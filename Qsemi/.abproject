@@ -1,0 +1,45 @@
+{
+  "ProjectName": "Qsemi",
+  "ProjectGuid": "4ab82173-f1de-41c4-a278-d4a3b5b724cf",
+  "projectVersion": 1,
+  "AppIdentifier": "com.telerik.Qsemi",
+  "DisplayName": "Qsemi",
+  "Author": "",
+  "Description": "Qsemi",
+  "BundleVersion": "1.0",
+  "AndroidVersionCode": "1",
+  "iOSDeviceFamily": [
+    "1",
+    "2"
+  ],
+  "iOSBackgroundMode": [],
+  "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
+  "FrameworkVersion": "6.4.0",
+  "AndroidPermissions": [
+    "android.permission.INTERNET"
+  ],
+  "DeviceOrientations": [
+    "Portrait",
+    "Landscape"
+  ],
+  "AndroidHardwareAcceleration": "true",
+  "iOSStatusBarStyle": "Default",
+  "Framework": "Cordova",
+  "WP8TileTitle": "",
+  "WP8Publisher": "",
+  "WP8Capabilities": [
+    "ID_CAP_NETWORKING",
+    "ID_CAP_WEBBROWSERCOMPONENT"
+  ],
+  "WP8Requirements": [],
+  "WP8PublisherID": "{a97fddff-c098-4a4f-9745-c1fd4bb3dc7d}",
+  "WP8ProductID": "{d6a05fbd-5977-4c1b-97fa-ee4e6c44b99a}",
+  "WPSdk": "8.0",
+  "WP8PackageIdentityName": "1234Telerik.Qsemi",
+  "WP8WindowsPublisherName": "CN=Telerik",
+  "WP8SupportedResolutions": [
+    "ID_RESOLUTION_WVGA",
+    "ID_RESOLUTION_WXGA",
+    "ID_RESOLUTION_HD720P"
+  ]
+}
