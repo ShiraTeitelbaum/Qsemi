@@ -1,0 +1,35 @@
+<div data-role="view" data-title="View" data-layout="main" data-model="app.returnWire2AndSupportAndConnection2" data-show="app.returnWire2AndSupportAndConnection2.onShow" data-after-show="app.returnWire2AndSupportAndConnection2.afterShow" id="returnWire2AndSupportAndConnection2Screen"
+class="screen">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+
+            <span data-bind="text: strings.returnWire2AndSupportAndConnection2.title"></span>
+
+            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
+
+        </div>
+    </header>
+
+
+    <!-- START_CUSTOM_CODE_returnWire2AndSupportAndConnection2 -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_returnWire2AndSupportAndConnection2 -->
+    <ul class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" data-template="returnWire2AndSupportAndConnection2ModelTemplate" data-bind="source: returnWire2AndSupportAndConnection2Model.dataSource, events: {click: returnWire2AndSupportAndConnection2Model.itemClick}"
+    data-pull-to-refresh="false" data-endless-scroll="false">
+    </ul>
+
+
+    <!-- START_CUSTOM_CODE_returnWire2AndSupportAndConnection2Model -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_returnWire2AndSupportAndConnection2Model -->
+    <script type="text/x-kendo-template" id="returnWire2AndSupportAndConnection2ModelTemplate">
+        <div class="image-with-text ">
+            # data = app.returnWire2AndSupportAndConnection2.returnWire2AndSupportAndConnection2Model.fixHierarchicalData(data); #
+
+            <h3>#: data['name'] #</h3>
+
+        </div>
+    </script>
+</div>

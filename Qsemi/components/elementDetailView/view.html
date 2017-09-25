@@ -1,0 +1,44 @@
+<div data-role="view" data-title="View" data-layout="main" data-model="app.elementDetailView" data-show="app.elementDetailView.onShow" data-after-show="app.elementDetailView.afterShow" id="elementDetailViewScreen" class="screen">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+
+            <span data-bind="text: strings.elementDetailView.title"></span>
+
+            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
+
+        </div>
+    </header>
+
+
+    <!-- START_CUSTOM_CODE_elementDetailView -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_elementDetailView -->
+    <form class="km-filter-form custom-filter">
+        <div class="km-filter-wrap">
+            <input type="search" placeholder="Search..." data-bind="events:{keyup: elementDetailViewModel.searchChange}">
+        </div>
+    </form>
+
+    <ul class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" data-template="elementDetailViewModelTemplate" data-bind="source: elementDetailViewModel.dataSource, events: {click: elementDetailViewModel.itemClick}"
+    data-pull-to-refresh="true" data-endless-scroll="false">
+    </ul>
+
+
+    <!-- START_CUSTOM_CODE_elementDetailViewModel -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_elementDetailViewModel -->
+    <script type="text/x-kendo-template" id="elementDetailViewModelTemplate">
+        <div class="image-with-text ">
+            # data = app.elementDetailView.elementDetailViewModel.fixHierarchicalData(data); #
+
+            <h3>#: data['name'] #</h3>
+
+        </div>
+        <div id="elementLastUpdateDateField" class="field field--heading">
+            <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.lastUpdateDate.title"></span>
+            <h3>#: kendo.toString(data['LastUpdateDate'], "dd/MM/yyyy") #</h3>
+        </div>
+    </script>
+</div>

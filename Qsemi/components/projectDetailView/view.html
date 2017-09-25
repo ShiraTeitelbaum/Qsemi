@@ -1,0 +1,35 @@
+<div data-role="view" data-title="View" data-layout="main" data-model="app.projectDetailView" data-show="app.projectDetailView.onShow" data-after-show="app.projectDetailView.afterShow" id="projectDetailViewScreen" class="screen">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+
+            <span data-bind="text: strings.projectDetailView.title"></span>
+
+            <!--<a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>-->
+
+        </div>
+    </header>
+
+
+    <!-- START_CUSTOM_CODE_projectDetailView -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_projectDetailView -->
+    <ul class="masterDetailView grid noSeparators cols-3" data-role="listview" data-auto-bind="false" data-style="inset" data-template="projectDetailViewModelTemplate" data-bind="source: projectDetailViewModel.dataSource, events: {click: projectDetailViewModel.itemClick}"
+    data-pull-to-refresh="false" data-endless-scroll="false">
+    </ul>
+
+
+    <!-- START_CUSTOM_CODE_projectDetailViewModel -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_projectDetailViewModel -->
+    <script type="text/x-kendo-template" id="projectDetailViewModelTemplate">
+        <div class="image-with-text ">
+            # data = app.projectDetailView.projectDetailViewModel.fixHierarchicalData(data); #
+
+            <img src="#: data['LocationImage_URLUrl'] #">
+            <h3>#: data['LocationName'] #</h3>
+
+        </div>
+    </script>
+</div>

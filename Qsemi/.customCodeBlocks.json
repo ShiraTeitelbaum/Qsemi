@@ -1,0 +1,289 @@
+{
+    "customCode": [
+        {
+            "file": ".html",
+            "tag": "authenticationViewModel",
+            "block": "<!-- START_CUSTOM_CODE_authenticationViewModel -->\n    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n    <!-- END_CUSTOM_CODE_authenticationViewModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "authenticationViewModel",
+            "block": "// START_CUSTOM_CODE_authenticationViewModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_authenticationViewModel"
+        },
+        {
+            "file": ".html",
+            "tag": "elementDetailViewModel",
+            "block": "<!-- START_CUSTOM_CODE_elementDetailViewModel -->\n    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n    <!-- END_CUSTOM_CODE_elementDetailViewModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "elementDetailViewModel",
+            "block": "// START_CUSTOM_CODE_elementDetailViewModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// you can handle the beforeFill / afterFill events here. For example:\n/*\napp.elementDetailView.elementDetailViewModel.get('_jsdoOptions').events = {\n    'beforeFill' : [ {\n        scope : app.elementDetailView.elementDetailViewModel,\n        fn : function (jsdo, success, request) {\n            // beforeFill event handler statements ...\n        }\n    } ]\n};\n*/\n// END_CUSTOM_CODE_elementDetailViewModel"
+        },
+        {
+            "file": ".html",
+            "tag": "poleSupportDrillingIfTransPlatesFormModel",
+            "block": "<!-- START_CUSTOM_CODE_poleSupportDrillingIfTransPlatesFormModel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n        <script>\n            $(\"input:checkbox\").change(function() {\n                var group = \":checkbox[name='\" + $(this).attr(\"name\") + \"']\";\n                console.log(\"group\")\n                console.log(group)\n                if ($(this).is(':checked')) {\n                    $(group).not($(this)).attr(\"checked\", false);\n                } else {\n                    $(group).not($(this)).attr(\"checked\", true);\n                }\n            });\n        </script>\n        <!-- END_CUSTOM_CODE_poleSupportDrillingIfTransPlatesFormModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "poleSupportDrillingIfTransPlatesFormModel",
+            "block": "// START_CUSTOM_CODE_poleSupportDrillingIfTransPlatesFormModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_poleSupportDrillingIfTransPlatesFormModel"
+        },
+        {
+            "file": ".html",
+            "tag": "cantCounterwAnchorsDrillingModel",
+            "block": "<!-- START_CUSTOM_CODE_cantCounterwAnchorsDrillingModel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_cantCounterwAnchorsDrillingModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "cantCounterwAnchorsDrillingModel",
+            "block": "// START_CUSTOM_CODE_cantCounterwAnchorsDrillingModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_cantCounterwAnchorsDrillingModel"
+        },
+        {
+            "file": ".html",
+            "tag": "returnWire2DrillingModel",
+            "block": "<!-- START_CUSTOM_CODE_returnWire2DrillingModel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_returnWire2DrillingModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "returnWire2DrillingModel",
+            "block": "// START_CUSTOM_CODE_returnWire2DrillingModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_returnWire2DrillingModel"
+        },
+        {
+            "file": ".html",
+            "tag": "concretingModel",
+            "block": "<!-- START_CUSTOM_CODE_concretingModel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_concretingModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "concretingModel",
+            "block": "// START_CUSTOM_CODE_concretingModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_concretingModel"
+        },
+        {
+            "file": ".html",
+            "tag": "reinforcementModel",
+            "block": "<!-- START_CUSTOM_CODE_reinforcementModel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_reinforcementModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "reinforcementModel",
+            "block": "// START_CUSTOM_CODE_reinforcementModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_reinforcementModel"
+        },
+        {
+            "file": ".html",
+            "tag": "excavationModel",
+            "block": "<!-- START_CUSTOM_CODE_excavationModel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_excavationModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "excavationModel",
+            "block": "// START_CUSTOM_CODE_excavationModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_excavationModel"
+        },
+        {
+            "file": ".html",
+            "tag": "cantileverSupportAndCounterWeightsModel",
+            "block": "<!-- START_CUSTOM_CODE_cantileverSupportAndCounterWeightsModel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_cantileverSupportAndCounterWeightsModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "cantileverSupportAndCounterWeightsModel",
+            "block": "// START_CUSTOM_CODE_cantileverSupportAndCounterWeightsModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_cantileverSupportAndCounterWeightsModel"
+        },
+        {
+            "file": ".html",
+            "tag": "portalModel",
+            "block": "<!-- START_CUSTOM_CODE_portalModel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_portalModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "portalModel",
+            "block": "// START_CUSTOM_CODE_portalModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_portalModel"
+        },
+        {
+            "file": ".html",
+            "tag": "poleModel",
+            "block": "<!-- START_CUSTOM_CODE_poleModel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_poleModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "poleModel",
+            "block": "// START_CUSTOM_CODE_poleModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_poleModel"
+        },
+        {
+            "file": ".html",
+            "tag": "returnWire2AndSupportAndConnectionModel",
+            "block": "<!-- START_CUSTOM_CODE_returnWire2AndSupportAndConnectionModel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_returnWire2AndSupportAndConnectionModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "returnWire2AndSupportAndConnectionModel",
+            "block": "// START_CUSTOM_CODE_returnWire2AndSupportAndConnectionModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_returnWire2AndSupportAndConnectionModel"
+        },
+        {
+            "file": ".html",
+            "tag": "cantileverInstallationModel",
+            "block": "<!-- START_CUSTOM_CODE_cantileverInstallationModel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_cantileverInstallationModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "cantileverInstallationModel",
+            "block": "// START_CUSTOM_CODE_cantileverInstallationModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_cantileverInstallationModel"
+        },
+        {
+            "file": ".html",
+            "tag": "cantileversManufactureModel",
+            "block": "<!-- START_CUSTOM_CODE_cantileversManufactureModel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_cantileversManufactureModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "cantileversManufactureModel",
+            "block": "// START_CUSTOM_CODE_cantileversManufactureModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_cantileversManufactureModel"
+        },
+        {
+            "file": ".html",
+            "tag": "counterwWeightModel",
+            "block": "<!-- START_CUSTOM_CODE_counterwWeightModel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_counterwWeightModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "counterwWeightModel",
+            "block": "// START_CUSTOM_CODE_counterwWeightModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_counterwWeightModel"
+        },
+        {
+            "file": ".html",
+            "tag": "couterwPulleyModel",
+            "block": "<!-- START_CUSTOM_CODE_couterwPulleyModel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_couterwPulleyModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "couterwPulleyModel",
+            "block": "// START_CUSTOM_CODE_couterwPulleyModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_couterwPulleyModel"
+        },
+        {
+            "file": ".html",
+            "tag": "contactWireLayingModel",
+            "block": "<!-- START_CUSTOM_CODE_contactWireLayingModel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_contactWireLayingModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "contactWireLayingModel",
+            "block": "// START_CUSTOM_CODE_contactWireLayingModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_contactWireLayingModel"
+        },
+        {
+            "file": ".html",
+            "tag": "droppersModel",
+            "block": "<!-- START_CUSTOM_CODE_droppersModel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_droppersModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "droppersModel",
+            "block": "// START_CUSTOM_CODE_droppersModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_droppersModel"
+        },
+        {
+            "file": ".html",
+            "tag": "messengerWireLayingModel",
+            "block": "<!-- START_CUSTOM_CODE_messengerWireLayingModel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_messengerWireLayingModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "messengerWireLayingModel",
+            "block": "// START_CUSTOM_CODE_messengerWireLayingModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_messengerWireLayingModel"
+        },
+        {
+            "file": ".html",
+            "tag": "returnWireLaying1Model",
+            "block": "<!-- START_CUSTOM_CODE_returnWireLaying1Model -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_returnWireLaying1Model -->"
+        },
+        {
+            "file": ".js",
+            "tag": "returnWireLaying1Model",
+            "block": "// START_CUSTOM_CODE_returnWireLaying1Model\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_returnWireLaying1Model"
+        },
+        {
+            "file": ".html",
+            "tag": "returnWireLaying2Model",
+            "block": "<!-- START_CUSTOM_CODE_returnWireLaying2Model -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_returnWireLaying2Model -->"
+        },
+        {
+            "file": ".js",
+            "tag": "returnWireLaying2Model",
+            "block": "// START_CUSTOM_CODE_returnWireLaying2Model\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_returnWireLaying2Model"
+        },
+        {
+            "file": ".html",
+            "tag": "tieRodsClampsInsulatorsCrossBarsAndMidpModel",
+            "block": "<!-- START_CUSTOM_CODE_tieRodsClampsInsulatorsCrossBarsAndMidpModel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_tieRodsClampsInsulatorsCrossBarsAndMidpModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "tieRodsClampsInsulatorsCrossBarsAndMidpModel",
+            "block": "// START_CUSTOM_CODE_tieRodsClampsInsulatorsCrossBarsAndMidpModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_tieRodsClampsInsulatorsCrossBarsAndMidpModel"
+        },
+        {
+            "file": ".html",
+            "tag": "eandBmodel",
+            "block": "<!-- START_CUSTOM_CODE_eandBmodel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_eandBmodel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "eandBmodel",
+            "block": "// START_CUSTOM_CODE_eandBmodel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_eandBmodel"
+        },
+        {
+            "file": ".html",
+            "tag": "generalAdjustementModel",
+            "block": "<!-- START_CUSTOM_CODE_generalAdjustementModel -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n        <!-- END_CUSTOM_CODE_generalAdjustementModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "generalAdjustementModel",
+            "block": "// START_CUSTOM_CODE_generalAdjustementModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// END_CUSTOM_CODE_generalAdjustementModel"
+        },
+        {
+            "file": ".html",
+            "tag": "elementLocationMapsModel",
+            "block": "<!-- START_CUSTOM_CODE_elementLocationMapsModel -->\n    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n    <!-- END_CUSTOM_CODE_elementLocationMapsModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "elementLocationMapsModel",
+            "block": "// START_CUSTOM_CODE_elementLocationMapsModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// you can handle the beforeFill / afterFill events here. For example:\n/*\napp.elementLocationMaps.elementLocationMapsModel.get('_jsdoOptions').events = {\n    'beforeFill' : [ {\n        scope : app.elementLocationMaps.elementLocationMapsModel,\n        fn : function (jsdo, success, request) {\n            // beforeFill event handler statements ...\n        }\n    } ]\n};\n*/\n// END_CUSTOM_CODE_elementLocationMapsModel"
+        },
+        {
+            "file": ".html",
+            "tag": "projectDetailViewModel",
+            "block": "<!-- START_CUSTOM_CODE_projectDetailViewModel -->\n    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n    <!-- END_CUSTOM_CODE_projectDetailViewModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "projectDetailViewModel",
+            "block": "// START_CUSTOM_CODE_projectDetailViewModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// you can handle the beforeFill / afterFill events here. For example:\n/*\napp.projectDetailView.projectDetailViewModel.get('_jsdoOptions').events = {\n    'beforeFill' : [ {\n        scope : app.projectDetailView.projectDetailViewModel,\n        fn : function (jsdo, success, request) {\n            // beforeFill event handler statements ...\n        }\n    } ]\n};\n*/\n// END_CUSTOM_CODE_projectDetailViewModel"
+        },
+        {
+            "file": ".html",
+            "tag": "mapViewModel",
+            "block": "<!-- START_CUSTOM_CODE_mapViewModel -->\n    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n    <!-- END_CUSTOM_CODE_mapViewModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "mapViewModel",
+            "block": "// START_CUSTOM_CODE_mapViewModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// you can handle the beforeFill / afterFill events here. For example:\n/*\napp.mapView.mapViewModel.get('_jsdoOptions').events = {\n    'beforeFill' : [ {\n        scope : app.mapView.mapViewModel,\n        fn : function (jsdo, success, request) {\n            // beforeFill event handler statements ...\n        }\n    } ]\n};\n*/\n// END_CUSTOM_CODE_mapViewModel"
+        },
+        {
+            "file": ".html",
+            "tag": "portal2Model",
+            "block": "<!-- START_CUSTOM_CODE_portal2Model -->\n    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n    <!-- END_CUSTOM_CODE_portal2Model -->"
+        },
+        {
+            "file": ".js",
+            "tag": "portal2Model",
+            "block": "// START_CUSTOM_CODE_portal2Model\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// you can handle the beforeFill / afterFill events here. For example:\n/*\napp.portal2.portal2Model.get('_jsdoOptions').events = {\n    'beforeFill' : [ {\n        scope : app.portal2.portal2Model,\n        fn : function (jsdo, success, request) {\n            // beforeFill event handler statements ...\n        }\n    } ]\n};\n*/\n// END_CUSTOM_CODE_portal2Model"
+        },
+        {
+            "file": ".html",
+            "tag": "editableListForm84",
+            "block": "<!-- START_CUSTOM_CODE_editableListForm84 -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n        <!-- END_CUSTOM_CODE_editableListForm84 -->"
+        }
+    ]
+}

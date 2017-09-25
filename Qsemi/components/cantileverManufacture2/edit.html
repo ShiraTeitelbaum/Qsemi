@@ -1,0 +1,165 @@
+<div data-role="view" data-title="Edit" data-model="app.cantileverManufacture2.editItemViewModel" data-bind="events: { show: onShow, init:onInit }" id="cantileverManufacture2ModelEditScreen" class="screen screen--edit edit-item-view">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+            <span data-bind="text: itemData['name']"></span>
+            <a data-role="backbutton" data-align="left" data-bind="events: { click: onCancel }">Cancel</a>
+            <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }">Save</a>
+        </div>
+    </header>
+    <!-- START_CUSTOM_CODE_cantileverManufacture2Model -->
+    <!-- END_CUSTOM_CODE_cantileverManufacture2Model -->
+    <div id="editableListForm112" class="form-view screen__content screen__content--form">
+        <form>
+            <ul class="form-content" data-role="listview" data-style="inset">
+                <li class="form-content-item">
+                    <span class="field__label" data-bind="text: strings.poleSupportDrillingIfTransPlatesForm.poleSupportDrillingIfTransPlatesFormModel.editableListForm4.checkbox1.name"></span>
+                    <label id="checkbox1Field" class="field km-listview-label field--checkbox">
+                        <input id="checkbox1CM" class="radio" value="1" name="check1CM" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox"> <!-- data-bind="checked: addFormData.checkbox1"  -->
+                        <label class="km-checkbox-label" for="checkbox1"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.valid"></span></label>
+                    </label>
+                    <label id="checkbox1NotOkField" class="field km-listview-label field--checkbox">
+                        <input id="checkbox1NotOkCM" class="radio" value="1" name="check1CM" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox">
+                        <label class="km-checkbox-label" for="checkbox1NotOkField"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.invalid"></span></label>
+                    </label>
+                    <label id="comments1FieldCM" class="km-label-above field field--textarea">
+                        <span class="field__label" data-bind="text: strings.stagesFormComments.title"></span>
+                        <textarea rows="7" data-bind="value: editFormData.comments1"></textarea>
+                    </label>
+                </li>
+
+                <li class="form-content-item">
+                    <span class="field__label" data-bind="text: strings.poleSupportDrillingIfTransPlatesForm.poleSupportDrillingIfTransPlatesFormModel.editableListForm4.checkbox2.name"></span>
+                    <label id="checkbox2Field" class="field km-listview-label field--checkbox">
+                        <input id="checkbox2CM" class="radio" value="1" name="check2CM" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox"> <!-- data-bind="checked: addFormData.checkbox1"  -->
+                        <label class="km-checkbox-label" for="checkbox2"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.valid"></span></label>
+                    </label>
+                    <label id="checkbox2NotOkField" class="field km-listview-label field--checkbox">
+                        <input id="checkbox2NotOkCM" class="radio" value="1" name="check2CM" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox">
+                        <label class="km-checkbox-label" for="checkbox2NotOkField"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.invalid"></span></label>
+                    </label>
+                    <label id="comments2FieldCM" class="km-label-above field field--textarea">
+                        <span class="field__label" data-bind="text: strings.stagesFormComments.title"></span>
+                        <textarea rows="7" data-bind="value: editFormData.comments2"></textarea>
+                    </label>
+                </li>
+
+                <li class="form-content-item">
+                    <span class="field__label" data-bind="text: strings.poleSupportDrillingIfTransPlatesForm.poleSupportDrillingIfTransPlatesFormModel.editableListForm4.checkbox3.name"></span>
+                    <label id="checkbox3Field" class="field km-listview-label field--checkbox">
+                        <input id="checkbox3CM" class="radio" value="1" name="check3CM" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox"> <!-- data-bind="checked: addFormData.checkbox1"  -->
+                        <label class="km-checkbox-label" for="checkbox3"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.valid"></span></label>
+                    </label>
+                    <label id="checkbox3NotOkField" class="field km-listview-label field--checkbox">
+                        <input id="checkbox3NotOkCM" class="radio" value="1" name="check3CM" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox">
+                        <label class="km-checkbox-label" for="checkbox3NotOkField"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.invalid"></span></label>
+                    </label>
+                    <label id="comments3FieldCM" class="km-label-above field field--textarea">
+                        <span class="field__label" data-bind="text: strings.stagesFormComments.title"></span>
+                        <textarea rows="7" data-bind="value: editFormData.comments3"></textarea>
+                    </label>
+                </li>
+                
+                <li class="form-content-item">
+                    <span class="field__label" data-bind="text: strings.poleSupportDrillingIfTransPlatesForm.poleSupportDrillingIfTransPlatesFormModel.editableListForm4.checkbox4.name"></span>
+                    <label id="checkbox4Field" class="field km-listview-label field--checkbox">
+                        <input id="checkbox4CM" class="radio" value="1" name="check4CM" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox"> <!-- data-bind="checked: addFormData.checkbox1"  -->
+                        <label class="km-checkbox-label" for="checkbox4"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.valid"></span></label>
+                    </label>
+                    <label id="checkbox4NotOkField" class="field km-listview-label field--checkbox">
+                        <input id="checkbox4NotOkCM" class="radio" value="1" name="check4CM" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox">
+                        <label class="km-checkbox-label" for="checkbox4NotOkField"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.invalid"></span></label>
+                    </label>
+                    <label id="comments4FieldCM" class="km-label-above field field--textarea">
+                        <span class="field__label" data-bind="text: strings.stagesFormComments.title"></span>
+                        <textarea rows="7" data-bind="value: editFormData.comments4"></textarea>
+                    </label>
+                </li>
+
+                <li class="form-content-item">
+                    <span>checkbox5</span>
+                    <span class="field__label" data-bind="text: strings.poleSupportDrillingIfTransPlatesForm.poleSupportDrillingIfTransPlatesFormModel.editableListForm5.checkbox5.name"></span>
+                    <label id="checkbox5Field" class="field km-listview-label field--checkbox">
+                        <input id="checkbox5CM" class="radio" value="1" name="check5CM" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox"> <!-- data-bind="checked: addFormData.checkbox1"  -->
+                        <label class="km-checkbox-label" for="checkbox5"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.valid"></span></label>
+                    </label>
+                    <label id="checkbox5NotOkField" class="field km-listview-label field--checkbox">
+                        <input id="checkbox5NotOkCM" class="radio" value="1" name="check5CM" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox">
+                        <label class="km-checkbox-label" for="checkbox5NotOkField"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.invalid"></span></label>
+                    </label>
+                     <label id="comments5FieldCM" class="km-label-above field field--textarea">
+                        <span class="field__label" data-bind="text: strings.stagesFormComments.title"></span>
+                        <textarea rows="7" data-bind="value: editFormData.comments5"></textarea>
+                    </label>
+                </li>
+                
+                <li class="form-content-item">
+                    <label id="completedField" class="field km-listview-label field--checkbox">
+                        <span class="field__label" data-bind="text: strings.poleSupportDrillingIfTransPlatesForm.poleSupportDrillingIfTransPlatesFormModel.editableListForm4.completed.title"></span>
+                        <input id="completedCM" type="checkbox" style="width:6vw;height:6vw;border-color: black;">
+                    </label>
+                </li>
+            </ul>
+        </form>
+        <center>
+                <span>חתימה</span>
+                <div style="border-color: black; border-style: solid; width: 90%; background-color: white;"> 
+                    <label class="km-label-above field field--textarea">  
+                        <div class='signature-wrapper' >
+                            <div id='signatureCM'></div>
+                            <input type='hidden' id='SignatureCMAdd-value' name='SignatureAdd-value'/>
+                        </div>
+                    </label>
+                </div>
+                <p style="text-align:center; margin-top:0em">
+                    <button id="CMReset" type="button">נקה חתימה</button>
+                </p>
+            </center>
+            <br />
+        <!-- START_CUSTOM_CODE_editableListForm112 -->
+        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+        <script>
+            $("input:checkbox").change(function() {
+                var group = ":checkbox[name='" + $(this).attr("name") + "']";
+                console.log("group")
+                console.log(group)
+                if ($(this).is(':checked')) {
+                    $(group).not($(this)).attr("checked", false);
+                } else {
+                    $(group).not($(this)).attr("checked", true);
+                }
+
+                if($("#checkbox1NotOkCM").is(':checked')) { $("#comments1FieldCM").show(); }
+                if($("#checkbox2NotOkCM").is(':checked')) { $("#comments2FieldCM").show(); }
+                if($("#checkbox3NotOkCM").is(':checked')) { $("#comments3FieldCM").show(); }
+                if($("#checkbox4NotOkCM").is(':checked')) { $("#comments4FieldCM").show(); }
+                if($("#checkbox5NotOkCM").is(':checked')) { $("#comments5FieldCM").show(); }
+
+                if($("#checkbox1CM").is(':checked')) { $("#comments1FieldCM").hide(); }
+                if($("#checkbox2CM").is(':checked')) { $("#comments2FieldCM").hide(); }
+                if($("#checkbox3CM").is(':checked')) { $("#comments3FieldCM").hide(); }
+                if($("#checkbox4CM").is(':checked')) { $("#comments4FieldCM").hide(); }
+                if($("#checkbox5CM").is(':checked')) { $("#comments5FieldCM").hide(); }
+            });
+        </script>
+        <!-- END_CUSTOM_CODE_editableListForm112 -->
+    </div>
+    <script>
+         $('#CMReset').click(function(e){
+            $('#signatureCM').jSignature('clear');
+            e.preventDefault();
+        });
+      var scroller;
+
+      function attachToScroller(e) {
+        scroller = e.view.scroller;
+      }
+
+      $("#cantileverManufacture2ModelEditScreen").on("touchstart mousedown", ".signature-wrapper", function () {
+        scroller.enabled = false;
+      });
+
+      $("#cantileverManufacture2ModelEditScreen").on("mouseup touchend", function () {
+        scroller.enabled = true;
+      });
+    </script>
+</div>

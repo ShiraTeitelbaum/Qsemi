@@ -1,0 +1,34 @@
+<div data-role="view" data-title="View" data-layout="main" data-model="app.counterwPulley2" data-show="app.counterwPulley2.onShow" data-after-show="app.counterwPulley2.afterShow" id="counterwPulley2Screen" class="screen">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+
+            <span data-bind="text: strings.counterwPulley2.title"></span>
+
+            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
+
+        </div>
+    </header>
+
+
+    <!-- START_CUSTOM_CODE_counterwPulley2 -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_counterwPulley2 -->
+    <ul class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" data-template="counterwPulley2ModelTemplate" data-bind="source: counterwPulley2Model.dataSource, events: {click: counterwPulley2Model.itemClick}"
+    data-pull-to-refresh="false" data-endless-scroll="false">
+    </ul>
+
+
+    <!-- START_CUSTOM_CODE_counterwPulley2Model -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_counterwPulley2Model -->
+    <script type="text/x-kendo-template" id="counterwPulley2ModelTemplate">
+        <div class="image-with-text ">
+            # data = app.counterwPulley2.counterwPulley2Model.fixHierarchicalData(data); #
+
+            <h3>#: data['name'] #</h3>
+
+        </div>
+    </script>
+</div>

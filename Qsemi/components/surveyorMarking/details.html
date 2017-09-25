@@ -1,0 +1,66 @@
+<div data-role="view" data-title="Details" data-model="app.surveyorMarking.surveyorMarkingModel" data-bind="events: { show: detailsShow }" id="surveyorMarkingModelScreen" class="screen screen--detail">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+            <a data-role="backbutton" data-align="left">Back</a>
+            <span data-bind="text: currentItem['name']"></span>
+            <a data-role="button" data-align="right" data-bind="events: { click: editClick }">Edit</a>
+        </div>
+    </header>
+
+    <div class="details-content screen__content screen__content--details">
+        <div class="km-listview-wrapper">
+            <ul class="km-listview km-list km-listinset details-fields">
+
+
+                <li class="detail-content-item">
+
+
+                    <div id="idpointsAndKpField" class="field field--heading">
+
+                        <h3 data-bind="html: currentItem.IDPointsAndKP"></h3>
+
+                    </div>
+
+
+                </li>
+                <li class="detail-content-item">
+
+
+                    <div id="pileCastingHeightMarkedField" class="field field--heading">
+
+                        <h3 data-bind="html: currentItem.PileCastingHeightMarked"></h3>
+
+                    </div>
+
+
+                </li>
+                <li class="detail-content-item">
+
+
+                    <div id="surveyorMarkingInTheFieldField" class="field field--heading">
+
+                        <h3 data-bind="html: currentItem.surveyorMarkingInTheField"></h3>
+
+                    </div>
+
+
+                </li>
+                <li class="detail-content-item">
+
+
+                    <div id="thereticalCapacityField" class="field field--heading">
+
+                        <h3 data-bind="html: currentItem.ThereticalCapacity"></h3>
+
+                    </div>
+
+
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- START_CUSTOM_CODE_surveyorMarkingModel -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_surveyorMarkingModel -->
+</div>

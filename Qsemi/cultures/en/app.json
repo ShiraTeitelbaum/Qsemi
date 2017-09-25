@@ -6,5 +6,615 @@
   },
   "home": {
     "title": "Home View"
+  },
+  "authenticationView": {
+    "title": "Authentication",
+    "authenticationViewModel": {
+      "logoutLabel": "Sign Out",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "signinLabel": "Sign In",
+      "remembermeLabel": "Remember Me"
+    }
+  },
+  "stagesFormCheckBox": {
+    "valid": "OK",
+    "invalid": "NOT OK"
+  },
+  "stagesFormComments": {
+    "title": "comments"
+  },
+  "elementDetailView": {
+    "title": "element",
+    "elementDetailViewModel": {
+      "editableListForm2": {
+        "elementLastUpdateDate": {
+          "title": "Heading"
+        }
+      },
+      "editableListForm3": {
+        "elementDetails": {
+          "generalDetails": "General Details",
+          "qc": "QC"
+        },
+        "stage0": {
+          "name": "surveyor Marking"
+        },
+        "stage1": {
+          "title": "stage 1",
+          "name": "1 Pole Foundation",
+          "form1": "Pole Support Drilling If Trans Plates",
+          "form2": "Cant / Counterw / Anchors Drilling",
+          "form3": "Return Wire 2 Drilling",
+          "form4": "Concreting",
+          "form5": "Reinforcement",
+          "form6": "Excavation"
+        },
+        "stage1Persent": {
+          "title": "stage 1 persent"
+        },
+        "stage2": {
+          "title": "stage 2",
+          "name": "2 Pole",
+          "form1": "Cantilever Support & Counter Weights",
+          "form2": "Portal",
+          "form3": "Pole",
+          "form4": "Return Wire 2 & Support & Connection"
+        },
+        "stage2Persent": {
+          "title": "stage 2 persent"
+        },
+        "stage3": {
+          "title": "stage 3",
+          "name": "3 Pole Equipment & Cantilever",
+          "form1": "Cantilever Installation",
+          "form2": "Cantilevers Manufacture",
+          "form3": "Counterw Weight",
+          "form4": "Counterw Pulley"
+        },
+        "stage3Persent": {
+          "title": "stage 3 persent"
+        },
+        "stage4": {
+          "title": "stage 4",
+          "name": "4 OCS Wires",
+          "form1": "Contact Wire Laying",
+          "form2": "Droppers",
+          "form3": "Messenger Wire Laying",
+          "form4": "Return Wire Laying 1",
+          "form5": "Return Wire Laying 2",
+          "form6": "Tie-Rods, Clamps' Insulators, Cross-Bars and MID-P"
+        },
+        "stage4Persent": {
+          "title": "stage 4 persent"
+        },
+        "stage5": {
+          "title": "stage 5",
+          "name": "5 E & B",
+          "form1": "E & B"
+        },
+        "stage5Persent": {
+          "title": "stage 5 persent"
+        },
+        "stage6": {
+          "title": "stage 6",
+          "name": "6 Test",
+          "form1": "General Adjusment"
+        },
+        "stage6Persent": {
+          "title": "stage 6 persent"
+        },
+        "lastUpdateDate": {
+          "title": "last update date"
+        },
+        "poleType": {
+          "title": "pole type"
+        },
+        "ancohorage": {
+          "title": "ancohorage"
+        },
+        "sectionning": {
+          "title": "sectionning"
+        },
+        "soilFound": {
+          "title": "soil found"
+        },
+        "anchoragesKp": {
+          "title": "anchorages kp"
+        },
+        "trackLayout": {
+          "title": "track layout"
+        },
+        "profile": {
+          "title": "profile"
+        },
+        "kp": {
+          "title": "kp"
+        },
+        "embankment": {
+          "title": "embankment"
+        },
+        "anchorageFoundation": {
+          "title": "anchorage foundation"
+        },
+        "foundation": {
+          "title": "foundation"
+        },
+        "depthFound": {
+          "title": "depth found"
+        },
+        "spanBefor": {
+          "title": "span befor"
+        },
+        "spanAfter": {
+          "title": "span after"
+        },
+        "depthAnchor": {
+          "title": "depth anchor"
+        }
+      }
+    }
+  },
+  "poleSupportDrillingIfTransPlatesForm": {
+    "title": "Pole Support Drilling If Trans Plates",
+    "poleSupportDrillingIfTransPlatesFormModel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm4": {
+        "checkbox1": {
+          "title": "Checkbox1 Label",
+          "name": "checkbox1"
+        },
+        "checkbox2": {
+          "title": "Checkbox2 Label",
+          "name": "checkbox2"
+        },
+        "checkbox3": {
+          "title": "Checkbox3 Label",
+          "name": "checkbox3"
+        },
+        "checkbox4": {
+          "title": "Checkbox4 Label",
+          "name": "checkbox4"
+        },
+        "checkbox5": {
+          "title": "Checkbox5 Label",
+          "name": "checkbox5"
+        },
+        "comments1": {
+          "title": "Comments"
+        },
+        "comments2": {
+          "title": "Comments"
+        },
+        "comments3": {
+          "title": "Comments"
+        },
+        "comments4": {
+          "title": "Comments"
+        },
+        "comments5": {
+          "title": "Comments"
+        },
+        "completed": {
+          "title": "Completed"
+        },
+        "checkbox1NotOk": {
+          "title": "Checkbox1NotOk Label"
+        },
+        "checkbox2NotOk": {
+          "title": "Checkbox2NotOk Label"
+        },
+        "checkbox3NotOk": {
+          "title": "Checkbox3NotOk Label"
+        },
+        "checkbox4NotOk": {
+          "title": "Checkbox4NotOk Label"
+        },
+        "checkbox5NotOk": {
+          "title": "Checkbox5NotOk Label"
+        }
+      }
+    }
+  },
+  "cantCounterwAnchorsDrilling": {
+    "title": "Cant Counterw Anchors Drilling",
+    "cantCounterwAnchorsDrillingModel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm5": {}
+    }
+  },
+  "returnWire2Drilling": {
+    "title": "Return Wire 2 Drilling",
+    "returnWire2DrillingModel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm6": {}
+    }
+  },
+  "concreting": {
+    "title": "Concreting",
+    "concretingModel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm8": {}
+    }
+  },
+  "reinforcement": {
+    "title": "Reinforcement",
+    "reinforcementModel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm9": {}
+    }
+  },
+  "excavation": {
+    "title": "Excavation",
+    "excavationModel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm12": {}
+    }
+  },
+  "cantileverSupportAndCounterWeights": {
+    "title": "Cantilever Support & Counter Weights",
+    "cantileverSupportAndCounterWeightsModel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm13": {
+        "textField": {
+          "title": "Text field",
+          "placeholder": "Type here ..."
+        }
+      }
+    }
+  },
+  "portal": {
+    "title": "Portal",
+    "portalModel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm15": {}
+    }
+  },
+  "pole": {
+    "title": "Pole",
+    "poleModel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm16": {}
+    }
+  },
+  "returnWire2AndSupportAndConnection": {
+    "title": "Return Wire 2 & Support & Connection",
+    "returnWire2AndSupportAndConnectionModel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm17": {}
+    }
+  },
+  "cantileverInstallation": {
+    "title": "Cantilever Installation",
+    "cantileverInstallationModel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm18": {}
+    }
+  },
+  "cantileversManufacture": {
+    "title": "Cantilevers Manufacture",
+    "cantileversManufactureModel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm19": {}
+    }
+  },
+  "counterwWeight": {
+    "title": "Counterw Weight",
+    "counterwWeightModel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm21": {}
+    }
+  },
+  "couterwPulley": {
+    "title": "Couterw Pulley",
+    "couterwPulleyModel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm22": {}
+    }
+  },
+  "contactWireLaying": {
+    "title": "Contact Wire Laying",
+    "contactWireLayingModel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm23": {}
+    }
+  },
+  "droppers": {
+    "title": "Droppers",
+    "droppersModel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm24": {}
+    }
+  },
+  "messengerWireLaying": {
+    "title": "Messenger Wire Laying",
+    "messengerWireLayingModel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm25": {}
+    }
+  },
+  "returnWireLaying1": {
+    "title": "Return Wire Laying 1",
+    "returnWireLaying1Model": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm26": {
+        "textField1": {
+          "title": "Text field",
+          "placeholder": "Type here ..."
+        }
+      }
+    }
+  },
+  "returnWireLaying2": {
+    "title": "Return Wire Laying 2",
+    "returnWireLaying2Model": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm27": {}
+    }
+  },
+  "tieRodsClampsInsulatorsCrossBarsAndMidp": {
+    "title": "Tie Rods, Clamps' Insulators, Cross-Bars And MID-P",
+    "tieRodsClampsInsulatorsCrossBarsAndMidpModel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm28": {}
+    }
+  },
+  "eandB": {
+    "title": "E & B",
+    "eandBmodel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm29": {}
+    }
+  },
+  "generalAdjustement": {
+    "title": "General Adjustement",
+    "generalAdjustementModel": {
+      "submitButton": "Save",
+      "cancelButton": "Cancel",
+      "editableListForm30": {}
+    }
+  },
+  "elementLocationMaps": {
+    "title": "Element Location Map",
+    "elementLocationMapsModel": {
+      "detailHeaderFieldValue": "Detail"
+    }
+  },
+  "controlPanel": {
+    "title": "Control Panel",
+    "controlPanelModel": {
+      "detailHeaderFieldValue": "Detail"
+    }
+  },
+  "surveyorMarking": {
+    "title": "Surveyor Marking",
+    "surveyorMarkingModel": {
+      "editableListForm32": {
+        "idpointsAndKp": {
+          "title": "Heading"
+        },
+        "pileCastingHeightMarked": {
+          "title": "Pile Casting Height Marked",
+          "placeholder": "Pile Casting Height Marked"
+        },
+        "surveyorMarkingInTheField": {
+          "title": "Heading"
+        },
+        "thereticalCapacity": {
+          "title": "Theretical Capacity",
+          "placeholder": "Theretical Capacity"
+        },
+        "completed": {
+            "title": "completed"
+        }
+      },
+      "editableListForm33": {
+          "idpointsAndKp": {
+              "name": "ID Points And KP"
+          },
+        "radioButtonOK": {
+          "title": "OK"
+        },
+        "radioButtonNotOk": {
+          "title": "NOT OK"
+        },
+        "radioButtonNormal": {
+          "title": "NORMAL"
+        },
+        "radioButtonNotNormal": {
+          "title": "NOT NORMAL"
+        },
+        "surveyorMarkingInTheField": {
+            "name": "Surveyor Marking In The Field"
+        }
+      }
+    }
+  },
+  "poleSupportDrillingIfTransPlatesForm2": {
+    "title": "Pole Support Drilling If Trans Plates Form",
+    "poleSupportDrillingIfTransPlatesForm2Model": {
+      "editableListForm36": {}
+    }
+  },
+  "projectDetailView": {
+    "title": "projects",
+    "projectDetailViewModel": {
+      "detailHeaderFieldValue": "Detail"
+    }
+  },
+  "tryFormDetailView": {
+    "title": "try form 1",
+    "tryFormDetailViewModel": {
+      "detailHeaderFieldValue": "Detail",
+      "editScreenHeaderValue": "Edit",
+      "editableListForm40": {
+        "checkbox6": {
+          "title": "Label"
+        }
+      }
+    }
+  },
+  "poleSupportDrillingIfTransPlatesForm22": {
+    "title": "Pole Support Drilling If Trans Plates Form",
+    "poleSupportDrillingIfTransPlatesForm22Model": {
+      "editableListForm43": {}
+    }
+  },
+  "mapView": {
+    "title": "Map",
+    "mapViewModel": {
+      "detailHeaderFieldValue": "Detail"
+    }
+  },
+  "cantCounterwAnchorsDrilling2": {
+    "title": "Cant Counterw Anchors Drilling",
+    "cantCounterwAnchorsDrilling2Model": {
+      "editableListForm54": {}
+    }
+  },
+  "returnWire2Driliing2": {
+    "title": "Return Wire 2 Driliing",
+    "returnWire2Driliing2Model": {
+      "editableListForm59": {}
+    }
+  },
+  "concreting2": {
+    "title": "Concreting",
+    "concreting2Model": {
+      "editableListForm64": {}
+    }
+  },
+  "reinforcement2": {
+    "title": "Reinforcement",
+    "reinforcement2Model": {
+      "editableListForm69": {}
+    }
+  },
+  "excavation2": {
+    "title": "Excavation",
+    "excavation2Model": {
+      "editableListForm74": {}
+    }
+  },
+  "cantileverSupportAndCounterWeight2": {
+    "title": "Cantilever Support And Counter Weight",
+    "cantileverSupportAndCounterWeight2Model": {
+      "editableListForm79": {}
+    }
+  },
+  "portal2": {
+    "title": "Portal",
+    "portal2Model": {
+      "editableListForm84": {}
+    }
+  },
+  "pole2": {
+    "title": "Pole",
+    "pole2Model": {
+      "editableListForm93": {}
+    }
+  },
+  "returnWire2AndSupportAndConnection2": {
+    "title": "Return Wire 2 & Support & Connection",
+    "returnWire2AndSupportAndConnection2Model": {
+      "editableListForm98": {}
+    }
+  },
+  "cantileverInstallation2": {
+    "title": "Cantilever Installation",
+    "cantileverInstallation2Model": {
+      "editableListForm103": {}
+    }
+  },
+  "cantileverManufacture2": {
+    "title": "Cantilever Manufacture",
+    "cantileverManufacture2Model": {
+      "editableListForm112": {}
+    }
+  },
+  "counterwWeight2": {
+    "title": "Counterw Weight",
+    "counterwWeight2Model": {
+      "editableListForm117": {}
+    }
+  },
+  "counterwPulley2": {
+    "title": "Counterw Pulley",
+    "counterwPulley2Model": {
+      "editableListForm122": {}
+    }
+  },
+  "contactWireLaying2": {
+    "title": "Contact Wire Laying",
+    "contactWireLaying2Model": {
+      "editableListForm127": {}
+    }
+  },
+  "droppers2": {
+    "title": "Droppers",
+    "droppers2Model": {
+      "editableListForm132": {}
+    }
+  },
+  "messengerWireLaying2": {
+    "title": "Messenger Wire Laying",
+    "messengerWireLaying2Model": {
+      "editableListForm135": {}
+    }
+  },
+  "returnWireLaying12": {
+    "title": "Return Wire Laying 1",
+    "returnWireLaying12Model": {
+      "editableListForm140": {
+        "textAreaField": {
+          "title": "Textarea field"
+        }
+      }
+    }
+  },
+  "returnWireLaying22": {
+    "title": "Return Wire Laying 2",
+    "returnWireLaying22Model": {
+      "editableListForm145": {}
+    }
+  },
+  "tieRoadsClampsInsulatorsCrossBarAndMipd2": {
+    "title": "Tie-Roads Clamps' Insulators Cross-Bar And MIP-D",
+    "tieRoadsClampsInsulatorsCrossBarAndMipd2Model": {
+      "editableListForm150": {}
+    }
+  },
+  "eandB2": {
+    "title": "E & B",
+    "eandB2Model": {
+      "editableListForm155": {}
+    }
+  },
+  "generalAdjustement2": {
+    "title": "General Adjustement",
+    "generalAdjustement2Model": {
+      "editableListForm160": {}
+    }
   }
 }

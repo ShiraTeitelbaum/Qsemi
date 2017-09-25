@@ -1,0 +1,245 @@
+<div data-role="view" data-title="Details" data-model="app.elementDetailView.elementDetailViewModel" data-bind="events: { show: detailsShow }" id="elementDetailViewModelScreen" class="screen screen--detail">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+            <a data-role="backbutton" data-align="left">Back</a>
+            <span data-bind="text: currentItem['name']"></span>
+        </div>
+        <center>
+            <h3 data-bind="html: currentItem.name"></h3>
+            <h3>element step</h3>
+        </center>
+        <br />
+        <center>
+            <button id="defaultOpen" onclick="openDetails()" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.elementDetails.generalDetails"></button>
+        <button onclick="openQC()" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.elementDetails.qc"></button>
+        </center>
+    </header>
+    
+    <div class="details-content screen__content screen__content--details">
+        <div id="generalDetails" class="km-listview-wrapper">
+            <ul class="km-listview km-list km-listinset details-fields">
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage1.title"></span>
+                    <div id="stage1Field" class="field field--heading">
+                        <h3 data-bind="html: currentItem.stage1"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage1Persent.title"></span>
+                    <div id="stage1PersentField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.stage1Persent"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage2.title"></span>
+                    <div id="stage2Field" class="field field--heading">
+                        <h3 data-bind="html: currentItem.stage2"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage2Persent.title"></span>
+                    <div id="stage2PersentField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.stage2Persent"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage3.title"></span>
+                    <div id="stage3Field" class="field field--heading">
+                        <h3 data-bind="html: currentItem.stage3"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage3Persent.title"></span>
+                    <div id="stage3PersentField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.stage3Persent"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage4.title"></span>
+                    <div id="stage4Field" class="field field--heading">
+                        <h3 data-bind="html: currentItem.stage4"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                        <h3 data-bind="html: currentItem.stage4Persent"></h3>
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage4Persent.title"></span>
+                    <div id="stage4PersentField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.stage4Persent"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage5.title"></span>
+                    <div id="stage5Field" class="field field--heading">
+                        <h3 data-bind="html: currentItem.stage5"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage5Persent.title"></span>
+                    <div id="stage5PersentField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.stage5Persent"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage6.title"></span>
+                    <div id="stage6Field" class="field field--heading">
+                        <h3 data-bind="html: currentItem.stage6"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage6Persent.title"></span>
+                    <div id="stage6PersentField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.stage6Persent"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.lastUpdateDate.title"></span>
+                    <div id="lastUpdateDateField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.LastUpdateDate"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.poleType.title"></span>
+                    <div id="poleTypeField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.PoleType"></h3>
+                    </div>
+                </li>
+                
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.ancohorage.title"></span>
+                    <div id="ancohorageField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.Ancohorage"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.sectionning.title"></span>
+                    <div id="sectionningField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.Sectionning"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.soilFound.title"></span>
+                    <div id="soilFoundField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.SoilFound"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.anchoragesKp.title"></span>
+                    <div id="anchoragesKpField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.AnchoragesKP"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.trackLayout.title"></span>
+                    <div id="trackLayoutField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.TrackLayout"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.profile.title"></span>
+                    <div id="profileField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.Profile"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.kp.title"></span>
+                    <div id="kpField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.KP"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.embankment.title"></span>
+                    <div id="embankmentField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.Embankment"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.anchorageFoundation.title"></span>
+                    <div id="anchorageFoundationField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.AnchorageFoundation"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.foundation.title"></span>
+                    <div id="foundationField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.Foundation"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.depthFound.title"></span>
+                    <div id="depthFoundField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.DepthFound"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.spanBefor.title"></span>
+                    <div id="spanBeforField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.SpanBefor"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.spanAfter.title"></span>
+                    <div id="spanAfterField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.SpanAfter"></h3>
+                    </div>
+                </li>
+
+                <li class="detail-content-item">
+                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.depthAnchor.title"></span>
+                    <div id="depthAnchorField" class="field field--heading">
+                        <h3 data-bind="html: currentItem.DepthAnchor"></h3>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <ul id="elementSteps" class="list noSeparators " data-role="listview" data-endless-scroll="false"></ul>
+        
+        <script type="text/x-kendo-template" id="elementStepsTemplate">
+            <div>
+                <br />
+                <span id=#:name# class="field__label" onclick="app.elementDetailView.elementDetailViewModel.elementStepClick(this.id)">#: name #</span>
+                <br />
+            </div>
+        </script>
+    </div>
+    <!-- START_CUSTOM_CODE_elementDetailViewModel -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_elementDetailViewModel -->
+</div>
+<script>
+    function openDetails() {
+        $("#generalDetails").show();
+        $("#elementSteps").hide();
+    }
+    function openQC() {
+        app.elementDetailView.elementDetailViewModel.openQC1();
+        $("#generalDetails").hide();
+        $("#elementSteps").show();
+    }
+</script>

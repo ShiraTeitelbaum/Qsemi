@@ -1,0 +1,98 @@
+<div data-role="view" data-title="Edit" data-model="app.surveyorMarking.editItemViewModel" data-bind="events: { show: onShow, init:onInit }" id="surveyorMarkingModelEditScreen" class="screen screen--edit edit-item-view">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+            <span data-bind="text: itemData['name']"></span>
+            <a data-role="backbutton" data-align="left" data-bind="events: { click: onCancel }">Cancel</a>
+            <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }">Save</a>
+        </div>
+    </header>
+    <!-- START_CUSTOM_CODE_surveyorMarkingModel -->
+    <!-- END_CUSTOM_CODE_surveyorMarkingModel -->
+    <div id="editableListForm33" class="form-view screen__content screen__content--form">
+        <form>
+            <ul class="form-content" data-role="listview" data-style="inset">
+                <li class="form-content-item">
+                    <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm33.idpointsAndKp.name"></span>
+                    <label id="idpointsAndKpokField" class="field km-listview-label field--radio">
+                        <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm33.radioButtonOK.title"></span>
+                        <input id="idpointsAndKpokS" name="group1" type="radio" value="option">
+                    </label>
+                    <label id="idpointsAndKpnotOkField" class="field km-listview-label field--radio">
+                        <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm33.radioButtonNotOk.title"></span>
+                        <input id="idpointsAndKpnotOkS" name="group1" type="radio" value="option">
+                    </label>
+                </li>
+                
+                <li class="form-content-item">
+                    <label id="pileCastingHeightMarkedField" class="field km-listview-label field--tel">
+                        <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm32.pileCastingHeightMarked.title"></span>
+                        <input id="pileCastingHeightMarked" data-bind="value: editFormData.pileCastingHeightMarked" type="number">
+                    </label>
+                </li>
+
+                <li class="form-content-item">
+                    <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm33.surveyorMarkingInTheField.name"></span>
+                    <label id="surveyorMarkingInTheFieldOkField" class="field km-listview-label field--radio">
+                        <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm33.radioButtonNormal.title"></span>
+                        <input id="surveyorMarkingInTheFieldOkS" name="group2" type="radio" value="option">
+                    </label>
+                     <label id="surveyorMarkingInTheFieldNotOkField" class="field km-listview-label field--radio">
+                        <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm33.radioButtonNotNormal.title"></span>
+                        <input id="surveyorMarkingInTheFieldNotOkS" name="group2" type="radio" value="option">
+                    </label>
+                </li>
+                
+                <li class="form-content-item">
+                    <label id="thereticalCapacityField" class="field km-listview-label field--tel">
+                        <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm32.thereticalCapacity.title"></span>
+                        <input id="thereticalCapacity" data-bind="value: editFormData.thereticalCapacity" type="number">
+                    </label>
+                </li>
+                <li class="form-content-item">
+                    <label id="completedField" class="field km-listview-label field--checkbox">
+                        <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm32.completed.title"></span>
+                        <input id="completedS" type="checkbox" style="width:6vw;height:6vw;border-color: black;">
+                    </label>
+                </li>
+            </ul>
+        </form>
+        <center>
+                <span>חתימה</span>
+                <div style="border-color: black; border-style: solid; width: 90%; background-color: white;"> 
+                    <label class="km-label-above field field--textarea">  
+                        <div class='signature-wrapper' >
+                            <div id='signatureS'></div>
+                            <input type='hidden' id='SignatureSAdd-value' name='SignatureAdd-value'/>
+                        </div>
+                    </label>
+                </div>
+                <p style="text-align:center; margin-top:0em">
+                    <button id="SReset" type="button">נקה חתימה</button>
+                </p>
+            </center>
+            <br />
+        <a id="ChooseLocationOnMap" data-role="button" data-bind="events: {click: openMap}">MAP</a>
+        <!-- START_CUSTOM_CODE_editableListForm33 -->
+        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+        <!-- END_CUSTOM_CODE_editableListForm33 -->
+    </div>
+    <script>
+         $('#SReset').click(function(e){
+            $('#signatureS').jSignature('clear');
+            e.preventDefault();
+        });
+      var scroller;
+
+      function attachToScroller(e) {
+        scroller = e.view.scroller;
+      }
+
+      $("#surveyorMarkingModelEditScreen").on("touchstart mousedown", ".signature-wrapper", function () {
+        scroller.enabled = false;
+      });
+
+      $("#surveyorMarkingModelEditScreen").on("mouseup touchend", function () {
+        scroller.enabled = true;
+      });
+    </script>
+</div>

@@ -1,0 +1,34 @@
+<div data-role="view" data-title="View" data-layout="main" data-model="app.returnWireLaying12" data-show="app.returnWireLaying12.onShow" data-after-show="app.returnWireLaying12.afterShow" id="returnWireLaying12Screen" class="screen">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+
+            <span data-bind="text: strings.returnWireLaying12.title"></span>
+
+            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
+
+        </div>
+    </header>
+
+
+    <!-- START_CUSTOM_CODE_returnWireLaying12 -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_returnWireLaying12 -->
+    <ul class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" data-template="returnWireLaying12ModelTemplate" data-bind="source: returnWireLaying12Model.dataSource, events: {click: returnWireLaying12Model.itemClick}"
+    data-pull-to-refresh="false" data-endless-scroll="false">
+    </ul>
+
+
+    <!-- START_CUSTOM_CODE_returnWireLaying12Model -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_returnWireLaying12Model -->
+    <script type="text/x-kendo-template" id="returnWireLaying12ModelTemplate">
+        <div class="image-with-text ">
+            # data = app.returnWireLaying12.returnWireLaying12Model.fixHierarchicalData(data); #
+
+            <h3>#: data['name'] #</h3>
+
+        </div>
+    </script>
+</div>
