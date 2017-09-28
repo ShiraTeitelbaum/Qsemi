@@ -2,9 +2,9 @@
   "ProjectName": "Qsemi",
   "ProjectGuid": "4ab82173-f1de-41c4-a278-d4a3b5b724cf",
   "projectVersion": 1,
-  "AppIdentifier": "com.telerik.Qsemi",
+  "AppIdentifier": "com.safeguard.Qsem",
   "DisplayName": "Qsemi",
-  "Author": "",
+  "Author": "safeguard",
   "Description": "Qsemi",
   "BundleVersion": "1.0",
   "AndroidVersionCode": "1",
@@ -19,8 +19,7 @@
     "android.permission.INTERNET"
   ],
   "DeviceOrientations": [
-    "Portrait",
-    "Landscape"
+    "Portrait"
   ],
   "AndroidHardwareAcceleration": "true",
   "iOSStatusBarStyle": "Default",
@@ -41,5 +40,11 @@
     "ID_RESOLUTION_WVGA",
     "ID_RESOLUTION_WXGA",
     "ID_RESOLUTION_HD720P"
-  ]
+  ],
+  "CordovaPluginVariables": {
+    "cordova-plugin-camera": {
+      "CAMERA_USAGE_DESCRIPTION": "CAMERA",
+      "PHOTOLIBRARY_USAGE_DESCRIPTION": "PHOTOLIBRARY"
+    }
+  }
 }

@@ -18,11 +18,15 @@
     }
   },
   "stagesFormCheckBox": {
-    "valid": "OK",
-    "invalid": "NOT OK"
+    "valid": "Ok",
+    "invalid": "Not Ok"
   },
   "stagesFormComments": {
     "title": "comments"
+  },
+  "stagesFormSignature": {
+    "title": "Signature:",
+    "clear": "clear signature"
   },
   "elementDetailView": {
     "title": "element",
@@ -105,52 +109,52 @@
           "title": "stage 6 persent"
         },
         "lastUpdateDate": {
-          "title": "last update date"
+          "title": "Last Update Date:"
         },
         "poleType": {
-          "title": "pole type"
+          "title": "Pole Type:"
         },
         "ancohorage": {
-          "title": "ancohorage"
+          "title": "Ancohorage:"
         },
         "sectionning": {
-          "title": "sectionning"
+          "title": "Sectionning:"
         },
         "soilFound": {
-          "title": "soil found"
+          "title": "Soil Found:"
         },
         "anchoragesKp": {
-          "title": "anchorages kp"
+          "title": "Anchorages KP:"
         },
         "trackLayout": {
-          "title": "track layout"
+          "title": "Track Layout:"
         },
         "profile": {
-          "title": "profile"
+          "title": "Profile:"
         },
         "kp": {
-          "title": "kp"
+          "title": "KP:"
         },
         "embankment": {
-          "title": "embankment"
+          "title": "Embankment:"
         },
         "anchorageFoundation": {
-          "title": "anchorage foundation"
+          "title": "Anchorage Foundation:"
         },
         "foundation": {
-          "title": "foundation"
+          "title": "Foundation:"
         },
         "depthFound": {
-          "title": "depth found"
+          "title": "Depth Found:"
         },
         "spanBefor": {
-          "title": "span befor"
+          "title": "Span Befor:"
         },
         "spanAfter": {
-          "title": "span after"
+          "title": "Span After:"
         },
         "depthAnchor": {
-          "title": "depth anchor"
+          "title": "Depth Anchor:"
         }
       }
     }
@@ -426,27 +430,27 @@
           "placeholder": "Theretical Capacity"
         },
         "completed": {
-            "title": "completed"
+          "title": "completed"
         }
       },
       "editableListForm33": {
-          "idpointsAndKp": {
-              "name": "ID Points And KP"
-          },
+        "idpointsAndKp": {
+          "name": "ID Points And KP"
+        },
         "radioButtonOK": {
-          "title": "OK"
+          "title": "Ok"
         },
         "radioButtonNotOk": {
-          "title": "NOT OK"
+          "title": "Not Ok"
         },
         "radioButtonNormal": {
-          "title": "NORMAL"
+          "title": "Normal"
         },
         "radioButtonNotNormal": {
-          "title": "NOT NORMAL"
+          "title": "Not Normal"
         },
         "surveyorMarkingInTheField": {
-            "name": "Surveyor Marking In The Field"
+          "name": "Surveyor Marking In The Field"
         }
       }
     }
@@ -615,6 +619,12 @@
     "title": "General Adjustement",
     "generalAdjustement2Model": {
       "editableListForm160": {}
+    }
+  },
+  "generalMapView": {
+    "title": "General Map",
+    "generalMapViewModel": {
+      "detailHeaderFieldValue": "Detail"
     }
   }
 }

@@ -59,7 +59,7 @@ app.localization.registerView('authenticationView');
 
                 parent.authenticationViewModel.set('email', rememberedData.email);
                 parent.authenticationViewModel.set('password', rememberedData.password);
-                parent.authenticationViewModel.signin();
+                //parent.authenticationViewModel.signin();
             }
         },
         successHandler = function(data) {

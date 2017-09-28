@@ -6,149 +6,25 @@
         </div>
     </header>
 
-    <div class="details-content screen__content screen__content--details">
-        <ul id="stageForms" class="list noSeparators " data-role="listview" data-endless-scroll="false"></ul>
+    <div class="details-content screen__content screen__content--details" style="overflow-x:hidden; background-color: #FFFFFF; width: 100%; height: 100%;">
+        <ul id="stageForms" data-role="listview" data-style="inset" style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0;"></ul>
+
         <script type="text/x-kendo-template" id="formStageTemplate">
-            <div id=#:id# onclick="app.elementDetailView.elementDetailViewModel.openFormStage(this.id)">
-                <br />
-                <span class="field__label">#: name #</span>
-                <br />
+            <div class="formList" id=#:id# onclick="app.elementDetailView.elementDetailViewModel.openFormStage(this.id)">
+                <table style="width: 100%; height: 100%;">
+                    <tr style="padding: 0; margin: 0;">
+                        <td style="width: 80%;">
+                            <span style="font-size: 14px; margin-left: 5%;">#: name #</span>
+                        </td>
+                        <td style="width: 10%;">
+                            
+                        </td>
+                    </tr>
+                </table>
             </div>
         </script>
-
-        <!--<ul id="stage1Forms" class="list noSeparators " data-role="listview" data-endless-scroll="false"></ul>
-        <script type="text/x-kendo-template" id="formStage1Template">
-            <div>
-                <br />
-                <span id=#:name# class="field__label" onclick="app.elementDetailView.elementDetailViewModel.openFormStage1(this.id)">#: name #</span>
-                <br />
-            </div>
-        </script>-->
-        <!--<div id="stage1Forms" class="list noSeparators" data-role="listview">
-            <li id="form1" onclick="app.elementDetailView.elementDetailViewModel.openFormStage1(this.id)">
-                <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage1.form1"></span>
-            </li>
-            <li id="form2" onclick="app.elementDetailView.elementDetailViewModel.openFormStage1(this.id)">
-                <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage1.form2"></span>
-            </li>
-            <li id="form3" onclick="app.elementDetailView.elementDetailViewModel.openFormStage1(this.id)">
-                <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage1.form3"></span>
-            </li>
-            <li id="form4" onclick="app.elementDetailView.elementDetailViewModel.openFormStage1(this.id)">
-                <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage1.form4"></span>
-            </li>
-            <li id="form5" onclick="app.elementDetailView.elementDetailViewModel.openFormStage1(this.id)">
-                <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage1.form5"></span>
-            </li>
-            <li id="form6" onclick="app.elementDetailView.elementDetailViewModel.openFormStage1(this.id)">
-                <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage1.form6"></span>
-            </li>
-        </div>-->
-
-        <!--<ul id="stage2Forms" class="list noSeparators " data-role="listview" data-endless-scroll="false"></ul>
-        <script type="text/x-kendo-template" id="formStage2Template">
-            <div>
-                <br />
-                <span id=#:name# class="field__label" onclick="app.elementDetailView.elementDetailViewModel.openFormStage2(this.id)">#: name #</span>
-                <br />
-            </div>
-        </script>-->
-            <!--<div id="stage2Forms" class="list noSeparators" data-role="listview">
-                <li id="form1" onclick="app.elementDetailView.elementDetailViewModel.openFormStage2(this.id)">
-                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage2.form1"></span>
-                </li>
-                <li id="form2" onclick="app.elementDetailView.elementDetailViewModel.openFormStage2(this.id)">
-                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage2.form2"></span>
-                </li>
-                <li id="form3" onclick="app.elementDetailView.elementDetailViewModel.openFormStage2(this.id)">
-                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage2.form3"></span>
-                </li>
-                <li id="form4" onclick="app.elementDetailView.elementDetailViewModel.openFormStage2(this.id)">
-                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage2.form4"></span>
-                </li>
-            </div>-->
-
-            <!--<ul id="stage3Forms" class="list noSeparators " data-role="listview" data-endless-scroll="false"></ul>
-            <script type="text/x-kendo-template" id="formStage3Template">
-            <div>
-                <br />
-                <span id=#:name# class="field__label" onclick="app.elementDetailView.elementDetailViewModel.openFormStage3(this.id)">#: name #</span>
-                <br />
-            </div>
-        </script>-->
-            <!--<div id="stage3Forms" class="list noSeparators" data-role="listview">
-                <li id="form1" onclick="app.elementDetailView.elementDetailViewModel.openFormStage3(this.id)">
-                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage3.form1"></span>
-                </li>
-                <li id="form2" onclick="app.elementDetailView.elementDetailViewModel.openFormStage3(this.id)">
-                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage3.form2"></span>
-                </li>
-                <li id="form3" onclick="app.elementDetailView.elementDetailViewModel.openFormStage3(this.id)">
-                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage3.form3"></span>
-                </li>
-                <li id="form4" onclick="app.elementDetailView.elementDetailViewModel.openFormStage3(this.id)">
-                    <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage3.form4"></span>
-                </li>
-        </div>-->
-
-         <!--<ul id="stage4Forms" class="list noSeparators " data-role="listview" data-endless-scroll="false"></ul>
-         <script type="text/x-kendo-template" id="formStage4Template">
-            <div>
-                <br />
-                <span id=#:name# class="field__label" onclick="app.elementDetailView.elementDetailViewModel.openFormStage4(this.id)">#: name #</span>
-                <br />
-            </div>
-        </script>-->
-        <!--<div id="stage4Forms" class="list noSeparators" data-role="listview">
-            <li id="form1" onclick="app.elementDetailView.elementDetailViewModel.openFormStage4(this.id)">
-                <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage4.form1"></span>
-            </li>
-            <li id="form2" onclick="app.elementDetailView.elementDetailViewModel.openFormStage4(this.id)">
-                <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage4.form2"></span>
-            </li>
-            <li id="form3" onclick="app.elementDetailView.elementDetailViewModel.openFormStage4(this.id)">
-                <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage4.form3"></span>
-            </li>
-            <li id="form4" onclick="app.elementDetailView.elementDetailViewModel.openFormStage4(this.id)">
-                <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage4.form4"></span>
-            </li>
-            <li id="form5" onclick="app.elementDetailView.elementDetailViewModel.openFormStage4(this.id)">
-                <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage4.form5"></span>
-            </li>
-            <li id="form6" onclick="app.elementDetailView.elementDetailViewModel.openFormStage4(this.id)">
-                <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage4.form6"></span>
-            </li>
-        </div>-->
-
-         <!--<ul id="stage5Forms" class="list noSeparators " data-role="listview" data-endless-scroll="false"></ul>
-         <script type="text/x-kendo-template" id="formStage5Template">
-            <div>
-                <br />
-                <span id=#:name# class="field__label" onclick="app.elementDetailView.elementDetailViewModel.openFormStage5(this.id)">#: name #</span>
-                <br />
-            </div>
-        </script>-->
-        <!--<div id="stage5Forms" class="list noSeparators" data-role="listview">
-            <li id="form1" onclick="app.elementDetailView.elementDetailViewModel.openFormStage5(this.id)">
-                <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage5.form1"></span>
-            </li>
-        </div>-->
-
-         <!--<ul id="stage6Forms" class="list noSeparators " data-role="listview" data-endless-scroll="false"></ul>
-         <script type="text/x-kendo-template" id="formStage6Template">
-            <div>
-                <br />
-                <span id=#:name# class="field__label" onclick="app.elementDetailView.elementDetailViewModel.openFormStage6(this.id)">#: name #</span>
-                <br />
-            </div>
-        </script>-->
-        <!--<div id="stage6Forms" class="list noSeparators" data-role="listview">
-            <li id="form1" onclick="app.elementDetailView.elementDetailViewModel.openFormStage6(this.id)">
-                <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.stage6.form1"></span>
-            </li>
-        </div>-->
     <!-- START_CUSTOM_CODE_elementDetailViewModel -->
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
-
+    </div>
     <!-- END_CUSTOM_CODE_elementDetailViewModel -->
 </div>

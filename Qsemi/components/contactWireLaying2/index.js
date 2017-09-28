@@ -197,7 +197,9 @@ app.localization.registerView('contactWireLaying2');
             $sigdiv.jSignature({
                 'background-color': 'transparent',
                 'decor-color': 'transparent',
-                'height':'8em'
+                 //'height':'8em'
+                'width': '300',
+                'height': '110'
                 }) // inits the jSignature widget. 
         },
         onShow: function(e) {

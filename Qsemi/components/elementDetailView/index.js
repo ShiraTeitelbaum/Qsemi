@@ -183,6 +183,8 @@ app.localization.registerView('elementDetailView');
 
                 /// start detail form show
                 document.getElementById("defaultOpen").click();
+                console.log("currentItem")
+                console.log(elementDetailViewModel.currentItem)
                 /// end detail form show
             },
             openQC1: function () {
@@ -203,48 +205,45 @@ app.localization.registerView('elementDetailView');
 
                 dataSourceSteps.fetch(function() {
                     var steps = dataSourceSteps.data();
-
+                    
                     for(var i=0; i<steps.length; i++) {
                         if(step1 != 0) {
                             if(steps[i].stageNum == 1) {
-                                stepsNames[stepsNames.length] = { name: steps[i].name };
+                                stepsNames[stepsNames.length] = { name: steps[i].name, persent: elementDetailViewModel.currentItem.stage1Persent };
                             }
                         }
                         if(step2 != 0) {
                             if(steps[i].stageNum == 2) {
-                                stepsNames[stepsNames.length] = { name: steps[i].name };
+                                stepsNames[stepsNames.length] = { name: steps[i].name, persent: elementDetailViewModel.currentItem.stage2Persent };
                             }
                         }
                         if(step3 != 0) {
                             if(steps[i].stageNum == 3) {
-                                stepsNames[stepsNames.length] = { name: steps[i].name };
+                                stepsNames[stepsNames.length] = { name: steps[i].name, persent: elementDetailViewModel.currentItem.stage3Persent };
                             }
                         }
                         if(step4 != 0) {
                             if(steps[i].stageNum == 4) {
-                                stepsNames[stepsNames.length] = { name: steps[i].name };
+                                stepsNames[stepsNames.length] = { name: steps[i].name, persent: elementDetailViewModel.currentItem.stage4Persent };
                             }
                         }
                         if(step5 != 0) {
                             if(steps[i].stageNum == 5) {
-                                stepsNames[stepsNames.length] = { name: steps[i].name };
+                                stepsNames[stepsNames.length] = { name: steps[i].name, persent: elementDetailViewModel.currentItem.stage5Persent  };
                             }
                         }
                         if(step6 != 0) {
                             if(steps[i].stageNum == 6) {
-                                stepsNames[stepsNames.length] = { name: steps[i].name };
+                                stepsNames[stepsNames.length] = { name: steps[i].name, persent: elementDetailViewModel.currentItem.stage6Persent };
                             }
                         }
                     }
 
-                    console.log("stepsNames")
-                    console.log(stepsNames)
-
                         var templateContent = $("#elementStepsTemplate").html();
                         var template = kendo.template(templateContent);
-
+                        
                         var result = kendo.render(template, stepsNames); //render the template
-
+                        
                         $("#elementSteps").html(result); //append the result to the page
                 });
 
@@ -258,17 +257,20 @@ app.localization.registerView('elementDetailView');
 
                 templateContent = $("#formStageTemplate").html();
                 template = kendo.template(templateContent);
-                console.log("elementDetailViewModel.currentItem")
-                console.log(elementDetailViewModel.currentItem)
+                
                 switch(step_id) {
                     case "1":
                         formsNames = elementDetailViewModel.currentItem.FormsStep1;
                         if(formsNames != "null") {
                             tmp = formsNames.split(", ");
                             formsNames = [];
-                            for(var i=0; i<tmp.length-1; i++) {
+                            for(var i=0; i<tmp.length; i++) {
                                 formsNames[i] = { id:(tmp[i]).split(' ').join('_'), name: tmp[i] }
+                                if(i == tmp.length-1)
+                                    formsNames[i] = { id:((tmp[i]).split(' ').join('_')).substr(0, ((tmp[i]).split(' ').join('_')).length-1), name: (tmp[i]).substr(0, (tmp[i]).length-1) }
                             }
+                            console.log("formsNames")
+                            console.log(formsNames)
                             result = kendo.render(template, formsNames); //render the template
                             $("#stageForms").html(result); //append the result to the page
                         }
@@ -278,8 +280,10 @@ app.localization.registerView('elementDetailView');
                         if(formsNames != "null") {
                             tmp = formsNames.split(", ");
                             formsNames = [];
-                            for(var i=0; i<tmp.length-1; i++) {
+                            for(var i=0; i<tmp.length; i++) {
                                 formsNames[i] = { id:(tmp[i]).split(' ').join('_'), name: tmp[i] }
+                                if(i == tmp.length-1)
+                                    formsNames[i] = {id:((tmp[i]).split(' ').join('_')).substr(0, ((tmp[i]).split(' ').join('_')).length-1), name: (tmp[i]).substr(0, (tmp[i]).length-1) }
                             }
                             result = kendo.render(template, formsNames); //render the template
                             $("#stageForms").html(result); //append the result to the page
@@ -289,8 +293,10 @@ app.localization.registerView('elementDetailView');
                         if(formsNames != "null") {
                             tmp = formsNames.split(", ");
                             formsNames = [];
-                            for(var i=0; i<tmp.length-1; i++) {
+                            for(var i=0; i<tmp.length; i++) {
                                 formsNames[i] = { id:(tmp[i]).split(' ').join('_'), name: tmp[i] }
+                                if(i == tmp.length-1)
+                                    formsNames[i] = { id:((tmp[i]).split(' ').join('_')).substr(0, ((tmp[i]).split(' ').join('_')).length-1), name: (tmp[i]).substr(0, (tmp[i]).length-1) }
                             }
                             result = kendo.render(template, formsNames); //render the template
                             $("#stageForms").html(result); //append the result to the page
@@ -300,28 +306,22 @@ app.localization.registerView('elementDetailView');
                         if(formsNames != "null") {
                             tmp = formsNames.split(", ");
                             formsNames = [];
-                            for(var i=0; i<tmp.length-1; i++) {
+                            for(var i=0; i<tmp.length; i++) {
                                 formsNames[i] = { id:(tmp[i]).split(' ').join('_'), name: tmp[i] }
+                                if(i == tmp.length-1)
+                                    formsNames[i] = { id:((tmp[i]).split(' ').join('_')).substr(0, ((tmp[i]).split(' ').join('_')).length-1), name: (tmp[i]).substr(0, (tmp[i]).length-1) }
                             }
                             result = kendo.render(template, formsNames); //render the template
                             $("#stageForms").html(result); //append the result to the page
                         }
                         break;
                     case "5": formsNames = elementDetailViewModel.currentItem.FormsStep5;
-                            console.log("formsNames1")
-                            console.log(formsNames)
                         if(formsNames != "null") {
                             tmp = formsNames.split(", ");
-                            console.log("tmp")
-                            console.log(tmp)
                             formsNames = [];
-                            for(var i=0; i<tmp.length-1; i++) {
-                                formsNames[i] = { id:(tmp[i]).split(' ').join('_'), name: tmp[i] }
-                                console.log("formsNames[i]")
-                                console.log(formsNames[i])
+                            for(var i=0; i<tmp.length; i++) {
+                                formsNames[i] = { id:(tmp[i]).substr(0,(tmp[i]).length-1), name: (tmp[i]).substr(0,(tmp[i]).length-1) }
                             }
-                            console.log("formsNames2")
-                            console.log(formsNames)
                             result = kendo.render(template, formsNames); //render the template
                             $("#stageForms").html(result); //append the result to the page
                         }
@@ -330,72 +330,15 @@ app.localization.registerView('elementDetailView');
                         if(formsNames != "null") {
                             tmp = formsNames.split(", ");
                             formsNames = [];
-                            for(var i=0; i<tmp.length-1; i++) {
-                                formsNames[i] = { id:(tmp[i]).split(' ').join('_'), name: tmp[i] }
+                            for(var i=0; i<tmp.length; i++) {
+                                var str = (tmp[i]).split(' ').join('_')
+                                formsNames[i] = { id: str.substr(0, str.length-1), name: (tmp[i]).substr(0, (tmp[i]).length-1) }
                             }
                             result = kendo.render(template, formsNames); //render the template
                             $("#stageForms").html(result); //append the result to the page
                         }
                         break;
                 }
-                /*if(step_id == "0") {
-                    $("#stage1Forms").hide();
-                     $("#stage2Forms").hide();
-                     $("#stage3Forms").hide();
-                     $("#stage4Forms").hide();
-                     $("#stage5Forms").hide();
-                     $("#stage6Forms").hide();
-
-                     app.mobileApp.navigate('#components/surveyorMarking/edit.html?id=' + step_id);
-                }
-                else if(step_id == "1") {
-                     $("#stage1Forms").show();
-                     $("#stage2Forms").hide();
-                     $("#stage3Forms").hide();
-                     $("#stage4Forms").hide();
-                     $("#stage5Forms").hide();
-                     $("#stage6Forms").hide();
-                }
-                else if(step_id == "2") { 
-                    $("#stage1Forms").hide();
-                     $("#stage2Forms").show();
-                     $("#stage3Forms").hide();
-                     $("#stage4Forms").hide();
-                     $("#stage5Forms").hide();
-                     $("#stage6Forms").hide(); 
-                }
-                else if(step_id == "3") { 
-                    $("#stage1Forms").hide();
-                     $("#stage2Forms").hide();
-                     $("#stage3Forms").show();
-                     $("#stage4Forms").hide();
-                     $("#stage5Forms").hide();
-                     $("#stage6Forms").hide(); 
-                }
-                else if(step_id == "4") { 
-                    $("#stage1Forms").hide();
-                     $("#stage2Forms").hide();
-                     $("#stage3Forms").hide();
-                     $("#stage4Forms").show();
-                     $("#stage5Forms").hide();
-                     $("#stage6Forms").hide(); 
-                }
-                else if(step_id == "5") { 
-                    $("#stage1Forms").hide();
-                     $("#stage2Forms").hide();
-                     $("#stage3Forms").hide();
-                     $("#stage4Forms").hide();
-                     $("#stage5Forms").show();
-                     $("#stage6Forms").hide(); 
-                }
-                else if(step_id == "6") { 
-                    $("#stage1Forms").hide();
-                     $("#stage2Forms").hide();
-                     $("#stage3Forms").hide();
-                     $("#stage4Forms").hide();
-                     $("#stage5Forms").hide();
-                     $("#stage6Forms").show(); 
-                }*/
             },
             setCurrentItemByUid: function(uid) {
                 var item = uid,
@@ -423,8 +366,9 @@ app.localization.registerView('elementDetailView');
                 return linkChunks[0] + this.get('currentItem.' + linkChunks[1]);
             },
             openFormStage: function(id) {
-                alert(id)
+                //alert(id)
                 switch(id) {
+                    case "SURVEYOR_MARKING":
                     case "surveyor_Marking": 
                         app.mobileApp.navigate('#components/surveyorMarking/edit.html?elementUid=' + this.currentItem.uid+'&elementId='+this.currentItem.id);
                         break;
@@ -449,6 +393,7 @@ app.localization.registerView('elementDetailView');
                     case "RETURN_WIRE_LAYING_1":
                          app.mobileApp.navigate('#components/returnWireLaying12/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
                         break;
+                    case "Tie-Rods_Clamps'_Insulators_Cross-Bars_and":
                     case "Tie-Rods": 
                     case "Clamps'_Insulators":
                     case "Cross-Bars_and":
@@ -498,90 +443,6 @@ app.localization.registerView('elementDetailView');
                         break;
                 }
             },
-            /*openFormStage1: function(id) {
-                switch(id) {
-                    case "form1": //app.mobileApp.navigate('#components/poleSupportDrillingIfTransPlatesForm/view.html?elementUid='+this.currentItem.uid);//uid??
-                                //app.mobileApp.navigate('#components/poleSupportDrillingIfTransPlatesForm2/view.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                app.mobileApp.navigate('#components/poleSupportDrillingIfTransPlatesForm22/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                    case "form2": app.mobileApp.navigate('#components/cantCounterwAnchorsDrilling2/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                    case "form3": //app.mobileApp.navigate('#components/returnWire2Drilling/view.html?id=' + id);//uid??
-                                app.mobileApp.navigate('#components/returnWire2Driliing2/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                    case "form4": //app.mobileApp.navigate('#components/concreting/view.html?id=' + id);//uid??
-                                app.mobileApp.navigate('#components/concreting2/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                    case "form5": //app.mobileApp.navigate('#components/reinforcement/view.html?id=' + id);//uid??
-                                app.mobileApp.navigate('#components/reinforcement2/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                    case "form6": //app.mobileApp.navigate('#components/excavation/view.html?id=' + id);//uid??
-                                app.mobileApp.navigate('#components/excavation2/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                }
-            },*/
-            /*openFormStage2: function(id) {
-                switch(id) {
-                    case "form1": //app.mobileApp.navigate('#components/cantileverSupportAndCounterWeights/view.html?id=' + id);//uid??
-                                app.mobileApp.navigate('#components/cantileverSupportAndCounterWeight2/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                    case "form2": //app.mobileApp.navigate('#components/portal/view.html?id=' + id);//uid??
-                                app.mobileApp.navigate('#components/portal2/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                    case "form3": //app.mobileApp.navigate('#components/pole/view.html?id=' + id);//uid??
-                                app.mobileApp.navigate('#components/pole2/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                    case "form4": //app.mobileApp.navigate('#components/returnWire2AndSupportAndConnection/view.html?id=' + id);//uid??
-                                app.mobileApp.navigate('#components/returnWire2AndSupportAndConnection2/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                }
-            },*/
-            /*openFormStage3: function(id) {
-                switch(id) {
-                    case "form1": //app.mobileApp.navigate('#components/cantileverInstallation/view.html?id=' + id);//uid??
-                                app.mobileApp.navigate('#components/cantileverInstallation2/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                    case "form2": //app.mobileApp.navigate('#components/cantileversManufacture/view.html?id=' + id);//uid??
-                                app.mobileApp.navigate('#components/cantileverManufacture2/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                    case "form3": //app.mobileApp.navigate('#components/counterwWeight/view.html?id=' + id);//uid??
-                                app.mobileApp.navigate('#components/counterwWeight2/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                    case "form4": //app.mobileApp.navigate('#components/couterwPulley/view.html?id=' + id);//uid??
-                                app.mobileApp.navigate('#components/counterwPulley2/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                }
-            },*/
-            /*openFormStage4: function(id) {
-                switch(id) {
-                    case "form1": //app.mobileApp.navigate('#components/contactWireLaying/view.html?id=' + id);//uid??
-                                app.mobileApp.navigate('#components/contactWireLaying2/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                    case "form2": //app.mobileApp.navigate('#components/droppers/view.html?id=' + id);//uid??
-                                app.mobileApp.navigate('#components/droppers2/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                    case "form3": //app.mobileApp.navigate('#components/messengerWireLaying/view.html?id=' + id);//uid??
-                                app.mobileApp.navigate('#components/messengerWireLaying2/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                    case "form4": //app.mobileApp.navigate('#components/returnWireLaying1/view.html?id=' + id);//uid??
-                                app.mobileApp.navigate('#components/returnWireLaying12/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                    case "form5": //app.mobileApp.navigate('#components/returnWireLaying2/view.html?id=' + id);//uid??
-                                app.mobileApp.navigate('#components/returnWireLaying22/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                    case "form6": //app.mobileApp.navigate('#components/tieRodsClampsInsulatorsCrossBarsAndMidp/view.html?id=' + id);//uid??
-                                app.mobileApp.navigate('#components/tieRoadsClampsInsulatorsCrossBarAndMipd2/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-                                break;
-                }
-            },*/
-            /*openFormStage5: function(id) {
-                 //app.mobileApp.navigate('#components/eandB/view.html?id=' + id);//uid??
-                 app.mobileApp.navigate('#components/eandB2/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-            },*/
-            /*openFormStage6: function(id) {
-                //app.mobileApp.navigate('#components/generalAdjustement/view.html?id=' + id);//uid??
-                app.mobileApp.navigate('#components/generalAdjustement2/edit.html?elementUid='+this.currentItem.uid+'&elementId='+this.currentItem.id);
-            },*/
             /// start masterDetails view model functions
             /// end masterDetails view model functions
             currentItem: {}
@@ -628,7 +489,6 @@ app.localization.registerView('elementDetailView');
                 dataSourceOptions.transport.jsdo = jsdo;
                 dataSource = new kendo.data.DataSource(dataSourceOptions);
 
-                //console.log("stepId:" + stepId)
                 //R363890883
                 //dataSource.filter({ field: "locationId", operator: "==", value: sessionStorage.getItem("locationId") });
                 dataSource.filter({ field: "R363890883", operator: "==", value: stepId });

@@ -197,7 +197,9 @@ app.localization.registerView('cantileverSupportAndCounterWeight2');
             $sigdiv.jSignature({
                 'background-color': 'transparent',
                 'decor-color': 'transparent',
-                'height':'8em'
+                 //'height':'8em'
+                'width': '300',
+                'height': '110'
                 }) // inits the jSignature widget. 
         },
         onShow: function(e) {
@@ -450,7 +452,7 @@ app.localization.registerView('cantileverSupportAndCounterWeight2');
                         itemData.set('Comments3', editFormData.comments3);
                         itemData.set('Comments2', editFormData.comments2);
                         itemData.set('Comments1', editFormData.comments1);
-                        itemData.set('signature', $("#signaturePSDTP").jSignature("getData"));
+                        itemData.set('signature', $("#signatureCSACW").jSignature("getData"));
 
                         var jsrow = jsdo2.findById(that.itemId);
                             var afterUpdateFn;

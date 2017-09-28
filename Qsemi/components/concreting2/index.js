@@ -197,7 +197,9 @@ app.localization.registerView('concreting2');
             $sigdiv.jSignature({
                 'background-color': 'transparent',
                 'decor-color': 'transparent',
-                'height':'8em'
+                 //'height':'8em'
+                'width': '300',
+                'height': '110'
                 }) // inits the jSignature widget. 
         },
         onShow: function(e) {
@@ -231,9 +233,6 @@ app.localization.registerView('concreting2');
                     that.itemId = view[0].id;
                     itemData = dataSource2.getByUid(view[0].uid);
                     fixedData = concreting2Model.fixHierarchicalData(itemData);
-
-                    console.log("itemData")
-                    console.log(itemData)
 
                     var checkBox1List = app.concreting2.concreting2Model._dataSourceOptions.transport.jsdo.getPicklist_Checkbox1().response.picklistData;
                      var checkBox2List = app.concreting2.concreting2Model._dataSourceOptions.transport.jsdo.getPicklist_Checkbox2().response.picklistData;

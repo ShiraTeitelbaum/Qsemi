@@ -10,8 +10,14 @@
 }
 /* Button */
 .km-flat .km-button {
-  background: rgba(0, 0, 0, 0.1);
+  background: #351e45;
   border-color: rgba(0, 0, 0, 0.1);
+  color: white;
+}
+.km-flat .km-button .km-state-active {
+  background: #351e45;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: white;
 }
 /* Badges and Details */
 .km-flat .km-detail,
@@ -20,7 +26,7 @@
 }
 /* Switch */
 .km-flat .km-switch-wrapper {
-  background-color: #bababa;
+  background-color: #FFFFFF;
 }
 .km-flat .km-switch-background,
 .km-flat .k-slider-selection {
@@ -38,7 +44,7 @@
 }
 .km-flat .km-switch-container,
 .km-flat .km-switch-wrapper {
-  border-color: #f0f0f0;
+  border-color: #FFFFFF;
 }
 /* Slider */
 .km-flat .k-slider-track {
@@ -46,7 +52,7 @@
 }
 /* ListView */
 .km-flat .km-list > li {
-  background: #fcfcfc;
+  background: #FFFFFF;
   border-color: rgba(0, 0, 0, 0.1);
 }
 .km-flat .km-listinset > li:first-child,
@@ -69,14 +75,16 @@
 }
 .km-flat .km-filter-wrap:before,
 .km-flat .km-filter-reset .km-clear {
-  color: #4c5356;
+  color: #00c853;
+  border-color: #00c853;
+  direction: rtl;
 }
 .km-flat .km-filter-wrap > input {
   color: #4c5356;
-  border-color: rgba(0, 0, 0, 0.1);
+  border-color: #00c853;
 }
 .km-flat .km-filter-wrap > input:focus {
-  border-color: #000;
+  border-color: #00c853;
 }
 /* ScrollView */
 .km-flat .km-pages li {
@@ -104,8 +112,9 @@
 .km-flat .km-list .k-dropdown-wrap,
 .km-flat .km-list textarea,
 .km-flat .km-list .k-dropdown-wrap .k-input {
-  color: #4c5356;
+  color: black;
 }
+
 .km-flat .km-list select:not([multiple]) option {
   color: #333;
 }
@@ -125,16 +134,17 @@
 .km-flat .km-content .km-list .km-state-active input[type=text]:not(.k-input),
 .km-flat .km-content .km-list .km-state-active select:not([multiple]),
 .km-flat .km-content .km-list .km-state-active textarea {
-  color: #fff;
+  color: #FFFFFF;
 }
 /* Checkboxes and Radios */
 .km-flat .km-listview-label input[type=radio],
 .km-flat .km-listview-label input[type=checkbox] {
   border-color: rgba(0, 0, 0, 0.1);
-  background: #f4f4f4;
+  background: #FFFFFF;
 }
-.km-flat .km-listview-label input[type=checkbox]:checked:after {
-  color: #eee;
+/* *** */
+.km-flat .km-listview-label input[type=checkbox]:checked:after { 
+  color: black;
 }
 /* Shim */
 .km-flat .km-shim,
@@ -185,7 +195,6 @@
 .km-flat .km-badge,
 .km-flat .km-rowinsert,
 .km-flat .km-rowdelete,
-.km-flat .km-state-active,
 .km-flat .km-switch-label-on,
 .km-flat .km-switch-label-off,
 .km-flat .km-tabstrip .km-button,
@@ -202,18 +211,16 @@
 .km-flat .km-popup .k-state-focused,
 .km-flat .km-popup .k-state-selected,
 .km-flat .km-actionsheet > li > a:active,
-.km-flat .km-actionsheet > li > a:hover,
-.km-flat .km-actionsheet > li > .km-state-active,
-.km-flat li.km-state-active .km-listview-link,
-.km-flat li.km-state-active .km-listview-label,
-.km-flat .km-state-active .km-listview-link:after {
+.km-flat .km-actionsheet > li > a:hover, {
   color: #fff;
 }
+
 .km-flat .km-loader > *:not(h1),
 .km-flat .km-filter-wrap > input,
 .km-flat .km-switch-handle.km-state-active,
 .km-root .km-flat .km-scroller-refresh span:not(.km-template) {
   background: #fff;
+  border-color: #00c853;
 }
 .km-flat .km-switch-handle,
 .km-flat .k-slider-selection,
@@ -222,7 +229,6 @@
   color: #10c4b2;
 }
 .km-flat .km-rowinsert,
-.km-flat .km-state-active,
 .km-flat .km-scroller-pull,
 .km-flat .km-loader:before,
 .km-flat .k-slider-selection,
@@ -230,22 +236,28 @@
 .km-flat .km-pages .km-current-page,
 .km-flat .k-slider .k-draghandle,
 .km-flat .k-slider .k-draghandle:hover,
-.km-flat .km-tabstrip .km-state-active,
 .km-flat .km-scroller-refresh.km-load-more,
 .km-flat .km-popup .k-state-hover,
 .km-flat .km-popup .k-state-focused,
 .km-flat .km-popup .k-state-selected,
 .km-flat .km-actionsheet > li > a:active,
 .km-flat .km-actionsheet > li > a:hover,
-.km-flat .km-actionsheet > li > .km-state-active,
-.km-flat li.km-state-active .km-listview-link,
-.km-flat li.km-state-active .km-listview-label,
 .km-flat .km-listview-label input[type=radio]:checked,
 .km-flat .km-listview-label input[type=checkbox]:checked {
-  background: #10c4b2;
+  background: #00c853;
+}
+
+/* background: #FFFFFF; */
+.km-flat .km-listview-label input[type=radio]:checked,
+.km-flat .km-listview-label input[type=checkbox]:checked {
+    background: #00c853;
+}
+.km-flat .km-actionsheet > li > a:active,
+.km-flat .km-actionsheet > li > a:hover {
+    background: #FFFFFF;
 }
 .km-flat .km-filter-wrap > input:focus {
-  border-color: #10c4b2;
+  border-color: #00c853;
 }
 .km-flat .km-badge,
 .km-flat .km-rowdelete {
@@ -283,10 +295,7 @@
   color: #ffffff;
 }
 .km-flat .button-group .km-button.primary,
-.km-flat .km-state-active,
 .km-flat #navigation-container .active,
-.km-flat #navigation-container .km-state-active,
-.km-flat #navigation-container li.km-state-active .km-listview-link,
 .km-flat .button-group .km-button.primary {
   color: #ffffff;
 }
@@ -298,9 +307,7 @@
 .km-flat .button-group .km-button.primary {
   background-color: #10c4b2;
 }
-.km-flat .button-group .km-button.primary.km-state-active {
-  background-color: #0eac9d;
-}
+
 /*Active state for drawer navigation*/
 .km-flat #navigation-container .active {
   background-color: #10c4b2;
@@ -334,10 +341,13 @@
 .km-flat .custom-filter input {
   font-size: 1.2em;
   padding: .3em 0 .3em 1.8em;
+  border-color: #00c853;
 }
 .km-flat .km-filter-wrap:before {
   position: absolute;
   top: .25em;
+  border-color: #00c853;
+  direction: rtl;
 }
 #navigation-show-more-view {
   background-color: #f4f4f4;
@@ -359,4 +369,83 @@
 /*Image Gallery field*/
 .km-flat .field--gallery:not(.field--gallery-slider) .field__content .gallery__items:after {
   background: rgba(0, 0, 0, 0.1);
+}
+
+.elementList {
+    border-bottom: 1px dashed #e9eaeb;
+    border-width: 100%;
+    padding-top: 3px; 
+    padding-bottom: 3px; 
+    padding-right: 3px;
+    width: 100%;
+    height: 45px;
+    border-right: none; 
+    border-left: none; 
+    border-top: none; 
+    font-size: 14px; 
+    margin: 0; 
+    padding: 0;
+}
+
+.stepList {
+    border-bottom: 1px solid #e9eaeb;
+    border-width: 100%;
+    padding-top: 3px; 
+    padding-bottom: 3px; 
+    padding-right: 3px;
+    width: 100%;
+    height: 45px;
+    border-right: none; 
+    border-left: none; 
+    border-top: none; 
+    font-size: 14px; 
+    margin: 0; 
+    padding: 0;
+}
+
+.formList {
+    border-bottom: 1px solid #e9eaeb;
+    border-width: 100%;
+    padding-top: 3px; 
+    padding-bottom: 3px; 
+    padding-right: 3px;
+    width: 100%;
+    height: 45px; 
+    border-right: none; 
+    border-left: none; 
+    border-top: none; 
+    font-size: 14px; 
+    margin: 0; 
+    padding: 0;
+}
+
+#redS {
+    background-color: #d12229;
+    width: 3%; 
+    height: 100%; 
+    padding: 0; 
+    margin: 0;
+}
+#orangeS {
+    background-color: #e06e3b;
+    width: 3%; 
+    height: 100%; 
+    padding: 0; 
+    margin: 0;
+}
+#greenS {
+    background-color: #449d31;
+    width: 3%; 
+    height: 100%; 
+    padding: 0; 
+    margin: 0;
+}
+
+.GDli {
+    height: 40px; 
+    border-bottom-style: dashed; 
+    border-bottom-color: #e9eaeb; 
+    border-right: none; 
+    border-left: none; 
+    font-size: 16px;
 }

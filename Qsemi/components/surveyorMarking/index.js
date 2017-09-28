@@ -83,6 +83,7 @@ app.localization.registerView('surveyorMarking');
         surveyorMarkingModel = kendo.observable({
             _dataSourceOptions: dataSourceOptions,
             _jsdoOptions: jsdoOptions,
+            mapFlag: false,
             fixHierarchicalData: function(data) {
                 var result = {},
                     layout = {};
@@ -194,18 +195,22 @@ app.localization.registerView('surveyorMarking');
         itemUid: '',
         itemId: '',
         onInit: function(e) {
-             var $sigdiv = $("#signatureS")
+            var $sigdiv = $("#signatureS")
             $sigdiv.jSignature({
                 'background-color': 'transparent',
                 'decor-color': 'transparent',
-                'height':'8em'
+                 //'height':'8em'
+                'width': '300',
+                'height': '110'
                 }) // inits the jSignature widget. 
         },
         onShow: function(e) {
-             $(".km-scroll-container").css( "overflow", "hidden" );
-            var $sigdiv = $("#signatureS");
-            // after some doodling...
-            $sigdiv.jSignature("reset") // clears the canvas and rerenders the decor on it.
+            if(surveyorMarkingModel.mapFlag == false) {
+                $(".km-scroll-container").css( "overflow", "hidden" );
+                var $sigdiv = $("#signatureS");
+                // after some doodling...
+                $sigdiv.jSignature("reset") // clears the canvas and rerenders the decor on it.
+            }
 
             var that = this,
                 //itemUid = e.view.params.uid,
@@ -231,49 +236,50 @@ app.localization.registerView('surveyorMarking');
                     that.itemId = view[0].id;
                     itemData = dataSource2.getByUid(view[0].uid);
                     fixedData = surveyorMarkingModel.fixHierarchicalData(itemData);
-
                      var IDPointsradioButtonList = app.surveyorMarking.surveyorMarkingModel._dataSourceOptions.transport.jsdo.getPicklist_IDPointsAndKP().response.picklistData;
                      var surveyorMarkingradioButtonList = app.surveyorMarking.surveyorMarkingModel._dataSourceOptions.transport.jsdo.getPicklist_surveyorMarkingInTheField().response.picklistData;
                      
-                     if(itemData.IDPointsAndKP != "null") {
-                        for(var i=0; i<IDPointsradioButtonList.length; i++) {
-                            if(itemData.IDPointsAndKP == IDPointsradioButtonList[i].id && IDPointsradioButtonList[i].name == "OK") {
-                                $("#idpointsAndKpokS").attr("checked", true);
-                            }
-                            else if(itemData.IDPointsAndKP == IDPointsradioButtonList[i].id && IDPointsradioButtonList[i].name == "Not OK") {
-                                $("#idpointsAndKpnotOkS").attr("checked", true);
-                            }
-                        }
-                     }
-
-                     if(itemData.surveyorMarkingInTheField != "null") {
-                        for(var i=0; i<surveyorMarkingradioButtonList.length; i++) {
-                            if(itemData.surveyorMarkingInTheField == surveyorMarkingradioButtonList[i].id && surveyorMarkingradioButtonList[i].name == "Normal") {
-                                $("#surveyorMarkingInTheFieldOkS").attr("checked", true);
-                            }
-                            else if(itemData.surveyorMarkingInTheField == surveyorMarkingradioButtonList[i].id && surveyorMarkingradioButtonList[i].name == "Not Normal") {
-                                $("#surveyorMarkingInTheFieldNotOkS").attr("checked", true);
+                     if(surveyorMarkingModel.mapFlag == false) {
+                        if(itemData.IDPointsAndKP != "null") {
+                            for(var i=0; i<IDPointsradioButtonList.length; i++) {
+                                if(itemData.IDPointsAndKP == IDPointsradioButtonList[i].id && IDPointsradioButtonList[i].name == "OK") {
+                                    $("#idpointsAndKpokS").attr("checked", true);
+                                }
+                                else if(itemData.IDPointsAndKP == IDPointsradioButtonList[i].id && IDPointsradioButtonList[i].name == "Not OK") {
+                                    $("#idpointsAndKpnotOkS").attr("checked", true);
+                                }
                             }
                         }
+
+                        if(itemData.surveyorMarkingInTheField != "null") {
+                            for(var i=0; i<surveyorMarkingradioButtonList.length; i++) {
+                                if(itemData.surveyorMarkingInTheField == surveyorMarkingradioButtonList[i].id && surveyorMarkingradioButtonList[i].name == "Normal") {
+                                    $("#surveyorMarkingInTheFieldOkS").attr("checked", true);
+                                }
+                                else if(itemData.surveyorMarkingInTheField == surveyorMarkingradioButtonList[i].id && surveyorMarkingradioButtonList[i].name == "Not Normal") {
+                                    $("#surveyorMarkingInTheFieldNotOkS").attr("checked", true);
+                                }
+                            }
+                        }
+
+                        if(itemData.Completed == true) {
+                            $("#completedS").attr("checked", true);
+                        }
+
+                        if(itemData.signature != "null")
+                            $sigdiv.jSignature("importData", itemData.signature)
+
+                        //ThereticalCapacity
+                        //PileCastingHeightMarked
+
+                        that.set('itemData', itemData);
+                        that.set('editFormData', {
+                            thereticalCapacity: itemData.ThereticalCapacity,
+                            pileCastingHeightMarked: itemData.PileCastingHeightMarked,
+                            /// start edit form data init
+                            /// end edit form data init
+                        });
                      }
-
-                    if(itemData.Completed == true) {
-                         $("#completedS").attr("checked", true);
-                     }
-
-                     if(itemData.signature != "null")
-                         $sigdiv.jSignature("importData", itemData.signature)
-
-                     //ThereticalCapacity
-                     //PileCastingHeightMarked
-
-                    that.set('itemData', itemData);
-                    that.set('editFormData', {
-                        thereticalCapacity: itemData.ThereticalCapacity,
-                        pileCastingHeightMarked: itemData.PileCastingHeightMarked,
-                        /// start edit form data init
-                        /// end edit form data init
-                    });
                     app.mobileApp.hideLoading();
                 });
             });
@@ -300,6 +306,7 @@ app.localization.registerView('surveyorMarking');
             return linkChunks[0] + ':' + this.get('itemData.' + linkChunks[1]);
         },
         openMap: function () {
+            surveyorMarkingModel.mapFlag=true;
             app.mobileApp.navigate('#components/elementLocationMaps/view.html');
         },
         onSaveClick: function(e) {
@@ -359,13 +366,49 @@ app.localization.registerView('surveyorMarking');
                             afterUpdateFn = function (jsdo2, record, success, request) {
                                 jsdo2.unsubscribe('afterUpdate', afterUpdateFn);
                                 if (success === true) {
-                                    app.mobileApp.navigate('#:back');
+                                    //app.mobileApp.navigate('#:back');
+
+                                    var jsdoOptions3 = app.elementDetailView.elementDetailViewModel.get('_jsdoOptions'),
+                                        jsdo3 = new progress.data.JSDO(jsdoOptions3);
+                                    dataSourceOptions.transport.jsdo = jsdo3;
+                                    var dataSource3 = new kendo.data.DataSource(dataSourceOptions);
+
+                                    dataSource3.filter({ field: "id", operator: "==", value: app.elementDetailView.elementDetailViewModel.currentItem.id });
+
+                                    dataSource3.fetch(function() {
+                                        var element = dataSource3.data();
+                                        
+                                        var tmp = (app.elementDetailView.elementDetailViewModel.marker.position).toString().split(",");
+                                        var lat = parseFloat((tmp[0]).substr(1, tmp[0].length)).toFixed(8);
+                                        var lng = parseFloat((tmp[1]).substr(1, tmp[1].length-2)).toFixed(8);
+
+                                        var elementLocation = {
+                                            Latitude: lat,
+                                            Longtitud: lng
+                                        };
+                                        
+                                        var jsrow = jsdo3.findById(app.elementDetailView.elementDetailViewModel.currentItem.id);
+                                        var afterUpdateFn;
+                                        jsrow.assign(elementLocation);
+
+                                        afterUpdateFn = function (jsdo3, record, success, request) {
+                                            jsdo3.unsubscribe('afterUpdate', afterUpdateFn);
+                                            if (success === true) {
+                                                //app.mobileApp.navigate('#:back');
+                                            } else {
+                                                alert("error")
+                                            }
+                                        };
+                                        jsdo3.subscribe('afterUpdate', afterUpdateFn);
+                                        jsdo3.saveChanges();
+                                    });
                                 } else {
                                     alert("error")
                                 }
                             };
                             jsdo2.subscribe('afterUpdate', afterUpdateFn);
                             jsdo2.saveChanges();
+                            app.mobileApp.navigate('#:back');
                     });
                 });
             /// edit properties
@@ -415,6 +458,8 @@ app.localization.registerView('surveyorMarking');
         },
         onCancel: function() {
             /// start edit form cancel
+            app.elementDetailView.elementDetailViewModel.marker = null;
+            app.surveyorMarking.surveyorMarkingModel.mapFlag=false;
             /// end edit form cancel
         }
     }));

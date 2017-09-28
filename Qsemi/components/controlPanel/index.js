@@ -136,12 +136,8 @@ app.localization.registerView('controlPanel');
             },
             itemClick: function(e) {
                 var dataItem = e.dataItem || controlPanelModel.originalItem;
-                console.log("itemClick dataItem")
-                console.log(dataItem)
-                //app.mobileApp.navigate('#components/controlPanel/details.html?uid=' + dataItem.uid);
-                //app.mobileApp.navigate('#components/elementDetailView/view.html?stageName=' + dataItem.name);
+                
                 app.mobileApp.navigate('#components/elementDetailView/view.html?stageId=' + dataItem.id);
-
             },
             detailsShow: function(e) {
                 var uid = e.view.params.uid,
@@ -177,6 +173,9 @@ app.localization.registerView('controlPanel');
                     return this.get('currentItem.' + linkChunks[1]);
                 }
                 return linkChunks[0] + this.get('currentItem.' + linkChunks[1]);
+            },
+            openGeneralMap: function() {
+                app.mobileApp.navigate('#components/generalMapView/view.html');
             },
             /// start masterDetails view model functions
             /// end masterDetails view model functions

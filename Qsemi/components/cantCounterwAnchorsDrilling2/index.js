@@ -197,7 +197,9 @@ app.localization.registerView('cantCounterwAnchorsDrilling2');
             $sigdiv.jSignature({
                 'background-color': 'transparent',
                 'decor-color': 'transparent',
-                'height':'8em'
+                //'height':'8em'
+                'width': '300',
+                'height': '110'
                 }) // inits the jSignature widget. 
         },
         onShow: function(e) {
@@ -226,8 +228,6 @@ app.localization.registerView('cantCounterwAnchorsDrilling2');
 
                 dataSource2.fetch(function() {
                      var view = dataSource2.data();
-                     //console.log("view")
-                     //console.log(view)
                    
                     that.itemUid = view[0].uid;
                     that.itemId = view[0].id;

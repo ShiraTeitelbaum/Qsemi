@@ -1,3 +1,27 @@
+#signatureEX img{ display: none !important; }
+#signatureCCAD img{ display: none !important; } 
+#signatureCI img{ display: none !important; } 
+#signatureCM img{ display: none !important; }
+#signatureCSACW img{ display: none !important; }
+#signatureC img{ display: none !important; }
+#signatureCWL img{ display: none !important; } 
+#signatureCP img{ display: none !important; }
+#signatureCW img{ display: none !important; }
+#signatureD img{ display: none !important; }
+#signatureEB img{ display: none !important; }
+#signatureGA img{ display: none !important; }
+#signatureMWL img{ display: none !important; }
+#signatureP img{ display: none !important; } 
+#signaturePSDTP img{ display: none !important; }
+#signaturePo img{ display: none !important; }
+#signatureR img{ display: none !important; }
+#signatureRWSC img{ display: none !important; }
+#signatureRWD img{ display: none !important; }
+#signatureRWL1 img{ display: none !important; }
+#signatureRWL2 img{ display: none !important; }
+#signatureTRCIC img{ display: none !important; }
+#signatureS img{ display: none !important; }
+
 #kendoUiMobileApp .block {
     display: block;
     margin: 1em;
@@ -287,6 +311,8 @@ Fields
     -ms-flex-flow: row;
     flex-flow: row;
     -webkit-box-orient: horizontal;
+    background-color: #00c853;
+    color: #FFFFFF;
 }
 
 #kendoUiMobileApp .km-header .km-rightitem,
@@ -733,7 +759,11 @@ Fields
     height: 2em;
 }
 
-
+#kendoUiMobileApp .km-logOutNew:after,
+#kendoUiMobileApp .km-logOutNew:before {
+    content: '\e0b3';
+    zoom:115%;
+}
 /* End Grid columns */
 
 

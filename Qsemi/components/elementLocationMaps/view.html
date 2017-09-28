@@ -2,11 +2,13 @@
 id="elementLocationMapsScreen" class="screen">
     <header data-role="header">
         <div data-role="navbar" class="header-text">
+            <a data-role="button" data-align="right" data-bind="events: { click: elementLocationMapsModel.saveElementLocation }">Save Location</a>
 
             <span data-bind="text: strings.elementLocationMaps.title"></span>
 
-            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
-            <a data-role="backbutton" data-align="left">Back</a>
+            <!--<a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>-->
+            <!--<a data-role="backbutton" data-align="left">Back</a>-->
+            <a data-role="button" data-align="left" data-bind="events: { click: elementLocationMapsModel.onCancel }">Cancel</a>
 
         </div>
     </header>

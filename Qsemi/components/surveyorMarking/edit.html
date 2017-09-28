@@ -3,75 +3,95 @@
         <div data-role="navbar" class="header-text">
             <span data-bind="text: itemData['name']"></span>
             <a data-role="backbutton" data-align="left" data-bind="events: { click: onCancel }">Cancel</a>
-            <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }">Save</a>
+            <!--<a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }">Save</a>-->
         </div>
     </header>
     <!-- START_CUSTOM_CODE_surveyorMarkingModel -->
     <!-- END_CUSTOM_CODE_surveyorMarkingModel -->
-    <div id="editableListForm33" class="form-view screen__content screen__content--form">
-        <form>
-            <ul class="form-content" data-role="listview" data-style="inset">
-                <li class="form-content-item">
+    <div id="editableListForm33" class="form-view screen__content screen__content--form" style="overflow-x:hidden; background-color: #FFFFFF;">
+            <ul data-role="listview" data-style="inset">
+                <li style="border: none;">
                     <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm33.idpointsAndKp.name"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #E0E0E0; border-right: none; border-left: none;">
                     <label id="idpointsAndKpokField" class="field km-listview-label field--radio">
-                        <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm33.radioButtonOK.title"></span>
-                        <input id="idpointsAndKpokS" name="group1" type="radio" value="option">
+                        <input id="idpointsAndKpokS" name="group1" type="radio" value="option" style="width:5vw;height:5vw;border-color: black; left: 5%;">
+                        <span style="margin-left: 13%" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm33.radioButtonOK.title"></span>
                     </label>
                     <label id="idpointsAndKpnotOkField" class="field km-listview-label field--radio">
-                        <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm33.radioButtonNotOk.title"></span>
-                        <input id="idpointsAndKpnotOkS" name="group1" type="radio" value="option">
+                        <input id="idpointsAndKpnotOkS" name="group1" type="radio" value="option" style="width:5vw;height:5vw;border-color: black; left: 5%;">
+                        <span style="margin-left: 13%" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm33.radioButtonNotOk.title"></span>
                     </label>
                 </li>
                 
-                <li class="form-content-item">
-                    <label id="pileCastingHeightMarkedField" class="field km-listview-label field--tel">
-                        <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm32.pileCastingHeightMarked.title"></span>
-                        <input id="pileCastingHeightMarked" data-bind="value: editFormData.pileCastingHeightMarked" type="number">
+                <li style="border: none;">
+                    <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm32.pileCastingHeightMarked.title"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #E0E0E0; border-right: none; border-left: none;">
+                    <!--<label id="pileCastingHeightMarkedField" class="field km-listview-label field--tel">-->
+                        <input id="pileCastingHeightMarked" data-bind="value: editFormData.pileCastingHeightMarked" type="number" style="border-radius: 3px; border: 1px solid black; margin-right: 45%; height: 60%">
+                        <br/>
+                    <!--</label>-->
+                </li>
+
+                <li style="border: none;">
+                    <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm33.surveyorMarkingInTheField.name"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #E0E0E0; border-right: none; border-left: none;">
+                    <label id="surveyorMarkingInTheFieldOkField" class="field km-listview-label field--radio">
+                        <input id="surveyorMarkingInTheFieldOkS" name="group2" type="radio" value="option" style="width:5vw;height:5vw;border-color: black; left: 5%;">
+                        <span style="margin-left: 13%" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm33.radioButtonNormal.title"></span>
+                    </label>
+                     <label id="surveyorMarkingInTheFieldNotOkField" class="field km-listview-label field--radio">
+                        <input id="surveyorMarkingInTheFieldNotOkS" name="group2" type="radio" value="option" style="width:5vw;height:5vw;border-color: black; left: 5%;">
+                        <span style="margin-left: 13%" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm33.radioButtonNotNormal.title"></span>
+                    </label>
+                </li>
+                
+                <li style="border: none;">
+                    <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm32.thereticalCapacity.title"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #E0E0E0; border-right: none; border-left: none;">
+                    <!--<label id="thereticalCapacityField" class="field km-listview-label field--tel">-->
+                        <input id="thereticalCapacity" data-bind="value: editFormData.thereticalCapacity" type="number" style="border-radius: 3px; border: 1px solid black; margin-right: 45%; height: 60%">
+                        <br/>
+                    <!--</label>-->
+                </li>
+                
+                <li style="border-bottom-style: dashed; border-bottom-color: #E0E0E0; border-right: none; border-left: none;">
+                    <label id="completedField" class="field km-listview-label field--checkbox">
+                        <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm32.completed.title"></span>
+                        <input id="completedS" type="checkbox" style="width:6vw;height:6vw;border-color: black; top: 1.2em; left: 30%;">
                     </label>
                 </li>
 
-                <li class="form-content-item">
-                    <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm33.surveyorMarkingInTheField.name"></span>
-                    <label id="surveyorMarkingInTheFieldOkField" class="field km-listview-label field--radio">
-                        <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm33.radioButtonNormal.title"></span>
-                        <input id="surveyorMarkingInTheFieldOkS" name="group2" type="radio" value="option">
-                    </label>
-                     <label id="surveyorMarkingInTheFieldNotOkField" class="field km-listview-label field--radio">
-                        <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm33.radioButtonNotNormal.title"></span>
-                        <input id="surveyorMarkingInTheFieldNotOkS" name="group2" type="radio" value="option">
-                    </label>
-                </li>
-                
-                <li class="form-content-item">
-                    <label id="thereticalCapacityField" class="field km-listview-label field--tel">
-                        <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm32.thereticalCapacity.title"></span>
-                        <input id="thereticalCapacity" data-bind="value: editFormData.thereticalCapacity" type="number">
-                    </label>
-                </li>
-                <li class="form-content-item">
-                    <label id="completedField" class="field km-listview-label field--checkbox">
-                        <span class="field__label" data-bind="text: strings.surveyorMarking.surveyorMarkingModel.editableListForm32.completed.title"></span>
-                        <input id="completedS" type="checkbox" style="width:6vw;height:6vw;border-color: black;">
-                    </label>
+                <li style="border-bottom-style: dashed; border-bottom-color: #E0E0E0; border-right: none; border-left: none;" data-bind="events: {click: openMap}">
+                    <!--<a id="ChooseLocationOnMap" data-role="button" data-bind="events: {click: openMap}">Get Element Location</a>-->
+                    <a id="ChooseLocationOnMap">Get Element Location</a>
                 </li>
             </ul>
-        </form>
-        <center>
-                <span>חתימה</span>
-                <div style="border-color: black; border-style: solid; width: 90%; background-color: white;"> 
-                    <label class="km-label-above field field--textarea">  
-                        <div class='signature-wrapper' >
-                            <div id='signatureS'></div>
-                            <input type='hidden' id='SignatureSAdd-value' name='SignatureAdd-value'/>
-                        </div>
-                    </label>
-                </div>
-                <p style="text-align:center; margin-top:0em">
-                    <button id="SReset" type="button">נקה חתימה</button>
-                </p>
-            </center>
-            <br />
-        <a id="ChooseLocationOnMap" data-role="button" data-bind="events: {click: openMap}">MAP</a>
+            <div>
+                    <span style="margin-left: 7%" data-bind="text: strings.stagesFormSignature.title"></span>
+                    <a id="SReset" data-role="button" style="margin-left: 36%; border-radius: 0;"><span class="field__label" data-bind="text: strings.stagesFormSignature.clear"></span></a>
+                    <br/>
+                    <br/>
+                    <div style="border: 1px solid black; width: 90%; background-color: white; margin-left: 5%"> 
+                        <label class="km-label-above field field--textarea">  
+                            <div class='signature-wrapper' >
+                                <div id='signatureS'></div>
+                                <input type='hidden' id='SignatureSAdd-value' name='SignatureAdd-value'/>
+                            </div>
+                        </label>
+                    </div>
+                </dic>
+                <br />
+
+            <footer data-role="footer" style="background-color: white">
+                <center>
+                    <a data-role="button" data-align="right" style="border-radius: 0; width: 90%;" data-bind="events: { click: onSaveClick }">Save</a>
+                </center>
+            </footer>
+        
         <!-- START_CUSTOM_CODE_editableListForm33 -->
         <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
         <!-- END_CUSTOM_CODE_editableListForm33 -->

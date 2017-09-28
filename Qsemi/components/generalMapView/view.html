@@ -1,0 +1,38 @@
+<div data-role="view" data-stretch="true" data-hide="app.generalMapView.onHide" data-title="View" data-layout="main" data-model="app.generalMapView" data-show="app.generalMapView.onShow" data-after-show="app.generalMapView.afterShow" id="generalMapViewScreen"
+class="screen">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+
+            <span data-bind="text: strings.generalMapView.title"></span>
+            <a data-role="backbutton" data-align="left">Back</a>
+            <!--<a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>-->
+
+        </div>
+    </header>
+
+
+    <!-- START_CUSTOM_CODE_generalMapView -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_generalMapView -->
+    <div id="generalMapViewModelMap" class="map"></div>
+
+    <!--<div class="map-details details-content screen__content screen__content--details screen__content--map" data-bind="click: generalMapViewModel.itemClick, visible: generalMapViewModel.itemDetailsVisible">
+        <h3 data-bind="text: generalMapViewModel.originalItem.AnchorageFoundation"></h3>
+
+    </div>-->
+
+
+    <!-- START_CUSTOM_CODE_generalMapViewModel -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_generalMapViewModel -->
+    <script type="text/x-kendo-template" id="generalMapViewModelTemplate">
+        <div class="image-with-text ">
+            # data = app.generalMapView.generalMapViewModel.fixHierarchicalData(data); #
+
+            <h3>#: data['AnchorageFoundation'] #</h3>
+
+        </div>
+    </script>
+</div>

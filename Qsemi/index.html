@@ -7,6 +7,8 @@
     <title></title>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width">
+    <link rel="stylesheet" href="kendo/styles/kendo.rtl.min.css">
+    <link rel="stylesheet" href="kendo/styles/kendo.silver.min.css">
     <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet">
 
     <link href="styles/overrides.css" rel="stylesheet">
@@ -25,6 +27,7 @@
 </head>
 
 <body id="kendoUiMobileApp">
+    <script src="components/generalMapView/index.js"></script>
     <script src="components/generalAdjustement2/index.js"></script>
     <script src="components/eandB2/index.js"></script>
     <script src="components/tieRoadsClampsInsulatorsCrossBarAndMipd2/index.js"></script>
@@ -73,45 +76,16 @@
         </header>
     </div>
 
-    <div id="appDrawer" data-role="drawer" data-title="Navigation">
+    <!--<div id="appDrawer" data-role="drawer" data-title="Navigation">
         <header data-role="header">
             <div data-role="navbar">
                 <span data-role="view-title"></span>
             </div>
         </header>
         <ul id="navigation-container" data-role="listview">
-            <!--<li><a href="components/home/view.html" data-icon="home"><span class="navigation-link-text" data-bind="text: strings.home.title"></span></a></li>-->
-            <!--<li><a href="components/authenticationView/view.html" data-icon="home"><span class="navigation-link-text" data-bind="text: strings.authenticationView.title"></span></a></li>-->
-            <!--<li><a href="components/elementDetailView/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.elementDetailView.title"></span></a></li>-->
-            <li><a href="components/elementLocationMaps/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.elementLocationMaps.title"></span></a></li>
-            <li><a href="components/controlPanel/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.controlPanel.title"></span></a></li>
-            <li><a href="components/surveyorMarking/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.surveyorMarking.title"></span></a></li>
-            <!--<li><a href="components/projectDetailView/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.projectDetailView.title"></span></a></li>-->
-            <!--<li><a href="components/poleSupportDrillingIfTransPlatesForm22/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.poleSupportDrillingIfTransPlatesForm22.title"></span></a></li>-->
-            <!--<li><a href="components/cantCounterwAnchorsDrilling2/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.cantCounterwAnchorsDrilling2.title"></span></a></li>-->
-            <!--<li><a href="components/returnWire2Driliing2/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.returnWire2Driliing2.title"></span></a></li>-->
-            <!--<li><a href="components/concreting2/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.concreting2.title"></span></a></li>-->
-            <!--<li><a href="components/reinforcement2/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.reinforcement2.title"></span></a></li>-->
-            <!--<li><a href="components/excavation2/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.excavation2.title"></span></a></li>-->
-            <!--<li><a href="components/cantileverSupportAndCounterWeight2/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.cantileverSupportAndCounterWeight2.title"></span></a></li>-->
-            <!--<li><a href="components/portal2/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.portal2.title"></span></a></li>-->
-            <!--<li><a href="components/pole2/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.pole2.title"></span></a></li>-->
-            <!--<li><a href="components/returnWire2AndSupportAndConnection2/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.returnWire2AndSupportAndConnection2.title"></span></a></li>-->
-            <!--<li><a href="components/cantileverInstallation2/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.cantileverInstallation2.title"></span></a></li>-->
-            <!--<li><a href="components/cantileverManufacture2/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.cantileverManufacture2.title"></span></a></li>-->
-            <!--<li><a href="components/counterwWeight2/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.counterwWeight2.title"></span></a></li>-->
-            <!--<li><a href="components/counterwPulley2/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.counterwPulley2.title"></span></a></li>-->
-            <!--<li><a href="components/contactWireLaying2/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.contactWireLaying2.title"></span></a></li>-->
-            <!--<li><a href="components/droppers2/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.droppers2.title"></span></a></li>-->
-            <!--<li><a href="components/messengerWireLaying2/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.messengerWireLaying2.title"></span></a></li>-->
-            <!--<li><a href="components/returnWireLaying12/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.returnWireLaying12.title"></span></a></li>-->
-            <!--<li><a href="components/returnWireLaying22/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.returnWireLaying22.title"></span></a></li>-->
-            <!--<li><a href="components/tieRoadsClampsInsulatorsCrossBarAndMipd2/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.tieRoadsClampsInsulatorsCrossBarAndMipd2.title"></span></a></li>-->
-            <!--<li><a href="components/eandB2/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.eandB2.title"></span></a></li>-->
-            <!--<li><a href="components/generalAdjustement2/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.generalAdjustement2.title"></span></a></li>-->
             <li id="authenticationViewModellogout"><a href="components/authenticationView/view.html?logout=true" data-position="end" data-icon="action"><span class="navigation-link-text" data-bind="text: strings.authenticationView.authenticationViewModel.logoutLabel"></span></a></li>
         </ul>
-    </div>
+    </div>-->
     <div id="notify" class="notify-pop-up">
         <span class="notify-pop-up__content"></span>
     </div>

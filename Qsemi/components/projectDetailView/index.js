@@ -165,6 +165,9 @@ app.localization.registerView('projectDetailView');
 
                 return result;
             },
+            logoutClick: function() {
+                app.mobileApp.navigate('#components/authenticationView/view.html?logout=true');
+            },
             itemClick: function(e) {
                 var dataItem = e.dataItem || projectDetailViewModel.originalItem;
 
@@ -172,11 +175,6 @@ app.localization.registerView('projectDetailView');
                 var locationId = dataItem.locationId;
                 var userId = dataItem.UserId;
                 var userRole = dataItem.UserRole;
-
-                console.log("dataItem")
-                console.log(dataItem)
-                console.log("locationName")
-                console.log(locationName)
 
                 sessionStorage.setItem("locationName", locationName);
                 sessionStorage.setItem("locationId", locationId);

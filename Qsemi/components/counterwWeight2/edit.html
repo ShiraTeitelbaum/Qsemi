@@ -3,23 +3,24 @@
         <div data-role="navbar" class="header-text">
             <span data-bind="text: itemData['name']"></span>
             <a data-role="backbutton" data-align="left" data-bind="events: { click: onCancel }">Cancel</a>
-            <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }">Save</a>
+            <!--<a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }">Save</a>-->
         </div>
     </header>
     <!-- START_CUSTOM_CODE_counterwWeight2Model -->
     <!-- END_CUSTOM_CODE_counterwWeight2Model -->
-    <div id="editableListForm117" class="form-view screen__content screen__content--form">
-        <form>
-            <ul class="form-content" data-role="listview" data-style="inset">
-                <li class="form-content-item">
+    <div id="editableListForm117" class="form-view screen__content screen__content--form" style="overflow-x:hidden; background-color: #FFFFFF;">
+            <ul data-role="listview" data-style="inset">
+                <li style="border: none;">
                     <span class="field__label" data-bind="text: strings.poleSupportDrillingIfTransPlatesForm.poleSupportDrillingIfTransPlatesFormModel.editableListForm4.checkbox1.name"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #E0E0E0; border-right: none; border-left: none;">
                     <label id="checkbox1Field" class="field km-listview-label field--checkbox">
-                        <input id="checkbox1CW" class="radio" value="1" name="check1CW" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox"> <!-- data-bind="checked: addFormData.checkbox1"  -->
-                        <label class="km-checkbox-label" for="checkbox1"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.valid"></span></label>
+                        <input id="checkbox1CW" class="radio" value="1" name="check1CW" style="width:6vw;height:6vw;border-color: black;top: 1.2em; left: 5%;" type="checkbox"> <!-- data-bind="checked: addFormData.checkbox1"  -->
+                        <label style="margin-left: 13%" for="checkbox1"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.valid"></span></label>
                     </label>
                     <label id="checkbox1NotOkField" class="field km-listview-label field--checkbox">
-                        <input id="checkbox1NotOkCW" class="radio" value="1" name="check1CW" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox">
-                        <label class="km-checkbox-label" for="checkbox1NotOkField"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.invalid"></span></label>
+                        <input id="checkbox1NotOkCW" class="radio" value="1" name="check1CW" style="width:6vw;height:6vw;border-color: black;top: 1.2em; left: 5%;" type="checkbox">
+                        <label style="margin-left: 13%" for="checkbox1NotOkField"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.invalid"></span></label>
                     </label>
                     <label id="comments1FieldCW" class="km-label-above field field--textarea">
                         <span class="field__label" data-bind="text: strings.stagesFormComments.title"></span>
@@ -27,15 +28,17 @@
                     </label>
                 </li>
 
-                <li class="form-content-item">
+                <li style="border: none;">
                     <span class="field__label" data-bind="text: strings.poleSupportDrillingIfTransPlatesForm.poleSupportDrillingIfTransPlatesFormModel.editableListForm4.checkbox2.name"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #E0E0E0; border-right: none; border-left: none;">
                     <label id="checkbox2Field" class="field km-listview-label field--checkbox">
-                        <input id="checkbox2CW" class="radio" value="1" name="check2CW" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox"> <!-- data-bind="checked: addFormData.checkbox1"  -->
-                        <label class="km-checkbox-label" for="checkbox2"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.valid"></span></label>
+                        <input id="checkbox2CW" class="radio" value="1" name="check2CW" style="width:6vw;height:6vw;border-color: black;top: 1.2em; left: 5%;" type="checkbox"> <!-- data-bind="checked: addFormData.checkbox1"  -->
+                        <label style="margin-left: 13%" for="checkbox2"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.valid"></span></label>
                     </label>
                     <label id="checkbox2NotOkField" class="field km-listview-label field--checkbox">
-                        <input id="checkbox2NotOkCW" class="radio" value="1" name="check2CW" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox">
-                        <label class="km-checkbox-label" for="checkbox2NotOkField"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.invalid"></span></label>
+                        <input id="checkbox2NotOkCW" class="radio" value="1" name="check2CW" style="width:6vw;height:6vw;border-color: black;top: 1.2em; left: 5%;" type="checkbox">
+                        <label style="margin-left: 13%" for="checkbox2NotOkField"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.invalid"></span></label>
                     </label>
                     <label id="comments2FieldCW" class="km-label-above field field--textarea">
                         <span class="field__label" data-bind="text: strings.stagesFormComments.title"></span>
@@ -43,31 +46,35 @@
                     </label>
                 </li>
 
-                <li class="form-content-item">
+                <li style="border: none;">
                     <span class="field__label" data-bind="text: strings.poleSupportDrillingIfTransPlatesForm.poleSupportDrillingIfTransPlatesFormModel.editableListForm4.checkbox3.name"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #E0E0E0; border-right: none; border-left: none;">
                     <label id="checkbox3Field" class="field km-listview-label field--checkbox">
-                        <input id="checkbox3CW" class="radio" value="1" name="check3CW" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox"> <!-- data-bind="checked: addFormData.checkbox1"  -->
-                        <label class="km-checkbox-label" for="checkbox3"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.valid"></span></label>
+                        <input id="checkbox3CW" class="radio" value="1" name="check3CW" style="width:6vw;height:6vw;border-color: black;top: 1.2em; left: 5%;" type="checkbox"> <!-- data-bind="checked: addFormData.checkbox1"  -->
+                        <label style="margin-left: 13%" for="checkbox3"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.valid"></span></label>
                     </label>
                     <label id="checkbox3NotOkField" class="field km-listview-label field--checkbox">
-                        <input id="checkbox3NotOkCW" class="radio" value="1" name="check3CW" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox">
-                        <label class="km-checkbox-label" for="checkbox3NotOkField"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.invalid"></span></label>
+                        <input id="checkbox3NotOkCW" class="radio" value="1" name="check3CW" style="width:6vw;height:6vw;border-color: black;top: 1.2em; left: 5%;" type="checkbox">
+                        <label style="margin-left: 13%" for="checkbox3NotOkField"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.invalid"></span></label>
                     </label>
                     <label id="comments3FieldCW" class="km-label-above field field--textarea">
                         <span class="field__label" data-bind="text: strings.stagesFormComments.title"></span>
                         <textarea rows="7" data-bind="value: editFormData.comments3"></textarea>
                     </label>
                 </li>
-                
-                <li class="form-content-item">
+
+                <li style="border: none;">
                     <span class="field__label" data-bind="text: strings.poleSupportDrillingIfTransPlatesForm.poleSupportDrillingIfTransPlatesFormModel.editableListForm4.checkbox4.name"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #E0E0E0; border-right: none; border-left: none;">
                     <label id="checkbox4Field" class="field km-listview-label field--checkbox">
-                        <input id="checkbox4CW" class="radio" value="1" name="check4CW" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox"> <!-- data-bind="checked: addFormData.checkbox1"  -->
-                        <label class="km-checkbox-label" for="checkbox4"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.valid"></span></label>
+                        <input id="checkbox4CW" class="radio" value="1" name="check4CW" style="width:6vw;height:6vw;border-color: black;top: 1.2em; left: 5%;" type="checkbox"> <!-- data-bind="checked: addFormData.checkbox1"  -->
+                        <label style="margin-left: 13%" for="checkbox4"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.valid"></span></label>
                     </label>
                     <label id="checkbox4NotOkField" class="field km-listview-label field--checkbox">
-                        <input id="checkbox4NotOkCW" class="radio" value="1" name="check4CW" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox">
-                        <label class="km-checkbox-label" for="checkbox4NotOkField"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.invalid"></span></label>
+                        <input id="checkbox4NotOkCW" class="radio" value="1" name="check4CW" style="width:6vw;height:6vw;border-color: black;top: 1.2em; left: 5%;" type="checkbox">
+                        <label style="margin-left: 13%" for="checkbox4NotOkField"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.invalid"></span></label>
                     </label>
                     <label id="comments4FieldCW" class="km-label-above field field--textarea">
                         <span class="field__label" data-bind="text: strings.stagesFormComments.title"></span>
@@ -75,16 +82,18 @@
                     </label>
                 </li>
 
-                <li class="form-content-item">
-                    <span>checkbox5</span>
-                    <span class="field__label" data-bind="text: strings.poleSupportDrillingIfTransPlatesForm.poleSupportDrillingIfTransPlatesFormModel.editableListForm5.checkbox5.name"></span>
+                <li style="border: none;">
+                    <span class="field__label" data-bind="text: strings.poleSupportDrillingIfTransPlatesForm.poleSupportDrillingIfTransPlatesFormModel.editableListForm4.checkbox5.name"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #E0E0E0; border-right: none; border-left: none;">
+                    <!--<span>checkbox5</span>-->
                     <label id="checkbox5Field" class="field km-listview-label field--checkbox">
-                        <input id="checkbox5CW" class="radio" value="1" name="check5CW" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox"> <!-- data-bind="checked: addFormData.checkbox1"  -->
-                        <label class="km-checkbox-label" for="checkbox5"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.valid"></span></label>
+                        <input id="checkbox5CW" class="radio" value="1" name="check5CW" style="width:6vw;height:6vw;border-color: black;top: 1.2em; left: 5%;" type="checkbox"> <!-- data-bind="checked: addFormData.checkbox1"  -->
+                        <label style="margin-left: 13%" for="checkbox5"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.valid"></span></label>
                     </label>
                     <label id="checkbox5NotOkField" class="field km-listview-label field--checkbox">
-                        <input id="checkbox5NotOkCW" class="radio" value="1" name="check5CW" style="width:6vw;height:6vw;border-color: black;top: 0.7em;" type="checkbox">
-                        <label class="km-checkbox-label" for="checkbox5NotOkField"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.invalid"></span></label>
+                        <input id="checkbox5NotOkCW" class="radio" value="1" name="check5CW" style="width:6vw;height:6vw;border-color: black;top: 1.2em; left: 5%;" type="checkbox">
+                        <label style="margin-left: 13%" for="checkbox5NotOkField"> <span class="field__label" data-bind="text: strings.stagesFormCheckBox.invalid"></span></label>
                     </label>
                      <label id="comments5FieldCW" class="km-label-above field field--textarea">
                         <span class="field__label" data-bind="text: strings.stagesFormComments.title"></span>
@@ -92,17 +101,19 @@
                     </label>
                 </li>
                 
-                <li class="form-content-item">
+                <li style="border-bottom-style: dashed; border-bottom-color: #E0E0E0; border-right: none; border-left: none;">
                     <label id="completedField" class="field km-listview-label field--checkbox">
                         <span class="field__label" data-bind="text: strings.poleSupportDrillingIfTransPlatesForm.poleSupportDrillingIfTransPlatesFormModel.editableListForm4.completed.title"></span>
-                        <input id="completedCW" type="checkbox" style="width:6vw;height:6vw;border-color: black;">
+                        <input id="completedCW" type="checkbox" style="width:6vw;height:6vw;border-color: black; top: 1.2em; left: 30%;">
                     </label>
                 </li>
             </ul>
-        </form>
-        <center>
-                <span>חתימה</span>
-                <div style="border-color: black; border-style: solid; width: 90%; background-color: white;"> 
+            <div>
+                <span style="margin-left: 7%" data-bind="text: strings.stagesFormSignature.title"></span>
+                <a id="CWReset" data-role="button" style="margin-left: 36%; border-radius: 0;"><span class="field__label" data-bind="text: strings.stagesFormSignature.clear"></a>
+                <br />
+                <br />
+                <div style="border: 1px solid black; width: 90%; background-color: white; margin-left: 5%"> 
                     <label class="km-label-above field field--textarea">  
                         <div class='signature-wrapper' >
                             <div id='signatureCW'></div>
@@ -110,18 +121,19 @@
                         </div>
                     </label>
                 </div>
-                <p style="text-align:center; margin-top:0em">
-                    <button id="CWReset" type="button">נקה חתימה</button>
-                </p>
-            </center>
+            </div>
             <br />
+            <footer data-role="footer">
+                <center>
+                    <a data-role="button" data-align="right" style="border-radius: 0; width: 90%;" data-bind="events: { click: onSaveClick }">Save</a>
+                </center>
+            </footer>
         <!-- START_CUSTOM_CODE_editableListForm117 -->
         <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
         <script>
             $("input:checkbox").change(function() {
                 var group = ":checkbox[name='" + $(this).attr("name") + "']";
-                console.log("group")
-                console.log(group)
+                
                 if ($(this).is(':checked')) {
                     $(group).not($(this)).attr("checked", false);
                 } else {

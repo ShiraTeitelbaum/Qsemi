@@ -61,22 +61,9 @@ app.localization.registerView('poleSupportDrillingIfTransPlatesForm22');
             requestEnd: function(e) {
                 var response = e.response;
                 var type = e.type;
-                console.log(type); // displays "read"
-                console.log(response);
-                if(type == "read")
-                {
-                    console.log("read")
-                    current = response;
-                }
-                if(type == "create")
-                {
-                    console.log("update")
-                    current = response;
-                }
-                 if(type == "update")
-                {
-                    current = response;
-                }
+                if(type == "read") { current = response; }
+                if(type == "create") { current = response; }
+                 if(type == "update") { current = response; }
             },
             error: function(e) {
                 app.mobileApp.pane.loader.hide();
@@ -224,7 +211,9 @@ app.localization.registerView('poleSupportDrillingIfTransPlatesForm22');
             $sigdiv.jSignature({
                 'background-color': 'transparent',
                 'decor-color': 'transparent',
-                'height':'8em'
+                 //'height':'8em'
+                'width': '300',
+                'height': '110'
                 }) // inits the jSignature widget. 
         },
         onShow: function(e) {
@@ -450,9 +439,7 @@ app.localization.registerView('poleSupportDrillingIfTransPlatesForm22');
                         itemData.set('Comments2', editFormData.comments2);
                         itemData.set('Comments1', editFormData.comments1);
                         itemData.set('signature', $("#signaturePSDTP").jSignature("getData"));
-                        console.log("$('#signaturePSDTP').jSignature('getData')")
-                        console.log($("#signaturePSDTP").jSignature("getData"))
-
+                        
                         var jsrow = jsdo2.findById(that.itemId);
                             var afterUpdateFn;
                             jsrow.assign(itemData);
