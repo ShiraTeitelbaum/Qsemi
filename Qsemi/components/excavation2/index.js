@@ -442,7 +442,7 @@ app.localization.registerView('excavation2');
                             }
                         }
 
-                        if($("#checkbox5EX").is(':checked')) {
+                        if($("#completedEX").is(':checked')) {
                             itemData.set('Completed', true);
                         }
 

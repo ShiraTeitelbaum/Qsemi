@@ -48,6 +48,14 @@ app.localization.registerView('controlPanel');
             name: 'Steps',
             autoFill: false
         },
+        jsdoOptionsElements = {
+            name: 'element2',
+            autoFill: false
+        },
+        jsdoOptionsLocations = {
+            name: 'QualityDashboard',
+            autoFill: false
+        },
         dataSourceOptions = {
             type: 'jsdo',
             transport: {},
@@ -83,6 +91,9 @@ app.localization.registerView('controlPanel');
         controlPanelModel = kendo.observable({
             _dataSourceOptions: dataSourceOptions,
             _jsdoOptions: jsdoOptions,
+            _jsdoOptionsElements: jsdoOptionsElements,
+            _jsdoOptionsLocations: jsdoOptionsLocations,
+            stageList: [],
             fixHierarchicalData: function(data) {
                 var result = {},
                     layout = {};
@@ -175,7 +186,7 @@ app.localization.registerView('controlPanel');
                 return linkChunks[0] + this.get('currentItem.' + linkChunks[1]);
             },
             openGeneralMap: function() {
-                app.mobileApp.navigate('#components/generalMapView/view.html');
+               app.mobileApp.navigate('#components/generalMapView/view.html');
             },
             /// start masterDetails view model functions
             /// end masterDetails view model functions
@@ -213,7 +224,9 @@ app.localization.registerView('controlPanel');
             }
         }
 
-        if (!controlPanelModel.get('dataSource')) {
+        $("#controlPanelTitle").innerHTML = sessionStorage.getItem("locationName");
+        
+        //if (!controlPanelModel.get('dataSource')) {
             dataProvider.loadCatalogs().then(function _catalogsLoaded() {
                 var jsdoOptions = controlPanelModel.get('_jsdoOptions'),
                     jsdo = new progress.data.JSDO(jsdoOptions);
@@ -222,13 +235,98 @@ app.localization.registerView('controlPanel');
                 dataSource = new kendo.data.DataSource(dataSourceOptions);
                 controlPanelModel.set('dataSource', dataSource);
 
+                 var jsdoOptionsLocations = controlPanelModel.get('_jsdoOptionsLocations'),
+                    jsdoLocations = new progress.data.JSDO(jsdoOptionsLocations);
+
+                dataSourceOptions.transport.jsdo = jsdoLocations;
+                var dataSourceLocations = new kendo.data.DataSource(dataSourceOptions);
+
                 projectNameViewHome.innerHTML = sessionStorage.getItem("locationName");
+                //app.generalMapView.generalMapViewModel.loadMap();
 
                 fetchFilteredData(param);
+
+                 var jsdoOptionsElem = controlPanelModel.get('_jsdoOptionsElements'),
+                    jsdoElem = new progress.data.JSDO(jsdoOptionsElem);
+
+                dataSourceOptions.transport.jsdo = jsdoElem;
+                var dataSourceElem = new kendo.data.DataSource(dataSourceOptions);
+
+                dataSourceElem.filter({
+                    logic: "and",
+                    filters: [
+                        { field: "Latitude", operator: "neq", value: "NaN" },
+                        { field: "Latitude", operator: "neq", value: "null" },
+                        { field: "Longtitud", operator: "neq", value: "NaN" },
+                        { field: "Longtitud", operator: "neq", value: "null" },
+                        { field: "elementStage", operator: "neq", value: "null" } //**********
+                    ]
+                });
+                
+                  var jsdoOptionsLocations = controlPanelModel.get('_jsdoOptionsLocations'),
+                    jsdoLocations = new progress.data.JSDO(jsdoOptionsLocations);
+
+                dataSourceOptions.transport.jsdo = jsdoLocations;
+                var dataSourceLocations = new kendo.data.DataSource(dataSourceOptions);
+                dataSourceLocations.filter({ field: "locationId", operator:"==", value:sessionStorage.getItem("locationId") });
+
+                dataSourceLocations.filter({ field: "locationId", operator:"==", value:sessionStorage.getItem("locationId") });
+
+                dataSourceElem.fetch(function() {
+                    var elementsWithLocation = dataSourceElem.data();
+                    console.log("elementsWithLocation")
+                    console.log(elementsWithLocation)
+
+                    app.generalMapView.generalMapViewModel.elements = elementsWithLocation;
+                    console.log("app.generalMapView.generalMapViewModel.elements")
+                    console.log(app.generalMapView.generalMapViewModel.elements)
+
+                    dataSourceLocations.fetch(function() {
+                        var location = dataSourceLocations.data();
+                    });
+                                     
+                });
             });
-        } else {
+        /*} else {
             fetchFilteredData(param);
-        }
+            
+            var jsdoOptionsElem = controlPanelModel.get('_jsdoOptionsElements'),
+                    jsdoElem = new progress.data.JSDO(jsdoOptionsElem);
+
+                dataSourceOptions.transport.jsdo = jsdoElem;
+                var dataSourceElem = new kendo.data.DataSource(dataSourceOptions);
+
+                 var jsdoOptionsLocations = controlPanelModel.get('_jsdoOptionsLocations'),
+                    jsdoLocations = new progress.data.JSDO(jsdoOptionsLocations);
+
+                dataSourceOptions.transport.jsdo = jsdoLocations;
+                var dataSourceLocations = new kendo.data.DataSource(dataSourceOptions);
+
+                dataSourceLocations.filter({ field: "locationId", operator:"==", value:sessionStorage.getItem("locationId") });
+
+                dataSourceElem.filter({
+                    logic: "and",
+                    filters: [
+                        { field: "Latitude", operator: "neq", value: "NaN" },
+                        { field: "Latitude", operator: "neq", value: "null" },
+                        { field: "Longtitud", operator: "neq", value: "NaN" },
+                        { field: "Longtitud", operator: "neq", value: "null" },
+                        { field: "elementStage", operator: "neq", value: "null" } //**********
+                    ]
+                });
+                
+                dataSourceElem.fetch(function() {
+                    var elementsWithLocation = dataSourceElem.data();
+
+                    app.generalMapView.generalMapViewModel.elements = elementsWithLocation;
+
+                    dataSourceLocations.fetch(function() {
+                        var locations = dataSourceLocations.data();
+                        console.log("locations2")
+                        console.log(locations)
+                    });
+                });
+        }*/
 
     });
 

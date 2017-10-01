@@ -4,7 +4,7 @@
 
             <label id="projectNameViewHome"></label>
             <br/>
-            <span data-bind="text: strings.controlPanel.title"></span>
+            <!--<span data-bind="text: strings.controlPanel.title"></span>-->
             <a data-role="backbutton" data-align="left">Back</a>
             <!--<a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>-->
 
@@ -19,9 +19,79 @@
     <a data-role="button" onclick="app.controlPanel.controlPanelModel.openGeneralMap()"><img src="images/mapIcon.png" style="height: 20px; width: 18px; margin-left: 1px;"/><span>MAP</span></a>
     <div>
         <center>
-            <ul class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" data-template="controlPanelModelTemplate" data-bind="source: controlPanelModel.dataSource, events: {click: controlPanelModel.itemClick}" data-pull-to-refresh="false"
-            data-endless-scroll="false">
-            </ul>
+            <ul id="controlPanelStagesList" class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" data-template="controlPanelModelTemplate" data-bind="source: controlPanelModel.dataSource, events: {click: controlPanelModel.itemClick}" data-pull-to-refresh="false" data-endless-scroll="false"></ul>
+            <!--<ul id="controlPanelStagesList" class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" data-endless-scroll="false">
+                <li>
+                    <div>
+                        <div>
+                            <h3>POLE FOUNDATION</h3>
+                        </div> 
+                        <center>
+                            <span id="stage1Counter" style="top:5.5em;color:black;font-size:small;font-family:Tahoma, Geneva, sans-serif;font-weight: bold;">50</span>
+                        </center>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <div>
+                            <h3>POLE ERECTION</h3>
+                        </div> 
+                        <center>
+                            <span id="stage1Counter" style="top:5.5em;color:black;font-size:small;font-family:Tahoma, Geneva, sans-serif;font-weight: bold;">50</span>
+                        </center>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <div>
+                            <h3>POLE EQUIPMENT & CANTILEVER</h3>
+                        </div> 
+                        <center>
+                            <span id="stage1Counter" style="top:5.5em;color:black;font-size:small;font-family:Tahoma, Geneva, sans-serif;font-weight: bold;">50</span>
+                        </center>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <div>
+                            <h3>OCS WIRES</h3>
+                        </div> 
+                        <center>
+                            <span id="stage1Counter" style="top:5.5em;color:black;font-size:small;font-family:Tahoma, Geneva, sans-serif;font-weight: bold;">50</span>
+                        </center>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <div>
+                            <h3>E&B</h3>
+                        </div> 
+                        <center>
+                            <span id="stage1Counter" style="top:5.5em;color:black;font-size:small;font-family:Tahoma, Geneva, sans-serif;font-weight: bold;">50</span>
+                        </center>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <div>
+                            <h3>TEST</h3>
+                        </div> 
+                        <center>
+                            <span id="stage1Counter" style="top:5.5em;color:black;font-size:small;font-family:Tahoma, Geneva, sans-serif;font-weight: bold;">50</span>
+                        </center>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <div>
+                            <h3>Completed</h3>
+                        </div> 
+                        <center>
+                            <span id="stage1Counter" style="top:5.5em;color:black;font-size:small;font-family:Tahoma, Geneva, sans-serif;font-weight: bold;">50</span>
+                        </center>
+                    </div>
+                </li>
+            </ul>-->
         </center>
     </div>
     

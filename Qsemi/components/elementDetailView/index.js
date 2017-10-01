@@ -178,9 +178,10 @@ app.localization.registerView('elementDetailView');
             },
             detailsShow: function(e) {
                 this.page_scroller = e.view.scroller;
+                elementDetaileDetailsTitle.innerHTML = sessionStorage.getItem("locationName");
                 if(e.view.params.mapFlag != undefined) {
                     var id = e.view.params.id;
-                    if (!elementDetailViewModel.get('dataSource')) {
+                    //if (!elementDetailViewModel.get('dataSource')) {
                         dataProvider.loadCatalogs().then(function _catalogsLoaded() {
                             var jsdoOptions = elementDetailViewModel.get('_jsdoOptions'),
                                 dataSourceOptions = elementDetailViewModel.get('_dataSourceOptions'),
@@ -195,8 +196,10 @@ app.localization.registerView('elementDetailView');
                                 var view = dataSource.data();
                                 elementDetailViewModel.setCurrentItemByUid(view[0].uid);
                             });
+                            console.log("elementDetailViewModel.currentItem")
+                            console.log(elementDetailViewModel.currentItem)
                         });
-                    }
+                    //}
                 }
                 else {
                     var uid = e.view.params.uid,
@@ -204,6 +207,8 @@ app.localization.registerView('elementDetailView');
                     itemModel = dataSource.getByUid(uid);
                    
                     elementDetailViewModel.setCurrentItemByUid(uid);
+                    console.log("elementDetailViewModel.currentItem")
+                    console.log(elementDetailViewModel.currentItem)
 
                     /// start detail form show
                     //document.getElementById("QC_Button").setAttribute("href", "#qc");
@@ -506,6 +511,8 @@ app.localization.registerView('elementDetailView');
             }
         }
 
+        elementDetailViewTitle.innerHTML = sessionStorage.getItem("locationName");
+
         if (!elementDetailViewModel.get('dataSource')) {
             dataProvider.loadCatalogs().then(function _catalogsLoaded() {
                 var jsdoOptions = elementDetailViewModel.get('_jsdoOptions'),
@@ -516,14 +523,14 @@ app.localization.registerView('elementDetailView');
 
                 //R363890883
                 //dataSource.filter({ field: "locationId", operator: "==", value: sessionStorage.getItem("locationId") });
-                dataSource.filter({ field: "R363890883", operator: "==", value: stepId });
-                /*dataSource.filter({
+                //dataSource.filter({ field: "R363890883", operator: "==", value: stepId });
+                dataSource.filter({
                     logic: "and",
                     filters: [
                         {field: "R363890883", operator: "==", value: stepId},
                         {field: "locationId", operator: "==", value: sessionStorage.getItem("locationId")}
                         ]
-                });*/            
+                });            
                
                 elementDetailViewModel.set('dataSource', dataSource);
                 
@@ -531,14 +538,14 @@ app.localization.registerView('elementDetailView');
             });
         } else {
             var dataSource = elementDetailViewModel.get('dataSource');
-             dataSource.filter({ field: "R363890883", operator: "==", value: stepId });
-             /*dataSource.filter({
+             //dataSource.filter({ field: "R363890883", operator: "==", value: stepId });
+             dataSource.filter({
                     logic: "and",
                     filters: [
                         {field: "R363890883", operator: "==", value: stepId},
                         {field: "locationId", operator: "==", value: sessionStorage.getItem("locationId")}
                         ]
-                });*/ 
+                });
                 
                 elementDetailViewModel.set('dataSource', dataSource);
             //fetchFilteredData(param);

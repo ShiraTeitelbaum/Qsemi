@@ -211,7 +211,11 @@ app.localization.registerView('surveyorMarking');
                 // after some doodling...
                 $sigdiv.jSignature("reset") // clears the canvas and rerenders the decor on it.
             }
-
+            
+            console.log("on show")
+            //alert("on show")
+            app.elementLocationMaps.elementLocationMapsModel.counter = 0;
+            
             var that = this,
                 //itemUid = e.view.params.uid,
                 element_id = e.view.params.elementId,
@@ -232,10 +236,15 @@ app.localization.registerView('surveyorMarking');
 
                 dataSource2.fetch(function() {
                     var view = dataSource2.data();
+                    console.log("view")
+                    console.log(view)
                     that.itemUid = view[0].uid;
                     that.itemId = view[0].id;
                     itemData = dataSource2.getByUid(view[0].uid);
                     fixedData = surveyorMarkingModel.fixHierarchicalData(itemData);
+                    console.log("itemData")
+                    console.log(itemData)
+
                      var IDPointsradioButtonList = app.surveyorMarking.surveyorMarkingModel._dataSourceOptions.transport.jsdo.getPicklist_IDPointsAndKP().response.picklistData;
                      var surveyorMarkingradioButtonList = app.surveyorMarking.surveyorMarkingModel._dataSourceOptions.transport.jsdo.getPicklist_surveyorMarkingInTheField().response.picklistData;
                      

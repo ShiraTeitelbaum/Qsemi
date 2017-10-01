@@ -206,6 +206,13 @@ app.localization.registerView('generalMapView');
         generalMapViewModel = kendo.observable({
             _dataSourceOptions: dataSourceOptions,
             _jsdoOptions: jsdoOptions,
+            myOptions: '',
+            mapElement: '',
+            container: '',
+            map: '',
+            infoWindow: '',
+            pos: '',
+            elements: [],
             fixHierarchicalData: function(data) {
                 var result = {},
                     layout = {};
@@ -298,9 +305,120 @@ app.localization.registerView('generalMapView');
                 }
                 return linkChunks[0] + this.get('currentItem.' + linkChunks[1]);
             },
+            loadMap: function() {
+                app.mobileApp.pane.loader.show();
+                this.myOptions = {
+                    zoom: 18,
+                    mapTypeControl: true, 
+                    mapTypeControlOptions: {
+                        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                        position: google.maps.ControlPosition.TOP_CENTER
+                    },
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    zoomControl: true,
+                    zoomControlOptions: {
+                        style: google.maps.ZoomControlStyle.LARGE,
+                        position: google.maps.ControlPosition.TOP_LEFT
+                    },
+                    scaleControl: true,
+                };
+                this.mapElement = $("#generalMapViewModelMap");
+                //this.container = e.view.content;
+                this.container = $("#generalMapViewScreen").content;
+
+                 this.map = new google.maps.Map(this.mapElement[0], this.myOptions);
+                 this.infoWindow = new google.maps.InfoWindow({map: this.map});
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        generalMapViewModel.pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        /*generalMapViewModel.pos = {
+                            lat: 31.7660014,
+                            lng: 35.1908773
+                        };*/
+
+                        /*infoWindow.setPosition(pos);
+                        infoWindow.setContent('Location found.');
+                        map.setCenter(pos);*/
+                        //infoWindow.setPosition(pos);
+                        generalMapViewModel.infoWindow.setContent('<br/>'+ 'You Are Here'); //Location found.
+                        generalMapViewModel.infoWindow.open(generalMapViewModel.map);
+                        generalMapViewModel.map.setCenter(generalMapViewModel.pos);
+                        
+                        app.mobileApp.pane.loader.hide();
+                    }, function() {
+                        handleLocationError(true, generalMapViewModel.infoWindow,generalMapViewModel. map.getCenter());
+                    });
+                } else {
+                    // Browser doesn't support Geolocation
+                    handleLocationError(false, generalMapViewModel.infoWindow, generalMapViewModel.map.getCenter());
+                    app.mobileApp.pane.loader.hide();
+                }
+                function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                    infoWindow.setPosition(this.pos);
+                    infoWindow.setContent(browserHasGeolocation ?
+                                        'Error: The Geolocation service failed.' :
+                                        'Error: Your browser doesn\'t support geolocation.');
+                    infoWindow.open(this.map);
+                }
+                this.showElements();
+            },
+            showElements: function() {
+                var elementLocation;
+                if(this.elements.length > 0) {
+                    var i;
+                    for(i=0; i<this.elements.length; i++) {
+                        switch(this.elements[i].elementStage) {
+                            case 1: 
+                                generalMapViewModel.addMarker(this.elements[i], this.map, 1);
+                                break;
+                            case 2: 
+                                generalMapViewModel.addMarker(this.elements[i],this.map, 2);
+                                break;
+                            case 3: 
+                                generalMapViewModel.addMarker(this.elements[i], this.map, 3);
+                                break;
+                            case 4:  
+                                generalMapViewModel.addMarker(this.elements[i], this.map, 4);
+                                break;
+                            case 5: 
+                                generalMapViewModel.addMarker(this.elements[i], this.map, 5);
+                                break;
+                            case 6: 
+                                generalMapViewModel.addMarker(this.elements[i], this.map, 6);
+                                break;
+                        }
+                    }
+                    console.log("I")
+                    console.log(i)
+                }
+            },
+            attachMessage: function(marker, element) {
+                //this.elements
+                var contentString = '<div id="content">' + 
+                    '<p><b>' + element.name + '</b></p>' +
+                    '<div id="bodyContent">' +
+                     '<p><b>Stage: </b>' + element.elementStage + '</p>' +
+                     '<p> <a href="#components/elementDetailView/details.html?mapFlag=true&id=' + element.id+'">' +
+                    'To Element page</a> '
+                     '</div>' +
+                    '</div>';
+
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+
+                marker.addListener('click', function () {
+                    infowindow.open(marker.get('map'), marker);
+                });
+            },
              // Adds a marker to the map.
             //function addMarker(location, map) {
-            addMarker: function(location, map, num) {
+            addMarker: function(element, map, num) {
                 // Add the marker at the clicked location, and add the next-available label
                 // from the array of alphabetical characters.
                 var iconURL;
@@ -318,6 +436,7 @@ app.localization.registerView('generalMapView');
                     case 6: iconURL = 'images/addMapPinPink.png';
                         break;
                 }
+                var location = new google.maps.LatLng(element.Latitude, element.Longtitud);
                 var marker = new google.maps.Marker({
                     position: location,
                     map: map,
@@ -325,8 +444,7 @@ app.localization.registerView('generalMapView');
                     animation: google.maps.Animation.DROP,
                     icon: iconURL//iconURL//'images/addMapPinRed.png'
                     });
-                console.log("marker")
-                console.log(marker)
+                    this.attachMessage(marker, element);
                 },
             /// start masterDetails view model functions
             /// end masterDetails view model functions
@@ -368,7 +486,7 @@ app.localization.registerView('generalMapView');
         generalMapViewModel.set('mapVisble', false);
         generalMapViewModel.set('itemDetailsVisible', false);
 
-        if (!generalMapViewModel.get('dataSource')) {
+        //if (!generalMapViewModel.get('dataSource')) {
             dataProvider.loadCatalogs().then(function _catalogsLoaded() {
                 var jsdoOptions = generalMapViewModel.get('_jsdoOptions'),
                     jsdo = new progress.data.JSDO(jsdoOptions);
@@ -379,7 +497,8 @@ app.localization.registerView('generalMapView');
                 dataSource.one('change', setupMapView);
                 fetchFilteredData(param);
 
-                app.mobileApp.pane.loader.show();
+                generalMapViewModel.loadMap();
+                /*app.mobileApp.pane.loader.show();
                 var myOptions = {
                     zoom: 18,
                     mapTypeControl: true, 
@@ -399,22 +518,22 @@ app.localization.registerView('generalMapView');
                 var container = e.view.content;
 
                  var map = new google.maps.Map(mapElement[0], myOptions);
-                 var infoWindow = new google.maps.InfoWindow({map: this.map});
+                 var infoWindow = new google.maps.InfoWindow({map: this.map});*/
 
-                if (navigator.geolocation) {
+                /*if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function(position) {
-                        /*var pos = {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude
-                        };*/
+                        //var pos = {
+                            //lat: position.coords.latitude,
+                            //lng: position.coords.longitude
+                        //};
                         var pos = {
                             lat: 31.7660014,
                             lng: 35.1908773
                         };
 
-                        /*infoWindow.setPosition(pos);
-                        infoWindow.setContent('Location found.');
-                        map.setCenter(pos);*/
+                        //infoWindow.setPosition(pos);
+                        //infoWindow.setContent('Location found.');
+                        //map.setCenter(pos);
                         //infoWindow.setPosition(pos);
                         //infoWindow.setContent('<br/>'+ 'You Are Here'); //Location found.
                         infoWindow.open(map);
@@ -423,9 +542,9 @@ app.localization.registerView('generalMapView');
                         //app.mobileApp.pane.loader.hide();
                     }, function() {
                         handleLocationError(true, infoWindow, map.getCenter());
-                    });
+                    });*/
 
-                    dataSource.fetch(function() {
+                    /*dataSource.fetch(function() {
                         var elements = dataSource.data();
                         console.log("elements")
                         console.log(elements)
@@ -436,36 +555,28 @@ app.localization.registerView('generalMapView');
                                 console.log(elements[i].elementStage)
                                 switch(elements[i].elementStage) {
                                     case 1: console.log("1");  elementLocation = new google.maps.LatLng(elements[i].Latitude, elements[i].Longtitud);
-                                        generalMapViewModel.addMarker(elementLocation, map, 1);
+                                        generalMapViewModel.addMarker(elementLocation, this.map, 1);
                                         break;
                                     case 2: console.log("2");  elementLocation = new google.maps.LatLng(elements[i].Latitude, elements[i].Longtitud);
-                                        generalMapViewModel.addMarker(elementLocation, map, 2);
+                                        generalMapViewModel.addMarker(elementLocation,this.mapmap, 2);
                                         break;
                                     case 3: console.log("3"); elementLocation = new google.maps.LatLng(elements[i].Latitude, elements[i].Longtitud);
-                                        generalMapViewModel.addMarker(elementLocation, map, 3);
+                                        generalMapViewModel.addMarker(elementLocation, this.map, 3);
                                         break;
                                     case 4:  console.log("4"); elementLocation = new google.maps.LatLng(elements[i].Latitude, elements[i].Longtitud);
-                                        generalMapViewModel.addMarker(elementLocation, map, 4);
+                                        generalMapViewModel.addMarker(elementLocation, this.map, 4);
                                         break;
                                     case 5: console.log("5"); elementLocation = new google.maps.LatLng(elements[i].Latitude, elements[i].Longtitud);
-                                        generalMapViewModel.addMarker(elementLocation, map, 5);
+                                        generalMapViewModel.addMarker(elementLocation, this.map, 5);
                                         break;
                                     case 6: console.log("6"); elementLocation = new google.maps.LatLng(elements[i].Latitude, elements[i].Longtitud);
-                                        generalMapViewModel.addMarker(elementLocation, map, 6);
+                                        generalMapViewModel.addMarker(elementLocation, this.map, 6);
                                         break;
                                 }
                             }
                         }
-                    });
-                    /*var elementLat = app.elementDetailView.elementDetailViewModel.currentItem.Latitude;//parseFloat(app.elementDetailView.elementDetailViewModel.currentItem.Latitude).toFixed(8);
-                    var elementLng = app.elementDetailView.elementDetailViewModel.currentItem.Longtitud;//parseFloat(app.elementDetailView.elementDetailViewModel.currentItem.Longtitud).toFixed(8);
-                    if(elementLat != "NaN" && elementLng != "NaN") {
-                        //var elementLocation = {lat: elementLat, lng: elementLng};
-                        var elementLocation = new google.maps.LatLng(elementLat, elementLng);
-                        
-                        elementLocationMapsModel.addMarker(elementLocation, map);
-                    }*/
-                } else {
+                    });*/
+                /*} else {
                     // Browser doesn't support Geolocation
                     handleLocationError(false, infoWindow, map.getCenter());
                     //app.mobileApp.pane.loader.hide();
@@ -476,12 +587,13 @@ app.localization.registerView('generalMapView');
                                         'Error: The Geolocation service failed.' :
                                         'Error: Your browser doesn\'t support geolocation.');
                     infoWindow.open(map);
-                }
+                }*/
             });
-            app.mobileApp.pane.loader.hide();
-        } else {
+            //app.mobileApp.pane.loader.hide();
+        /*} else {
             fetchFilteredData(param);
-        }
+            generalMapViewModel.loadMap();
+        }*/
 
     });
 

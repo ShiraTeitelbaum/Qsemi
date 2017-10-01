@@ -1,5 +1,6 @@
-<div data-role="view" data-stretch="true" data-hide="app.generalMapView.onHide" data-title="View" data-layout="main" data-model="app.generalMapView" data-show="app.generalMapView.onShow" data-after-show="app.generalMapView.afterShow" id="generalMapViewScreen"
+<div data-role="view" data-stretch="true" data-hide="app.generalMapView.onHide" data-title="View" data-layout="main" data-model="app.generalMapView" data-bind="events: { show: onShow }" data-after-show="app.generalMapView.afterShow" id="generalMapViewScreen"
 class="screen">
+<!-- data-show="app.generalMapView.onShow"  -->
     <header data-role="header">
         <div data-role="navbar" class="header-text">
 
@@ -9,8 +10,29 @@ class="screen">
 
         </div>
     </header>
-
-
+<style>
+    .footerMapTD {
+        width: 33%; 
+        font-size: small;
+    }
+</style>
+<!-- background-color: white; -->
+    <footer data-role="footer" style="background-color: white; height: 15%;">
+        <center>
+            <table style="width: 100%; height: 100px;">
+                <tr>
+                    <td class="footerMapTD"><span>FOUNDATION</span></td>
+                    <td class="footerMapTD"><span>ERECTION</span></td>
+                    <td class="footerMapTD"><span>EQUIPMENT & CANTILEVER</span></td>
+                </tr>
+                <tr>
+                    <td class="footerMapTD"><span>OCS WIRES</span></td>
+                    <td class="footerMapTD"><span>E&B</span></td>
+                    <td class="footerMapTD"><span>TEST</span></td>
+                </tr>
+            </table>
+        </center>
+    </footer>
     <!-- START_CUSTOM_CODE_generalMapView -->
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
 
@@ -36,3 +58,7 @@ class="screen">
         </div>
     </script>
 </div>
+
+<footer data-role="footer" style="background-color: red;">
+    <span>AAAA</span>
+</footer>
