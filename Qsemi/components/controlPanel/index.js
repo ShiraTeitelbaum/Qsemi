@@ -150,6 +150,27 @@ app.localization.registerView('controlPanel');
                 
                 app.mobileApp.navigate('#components/elementDetailView/view.html?stageId=' + dataItem.id);
             },
+            openStage: function(stepId, num) {
+                switch(num) {
+                    case 0: sessionStorage.setItem("stageName", sessionStorage.getItem("stage0Name"));
+                        break;
+                    case 1: sessionStorage.setItem("stageName", sessionStorage.getItem("stage1Name"));
+                        break;
+                    case 2: sessionStorage.setItem("stageName", sessionStorage.getItem("stage2Name"));
+                        break;
+                    case 3: sessionStorage.setItem("stageName", sessionStorage.getItem("stage3Name"));
+                        break;
+                    case 4: sessionStorage.setItem("stageName", sessionStorage.getItem("stage4Name"));
+                        break;
+                    case 5: sessionStorage.setItem("stageName", sessionStorage.getItem("stage5Name"));
+                        break;
+                    case 6: sessionStorage.setItem("stageName", sessionStorage.getItem("stage6Name"));
+                        break;
+                    case 7: sessionStorage.setItem("stageName", sessionStorage.getItem("stage7Name"));
+                        break;
+                }
+                app.mobileApp.navigate('#components/elementDetailView/view.html?stageId=' + stepId);
+            },
             detailsShow: function(e) {
                 var uid = e.view.params.uid,
                     dataSource = controlPanelModel.get('dataSource'),
@@ -259,7 +280,8 @@ app.localization.registerView('controlPanel');
                         { field: "Latitude", operator: "neq", value: "null" },
                         { field: "Longtitud", operator: "neq", value: "NaN" },
                         { field: "Longtitud", operator: "neq", value: "null" },
-                        { field: "elementStage", operator: "neq", value: "null" } //**********
+                        { field: "elementStage", operator: "neq", value: "null" }, //**********
+                        { field: "locationId", operator:"==", value:sessionStorage.getItem("locationId") }
                     ]
                 });
                 
@@ -270,21 +292,77 @@ app.localization.registerView('controlPanel');
                 var dataSourceLocations = new kendo.data.DataSource(dataSourceOptions);
                 dataSourceLocations.filter({ field: "locationId", operator:"==", value:sessionStorage.getItem("locationId") });
 
-                dataSourceLocations.filter({ field: "locationId", operator:"==", value:sessionStorage.getItem("locationId") });
-
+                //dataSourceLocations.filter({ field: "locationId", operator:"==", value:sessionStorage.getItem("locationId") });
+                app.mobileApp.showLoading();
                 dataSourceElem.fetch(function() {
+                    //app.mobileApp.showLoading();
                     var elementsWithLocation = dataSourceElem.data();
-                    console.log("elementsWithLocation")
-                    console.log(elementsWithLocation)
 
                     app.generalMapView.generalMapViewModel.elements = elementsWithLocation;
-                    console.log("app.generalMapView.generalMapViewModel.elements")
-                    console.log(app.generalMapView.generalMapViewModel.elements)
-
+                    
                     dataSourceLocations.fetch(function() {
                         var location = dataSourceLocations.data();
-                    });
-                                     
+                        
+                        dataSource.fetch(function() {
+                            //app.mobileApp.showLoading();
+                            var stages = dataSource.data();
+
+                            controlPanelModel.stageList = stages
+
+                            var list, tmp, step0, step1, step2, step3, step4, step5, step6, step7;
+                            for(var i=0; i < stages.length; i++) {
+                                tmp = (stages[i].name).split(")");
+                                name = tmp[1];
+                                switch(tmp[0]) {
+                                    case "1": sessionStorage.setItem("stage1Name", tmp[1]);
+                                         step1 = '<li id="'+stages[i].id+'" onclick="app.controlPanel.controlPanelModel.openStage(this.id,1)"><div><div><h3>'+tmp[1]+'</h3></div><center><span class="controlPanelCounters">'
+                                                +location.stage1+'</span></center></div></li>';
+                                                  break;
+                                    case "2": sessionStorage.setItem("stage2Name", tmp[1]);
+                                         step2 = '<li id="'+stages[i].id+'" onclick="app.controlPanel.controlPanelModel.openStage(this.id, 2)"><div><div><h3>'+tmp[1]+'</h3></div><center><span class="controlPanelCounters">'
+                                                +location.stage2+'</span></center></div></li>';
+                                                  break;
+                                    case "3": sessionStorage.setItem("stage3Name", tmp[1]);
+                                         step3 = '<li id="'+stages[i].id+'" onclick="app.controlPanel.controlPanelModel.openStage(this.id, 3)"><div><div><h3>'+tmp[1]+'</h3></div><center><span class="controlPanelCounters">'
+                                                +location.stage3+'</span></center></div></li>';
+                                                 break;
+                                    case "4": sessionStorage.setItem("stage4Name", tmp[1]);
+                                         step4 = '<li id="'+stages[i].id+'" onclick="app.controlPanel.controlPanelModel.openStage(this.id, 4)"><div><div><h3>'+tmp[1]+'</h3></div><center><span class="controlPanelCounters">'
+                                                +location.stage4+'</span></center></div></li>';
+                                                  break;
+                                    case "5": sessionStorage.setItem("stage5Name", tmp[1]);
+                                         step5 = '<li id="'+stages[i].id+'" onclick="app.controlPanel.controlPanelModel.openStage(this.id, 5)"><div><div><h3>'+tmp[1]+'</h3></div><center><span class="controlPanelCounters">'
+                                                +location.stage5+'</span></center></div></li>';
+                                                  break;
+                                    case "6": sessionStorage.setItem("stage6Name", tmp[1]);
+                                         step6 = '<li id="'+stages[i].id+'" onclick="app.controlPanel.controlPanelModel.openStage(this.id, 6)"><div><div><h3>'+tmp[1]+'</h3></div><center><span class="controlPanelCounters">'
+                                                +location.stage6+'</span></center></div></li>';
+                                                  break;
+                                    case "7": sessionStorage.setItem("stage7Name", tmp[1]);
+                                         step7 = '<li id="'+stages[i].id+'" onclick="app.controlPanel.controlPanelModel.openStage(this.id, 7)"><div><div><h3>'+tmp[1]+'</h3></div><center><span class="controlPanelCounters">'
+                                                +location.stage7+'</span></center></div></li>';
+                                                  break;
+                                    case "SURVEYOR": sessionStorage.setItem("stage0Name", tmp);
+                                         /*step0 = '<li id="'+stages[i].id+'" onclick="app.controlPanel.controlPanelModel.openStage(this.id, 0'+
+                                                +')"><div><div><h3>'+stages[i].name+'</h3></div><center><span class="controlPanelCounters">'+location.stage0+'</span></center></div></li>';*/
+                                                 step0 = '<li id="'+stages[i].id+'" class="SURVEYOR" onclick="app.controlPanel.controlPanelModel.openStage(this.id, 0)"><div><div><h3>'
+                                                 +stages[i].name+'</h3></div><center><span class="controlPanelCounters"></span></center></div></li>';
+                                                break;
+                                }
+                                list=step0;
+                                list+=step1;
+                                list+=step2;
+                                list+=step3;
+                                list+=step4;
+                                list+=step5;
+                                list+=step6;
+                                list+=step7;
+
+                                document.getElementById("controlPanelStagesList").innerHTML = list;
+                                app.mobileApp.hideLoading();
+                            }
+                        });
+                    });        
                 });
             });
         /*} else {

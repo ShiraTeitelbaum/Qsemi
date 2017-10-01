@@ -1,6 +1,6 @@
 <div data-role="view" data-title="Details" data-model="app.elementDetailView.elementDetailViewModel" data-bind="events: { show: detailsShow }" id="elementDetailViewModelScreen" class="screen screen--detail">
     <header data-role="header" style="background-color: #351e45;">
-        <div data-role="navbar" class="header-text" style="background-color: #00c853;">
+        <div data-role="navbar" class="header-text" style="background-color: #00c853; box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5)">
             <a data-role="backbutton" data-align="left">Back</a>
             <!--<span data-bind="text: currentItem['name']"></span>-->
             <span id="elementDetaileDetailsTitle"></span>
@@ -9,7 +9,8 @@
             <br/>
             <br/>
             <center>
-                <span style="color: white;" data-bind="html: currentItem.name"></span><span style="color: #e9eaeb;"> - element step</span>
+                <span style="color: white; font-weight: bold;" data-bind="html: currentItem.name"></span><span id="elementStep" style="color: #808080; font-weight: bold;"></span>
+                <!--<span style="color: white;" data-bind="html: currentItem.name"></span><span style="color: #e9eaeb;"> - element step</span>-->
             </center>
             <br/>
             <!--<table style="width: 100%;">

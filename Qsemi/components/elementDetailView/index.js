@@ -179,6 +179,7 @@ app.localization.registerView('elementDetailView');
             detailsShow: function(e) {
                 this.page_scroller = e.view.scroller;
                 elementDetaileDetailsTitle.innerHTML = sessionStorage.getItem("locationName");
+                elementStep.innerHTML = ' - ' + sessionStorage.getItem("stageName");
                 if(e.view.params.mapFlag != undefined) {
                     var id = e.view.params.id;
                     //if (!elementDetailViewModel.get('dataSource')) {
@@ -281,6 +282,8 @@ app.localization.registerView('elementDetailView');
             stepFormsListShow: function(e) {
                 var id = e.view.params.stepid;
                 var step_id = id.substr(0, id.lastIndexOf(")"));
+
+                element_step.innerHTML = sessionStorage.getItem("stageName");
 
                 var formsNames = [], tmp, tmp_id;
                 var templateContent, template, result;
@@ -512,6 +515,7 @@ app.localization.registerView('elementDetailView');
         }
 
         elementDetailViewTitle.innerHTML = sessionStorage.getItem("locationName");
+        stageName.innerHTML = sessionStorage.getItem("stageName");
 
         if (!elementDetailViewModel.get('dataSource')) {
             dataProvider.loadCatalogs().then(function _catalogsLoaded() {

@@ -1,8 +1,9 @@
 <div data-role="view" data-title="Details" data-model="app.elementDetailView.elementDetailViewModel" data-bind="events: { show: stepFormsListShow }" id="elementDetailStepFormsScreen" class="screen screen--detail">
     <header data-role="header">
-        <div data-role="navbar" class="header-text">
+        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);">
             <a data-role="backbutton" data-align="left">Back</a>
-            <span data-bind="text: currentItem['name']"></span>
+            <span id="element_step"></span>
+            <!--<span data-bind="text: currentItem['name']"></span>-->
         </div>
     </header>
 
