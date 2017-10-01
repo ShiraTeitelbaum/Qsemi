@@ -99,8 +99,10 @@ app.localization.registerView('elementDetailView');
             _jsdoOptionsForms: jsdoOptionsForms,
             _jsdoOptionsSteps: jsdoOptionsSteps,
             marker: {},
+            markers: [],
             dataSourceSteps: '',
             stepsNames: [],
+            page_scroller: '',
             searchChange: function(e) {
                 var searchVal = e.target.value,
                     searchFilter;
@@ -175,17 +177,40 @@ app.localization.registerView('elementDetailView');
                 app.mobileApp.navigate('#components/elementDetailView/stepFormList.html?stepid=' + id);
             },
             detailsShow: function(e) {
-                var uid = e.view.params.uid,
-                    dataSource = elementDetailViewModel.get('dataSource'),
+                this.page_scroller = e.view.scroller;
+                if(e.view.params.mapFlag != undefined) {
+                    var id = e.view.params.id;
+                    if (!elementDetailViewModel.get('dataSource')) {
+                        dataProvider.loadCatalogs().then(function _catalogsLoaded() {
+                            var jsdoOptions = elementDetailViewModel.get('_jsdoOptions'),
+                                dataSourceOptions = elementDetailViewModel.get('_dataSourceOptions'),
+                                jsdo = new progress.data.JSDO(jsdoOptions);
+
+                            dataSourceOptions.transport.jsdo = jsdo;
+                            dataSource = new kendo.data.DataSource(dataSourceOptions);
+                            dataSource.filter({ field: "id", operator: "==", value: id });
+                            elementDetailViewModel.set('dataSource', dataSource);
+                            
+                            dataSource.fetch(function() {
+                                var view = dataSource.data();
+                                elementDetailViewModel.setCurrentItemByUid(view[0].uid);
+                            });
+                        });
+                    }
+                }
+                else {
+                    var uid = e.view.params.uid,
+                     dataSource = elementDetailViewModel.get('dataSource'),
                     itemModel = dataSource.getByUid(uid);
+                   
+                    elementDetailViewModel.setCurrentItemByUid(uid);
 
-                elementDetailViewModel.setCurrentItemByUid(uid);
-
-                /// start detail form show
-                document.getElementById("defaultOpen").click();
-                console.log("currentItem")
-                console.log(elementDetailViewModel.currentItem)
-                /// end detail form show
+                    /// start detail form show
+                    //document.getElementById("QC_Button").setAttribute("href", "#qc");
+                    //document.getElementById("defaultOpen").setAttribute("href", "#generalDetails");
+                    document.getElementById("defaultOpen").click();
+                    /// end detail form show
+                }
             },
             openQC1: function () {
                 var step1 = elementDetailViewModel.currentItem.Step1,
@@ -269,8 +294,8 @@ app.localization.registerView('elementDetailView');
                                 if(i == tmp.length-1)
                                     formsNames[i] = { id:((tmp[i]).split(' ').join('_')).substr(0, ((tmp[i]).split(' ').join('_')).length-1), name: (tmp[i]).substr(0, (tmp[i]).length-1) }
                             }
-                            console.log("formsNames")
-                            console.log(formsNames)
+                            //console.log("formsNames")
+                            //console.log(formsNames)
                             result = kendo.render(template, formsNames); //render the template
                             $("#stageForms").html(result); //append the result to the page
                         }
