@@ -1,0 +1,99 @@
+<div data-role="view" data-title="Edit" data-model="app.formDetailView.editItemViewModel" data-bind="events: { show: onShow, init: onInit }" id="formDetailViewModelEditScreen" class="screen screen--edit edit-item-view">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+            <span data-bind="text: itemData['name']"></span>
+            <a data-role="backbutton" data-align="left" data-bind="events: { click: onCancel }">Cancel</a>
+            <!--<a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }">Save</a>-->
+        </div>
+    </header>
+    <div class="details-content screen__content screen__content--details"  style="overflow-x:hidden; background-color: f4f4f4;"> <!--  background-color: #f4f4f4; -->
+        <br/>
+        <br/>
+        <div style="background-color: white;">
+            <div>
+                <center>
+                    <span data-bind="text: itemData['name']"></span>
+                </center>
+            </div>
+            <br/>
+            <div>
+                <center>
+                    <label>
+                        <input type="checkbox" id="ok" class="radio" value="1" name="fooby[1][]" style="width:6vw;height:6vw;border-color: black;top: 1.2em; left: 5%;">&nbsp;
+                        <label for="ok">Ok</label>
+                        <input type="checkbox" id="not_ok" class="radio" value="1" name="fooby[1][]" style="width:6vw;height:6vw;border-color: black;top: 1.2em; left: 5%;">&nbsp;
+                        <label for="not_ok">Not Ok</label>
+                        <input type="checkbox" id="NA" class="radio" value="1" name="fooby[1][]" style="width:6vw;height:6vw;border-color: black;top: 1.2em; left: 5%;">&nbsp;
+                        <label for="NA">N/A</label>
+                    </label>   
+                </center>         
+            </div>
+            <br/>
+            <div>
+                <center>
+                    <span data-bind="text: strings.stagesFormComments.title" style="text-align: left;"></span>
+                    <textarea rows="7" style="resize: none; width: 90%;"></textarea>
+                </center>
+            </div>
+            <br/>
+            <div>
+                <span style="margin-left: 7%" data-bind="text: strings.stagesFormSignature.title"></span>
+                    <a id="Reset" data-role="button" style="margin-left: 36%; border-radius: 0;"><span class="field__label" data-bind="text: strings.stagesFormSignature.clear"></span></a>
+                    <br/>
+                    <br/>
+                    <div style="border: 1px solid black; height: 10%; width: 90%; background-color: white; margin-left: 5%"> 
+                        <label class="km-label-above field field--textarea">  
+                            <div class='signature-wrapper' >
+                                <div id='signature'></div>
+                                <input type='hidden' id='SignatureAdd-value' name='SignatureAdd-value'/>
+                            </div>
+                        </label>
+                    </div>
+            </div>
+            <br/>
+            <div>
+                    <center>
+                        <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }" style="border-radius: 0; width: 90%;">Save</a>
+                    </center>
+            </div>
+        </div>
+    </div>
+    <!-- START_CUSTOM_CODE_formDetailViewModel -->
+    <script>
+        $("input:checkbox").on('click', function() {
+                // in the handler, 'this' refers to the box clicked on
+                var $box = $(this);
+                if ($box.is(":checked")) {
+                    // the name of the box is retrieved using the .attr() method
+                    // as it is assumed and expected to be immutable
+                    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                    // the checked state of the group/box on the other hand will change
+                    // and the current value is retrieved using .prop() method
+                    $(group).prop("checked", false);
+                    $box.prop("checked", true);
+                } else {
+                    $box.prop("checked", false);
+                }
+            });
+    </script>
+    <script>
+         $('#Reset').click(function(e){
+            $('#signature').jSignature('clear');
+            e.preventDefault();
+        });
+      var scroller;
+
+      function attachToScroller(e) {
+        scroller = e.view.scroller;
+      }
+
+      $("#formDetailViewModelEditScreen").on("touchstart mousedown", ".signature-wrapper", function () {
+        scroller.enabled = false;
+      });
+
+      $("#formDetailViewModelEditScreen").on("mouseup touchend", function () {
+        scroller.enabled = true;
+      });
+    </script>
+    <!-- END_CUSTOM_CODE_formDetailViewModel -->
+</div>

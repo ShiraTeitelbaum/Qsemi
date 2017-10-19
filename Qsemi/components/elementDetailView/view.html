@@ -1,6 +1,6 @@
 <div data-role="view" data-title="View" data-layout="main" data-model="app.elementDetailView" data-show="app.elementDetailView.onShow" data-after-show="app.elementDetailView.afterShow" id="elementDetailViewScreen" class="screen">
     <header data-role="header" style="background-color: #351e45;">
-        <div data-role="navbar" class="header-text" style="background-color: #00c853;">
+        <div data-role="navbar" class="header-text" style="background-color: #00c853; box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5)">
 
             <!--<span data-bind="text: strings.elementDetailView.title"></span>-->
             <span id="elementDetailViewTitle"></span>
@@ -16,7 +16,7 @@
         <br/>
           <form class="km-filter-form custom-filter">
             <div class="km-filter-wrap">
-                <input type="search" placeholder="Search..." data-bind="events:{keyup: elementDetailViewModel.searchChange}">
+                <input id="search" type="search" placeholder="Search..." data-bind="events:{keyup: elementDetailViewModel.searchChange}">
             </div>
         </form>
     </header>

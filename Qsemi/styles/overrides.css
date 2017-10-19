@@ -248,16 +248,72 @@
 .km-flat .km-popup .k-state-selected,
 .km-flat .km-actionsheet > li > a:active,
 .km-flat .km-actionsheet > li > a:hover,
-.km-flat .km-listview-label input[type=radio]:checked,
-.km-flat .km-listview-label input[type=checkbox]:checked {
+.km-flat .km-listview-label input[type=radio]:checked
+ {
   background: #00c853;
 }
 
 /* background: #FFFFFF; */
-.km-flat .km-listview-label input[type=radio]:checked,
+/*.km-flat .km-listview-label input[type=radio]:checked,
 .km-flat .km-listview-label input[type=checkbox]:checked {
-    background: #00c853;
-}
+    background: #FFFFFF;
+}*/
+
+.km-view input.km-checkbox {
+        display: inline;
+        opacity: 0;
+        width: 0;
+        margin: 0;
+        height: 0;
+      }
+
+      .km-view .km-checkbox-label {
+        display: block;
+        position: relative;
+        vertical-align: middle;
+        font-size: medium;
+        line-height: 1.3em;
+        padding-left: 2.5em;
+        margin-left: .89em;
+      }
+
+      .km-view .km-checkbox-label:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1.413rem;
+        height: 1.413rem;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 3px;
+      }
+
+      .km-view .km-checkbox-label:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1.413rem;
+        height: 1.413rem;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 3px;
+      }
+
+      .km-view input.km-checkbox:checked+.km-checkbox-label:after {
+        content: "\e227";
+        font-size: 1.2em;
+        line-height: 1em;
+        font-family: "Kendo UI";
+      }
+
+      .km-view .km-checkbox-label:after {
+        color: black;
+      }
+
+
+
 .km-flat .km-actionsheet > li > a:active,
 .km-flat .km-actionsheet > li > a:hover {
     background: #FFFFFF;
@@ -272,11 +328,11 @@
 .km-flat label.km-required:after {
   color: #da2228;
 }
-.km-flat .km-checkbox-label:before,
+/*.km-flat .km-checkbox-label:before,
 .km-flat .km-checkbox-label:after {
   color: #10c4b2;
   border-color: #10c4b2;
-}
+}*/
 .km-flat .km-radio-label:before {
   border-color: #10c4b2;
 }

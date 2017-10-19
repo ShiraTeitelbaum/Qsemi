@@ -1,0 +1,55 @@
+<div data-role="view" data-title="View" data-layout="main" data-model="app.formDetailView" data-show="app.formDetailView.onShow" data-after-show="app.formDetailView.afterShow" id="formDetailViewScreen" class="screen">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);">
+
+            <!--<span data-bind="text: strings.formDetailView.title"></span>-->
+            <span id="formNameCheckList"></span>
+
+            <!--<a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>-->
+
+            <!--<a data-role="button" data-align="right" data-bind="events: { click: formDetailViewModel.addClick }">Add</a></div>-->
+            <a data-role="backbutton" data-align="left">Back</a>
+    </header>
+
+
+    <!-- START_CUSTOM_CODE_formDetailView -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_formDetailView -->
+    <div class="details-content screen__content screen__content--details" style="overflow-x:hidden; background-color: #e9eaeb; width: 100%; height: 100%;">
+        <br/>
+        <br/>
+        <!--data-bind="events: {click: openMap}"-->
+         <div id="surveyor" style="border-bottom: 1px solid #e9eaeb; background-color: white; width: 100%;" onclick="app.formDetailView.addItemViewModel.openMap()" >
+            <img src="images/getLocationIcon.png" style="height: 24px; width: 24px; margin-left: 2%; margin-top:3%;" />
+            <a id="ChooseLocationOnMap" style="margin-bottom: 300px;">Get Element Location</a>
+            <br/>
+            <br/>
+        </div>
+
+        <ul class="masterDetailView list" data-role="listview" data-auto-bind="false" data-style="inset" data-template="formDetailViewModelTemplate" data-bind="source: formDetailViewModel.dataSource, events: {click: formDetailViewModel.itemClick}"
+        data-pull-to-refresh="false" data-endless-scroll="false" style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0; border-bottom: 1px solid #e9eaeb;">
+        </ul>
+
+
+        <!-- START_CUSTOM_CODE_formDetailViewModel -->
+        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+        <!-- END_CUSTOM_CODE_formDetailViewModel -->
+        <script type="text/x-kendo-template" id="formDetailViewModelTemplate">
+            # data = app.formDetailView.formDetailViewModel.fixHierarchicalData(data); #
+            <div>
+                <h3>#: data['name'] #</h3>
+                <span>#: data['Description'].substring(0, 65) #</span><span>...</span>
+            </div>
+        </script>
+        <!-- <table>
+                    <tr>
+                        <span>#: data['name'] #</span>
+                    </tr>
+                    <tr>
+                        <span>#: data['Description'] #</span>
+                    </tr>
+                </table> -->
+    </div>
+</div>

@@ -1,0 +1,235 @@
+<div data-role="view" data-title="Add" data-model="app.formDetailView.addItemViewModel" data-bind="events: { show: onShow, init: onInit }" id="formDetailViewModelAddScreen" class="screen screen--add add-item-view">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);">
+            <!--<span data-bind="text: strings.formDetailView.formDetailViewModel.addScreenHeaderValue"></span>-->
+            <span id="checkName"></span> <!-- data-bind="text: itemData['name']" -->
+            <a data-role="backbutton" data-align="left" data-bind="events: { click: onCancel }">Cancel</a>
+            <!--<a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }">Save</a>-->
+        </div>
+    </header>
+    <!-- START_CUSTOM_CODE_formDetailViewModel -->
+    <!-- END_CUSTOM_CODE_formDetailViewModel -->
+    <div id="editableListForm163" class="form-view screen__content screen__content--form" style="overflow-x:hidden;  background-color: #e9eaeb;">
+        <br/>
+        <br/>
+        <ul data-role="listview" data-style="inset" style="width:100%; margin-left:0;">
+                <li style="border:none;border-bottom: 1px solid #e9eaeb;">
+                    <span data-bind="text: itemData['name']" style="margin-left: 3%; margin-top: 20%; font-size: large; font-weight:bold;"></span>
+                </li>
+                <li style="border:none;">
+                    <span data-bind="text: itemData['Description']" style="margin-top: 20%;"></span>
+                </li>
+                <li id="checkStatus" style="border:none;border-bottom: 1px dashed #e9eaeb;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:30%">
+                                <input id="status_ok" class="km-checkbox" value="1" name="fooby[2][]"  type="checkbox"> 
+                                <label class="km-checkbox-label" for="status_ok" > <span>Ok</span></label>
+                            </td>
+                            <td style="width:36%">
+                                <input id="status_not_ok" class="km-checkbox" value="1" name="fooby[2][]"  type="checkbox" >
+                                <label class="km-checkbox-label" for="status_not_ok" > <span>Not Ok</span></label>
+                            </td>
+                            <td style="width:30%">
+                                <input id="status_NA" class="km-checkbox" value="1" name="fooby[2][]"  type="checkbox" >
+                                <label class="km-checkbox-label" for="status_NA" ><span>N/A</span></label>
+                            </td>
+                        </tr>
+                    </table>
+                </li>
+                <li id="processControlTitle" style="border:none;">
+                    <span style="font-size: medium; font-weight: bold;">Process Control</span>
+                </li>
+
+                <li id="text1" style="border:none;">
+                    <span id="text1inputTitle"></span>
+                </li>
+                <li id="Text1" style="height:35px; padding:0; border:none;">
+                    <input id="text1input" type="text" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
+                </li>
+                <li id="text2" style="border:none;">
+                    <span id="text2inputTitle"></span>
+                </li>
+                <li id="Text2" style="height:35px; padding:0; border:none;">
+                    <input id="text2input" type="text" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
+                </li>
+                <li id="text3" style="border:none;">
+                    <span id="text3inputTitle"></span>
+                </li>
+                <li id="Text3" style="height:35px; padding:0; border:none;">
+                    <input id="text3input" type="text" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
+                </li>
+                <li id="text4" style="border:none;">
+                    <span id="text4inputTitle"></span>
+                </li>
+                <li id="Text4" style="height:35px; padding:0; border:none;">
+                    <input id="text4input" type="text" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
+                </li>
+                <li id="text5" style="border:none;">
+                    <span id="text5inputTitle"></span>
+                </li>
+                <li id="Text5" style="height:35px; padding:0; border:none;">
+                    <input id="text5input" type="text" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
+                </li>
+
+                <li id="number1" style="border:none;">
+                    <span id="number1inputTitle"></span>
+                </li>
+                <li id="Number1" style="height:35px; padding:0; border:none;">
+                    <input id="number1input" type="number" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
+                </li>
+                <li id="number2" style="border:none;">
+                    <span id="number2inputTitle"></span>
+                </li>
+                <li id="Number2" style="height:35px; padding:0; border:none;">
+                    <input id="number2input" type="number" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
+                </li>
+                <li id="number3" style="border:none;">
+                    <span id="number3inputTitle"></span>
+                </li>
+                <li id="Number3" style="height:35px; padding:0; border:none;">
+                    <input id="number3input" type="number" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
+                </li>
+                <li id="number4" style="border:none;">
+                    <span id="number4inputTitle"></span>
+                </li>
+                <li id="Number4" style="height:35px; padding:0; border:none;">
+                    <input id="number4input" type="number" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
+                </li>
+                <li id="number5" style="border:none;">
+                    <span id="number5inputTitle"></span>
+                </li>
+                <li id="Number5" style="height:35px; padding:0; border:none;">
+                    <input id="number5input" type="number" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
+                </li>
+
+                <li id="pcOkNotOkTitle" style="border:none;">
+                    <span id="okNotOkTitle"></span>
+                </li>
+                <li id="pcOkNotOk" style="border:none;">
+                    <table style="width:60%">
+                        <tr>
+                            <td>
+                                <input id="pc_ok" class="km-checkbox" value="1" name="fooby[3][]" type="checkbox"> 
+                                <label class="km-checkbox-label" for="pc_ok"><span id="pc_ok_label">Ok</span></label>
+                            </td>
+                            <td>
+                                <input id="pc_not_ok" class="km-checkbox" value="1" name="fooby[3][]" type="checkbox" >
+                                <label class="km-checkbox-label" for="pc_not_ok"><span id="pc_not_ok_label">Not Ok</span></label>
+                            </td>
+                        </tr>
+                    </table>
+                </li>
+                <li id="pcNormalNotNormalTitle" style="border:none;">
+                    <span id="normalNotNormalTitle"></span>
+                </li>
+                <li id="pcNormalNotNormal" style="border:none;">
+                    <table style="width:75%">
+                        <tr>
+                            <td>
+                                <input id="pc_normal" class="km-checkbox" value="1" name="fooby[4][]" type="checkbox"> 
+                                <label class="km-checkbox-label" for="pc_normal"><span id="pc_normal_label">Normal</span></label>
+                            </td>
+                            <td>
+                                <input id="pc_not_normal" class="km-checkbox" value="1" name="fooby[4][]" type="checkbox" >
+                                <label class="km-checkbox-label" for="pc_not_normal"><span id="pc_not_normal_label">Not Normal</span></label>
+                            </td>
+                        </tr>
+                    </table>
+                </li>
+
+               
+                <li id="processControlImage" style="border:none;">
+                    <a class="capturePhotoButtonClass" id="addCapturePhotoForm">
+                        <img src="images/cameraIcon.png" style="height: 21px; width: 21px; margin-top:3%;" />
+                        <span>Add Image</span>
+                    </a>
+                </li>
+
+                <li style="border:none;border-bottom: 1px dashed #e9eaeb;;border-top: 1px dashed #e9eaeb;">
+                    <span data-bind="text: strings.stagesFormComments.title" style="text-align: left;"></span>
+                    <textarea id="checkComments" data-bind="value: addFormData.comments" rows="7" style="resize: none; width: 100%; border:1px solid black;"></textarea>
+                </li>
+                <li style="border:none;">
+                    <span data-bind="text: strings.stagesFormSignature.title"></span>
+                    <br />
+                    <a id="Reset" data-bind="text: strings.stagesFormSignature.clear" style="margin-left:65%; border-radius: 0; height: 20px; width: 120px; padding: 0;"></a>
+                    <br/>
+                    <div style="border: 1px solid black; height: 10%; width: 100%; background-color: white; "> 
+                        <label class="km-label-above field field--textarea">  
+                            <div class='signature-wrapper' >
+                                <div id='signature'></div>
+                                <input type='hidden' id='SignatureAdd-value' name='SignatureAdd-value'/>
+                            </div>
+                        </label>
+                    </div>
+                </li>
+                <li style="border:none;">
+                    <center>
+                        <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }" style="border-radius: 0; width: 100%;">Save</a>
+                    </center>
+                </li>
+            </ul>
+            
+            <div data-role="modalview" id="addCapturePhotoFormPop" style="background-color:white; padding:0;">
+                <div data-role="header">
+                    <div data-role="navbar">
+                        <span data-bind="text: strings.stagesFormImg.title"></span>
+                        <a data-bind="events:{click:closeAddPopUpImgForm}" data-role="button">
+                            <span data-bind="text: strings.stagesFormImg.close"></span>
+                        </a>
+                    </div>
+                </div>
+                <div data-role="content" style="background-color: transparent; margin-top: 2%;">
+                    <img id="addCapturePhotoFormImg" style="width: 100%; height:100%;" />
+                </div>
+                <div data-role="footer">
+                    <div data-role="navbar" style="background-color:#351e45;">
+                        <a class="capturePhotoButtonClass" id="addCapturePhotoForm_" style="color:white;">
+                            <span data-bind="text: strings.stagesFormImg.changePhoto"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        <!-- START_CUSTOM_CODE_editableListForm163 -->
+        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+        <!-- END_CUSTOM_CODE_editableListForm163 -->
+    </div>
+    <script>
+        $("input:checkbox").on('click', function() {
+                // in the handler, 'this' refers to the box clicked on
+                var $box = $(this);
+                if ($box.is(":checked")) {
+                    // the name of the box is retrieved using the .attr() method
+                    // as it is assumed and expected to be immutable
+                    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                    // the checked state of the group/box on the other hand will change
+                    // and the current value is retrieved using .prop() method
+                    $(group).prop("checked", false);
+                    $box.prop("checked", true);
+                } else {
+                    $box.prop("checked", false);
+                }
+            });
+    </script>
+    <script>
+         $('#Reset').click(function(e){
+            $('#signature').jSignature('clear');
+            e.preventDefault();
+        });
+      var scroller;
+
+      function attachToScroller(e) {
+        scroller = e.view.scroller;
+      }
+
+      $("#formDetailViewModelEditScreen").on("touchstart mousedown", ".signature-wrapper", function () {
+        scroller.enabled = false;
+      });
+
+      $("#formDetailViewModelEditScreen").on("mouseup touchend", function () {
+        scroller.enabled = true;
+      });
+    </script>
+</div>

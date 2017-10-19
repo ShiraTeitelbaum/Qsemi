@@ -368,10 +368,13 @@ app.localization.registerView('generalMapView');
             },
             showElements: function() {
                 var elementLocation;
+                // console.log("this.elements")
+                // console.log(this.elements)
                 if(this.elements.length > 0) {
                     var i;
                     for(i=0; i<this.elements.length; i++) {
                         switch(this.elements[i].elementStage) {
+                            // case 0: 
                             case 1: 
                                 generalMapViewModel.addMarker(this.elements[i], this.map, 1);
                                 break;
@@ -388,12 +391,13 @@ app.localization.registerView('generalMapView');
                                 generalMapViewModel.addMarker(this.elements[i], this.map, 5);
                                 break;
                             case 6: 
+                            // case 7:
                                 generalMapViewModel.addMarker(this.elements[i], this.map, 6);
                                 break;
                         }
                     }
-                    console.log("I")
-                    console.log(i)
+                    // console.log("I")
+                    // console.log(i)
                 }
             },
             attachMessage: function(marker, element) {
@@ -425,15 +429,15 @@ app.localization.registerView('generalMapView');
                 switch(num) {
                     case 1: iconURL = 'images/addMapPinRed.png';
                         break;
-                    case 2: iconURL = 'images/addMapPinBlue.png';
+                    case 2: iconURL = 'images/addMapPinOrange.png';
                         break;
                     case 3: iconURL = 'images/addMapPinYellow.png';
                         break;
                     case 4: iconURL = 'images/addMapPinGreen.png';
                         break;
-                    case 5: iconURL = 'images/addMapPinOrange.png';
+                    case 5: iconURL = 'images/addMapPinBlue.png';
                         break;
-                    case 6: iconURL = 'images/addMapPinPink.png';
+                    case 6: iconURL = 'images/addMapPinPurple.png';
                         break;
                 }
                 var location = new google.maps.LatLng(element.Latitude, element.Longtitud);

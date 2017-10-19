@@ -22,11 +22,16 @@
     "invalid": "Not Ok"
   },
   "stagesFormComments": {
-    "title": "comments"
+    "title": "Comments:"
   },
   "stagesFormSignature": {
     "title": "Signature:",
     "clear": "clear signature"
+  },
+  "stagesFormImg": {
+    "title": "Image",
+    "close":"Close",
+    "changePhoto":"Change Photo"
   },
   "elementDetailView": {
     "title": "element",
@@ -625,6 +630,22 @@
     "title": "General Map",
     "generalMapViewModel": {
       "detailHeaderFieldValue": "Detail"
+    }
+  },
+  "formDetailView": {
+    "title": "form Master Detail",
+    "formDetailViewModel": {
+      "addScreenHeaderValue": "Create",
+      "editableListForm162": {
+        "heading": {
+          "title": "Heading"
+        }
+      },
+      "editableListForm163": {
+        "checkbox7": {
+          "title": "Label"
+        }
+      }
     }
   }
 }

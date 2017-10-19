@@ -6,16 +6,28 @@
             <!--<span data-bind="text: currentItem['name']"></span>-->
         </div>
     </header>
-
-    <div class="details-content screen__content screen__content--details" style="overflow-x:hidden; background-color: #FFFFFF; width: 100%; height: 100%;">
-        <ul id="stageForms" data-role="listview" data-style="inset" style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0;"></ul>
+    <br/>
+    <br/>
+    <div class="details-content screen__content screen__content--details" style="overflow-x:hidden; background-color: #e9eaeb; width: 100%; height: 100%;">
+        <!--<ul id="stageForms" data-role="listview" data-style="inset" style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0;"></ul>-->
+        <!--<ul id="stageForms" data-bind="source: elementDetailViewModel.dataSourceElemForms" data-template="formStageTemplate" data-role="listview" data-style="inset" style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0;"></ul>-->
+        <ul id="stageForms" class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" 
+        data-template="formStageTemplate" data-pull-to-refresh="true" data-endless-scroll="false" 
+        style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0; background-color: #FFFFFF"></ul>
 
         <script type="text/x-kendo-template" id="formStageTemplate">
-            <div class="formList" id=#:id# onclick="app.elementDetailView.elementDetailViewModel.openFormStage(this.id)">
+            <div class="formList" id=#:data['uid']# onclick="app.elementDetailView.elementDetailViewModel.openFormStage(this.id)">
                 <table style="width: 100%; height: 100%;">
                     <tr style="padding: 0; margin: 0;">
+                         # if(PercentageComplete == "null" || (PercentageComplete >= 0 && PercentageComplete <= 40)) { #
+                                <td id="redS" ></td>
+                            # } else if(PercentageComplete> 40 && PercentageComplete <= 70) { #
+                                <td id="orangeS"></td>
+                            # } else if(PercentageComplete > 70 && PercentageComplete <= 100) { #
+                                <td id="greenS"></td>
+                            # } #	
                         <td style="width: 80%;">
-                            <span style="font-size: 14px; margin-left: 5%;">#: name #</span>
+                            <span style="font-size: 14px; margin-left: 5%;">#: data['name'] #</span>
                         </td>
                         <td style="width: 10%;">
                             

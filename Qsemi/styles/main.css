@@ -1,4 +1,4 @@
-#signatureEX img{ display: none !important; }
+/*#signatureEX img{ display: none !important; }
 #signatureCCAD img{ display: none !important; } 
 #signatureCI img{ display: none !important; } 
 #signatureCM img{ display: none !important; }
@@ -19,8 +19,10 @@
 #signatureRWD img{ display: none !important; }
 #signatureRWL1 img{ display: none !important; }
 #signatureRWL2 img{ display: none !important; }
-#signatureTRCIC img{ display: none !important; }
+#signatureTRCIC img{ display: none !important; }*/
+
 #signatureS img{ display: none !important; }
+#signature img{ display: none !important; }
 
 #kendoUiMobileApp .block {
     display: block;
@@ -477,8 +479,8 @@ Fields
 
 #kendoUiMobileApp .km-list .multiple-select-item input[type=checkbox],
 #kendoUiMobileApp .multiple-select-modal-window .multiple-select-item input[type=checkbox] {
-    width: 1.3rem;
-    height: 1.3rem;
+    width: 1rem;
+    height: 1rem;
     top: 0.4em;
     left: 3px;
     font-size: 0.8rem;

@@ -1,14 +1,19 @@
 <div data-role="view" data-title="View" data-layout="main" data-model="app.controlPanel" data-show="app.controlPanel.onShow" data-after-show="app.controlPanel.afterShow" id="controlPanelScreen" class="screen">
     <header data-role="header">
-        <div data-role="navbar" class="header-text">
+        <div data-role="navbar" class="header-text"> <!-- style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);" -->
 
-            <label id="projectNameViewHome"></label>
-            <br/>
+            <center><label id="projectNameViewHome"></label></center>
             <!--<span data-bind="text: strings.controlPanel.title"></span>-->
             <a data-role="backbutton" data-align="left">Back</a>
             <!--<a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>-->
-
+            
         </div>
+        <div style="background-color:#351e45; height:50px; width:100%; direction:rtl;">
+                <a onclick="app.controlPanel.controlPanelModel.openGeneralMap()" style="color:white;height:50px; font-weight:bold; direction:rtl; font-size:large;margin-right:6%;">
+                    <span>Map</span>
+                    <img src="images/mapIcon.png" style="height: 24px; width: 16px; margin-left: 1px; margin-top:3%;"/>
+                </a>
+            </div>
     </header>
 
 
@@ -16,7 +21,93 @@
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
 
     <!-- END_CUSTOM_CODE_controlPanel -->
-    <a data-role="button" onclick="app.controlPanel.controlPanelModel.openGeneralMap()"><img src="images/mapIcon.png" style="height: 20px; width: 18px; margin-left: 1px;"/><span>MAP</span></a>
+    <!--<a data-role="button" href="#components/formDetailView/view.html">FORM</a>-->
+    <br/>
+    <div style="overflow-x:hidden; padding:0;">
+        <!--<center>
+            <div id="chart-oct"></div>
+        </center>-->
+        <center>
+            <ul data-role></ul>
+            <div id="step1" style="padding:0;">
+                <span style="padding-top:0;">SURVEYOR</span>
+            </div>
+            <div id="step2" style=">
+                <span style="color:white;">FOUNDATION</span>
+            </div>
+            <div id="step3" style="margin-top:3px;">
+                <span style="color:white;">ERECTION</span>
+            </div>
+            <div id="step4" style="margin-top:3px;">
+                <span style="color:white;">EQUIPMENT & CANTILEVER</span>
+            </div>
+            <div id="step5" style="margin-top:3px;">
+                <span style="color:white;">OCS WIRES</span>
+            </div>
+            <div id="step6" style="margin-top:3px;">
+                <span style="color:white;">E&B</span>
+            </div>
+            <div id="step7" style="margin-top:3px;">
+                <span style="color:white;">TEST</span>
+            </div>
+            <div id="step8" style="margin-top:3px;">
+                <span style="color:white;">COMPLETED</span>
+            </div>
+        </center>
+    </div>
+    <style>
+         #step1 {
+            border-top: 50px solid #0e5a7e;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            width: 350px;
+         }
+         #step2 {
+            border-top: 50px solid #166f99;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            width: 310px;
+         }
+         #step3 {
+            border-top: 50px solid #2185b4;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            width: 270px;
+         }
+         #step4 {
+            border-top: 50px solid #319fd2;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            width: 230px;
+         }
+         #step5 {
+            border-top: 50px solid #3eaee2;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            width: 200px;
+         }
+          #step6 {
+            border-top: 50px solid #3eaee2;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            width: 170px;
+         }
+          #step7 {
+            border-top: 50px solid #3eaee2;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            width: 140px;
+         }
+          #step8 {
+            border-top: 50px solid #3eaee2;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            width: 100px;
+         }
+    </style>
+    <br/>
+    <br/>
+    <!--<a data-role="button" onclick="app.controlPanel.controlPanelModel.openGeneralMap()"><img src="images/mapIcon.png" style="height: 20px; width: 18px; margin-left: 1px;"/><span>MAP</span></a>-->
     <div>
         <center>
             <!--<ul id="controlPanelStagesList" class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" data-template="controlPanelModelTemplate" data-bind="source: controlPanelModel.dataSource, events: {click: controlPanelModel.itemClick}" data-pull-to-refresh="false" data-endless-scroll="false"></ul>-->
@@ -104,7 +195,7 @@
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
 
     <!-- END_CUSTOM_CODE_controlPanelModel -->
-    <script type="text/x-kendo-template" id="controlPanelModelTemplate">
+    <!--<script type="text/x-kendo-template" id="controlPanelModelTemplate">
         <div class="image-with-text " id="stepsList">
             # data = app.controlPanel.controlPanelModel.fixHierarchicalData(data); #
             
@@ -120,5 +211,114 @@
             </div>
             
         </div>
+    </script>-->
+    
+    <!--<script>
+        var octData = [{
+                    category: "Impressions ",
+                    value: 434823,
+                    color: "#0e5a7e"
+                },{
+                    category: "Clicks",
+                    value: 356854,
+                    color: "#166f99"
+                },{
+                    category: "Unique Visitors",
+                    value: 280022,
+                    color: "#2185b4"
+                },{
+                    category: "Downloads",
+                    value: 190374,
+                    color: "#319fd2"
+                },{
+                    category: "Purchases",
+                    value: 120392,
+                    color: "#3eaee2"
+                }];
+    
+        function createChart(chartName,data,text){
+            $('#chart-oct').kendoChart({
+                legend: {
+                    visible: false
+                },
+                seriesDefaults: {
+                    labels: {
+                        template: "#= category # #= value #",
+                        visible: true,
+                        background: "transparent",
+                        color:"white",
+                        format: "N0"
+                    },
+                    dynamicSlope: false,
+                    dynamicHeight: false
+                },
+                series: [{
+                    type: "funnel",
+                    data: data
+                }],
+                tooltip: {
+                    visible: true,
+                    template: "#= category #"
+                }
+            });
+        }
+    
+        function refresh() {
+            //var slider = $('#neckSlider').data("kendoSlider");
+            //var chartNames = ["chart-oct", "chart-nov", "chart-dec"];
+    
+            //for (var idx in chartNames) {
+                var chart = $("#chart-oct").data("kendoChart");
+    
+                var options =
+                {
+                    seriesDefaults: {
+                        neckRatio: 0.3,//slider.value(),
+                        //dynamicHeight : $('#dynamicHeight').is(':checked'),
+                        dynamicSlope : true,//$('#dynamicSlope').is(':checked'),
+                        labels: {
+                            visible: true,
+                            background: "transparent",
+                            color:"white",
+                            format: "N0"
+                        },
+                    }
+                }
+    
+                chart.setOptions(options);
+                slider.enable(!options.seriesDefaults.dynamicSlope);
+            //}
+        }
+    
+        function createCharts() {
+            createChart('chart-oct', octData, "October");
+          //  createChart('chart-nov', novData, "November");
+            //createChart('chart-dec', decData, "December");
+        }
+    
+        $(document).ready(function () {
+            // $("#neckSlider").kendoSlider({
+            //     change: refresh,
+            //     value: 0.3,
+            //     min: 0,
+            //     max: 10,
+            //     smallStep: 0.01,
+            //     largeStep: 0.1,
+            //     showButtons: false
+            // });
+    
+            createCharts();
+    
+            //$('.box').on('click', ':checkbox', refresh);
+            $(document).bind("kendo:skinChange", createCharts);
+        });
     </script>
+    <style>
+        #chart-oct {
+            display: inline-block;
+            width: 280px;
+            height: 300px;
+            margin: 15px 65px;
+        }
+    </style>-->
 </div>

@@ -313,7 +313,40 @@ app.localization.registerView('elementLocationMaps');
                 var lngStr = (tmp[1]).substr(1, tmp[1].length-2);
                 var lng = parseFloat(lngStr).toFixed(14);*/
                 //app.surveyorMarking.surveyorMarkingModel.mapFlag=true;
-                app.mobileApp.navigate('#:back');
+                var jsdoOptions3 = app.elementDetailView.elementDetailViewModel.get('_jsdoOptions'),
+                    jsdo3 = new progress.data.JSDO(jsdoOptions3);
+                dataSourceOptions.transport.jsdo = jsdo3;
+                var dataSource3 = new kendo.data.DataSource(dataSourceOptions);
+
+                dataSource3.filter({ field: "id", operator: "==", value: app.elementDetailView.elementDetailViewModel.currentItem.id });
+
+                dataSource3.fetch(function() {
+                    var element = dataSource3.data();
+
+                    var tmp = (app.elementDetailView.elementDetailViewModel.marker.position).toString().split(",");
+                    var lat = parseFloat((tmp[0]).substr(1, tmp[0].length)).toFixed(8);
+                    var lng = parseFloat((tmp[1]).substr(1, tmp[1].length-2)).toFixed(8);
+
+                    var elementLocation = {
+                        Latitude: lat,
+                        Longtitud: lng
+                    };
+                                    
+                    var jsrow = jsdo3.findById(element[0].id);
+                                    
+                    var afterUpdateFn;
+                    jsrow.assign(elementLocation);
+                    afterUpdateFn = function(jsdo3, record, success, request) {
+                        jsdo3.unsubscribe('afterUpdate', afterUpdateFn);
+                        if(success === true) {
+                            //alert(2222)
+                            app.mobileApp.navigate('#:back');
+                        }
+                    };
+                    jsdo3.subscribe('afterUpdate', afterUpdateFn);
+                    jsdo3.saveChanges();
+                });
+                // app.mobileApp.navigate('#:back');
             },
             onCancel: function(e) {
                 app.surveyorMarking.surveyorMarkingModel.mapFlag=false;
@@ -348,19 +381,20 @@ app.localization.registerView('elementLocationMaps');
 
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function(position) {
-                        console.log("map app.elementDetailView.elementDetailViewModel.currentItem")
-                        console.log(app.elementDetailView.elementDetailViewModel.currentItem)
                         //alert("name: "+app.elementDetailView.elementDetailViewModel.currentItem.name)
-                        var elementLat = app.elementDetailView.elementDetailViewModel.currentItem.Latitude;
-                        var elementLng = app.elementDetailView.elementDetailViewModel.currentItem.Longtitud;
+                        // var elementLat = app.elementDetailView.elementDetailViewModel.currentItem.Latitude;
+                        // var elementLng = app.elementDetailView.elementDetailViewModel.currentItem.Longtitud;
+                        var elementLat = app.elementDetailView.elementDetailViewModel.elementLocation.Latitude;
+                        var elementLng = app.elementDetailView.elementDetailViewModel.elementLocation.Longtitud;
+
                          if(elementLat != "NaN" && elementLat != "null" && elementLng != "NaN" && elementLng != "null") {
                              /*var pos = {
                                 lat: elementLat,
                                 lng: elementLng
                             };*/
                             elementLocationMapsModel.pos =  new google.maps.LatLng(elementLat, elementLng);
-                            console.log("pos if")
-                         console.log(elementLocationMapsModel.pos)
+                            //console.log("pos if")
+                         //console.log(elementLocationMapsModel.pos)
                          //alert("pos if: "+elementLocationMapsModel.pos)
                          }
                          else {
@@ -368,8 +402,8 @@ app.localization.registerView('elementLocationMaps');
                                 lat: position.coords.latitude,
                                 lng: position.coords.longitude
                             };
-                            console.log("pos else")
-                         console.log(elementLocationMapsModel.pos)
+                            //console.log("pos else")
+                         //console.log(elementLocationMapsModel.pos)
                          //alert("pos else: "+elementLocationMapsModel.pos)
                             //infoWindow.setContent('<br/>'+ 'You Are Here'); //Location found.
                          }
@@ -378,9 +412,9 @@ app.localization.registerView('elementLocationMaps');
                             elementLocationMapsModel.addMarker(elementLocationMapsModel.pos, elementLocationMapsModel.map);
                          }
                          
-                         console.log("pos")
-                         console.log(elementLocationMapsModel.pos)
-                         alert("pos: "+elementLocationMapsModel.pos)
+                         //console.log("pos")
+                         //console.log(elementLocationMapsModel.pos)
+                         //alert("pos: "+elementLocationMapsModel.pos)
                         /*infoWindow.setPosition(pos);
                         infoWindow.setContent('Location found.');
                         map.setCenter(pos);*/
