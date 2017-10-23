@@ -1,7 +1,7 @@
 <div data-role="view" data-title="Details" data-model="app.elementDetailView.elementDetailViewModel" data-bind="events: { show: detailsShow }" id="elementDetailViewModelScreen" class="screen screen--detail">
     <header data-role="header" style="background-color: #351e45;">
         <div data-role="navbar" class="header-text" style="background-color: #00c853; box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5)">
-            <a data-role="backbutton" data-align="left">Back</a>
+            <a data-role="backbutton" data-align="left" data-bind="buttonText: strings.buttonsText.back"></a>
             <!--<span data-bind="text: currentItem['name']"></span>-->
             <span id="elementDetaileDetailsTitle"></span>
         </div>
@@ -71,7 +71,7 @@
                     <table style="width: 100%;">
                         <tr>
                             <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.lastUpdateDate.title"></span></span></td>
-                            <!--<td style="width: 35%;"><span data-bind="html: currentItem.LastUpdateDate"></span></td>-->
+                            <td style="width: 35%;"><span data-bind="html: currentItem.LastUpdateDate"></span></td>
                         </tr>
                     </table>
                 </li>

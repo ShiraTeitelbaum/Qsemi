@@ -773,7 +773,11 @@ Fields
 
 
 /* START_CUSTOM_CODE_kendoUiMobileApp */
-
+#kendoUiMobileApp .km-signatureNew:after,
+#kendoUiMobileApp .km-signatureNew:before {
+    content: '\e30a';
+    zoom: 115%;
+}
 
 /* Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes */
 

@@ -37,6 +37,8 @@
                                 <center>
                                     <a data-role="button" class="btn" data-bind="events: { click: authenticationViewModel.signin }, buttonText: strings.authenticationView.authenticationViewModel.signinLabel" style=" color: #ffffff; background-color: #351e45; border-style:none;width: 90%;height: 44px;border-radius: 1px;font-weight: 200;font-size:medium;font-family: Tahoma, Geneva, sans-serif;box-shadow: 3px 3px 6px #5F5D5D;"></a>
                                 </center>
+                                <br/>
+                                <span class="status" data-bind="text: authenticationViewModel.errorMessage" style="font-weight:bold;"></span>
                             </td>
                         </tr>
                     </table>

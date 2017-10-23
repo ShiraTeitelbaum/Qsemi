@@ -319,9 +319,9 @@ app.localization.registerView('formDetailView');
                 itemData.ShowText1 == true || itemData.ShowText2 == true || itemData.ShowText3 == true || itemData.ShowText4 == true || itemData.ShowText5 == true ||
                 itemData.ShowOkNotOk1 == true || itemData.ShowNormal1 == true) {
                     if(app.elementDetailView.elementDetailViewModel.surveyorFlag == true) {
-                        $("#processControlTitle").hide();
+                        $("#processControlTitle").show();
                     }
-                    else $("#processControlTitle").show();
+                    else $("#processControlTitle").hide(); 
                     
                     if(itemData.ShowText1 == true) {
                         document.getElementById("text1inputTitle").innerHTML = itemData.TitleText1 + ':';
@@ -374,8 +374,7 @@ app.localization.registerView('formDetailView');
                         $("#number5").show();
                         $("#Number5").show();
                     }
-                    console.log("itemData")
-                    console.log(itemData)
+                    
                     if(itemData.image == true) {
                         $("#processControlImage").show();
                     }
@@ -415,9 +414,6 @@ app.localization.registerView('formDetailView');
                 //dataSource.sort({ field: "Index", dir: "asc" });
                 dataSource.fetch(function() {
                     var view = dataSource.data();
-                    console.log("view")
-                    console.log(view)
-
                     
                     if(view[0] != undefined) {
                         document.getElementById("status_ok").checked = false;
@@ -480,7 +476,9 @@ app.localization.registerView('formDetailView');
                         view[0].image = processImage(formDetailViewModel.get('_dataSourceOptionsChecks').transport.jsdo.url + imageObj.src);
                         if(view[0].imageURL != "null") {
                             $("#addCapturePhotoForm").css("color", "red");
-                            $("#addCapturePhotoFormImg").src = view[0].image; //view[0].imageURL
+                            // $("#addCapturePhotoFormImg").src = view[0].image; //view[0].imageURL
+                            document.getElementById("addCapturePhotoFormImg").setAttribute("src", view[0].image);
+                            // document.getElementById("addCapturePhotoFormImg").setAttribute("href", view[0].imageURL);
                         }
                         
                         var commentsC, text1;
@@ -538,6 +536,7 @@ app.localization.registerView('formDetailView');
             document.getElementById("pc_not_ok").checked = false;
             document.getElementById("pc_normal").checked = false;
             document.getElementById("pc_not_normal").checked = false;
+            $("#checkComments").val('');
             $("#addCapturePhotoForm").css("color", "black");
             $('#signature').jSignature('clear');
             // app.mobileApp.navigate('#:back');
@@ -565,6 +564,12 @@ app.localization.registerView('formDetailView');
         },
         closeAddPopUpImgForm: function (e) {
              $("#addCapturePhotoFormPop").kendoMobileModalView("close"); 
+        },
+        openSignaturePopUp: function(e) {
+            $("#signaturePopUp").kendoMobileModalView("open"); 
+        },
+        closeSignaturePopUp: function(e) {
+            $("#signaturePopUp").kendoMobileModalView("close"); 
         },
         onSaveClick: function(e) {
             var addFormData = this.get('addFormData'),
@@ -606,6 +611,11 @@ app.localization.registerView('formDetailView');
                 if(itemData.ShowText3 == true) { addModel.Text3 = $("#text3input").val(); }
                 if(itemData.ShowText4 == true) { addModel.Text4 = $("#text4input").val(); }
                 if(itemData.ShowText5 == true) { addModel.Text5 = $("#text5input").val(); }
+
+                if($("#number1input").val() > 9999999999 || $("#number2input").val() > 9999999999 || $("#number3input").val() > 9999999999 ||
+                $("#number4input").val() > 9999999999 || $("#number5input").val() > 9999999999) {
+                    alert("Invalid Number");
+                }
 
                 if(itemData.ShowNum1 == true) { addModel.Num1 = $("#number1input").val(); }
                 if(itemData.ShowNum2 == true) { addModel.Num2 = $("#number2input").val(); }
@@ -699,6 +709,11 @@ app.localization.registerView('formDetailView');
 
                     $("#addCapturePhotoForm").css("color", "black");
 
+                    app.elementDetailView.elementDetailViewModel.change_Percent = true;
+                    app.elementDetailView.elementDetailViewModel.QC_click_flag = true;
+
+                    $("#checkComments").val('');
+                    alert("The check has been successfully saved");
                     app.mobileApp.navigate('#:back');
                 });
 
@@ -890,7 +905,8 @@ app.localization.registerView('formDetailView');
     });
 
     function onFileUploadSuccess() {
-        alert("onFileUploadSuccess")
+        //alert("onFileUploadSuccess")
+        console.log("onFileUploadSuccess")
     // sessionStorage.setItem("fileToUpload", "null");
     // localStorage.setItem("fileName", "null");
         /*window.plugins.toast.showWithOptions(
@@ -910,7 +926,6 @@ function onFileTransferFail(error) {
         console.log("Body:" + error.body);
         console.log("Source: " + error.source);
         console.log("Target: " + error.target);
-        alert("Error loading the image");
     }
 
 })(app.formDetailView);

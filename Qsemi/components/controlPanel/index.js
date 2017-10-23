@@ -150,7 +150,10 @@ app.localization.registerView('controlPanel');
                 
                 app.mobileApp.navigate('#components/elementDetailView/view.html?stageId=' + dataItem.id);
             },
-            openStage: function(stepId, num) {
+            openStage: function(num) {
+                var stepId,
+                    dataSource = controlPanelModel.get('dataSource');
+                    
                 switch(num) {
                     case 0: sessionStorage.setItem("stageName", sessionStorage.getItem("stage0Name"));
                         break;
@@ -169,7 +172,44 @@ app.localization.registerView('controlPanel');
                     case 7: sessionStorage.setItem("stageName", sessionStorage.getItem("stage7Name"));
                         break;
                 }
-                app.mobileApp.navigate('#components/elementDetailView/view.html?stageId=' + stepId);
+              
+                dataSource.fetch(function() {
+                    var steps = dataSource.data();
+                    
+                    for(var i=0; i< steps.length; i++) {
+                        if(steps[i].stageNum == 0 && steps[i].stageNum == num) { stepId = steps[i].id; break; }
+                        else if(steps[i].stageNum == 1 && steps[i].stageNum == num) { stepId = steps[i].id; break; }
+                        else if(steps[i].stageNum == 2 && steps[i].stageNum == num) { stepId = steps[i].id; break; }
+                        else if(steps[i].stageNum == 3 && steps[i].stageNum == num) { stepId = steps[i].id; break; }
+                        else if(steps[i].stageNum == 4 && steps[i].stageNum == num) { stepId = steps[i].id; break; }
+                        else if(steps[i].stageNum == 5 && steps[i].stageNum == num) { stepId = steps[i].id; break; }
+                        else if(steps[i].stageNum == 6 && steps[i].stageNum == num) { stepId = steps[i].id; break; }
+                        else if(steps[i].stageNum == 7 && steps[i].stageNum == num) { stepId = steps[i].id; break; }
+                        // switch(steps[i].stageNum) {
+                        //     case 0: alert(0); stepId = steps[i].id;
+                        //         break;
+                        //     case 1: alert(1);stepId = steps[i].id;
+                        //         break;
+                        //     case 2: alert(2);stepId = steps[i].id;
+                        //         break;
+                        //     case 3: alert(3);stepId = steps[i].id;
+                        //         break;
+                        //     case 4: alert(4);stepId = steps[i].id;
+                        //         break;
+                        //     case 5: alert(5);stepId = steps[i].id;
+                        //         break;
+                        //     case 6: alert(6);stepId = steps[i].id;
+                        //         break;
+                        //     case 7: alert(7);stepId = steps[i].id;
+                        //         break;
+                        // }
+                    }
+                    
+                    app.mobileApp.navigate('#components/elementDetailView/view.html?stageId=' + stepId);
+                });
+
+                
+                // app.mobileApp.navigate('#components/elementDetailView/view.html?stageId=' + stepId);
             },
             detailsShow: function(e) {
                 var uid = e.view.params.uid,
@@ -305,86 +345,58 @@ app.localization.registerView('controlPanel');
                         var location = dataSourceLocations.data();
                         // console.log("location")
                         // console.log(location)
-                        // console.log(location.stage1)
+                        // console.log(location[0].stage1)
+                        document.getElementById("stage0Counter").innerHTML = location[0].stage0;
+                        document.getElementById("stage1Counter").innerHTML = location[0].stage1;
+                        document.getElementById("stage2Counter").innerHTML = location[0].stage2;
+                        document.getElementById("stage3Counter").innerHTML = location[0].stage3;
+                        document.getElementById("stage4Counter").innerHTML = location[0].stage4;
+                        document.getElementById("stage5Counter").innerHTML = location[0].stage5;
+                        document.getElementById("stage6Counter").innerHTML = location[0].stage6;
+                        document.getElementById("stage7Counter").innerHTML = location[0].stage7;
                         
                         dataSource.fetch(function() {
-                            //app.mobileApp.showLoading();
+                        //     //app.mobileApp.showLoading();
                             var stages = dataSource.data();
-                        //     console.log("location2")
-                        // console.log(location)
-                        // console.log(location[0].stage1)
-                            controlPanelModel.stageList = stages
+                            // console.log("stages")
+                            // console.log(stages)
+                            //controlPanelModel.stageList = stages;
 
-                            var list='', tmp, step0, step1, step2, step3, step4, step5, step6, step7;
+                        //     var list='', tmp, step0, step1, step2, step3, step4, step5, step6, step7;
                             for(var i=0; i < stages.length; i++) {
-                                //tmp = (stages[i].name).split(")");
-                                //name = tmp[1];
-                                //switch(tmp[0]) {
+                                controlPanelModel.stageList[i] = stages[i];
                                 switch(stages[i].name) {
                                     case "SURVEYOR": sessionStorage.setItem("stage0Name", stages[i].name);
-                                         /*step0 = '<li id="'+stages[i].id+'" onclick="app.controlPanel.controlPanelModel.openStage(this.id, 0'+
-                                                +')"><div><div><h3>'+stages[i].name+'</h3></div><center><span class="controlPanelCounters">'+location[0].stage0+'</span></center></div></li>';*/
-                                                 step0 = '<li id="'+stages[i].id+'" class="SURVEYOR" onclick="app.controlPanel.controlPanelModel.openStage(this.id, 0)"><div><div><h3>'
-                                                 +stages[i].name+'</h3></div><center><span class="controlPanelCounters">'+location[0].stage0+'</span></center></div></li>';
                                                 break;
                                     case "FOUNDATION": sessionStorage.setItem("stage1Name", stages[i].name);
-                                         step1 = '<li id="'+stages[i].id+'" onclick="app.controlPanel.controlPanelModel.openStage(this.id, 1)"><div><div><h3>'+stages[i].name+'</h3></div><center><span class="controlPanelCounters">'
-                                                +location[0].stage1+'</span></center></div></li>';
                                                   break;
                                     case "ERECTION": sessionStorage.setItem("stage2Name", stages[i].name);
-                                         step2 = '<li id="'+stages[i].id+'" onclick="app.controlPanel.controlPanelModel.openStage(this.id, 2)"><div><div><h3>'+stages[i].name+'</h3></div><center><span class="controlPanelCounters">'
-                                                +location[0].stage2+'</span></center></div></li>';
                                                   break;
                                     case "EQUIPMENT & CANTILEVER": sessionStorage.setItem("stage3Name", stages[i].name);
-                                         step3 = '<li id="'+stages[i].id+'" onclick="app.controlPanel.controlPanelModel.openStage(this.id, 3)"><div><div><h3>'+stages[i].name+'</h3></div><center><span class="controlPanelCounters">'
-                                                +location[0].stage3+'</span></center></div></li>';
                                                  break;
                                     case "OCS WIRES": sessionStorage.setItem("stage4Name", stages[i].name);
-                                         step4 = '<li id="'+stages[i].id+'" onclick="app.controlPanel.controlPanelModel.openStage(this.id, 4)"><div><div><h3>'+stages[i].name+'</h3></div><center><span class="controlPanelCounters">'
-                                                +location[0].stage4+'</span></center></div></li>';
                                                   break;
                                     case "E&B": sessionStorage.setItem("stage5Name", stages[i].name);
-                                         step5 = '<li id="'+stages[i].id+'" onclick="app.controlPanel.controlPanelModel.openStage(this.id, 5)"><div><div><h3>'+stages[i].name+'</h3></div><center><span class="controlPanelCounters">'
-                                                +location[0].stage5+'</span></center></div></li>';
                                                   break;
                                     case "TEST": sessionStorage.setItem("stage6Name", stages[i].name);
-                                         step6 = '<li id="'+stages[i].id+'" onclick="app.controlPanel.controlPanelModel.openStage(this.id, 6)"><div><div><h3>'+stages[i].name+'</h3></div><center><span class="controlPanelCounters">'
-                                                +location[0].stage6+'</span></center></div></li>';
                                                   break;
                                     case "COMPLETED": sessionStorage.setItem("stage7Name", stages[i].name);
-                                         step7 = '<li id="'+stages[i].id+'" onclick="app.controlPanel.controlPanelModel.openStage(this.id, 7)"><div><div><h3>'+stages[i].name+'</h3></div><center><span class="controlPanelCounters">'
-                                                +location[0].stage7+'</span></center></div></li>';
                                                   break;
                                 }
-                                // list=step0;
-                                // list+=step1;
-                                // list+=step2;
-                                // list+=step3;
-                                // list+=step4;
-                                // list+=step5;
-                                // list+=step6;
-                                // list+=step7;
-
-                                // document.getElementById("controlPanelStagesList").innerHTML = list;
-                                // console.log("list")
-                                // console.log(list)
-                                // app.mobileApp.hideLoading();
                             }
-                            list=step0;
-                                list+=step1;
-                                list+=step2;
-                                list+=step3;
-                                list+=step4;
-                                list+=step5;
-                                list+=step6;
-                                list+=step7;
+                        //     list=step0;
+                        //         list+=step1;
+                        //         list+=step2;
+                        //         list+=step3;
+                        //         list+=step4;
+                        //         list+=step5;
+                        //         list+=step6;
+                        //         list+=step7;
 
-                                document.getElementById("controlPanelStagesList").innerHTML = list;
-                                // console.log("list")
-                                // console.log(list)
-                                // document.getElementById("#controlPanelScreen").css('overflow-x', 'hidden');
-                                app.mobileApp.hideLoading();
+                        //         document.getElementById("controlPanelStagesList").innerHTML = list;
+                        //         app.mobileApp.hideLoading();
                         });
+                        app.mobileApp.hideLoading();
                     });        
                 });
             });

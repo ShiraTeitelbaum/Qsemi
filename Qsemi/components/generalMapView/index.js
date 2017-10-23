@@ -391,8 +391,10 @@ app.localization.registerView('generalMapView');
                                 generalMapViewModel.addMarker(this.elements[i], this.map, 5);
                                 break;
                             case 6: 
-                            // case 7:
                                 generalMapViewModel.addMarker(this.elements[i], this.map, 6);
+                                break;
+                            case 7: 
+                                generalMapViewModel.addMarker(this.elements[i], this.map, 7);
                                 break;
                         }
                     }
@@ -438,6 +440,8 @@ app.localization.registerView('generalMapView');
                     case 5: iconURL = 'images/addMapPinBlue.png';
                         break;
                     case 6: iconURL = 'images/addMapPinPurple.png';
+                        break;
+                    case 7: iconURL = 'images/addMapPinGrey.png';
                         break;
                 }
                 var location = new google.maps.LatLng(element.Latitude, element.Longtitud);

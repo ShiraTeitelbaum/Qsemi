@@ -3,13 +3,18 @@
         <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);">
             <!--<span data-bind="text: strings.formDetailView.formDetailViewModel.addScreenHeaderValue"></span>-->
             <span id="checkName"></span> <!-- data-bind="text: itemData['name']" -->
-            <a data-role="backbutton" data-align="left" data-bind="events: { click: onCancel }">Cancel</a>
+            <a data-role="backbutton" data-align="left" data-bind="events: { click: onCancel }, buttonText: strings.buttonsText.cancel"></a>
             <!--<a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }">Save</a>-->
         </div>
     </header>
     <!-- START_CUSTOM_CODE_formDetailViewModel -->
     <!-- END_CUSTOM_CODE_formDetailViewModel -->
     <div id="editableListForm163" class="form-view screen__content screen__content--form" style="overflow-x:hidden;  background-color: #e9eaeb;">
+        <!--<br/>
+         <div id="processControlCollapsible" data-role="collapsible" data-inset="true">
+            <h2><span style="font-size: medium; font-weight: bold;">Process Control</span></h2>
+            <p>AAAA</p>
+        </div>-->
         <br/>
         <br/>
         <ul data-role="listview" data-style="inset" style="width:100%; margin-left:0;">
@@ -23,16 +28,16 @@
                     <table style="width:100%">
                         <tr>
                             <td style="width:30%">
-                                <input id="status_ok" class="km-checkbox" value="1" name="fooby[2][]"  type="checkbox"> 
-                                <label class="km-checkbox-label" for="status_ok" > <span>Ok</span></label>
+                                <input id="status_ok" class="km-checkbox" value="1" name="fooby[2][]" type="checkbox"> 
+                                <label class="km-checkbox-label" for="status_ok"><span>Ok</span></label>
                             </td>
                             <td style="width:36%">
-                                <input id="status_not_ok" class="km-checkbox" value="1" name="fooby[2][]"  type="checkbox" >
-                                <label class="km-checkbox-label" for="status_not_ok" > <span>Not Ok</span></label>
+                                <input id="status_not_ok" class="km-checkbox" value="1" name="fooby[2][]" type="checkbox" >
+                                <label class="km-checkbox-label" for="status_not_ok"><span>Not Ok</span></label>
                             </td>
                             <td style="width:30%">
-                                <input id="status_NA" class="km-checkbox" value="1" name="fooby[2][]"  type="checkbox" >
-                                <label class="km-checkbox-label" for="status_NA" ><span>N/A</span></label>
+                                <input id="status_NA" class="km-checkbox" value="1" name="fooby[2][]" type="checkbox" >
+                                <label class="km-checkbox-label" for="status_NA"><span>N/A</span></label>
                             </td>
                         </tr>
                     </table>
@@ -76,31 +81,31 @@
                     <span id="number1inputTitle"></span>
                 </li>
                 <li id="Number1" style="height:35px; padding:0; border:none;">
-                    <input id="number1input" type="number" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
+                    <input id="number1input" type="number" max="9999999999" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
                 </li>
                 <li id="number2" style="border:none;">
                     <span id="number2inputTitle"></span>
                 </li>
                 <li id="Number2" style="height:35px; padding:0; border:none;">
-                    <input id="number2input" type="number" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
+                    <input id="number2input" type="number" max="9999999999" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
                 </li>
                 <li id="number3" style="border:none;">
                     <span id="number3inputTitle"></span>
                 </li>
                 <li id="Number3" style="height:35px; padding:0; border:none;">
-                    <input id="number3input" type="number" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
+                    <input id="number3input" type="number" max="9999999999" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
                 </li>
                 <li id="number4" style="border:none;">
                     <span id="number4inputTitle"></span>
                 </li>
                 <li id="Number4" style="height:35px; padding:0; border:none;">
-                    <input id="number4input" type="number" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
+                    <input id="number4input" type="number" max="9999999999" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
                 </li>
                 <li id="number5" style="border:none;">
                     <span id="number5inputTitle"></span>
                 </li>
                 <li id="Number5" style="height:35px; padding:0; border:none;">
-                    <input id="number5input" type="number" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
+                    <input id="number5input" type="number" max="9999999999" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
                 </li>
 
                 <li id="pcOkNotOkTitle" style="border:none;">
@@ -140,9 +145,9 @@
 
                
                 <li id="processControlImage" style="border:none;">
-                    <a class="capturePhotoButtonClass" id="addCapturePhotoForm">
+                    <a >
                         <img src="images/cameraIcon.png" style="height: 21px; width: 21px; margin-top:3%;" />
-                        <span>Add Image</span>
+                        <span class="capturePhotoButtonClass" id="addCapturePhotoForm">Add Image</span>
                     </a>
                 </li>
 
@@ -151,9 +156,10 @@
                     <textarea id="checkComments" data-bind="value: addFormData.comments" rows="7" style="resize: none; width: 100%; border:1px solid black;"></textarea>
                 </li>
                 <li style="border:none;">
-                    <span data-bind="text: strings.stagesFormSignature.title"></span>
+                    <!--<span data-bind="text: strings.stagesFormSignature.title"></span>-->
+                    <a data-icon="km-signatureNew" data-bind="events:{click: openSignaturePopUp}, text: strings.stagesFormSignature.title"></a>
                     <br />
-                    <a id="Reset" data-bind="text: strings.stagesFormSignature.clear" style="margin-left:65%; border-radius: 0; height: 20px; width: 120px; padding: 0;"></a>
+                    <!--<a id="Reset" data-bind="text: strings.stagesFormSignature.clear" style="margin-left:65%; border-radius: 0; height: 20px; width: 120px; padding: 0;"></a>
                     <br/>
                     <div style="border: 1px solid black; height: 10%; width: 100%; background-color: white; "> 
                         <label class="km-label-above field field--textarea">  
@@ -162,7 +168,7 @@
                                 <input type='hidden' id='SignatureAdd-value' name='SignatureAdd-value'/>
                             </div>
                         </label>
-                    </div>
+                    </div>-->
                 </li>
                 <li style="border:none;">
                     <center>
@@ -171,24 +177,54 @@
                 </li>
             </ul>
             
-            <div data-role="modalview" id="addCapturePhotoFormPop" style="background-color:white; padding:0;">
+            <div data-role="modalview" id="signaturePopUp" style="background-color:white; height:230px; width:330px; margin-top:1%; border:1px solid red;">
                 <div data-role="header">
-                    <div data-role="navbar">
-                        <span data-bind="text: strings.stagesFormImg.title"></span>
-                        <a data-bind="events:{click:closeAddPopUpImgForm}" data-role="button">
+                    <center>
+                        <span data-bind="text: strings.stagesFormSignature.title"></span>
+                        <a data-bind="events:{click:closeSignaturePopUp}" data-role="button">
                             <span data-bind="text: strings.stagesFormImg.close"></span>
                         </a>
-                    </div>
+                    </center>
+                </div>
+                <div>
+                    <center>
+                        <br/>
+                        <a id="Reset" data-bind="text: strings.stagesFormSignature.clear" style="border-radius: 0; padding: 0;"></a>
+                        <br/>
+                        <div style="border: 1px solid black; background-color: white; "> <!-- height: 10%; width: 90%; --> 
+                            <label class="km-label-above field field--textarea">  
+                                <div class='signature-wrapper' >
+                                    <div id='signature'></div>
+                                    <input type='hidden' id='SignatureAdd-value' name='SignatureAdd-value'/>
+                                </div>
+                            </label>
+                        </div>
+                    </center>
+                </div>
+            </div>
+
+            <div data-role="modalview" id="addCapturePhotoFormPop" style="background-color:white;">
+                <div data-role="header" style="background-color:#00c853;">
+                    <!--<div data-role="navbar">-->
+                        <center>
+                            <span data-bind="text: strings.stagesFormImg.title"></span>
+                            <a data-bind="events:{click:closeAddPopUpImgForm}" data-role="button">
+                                <span data-bind="text: strings.stagesFormImg.close"></span>
+                            </a>
+                        </center>
+                    <!--</div>-->
                 </div>
                 <div data-role="content" style="background-color: transparent; margin-top: 2%;">
                     <img id="addCapturePhotoFormImg" style="width: 100%; height:100%;" />
                 </div>
-                <div data-role="footer">
-                    <div data-role="navbar" style="background-color:#351e45;">
-                        <a class="capturePhotoButtonClass" id="addCapturePhotoForm_" style="color:white;">
-                            <span data-bind="text: strings.stagesFormImg.changePhoto"></span>
-                        </a>
-                    </div>
+                <div data-role="footer" style="background-color:#351e45;">
+                    <!--<div data-role="navbar" style="background-color:#351e45;">-->
+                        <center>
+                            <a class="capturePhotoButtonClass" id="addCapturePhotoForm_" style="color:white;">
+                                <span data-bind="text: strings.stagesFormImg.changePhoto"></span>
+                            </a>
+                        </center>
+                    <!--</div>-->
                 </div>
             </div>
 

@@ -21,90 +21,89 @@
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
 
     <!-- END_CUSTOM_CODE_controlPanel -->
-    <!--<a data-role="button" href="#components/formDetailView/view.html">FORM</a>-->
-    <br/>
-    <div style="overflow-x:hidden; padding:0;">
-        <!--<center>
-            <div id="chart-oct"></div>
-        </center>-->
+    <br />
+    <br />
+    <div style="overflow-x:hidden; width:98%; height:100%; margin-right:2%; padding:0;">
         <center>
-            <ul data-role></ul>
-            <div id="step1" style="padding:0;">
-                <span style="padding-top:0;">SURVEYOR</span>
+            <div class="controlPanel" id="step_0" onclick="app.controlPanel.controlPanelModel.openStage(0)" style="background-image: url('images/step0.png'); width:97%;">
+                <div class="stage">
+                    <span class="stageName">SURVEYOR</span>
+                    <br/>
+                    <span class="stageCounter" id="stage0Counter"></span>
+                </div>
+            </div>    
+            <div class="controlPanel" id="step_1" onclick="app.controlPanel.controlPanelModel.openStage(1)" style="background-image: url('images/step1.png'); width:94%;">
+                <div class="stage">
+                    <span class="stageName">FOUNDATION</span>
+                    <br/>
+                    <span class="stageCounter" id="stage1Counter"></span>
+                </div>
             </div>
-            <div id="step2" style=">
-                <span style="color:white;">FOUNDATION</span>
+            <div class="controlPanel" id="step_2" onclick="app.controlPanel.controlPanelModel.openStage(2)" style="background-image: url('images/step2.png'); width:91%;">
+                <div class="stage">
+                    <span class="stageName"v>ERECTION</span>
+                    <br/>
+                    <span class="stageCounter" id="stage2Counter"></span>
+                </div>
             </div>
-            <div id="step3" style="margin-top:3px;">
-                <span style="color:white;">ERECTION</span>
+            <div class="controlPanel" id="step_3" onclick="app.controlPanel.controlPanelModel.openStage(3)" style="background-image: url('images/step3.png'); width:88%;">
+                <div class="stage">
+                    <span class="stageName">EQUIPMENT & CANTILEVER</span>
+                    <br/>
+                    <span class="stageCounter" id="stage3Counter"></span>
+                </div>
             </div>
-            <div id="step4" style="margin-top:3px;">
-                <span style="color:white;">EQUIPMENT & CANTILEVER</span>
+            <div class="controlPanel" id="step_4" onclick="app.controlPanel.controlPanelModel.openStage(4)" style="background-image: url('images/step4.png'); width:85%;">
+                <div class="stage">
+                    <span class="stageName">OCS WIRES</span>
+                    <br/>
+                    <span class="stageCounter" id="stage4Counter"></span>
+                </div>
             </div>
-            <div id="step5" style="margin-top:3px;">
-                <span style="color:white;">OCS WIRES</span>
+            <div class="controlPanel" id="step_5" onclick="app.controlPanel.controlPanelModel.openStage(5)" style="background-image: url('images/step5.png'); width:82%;">
+                <div class="stage">
+                    <span class="stageName">E&B</span>
+                    <br/>
+                    <span class="stageCounter" id="stage5Counter"></span>
+                </div>
             </div>
-            <div id="step6" style="margin-top:3px;">
-                <span style="color:white;">E&B</span>
+            <div class="controlPanel" id="step_6" onclick="app.controlPanel.controlPanelModel.openStage(6)" style="background-image: url('images/step6.png'); width:79%;">
+                <div class="stage">
+                    <span class="stageName">TEST</span>
+                    <br/>
+                    <span class="stageCounter" id="stage6Counter"></span>
+                </div>
             </div>
-            <div id="step7" style="margin-top:3px;">
-                <span style="color:white;">TEST</span>
-            </div>
-            <div id="step8" style="margin-top:3px;">
-                <span style="color:white;">COMPLETED</span>
+            <div class="controlPanel" id="step_7" onclick="app.controlPanel.controlPanelModel.openStage(7)" style="background-image: url('images/step7.png'); width:76%;">
+                <div class="stage">
+                    <span class="stageName">COMPLETED</span>
+                    <br/>
+                    <span class="stageCounter" id="stage7Counter"></span>
+                </div>
             </div>
         </center>
     </div>
-    <style>
-         #step1 {
-            border-top: 50px solid #0e5a7e;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            width: 350px;
-         }
-         #step2 {
-            border-top: 50px solid #166f99;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            width: 310px;
-         }
-         #step3 {
-            border-top: 50px solid #2185b4;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            width: 270px;
-         }
-         #step4 {
-            border-top: 50px solid #319fd2;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            width: 230px;
-         }
-         #step5 {
-            border-top: 50px solid #3eaee2;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            width: 200px;
-         }
-          #step6 {
-            border-top: 50px solid #3eaee2;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            width: 170px;
-         }
-          #step7 {
-            border-top: 50px solid #3eaee2;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            width: 140px;
-         }
-          #step8 {
-            border-top: 50px solid #3eaee2;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            width: 100px;
-         }
-    </style>
+   <style>
+       .controlPanel {
+           background-size:cover;
+           background-attachment: initial; 
+           height:45px; 
+           
+       } /*margin-top:3px;*/
+       .stageCounter {
+           color:white; 
+           font-weight:bold;
+       }
+       .stageName {
+           color:white; 
+           font-weight:bold;
+       }
+       .stage {
+           margin-left:4%; 
+           padding-top:3%; 
+           padding-bottom:3%;
+       }
+   </style>
     <br/>
     <br/>
     <!--<a data-role="button" onclick="app.controlPanel.controlPanelModel.openGeneralMap()"><img src="images/mapIcon.png" style="height: 20px; width: 18px; margin-left: 1px;"/><span>MAP</span></a>-->

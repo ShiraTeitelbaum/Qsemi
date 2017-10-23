@@ -17,6 +17,11 @@
       "remembermeLabel": "Remember Me"
     }
   },
+  "buttonsText": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "back": "Back"
+  },
   "stagesFormCheckBox": {
     "valid": "Ok",
     "invalid": "Not Ok"
@@ -25,7 +30,7 @@
     "title": "Comments:"
   },
   "stagesFormSignature": {
-    "title": "Signature:",
+    "title": "Signature",
     "clear": "clear signature"
   },
   "stagesFormImg": {

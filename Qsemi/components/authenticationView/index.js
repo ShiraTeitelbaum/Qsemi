@@ -129,7 +129,6 @@ app.localization.registerView('authenticationView');
                 }
 
                 provider.Users.login(email, password, successHandler, init);
-
             }
         });
 
