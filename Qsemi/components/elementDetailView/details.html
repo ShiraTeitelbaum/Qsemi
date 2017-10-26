@@ -2,8 +2,9 @@
     <header data-role="header" style="background-color: #351e45;">
         <div data-role="navbar" class="header-text" style="background-color: #00c853; box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5)">
             <a data-role="backbutton" data-align="left" data-bind="buttonText: strings.buttonsText.back"></a>
-            <!--<span data-bind="text: currentItem['name']"></span>-->
             <span id="elementDetaileDetailsTitle"></span>
+            <a id="editGeneralDetailsButtom" data-role="button" data-align="right" data-bind="events: { click: genearalDetailsEditClick }"></a>
+            <!--<span data-bind="text: currentItem['name']"></span>-->
         </div>
         <div style="background-color: #351e45;">
             <br/>
@@ -27,7 +28,7 @@
                 </tr>
             </table>-->
             <div data-role="tabstrip" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);">
-                <a id="defaultOpen" style="font-size: 16px; font-weight: bold; background-color: #351e45; z-index:999;" onclick="openDetails()" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.elementDetails.generalDetails"></a>
+                <a id="defaultOpen" style="font-size: 16px; font-weight: bold; background-color: #351e45; z-index:999; box-shadow:none;" onclick="openDetails()" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.elementDetails.generalDetails"></a>
                 <a id="QC_Button" style="font-size: 16px; font-weight: bold; background-color: #351e45; z-index:999;" onclick="openQC()" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.elementDetails.qc"></a>
             </div>
         </div>
@@ -188,7 +189,10 @@
                     <table style="width: 100%;">
                         <tr>
                             <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.spanBefor.title"></span></td>
-                            <td style="width: 35%;"><span data-bind="html: currentItem.SpanBefor"></span></td>
+                            <td style="width: 35%;">
+                                <span id="spanBeforeLabel" data-bind="html: currentItem.SpanBefor"></span>
+                                <input type="text" id="spanBeforeEdit" style="border: 1px solid black;" />
+                            </td>
                         </tr>
                     </table>
                 </li>
@@ -197,7 +201,10 @@
                     <table style="width: 100%;">
                         <tr>
                             <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.spanAfter.title"></span></td>
-                            <td style="width: 35%;"><span data-bind="html: currentItem.SpanAfter"></span></td>
+                            <td style="width: 35%;">
+                                <span id="spanAfterLabel" data-bind="html: currentItem.SpanAfter"></span>
+                                <input type="text" id="spanAfterEdit" style="border: 1px solid black;" />
+                            </td>
                         </tr>
                     </table>
                 </li>
@@ -228,6 +235,8 @@
         $("#QC_Button").css('border-bottom', 'none');
         $("#QC_Button").css('box-shadow', 'none');
         //document.getElementById("defaultOpen").setAttribute("href", "#generalDetails");
+        document.getElementById("editGeneralDetailsButtom").innerHTML = "Edit";
+        $("#editGeneralDetailsButtom").show();
         $("#generalDetails").show();
         $("#qc").hide();
     }
@@ -240,7 +249,7 @@
         $("#defaultOpen").css('border-bottom', 'none');
         $("#defaultOpen").css('box-shadow', 'none');
         //document.getElementById("QC_Button").setAttribute("href", "#qc");
-        
+        $("#editGeneralDetailsButtom").hide();
         app.elementDetailView.elementDetailViewModel.openQC1();
         $("#generalDetails").hide();
         $("#qc").show();

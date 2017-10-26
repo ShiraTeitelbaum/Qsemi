@@ -8,6 +8,10 @@
   color: #4c5356;
   background-color: #f4f4f4;
 }
+.km-flat .km-content {
+  color: #4c5356;
+  background-color: #e9eaeb;
+}
 /* Button */
 .km-flat .km-button {
   background: #351e45;

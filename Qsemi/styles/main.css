@@ -542,7 +542,7 @@ Fields
 }
 
 #kendoUiMobileApp .km-shim {
-    background: transparent;
+    background: rgba(41, 37, 37, 0.4);
 }
 
 #kendoUiMobileApp .multiple-select-modal-window.km-modalview {
@@ -550,12 +550,12 @@ Fields
     border-radius: 3px;
 }
 
-#kendoUiMobileApp .km-modalview-root .k-animation-container {
+/*#kendoUiMobileApp .km-modalview-root .k-animation-container {
     height: 100% !important;
     width: 100% !important;
-}
+}*/
 
-#kendoUiMobileApp .km-modalview-wrapper {
+/*#kendoUiMobileApp .km-modalview-wrapper {
     position: fixed !important;
     top: 10%;
     left: 10%;
@@ -563,8 +563,7 @@ Fields
     bottom: 10%;
     width: auto;
     height: auto;
-}
-
+}*/
 
 /*Flat overrides*/
 

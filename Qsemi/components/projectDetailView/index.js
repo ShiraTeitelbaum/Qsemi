@@ -260,6 +260,27 @@ app.localization.registerView('projectDetailView');
             }
         }
 
+        // navigator.geolocation.getCurrentPosition(function(position){},function(error){
+        //     calldialog();
+        // });
+
+        // function calldialog() {
+        //     alert("calldialog")
+        //     document.addEventListener("deviceready",function(){
+        //         //default dialog
+        //         cordova.dialogGPS("Your GPS is Disabled, this app needs to be enable to works.",//message
+        //             "Use GPS, with wifi or 3G.",//description
+        //             function(buttonIndex){//callback
+        //               switch(buttonIndex) {
+        //                 case 0: break;//cancel
+        //                 case 1: break;//neutro option
+        //                 case 2: break;//user go to configuration
+        //               }},
+        //               "Please Turn on GPS",//title
+        //               ["Cancel","Later","Go"]);//buttons
+        //     });
+        // }
+
         //if (!projectDetailViewModel.get('dataSource')) {
             dataProvider.loadCatalogs().then(function _catalogsLoaded() {
                 var jsdoOptions = projectDetailViewModel.get('_jsdoOptions'),

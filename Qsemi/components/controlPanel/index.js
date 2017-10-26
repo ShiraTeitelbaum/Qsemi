@@ -266,7 +266,7 @@ app.localization.registerView('controlPanel');
     } else {
         parent.set('controlPanelModel', controlPanelModel);
     }
-
+ 
     parent.set('onShow', function(e) {
         var param = e.view.params.filter ? JSON.parse(e.view.params.filter) : null,
             isListmenu = false,
@@ -355,16 +355,18 @@ app.localization.registerView('controlPanel');
                         document.getElementById("stage6Counter").innerHTML = location[0].stage6;
                         document.getElementById("stage7Counter").innerHTML = location[0].stage7;
                         
-                        dataSource.fetch(function() {
+                        // dataSource.fetch(function() {
                         //     //app.mobileApp.showLoading();
-                            var stages = dataSource.data();
+                            // var stages = dataSource.data();
                             // console.log("stages")
                             // console.log(stages)
-                            //controlPanelModel.stageList = stages;
+                            var stages = [{ "name": "SURVEYOR", "stageNum": 0 }, { "name": "FOUNDATION", "stageNum": 1 }, { "name": "ERECTION", "stageNum": 2 },
+                                     { "name": "EQUIPMENT & CANTILEVER", "stageNum": 3 }, { "name": "OCS WIRES", "stageNum": 4 }, { "name": "E&B", "stageNum": 5 },
+                                     { "name": "TEST", "stageNum": 6 }, { "name": "COMPLETED", "stageNum": 7 }];
+                            app.elementDetailView.elementDetailViewModel.stageList = stages;
 
                         //     var list='', tmp, step0, step1, step2, step3, step4, step5, step6, step7;
                             for(var i=0; i < stages.length; i++) {
-                                controlPanelModel.stageList[i] = stages[i];
                                 switch(stages[i].name) {
                                     case "SURVEYOR": sessionStorage.setItem("stage0Name", stages[i].name);
                                                 break;
@@ -395,7 +397,7 @@ app.localization.registerView('controlPanel');
 
                         //         document.getElementById("controlPanelStagesList").innerHTML = list;
                         //         app.mobileApp.hideLoading();
-                        });
+                        // });
                         app.mobileApp.hideLoading();
                     });        
                 });

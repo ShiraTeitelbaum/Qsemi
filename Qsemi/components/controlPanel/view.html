@@ -1,16 +1,16 @@
 <div data-role="view" data-title="View" data-layout="main" data-model="app.controlPanel" data-show="app.controlPanel.onShow" data-after-show="app.controlPanel.afterShow" id="controlPanelScreen" class="screen">
     <header data-role="header">
-        <div data-role="navbar" class="header-text"> <!-- style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);" -->
+        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);"> <!-- style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);" -->
 
             <center><label id="projectNameViewHome"></label></center>
             <!--<span data-bind="text: strings.controlPanel.title"></span>-->
-            <a data-role="backbutton" data-align="left">Back</a>
+            <a data-role="backbutton" data-align="left" data-bind="buttonText: strings.buttonsText.back"></a>
             <!--<a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>-->
             
         </div>
         <div style="background-color:#351e45; height:50px; width:100%; direction:rtl;">
                 <a onclick="app.controlPanel.controlPanelModel.openGeneralMap()" style="color:white;height:50px; font-weight:bold; direction:rtl; font-size:large;margin-right:6%;">
-                    <span>Map</span>
+                    <span data-bind="text: strings.controlPanel.mapTitle"></span>
                     <img src="images/mapIcon.png" style="height: 24px; width: 16px; margin-left: 1px; margin-top:3%;"/>
                 </a>
             </div>
@@ -21,64 +21,64 @@
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
 
     <!-- END_CUSTOM_CODE_controlPanel -->
-    <br />
-    <br />
-    <div style="overflow-x:hidden; width:98%; height:100%; margin-right:2%; padding:0;">
+    <!--<br />-->
+    <!--<br />-->
+    <div style="overflow-x:hidden; width:85%; height:100%; margin-right:7%; margin-left:7%; padding:0; margin-top:6%;">
         <center>
-            <div class="controlPanel" id="step_0" onclick="app.controlPanel.controlPanelModel.openStage(0)" style="background-image: url('images/step0.png'); width:97%;">
+            <div class="controlPanel" id="step_0" onclick="app.controlPanel.controlPanelModel.openStage(0)" style="background-image: url('images/step0-2.png'); width:91%;">
                 <div class="stage">
-                    <span class="stageName">SURVEYOR</span>
-                    <br/>
                     <span class="stageCounter" id="stage0Counter"></span>
+                    <br/>
+                    <span class="stageName" data-bind="text: strings.controlPanel.stage0name"></span>
                 </div>
             </div>    
-            <div class="controlPanel" id="step_1" onclick="app.controlPanel.controlPanelModel.openStage(1)" style="background-image: url('images/step1.png'); width:94%;">
+            <div class="controlPanel" id="step_1" onclick="app.controlPanel.controlPanelModel.openStage(1)" style="background-image: url('images/step1.png'); width:87%;">
                 <div class="stage">
-                    <span class="stageName">FOUNDATION</span>
-                    <br/>
                     <span class="stageCounter" id="stage1Counter"></span>
+                    <br/>
+                    <span class="stageName" data-bind="text: strings.controlPanel.stage1name"></span>
                 </div>
             </div>
-            <div class="controlPanel" id="step_2" onclick="app.controlPanel.controlPanelModel.openStage(2)" style="background-image: url('images/step2.png'); width:91%;">
+            <div class="controlPanel" id="step_2" onclick="app.controlPanel.controlPanelModel.openStage(2)" style="background-image: url('images/step2.png'); width:83%;">
                 <div class="stage">
-                    <span class="stageName"v>ERECTION</span>
-                    <br/>
                     <span class="stageCounter" id="stage2Counter"></span>
+                    <br/>
+                    <span class="stageName" data-bind="text: strings.controlPanel.stage2name"></span>
                 </div>
             </div>
-            <div class="controlPanel" id="step_3" onclick="app.controlPanel.controlPanelModel.openStage(3)" style="background-image: url('images/step3.png'); width:88%;">
+            <div class="controlPanel" id="step_3" onclick="app.controlPanel.controlPanelModel.openStage(3)" style="background-image: url('images/step3.png'); width:79%;">
                 <div class="stage">
-                    <span class="stageName">EQUIPMENT & CANTILEVER</span>
-                    <br/>
                     <span class="stageCounter" id="stage3Counter"></span>
+                    <br/>
+                    <span class="stageName" data-bind="text: strings.controlPanel.stage3name"></span>
                 </div>
             </div>
-            <div class="controlPanel" id="step_4" onclick="app.controlPanel.controlPanelModel.openStage(4)" style="background-image: url('images/step4.png'); width:85%;">
+            <div class="controlPanel" id="step_4" onclick="app.controlPanel.controlPanelModel.openStage(4)" style="background-image: url('images/step4.png'); width:75%;">
                 <div class="stage">
-                    <span class="stageName">OCS WIRES</span>
-                    <br/>
                     <span class="stageCounter" id="stage4Counter"></span>
+                    <br/>
+                    <span class="stageName" data-bind="text: strings.controlPanel.stage4name"></span>
                 </div>
             </div>
-            <div class="controlPanel" id="step_5" onclick="app.controlPanel.controlPanelModel.openStage(5)" style="background-image: url('images/step5.png'); width:82%;">
+            <div class="controlPanel" id="step_5" onclick="app.controlPanel.controlPanelModel.openStage(5)" style="background-image: url('images/step5.png'); width:71%;">
                 <div class="stage">
-                    <span class="stageName">E&B</span>
-                    <br/>
                     <span class="stageCounter" id="stage5Counter"></span>
+                    <br/>
+                    <span class="stageName" data-bind="text: strings.controlPanel.stage5name"></span>
                 </div>
             </div>
-            <div class="controlPanel" id="step_6" onclick="app.controlPanel.controlPanelModel.openStage(6)" style="background-image: url('images/step6.png'); width:79%;">
+            <div class="controlPanel" id="step_6" onclick="app.controlPanel.controlPanelModel.openStage(6)" style="background-image: url('images/step6.png'); width:67%;">
                 <div class="stage">
-                    <span class="stageName">TEST</span>
-                    <br/>
                     <span class="stageCounter" id="stage6Counter"></span>
+                    <br/>
+                    <span class="stageName" data-bind="text: strings.controlPanel.stage6name"></span>
                 </div>
             </div>
-            <div class="controlPanel" id="step_7" onclick="app.controlPanel.controlPanelModel.openStage(7)" style="background-image: url('images/step7.png'); width:76%;">
+            <div class="controlPanel" id="step_7" onclick="app.controlPanel.controlPanelModel.openStage(7)" style="background-image: url('images/step7.png'); width:63%;">
                 <div class="stage">
-                    <span class="stageName">COMPLETED</span>
-                    <br/>
                     <span class="stageCounter" id="stage7Counter"></span>
+                    <br/>
+                    <span class="stageName" data-bind="text: strings.controlPanel.stage7name"></span>
                 </div>
             </div>
         </center>
@@ -87,31 +87,30 @@
        .controlPanel {
            background-size:cover;
            background-attachment: initial; 
-           height:45px; 
+           height:55px; 
            
        } /*margin-top:3px;*/
        .stageCounter {
-           color:white; 
+           color:black; 
            font-weight:bold;
        }
        .stageName {
-           color:white; 
+           color:black; 
            font-weight:bold;
        }
        .stage {
            margin-left:4%; 
-           padding-top:3%; 
-           padding-bottom:3%;
+           padding-top:4%; 
        }
    </style>
-    <br/>
-    <br/>
+    <!--<br/>
+    <br/>-->
     <!--<a data-role="button" onclick="app.controlPanel.controlPanelModel.openGeneralMap()"><img src="images/mapIcon.png" style="height: 20px; width: 18px; margin-left: 1px;"/><span>MAP</span></a>-->
-    <div>
-        <center>
+    <!--<div>-->
+        <!--<center>-->
             <!--<ul id="controlPanelStagesList" class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" data-template="controlPanelModelTemplate" data-bind="source: controlPanelModel.dataSource, events: {click: controlPanelModel.itemClick}" data-pull-to-refresh="false" data-endless-scroll="false"></ul>-->
 
-            <ul id="controlPanelStagesList" class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" data-pull-to-refresh="false" data-endless-scroll="false"></ul>
+            <!--<ul id="controlPanelStagesList" class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" data-pull-to-refresh="false" data-endless-scroll="false"></ul>-->
 
             <!--<ul id="controlPanelStagesList" class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" data-endless-scroll="false">
                 <li>
@@ -185,8 +184,8 @@
                     </div>
                 </li>
             </ul>-->
-        </center>
-    </div>
+        <!--</center>-->
+    <!--</div>-->
     
 
 

@@ -9,7 +9,7 @@
     </header>
     <!-- START_CUSTOM_CODE_formDetailViewModel -->
     <!-- END_CUSTOM_CODE_formDetailViewModel -->
-    <div id="editableListForm163" class="form-view screen__content screen__content--form" style="overflow-x:hidden;  background-color: #e9eaeb;">
+    <div id="editableListForm163" class="form-view screen__content screen__content--form" style="overflow-x:hidden;  background-color: #e9eaeb; height:100%;">
         <!--<br/>
          <div id="processControlCollapsible" data-role="collapsible" data-inset="true">
             <h2><span style="font-size: medium; font-weight: bold;">Process Control</span></h2>
@@ -42,11 +42,11 @@
                         </tr>
                     </table>
                 </li>
-                <li id="processControlTitle" style="border:none;">
+                <!--<li id="processControlTitle" style="border:none;">
                     <span style="font-size: medium; font-weight: bold;">Process Control</span>
-                </li>
+                </li>-->
 
-                <li id="text1" style="border:none;">
+                <!--<li id="text1" style="border:none;">
                     <span id="text1inputTitle"></span>
                 </li>
                 <li id="Text1" style="height:35px; padding:0; border:none;">
@@ -75,9 +75,9 @@
                 </li>
                 <li id="Text5" style="height:35px; padding:0; border:none;">
                     <input id="text5input" type="text" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
-                </li>
+                </li>-->
 
-                <li id="number1" style="border:none;">
+                <!--<li id="number1" style="border:none;">
                     <span id="number1inputTitle"></span>
                 </li>
                 <li id="Number1" style="height:35px; padding:0; border:none;">
@@ -106,9 +106,9 @@
                 </li>
                 <li id="Number5" style="height:35px; padding:0; border:none;">
                     <input id="number5input" type="number" max="9999999999" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
-                </li>
+                </li>-->
 
-                <li id="pcOkNotOkTitle" style="border:none;">
+                <!--<li id="pcOkNotOkTitle" style="border:none;">
                     <span id="okNotOkTitle"></span>
                 </li>
                 <li id="pcOkNotOk" style="border:none;">
@@ -141,7 +141,7 @@
                             </td>
                         </tr>
                     </table>
-                </li>
+                </li>-->
 
                
                 <li id="processControlImage" style="border:none;">
@@ -177,23 +177,24 @@
                 </li>
             </ul>
             
-            <div data-role="modalview" id="signaturePopUp" style="background-color:white; height:230px; width:330px; margin-top:1%; border:1px solid red;">
-                <div data-role="header">
-                    <center>
-                        <span data-bind="text: strings.stagesFormSignature.title"></span>
-                        <a data-bind="events:{click:closeSignaturePopUp}" data-role="button">
-                            <span data-bind="text: strings.stagesFormImg.close"></span>
-                        </a>
-                    </center>
+            <!--<div data-role="modalview" id="signaturePopUp" style="width:95%; height:40%; background-color:white; display:none; left:1px;  
+            border: 2px solid rgba(11, 61, 2, 0.729412); box-shadow: rgba(0, 0, 0, 0.109804) 3px 5px 2px 5px, rgba(4, 56, 8, 0.619608) 1px 1px 8px 2px;">-->
+            <div data-role="modalview" id="signaturePopUp" style="left:1px; width:95%; height:36%; background-color:#F4F4F4; border: 1px solid rgba(0, 200, 83, 0.729412);">
+                <!--<div style="width:100%;">
+                    <span data-bind="text: strings.stagesFormSignature.title"></span>
+                </div>-->
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                        <center>
+                            <span data-bind="text: strings.stagesFormSignature.title" style="font-size:large;"></span>
+                        </center>
                 </div>
-                <div>
+                <div data-role="content" dir="ltr" style="background-color: transparent; margin-top: 3%;">
                     <center>
-                        <br/>
-                        <a id="Reset" data-bind="text: strings.stagesFormSignature.clear" style="border-radius: 0; padding: 0;"></a>
-                        <br/>
-                        <div style="border: 1px solid black; background-color: white; "> <!-- height: 10%; width: 90%; --> 
+                        <!--<a id="Reset" data-bind="text: strings.stagesFormSignature.clear" style="border-radius: 0; padding: 0;"></a>-->
+                        <!--<br/>-->
+                        <div style="border: 1px solid black; background-color: white; width:90%;"> <!-- height: 10%; width: 90%; --> 
                             <label class="km-label-above field field--textarea">  
-                                <div class='signature-wrapper' >
+                                <div class='signature-wrapper'>
                                     <div id='signature'></div>
                                     <input type='hidden' id='SignatureAdd-value' name='SignatureAdd-value'/>
                                 </div>
@@ -201,30 +202,43 @@
                         </div>
                     </center>
                 </div>
+                <!--<br/>-->
+                <footer data-role="footer" style="background-color: transparent;">
+                    <div style="width:100%; margin-bottom:3%;">
+                        <center>
+                            <a data-role="button" style="margin-bottom:0%;border-radius:0;" data-bind="events:{click: closeSignaturePopUp}"><span data-bind="text: strings.stagesFormImg.close"></span></a>
+                            <a id="Reset" data-role="button" style="margin-bottom:0%;border-radius:0;"><span data-bind="text: strings.stagesFormSignature.clear"></span></a>
+                        </center>
+                    </div>
+                </footer>
             </div>
 
-            <div data-role="modalview" id="addCapturePhotoFormPop" style="background-color:white;">
-                <div data-role="header" style="background-color:#00c853;">
-                    <!--<div data-role="navbar">-->
+            <div data-role="modalview" id="addCapturePhotoFormPop" style="left:1px; width:95%; height:70%; background-color:#F4F4F4; border: 1px solid rgba(0, 200, 83, 0.729412);">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                    <div style="width:100%;">
                         <center>
-                            <span data-bind="text: strings.stagesFormImg.title"></span>
-                            <a data-bind="events:{click:closeAddPopUpImgForm}" data-role="button">
-                                <span data-bind="text: strings.stagesFormImg.close"></span>
-                            </a>
+                            <span data-bind="text: strings.stagesFormImg.title" style="font-size:large;"></span>
                         </center>
-                    <!--</div>-->
+                        <!--<a data-bind="events:{click:closeAddPopUpImgForm}" data-role="button" style="border-radius:0; margin-left:80%;">
+                            <span data-bind="text: strings.stagesFormImg.close"></span>
+                        </a>-->
+                    </div>
                 </div>
                 <div data-role="content" style="background-color: transparent; margin-top: 2%;">
                     <img id="addCapturePhotoFormImg" style="width: 100%; height:100%;" />
                 </div>
-                <div data-role="footer" style="background-color:#351e45;">
-                    <!--<div data-role="navbar" style="background-color:#351e45;">-->
+                <div data-role="footer" style="margin-bottom:3%; margin-top:3%; background-color:transparent">
+                    <div style="width:100%; margin-bottom:2%;">
                         <center>
-                            <a class="capturePhotoButtonClass" id="addCapturePhotoForm_" style="color:white;">
+                            <a data-role="button" class="capturePhotoButtonClass" id="addCapturePhotoForm_" style="color:white;margin-bottom:0%;border-radius:0;">
                                 <span data-bind="text: strings.stagesFormImg.changePhoto"></span>
                             </a>
+                            <a data-bind="events:{click:closeAddPopUpImgForm}" data-role="button" style="color:white;margin-bottom:0%;border-radius:0;">
+                                <span data-bind="text: strings.stagesFormImg.close"></span>
+                            </a>
                         </center>
-                    <!--</div>-->
+                    </div>
+                        
                 </div>
             </div>
 

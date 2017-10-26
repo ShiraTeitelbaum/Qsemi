@@ -125,6 +125,7 @@ app.localization.registerView('elementDetailView');
             dataSourceSteps: '',
             stepsNames: '',
             stepId: '',
+            stageList: '',
             page_scroller: '',
             formCheckListIds: [],
             QC_click_flag: false,
@@ -264,8 +265,17 @@ app.localization.registerView('elementDetailView');
                 this.page_scroller = e.view.scroller;
                 elementDetaileDetailsTitle.innerHTML = sessionStorage.getItem("locationName");
                 elementStep.innerHTML = 'Step: ' + sessionStorage.getItem("stageName");
+                $("#spanEdit").hide();
                 if(e.view.params.mapFlag != undefined) {
-                    var id = e.view.params.id;
+                    var id = e.view.params.id,
+                        stepnum = e.view.params.stepNum;
+                    for(var i=0; i<elementDetailViewModel.stageList.length; i++) {
+                        if(elementDetailViewModel.stageList[i].stageNum == stepnum) {
+                            elementStep.innerHTML = 'Step: ' + elementDetailViewModel.stageList[i].name;
+                            break;
+                        }
+                    }
+                    
                     //if (!elementDetailViewModel.get('dataSource')) {
                         dataProvider.loadCatalogs().then(function _catalogsLoaded() {
                             var jsdoOptions = elementDetailViewModel.get('_jsdoOptions'),
@@ -320,6 +330,22 @@ app.localization.registerView('elementDetailView');
                         document.getElementById("QC_Button").click();
                     else document.getElementById("defaultOpen").click();
                     /// end detail form show
+                }
+            },
+            genearalDetailsEditClick: function(e) {
+                if(document.getElementById("editGeneralDetailsButtom").innerHTML == "Edit") {
+                    document.getElementById("editGeneralDetailsButtom").innerHTML = "Save";
+                    $("#spanBeforeLabel").hide();
+                    $("#spanBeforeEdit").show();
+                    $("#spanAfterLabel").hide();
+                    $("#spanAfterEdit").show();
+                }
+                else if(document.getElementById("editGeneralDetailsButtom").innerHTML == "Save") {
+                    document.getElementById("editGeneralDetailsButtom").innerHTML = "Edit";
+                    $("#spanBeforeEdit").hide();
+                    $("#spanBeforeLabel").show();
+                    $("#spanAfterEdit").hide();
+                    $("#spanAfterLabel").show();
                 }
             },
             openQC1: function () {

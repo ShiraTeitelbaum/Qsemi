@@ -20,7 +20,8 @@
   "buttonsText": {
       "save": "Save",
       "cancel": "Cancel",
-      "back": "Back"
+      "back": "Back",
+      "edit": "Edit"
   },
   "stagesFormCheckBox": {
     "valid": "Ok",
@@ -31,12 +32,24 @@
   },
   "stagesFormSignature": {
     "title": "Signature",
-    "clear": "clear signature"
+    "clear": "Clear",
+    "cancel": "Cancel"
   },
   "stagesFormImg": {
     "title": "Image",
     "close":"Close",
     "changePhoto":"Change Photo"
+  },
+  "controlPanel": {
+      "mapTitle": "Map",
+      "stage0name": "SURVEYOR",
+      "stage1name": "FOUNDATION",
+      "stage2name": "ERECTION",
+      "stage3name": "EQUIPMENT & CANTILEVER",
+      "stage4name": "OCS WIRES",
+      "stage5name": "E&B",
+      "stage6name": "TEST",
+      "stage7name": "COMPLETED"
   },
   "elementDetailView": {
     "title": "element",
@@ -415,12 +428,7 @@
       "detailHeaderFieldValue": "Detail"
     }
   },
-  "controlPanel": {
-    "title": "Control Panel",
-    "controlPanelModel": {
-      "detailHeaderFieldValue": "Detail"
-    }
-  },
+ 
   "surveyorMarking": {
     "title": "Surveyor Marking",
     "surveyorMarkingModel": {

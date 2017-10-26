@@ -1,10 +1,9 @@
 {
   "CorePlugins": [
+    "com.telerik.LivePatch",
     "cordova-plugin-battery-status",
     "cordova-plugin-camera",
-    "cordova-plugin-contacts",
     "cordova-plugin-device",
-    "cordova-plugin-device-motion",
     "cordova-plugin-device-orientation",
     "cordova-plugin-dialogs",
     "cordova-plugin-file",

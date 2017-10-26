@@ -29,6 +29,7 @@
     $(document).ready(function() {
 
         app.notification = $("#notify");
+        
 
     });
 

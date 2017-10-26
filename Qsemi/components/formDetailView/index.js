@@ -280,7 +280,7 @@ app.localization.registerView('formDetailView');
                 'decor-color': 'transparent',
                 'color': 'black',
                  //'height':'8em'
-                'width': '322',
+                'width': '300',
                 'height': '110'
                 }) // inits the jSignature widget. 
         },
@@ -289,15 +289,15 @@ app.localization.registerView('formDetailView');
             e.view.scroller.reset();
             this.pageScroller = e.view.scroller;
 
-            $("#processControlTitle").hide();
-            $("#processControlImage").hide();
-            $("#processControlChecks").hide();
-            $("#processControlImage").hide();
-            $("#text1").hide(); $("#text2").hide(); $("#text3").hide(); $("#text4").hide(); $("#text5").hide();
-            $("#Text1").hide(); $("#Text2").hide(); $("#Text3").hide(); $("#Text4").hide(); $("#Text5").hide();
-            $("#number1").hide(); $("#number2").hide(); $("#number3").hide(); $("#number4").hide(); $("#number5").hide();
-            $("#Number1").hide(); $("#Number2").hide(); $("#Number3").hide(); $("#Number4").hide(); $("#Number5").hide();
-            $("#pcOkNotOkTitle").hide(); $("#pcOkNotOk").hide(); $("#pcNormalNotNormalTitle").hide(); $("#pcNormalNotNormal").hide(); 
+            // $("#processControlTitle").hide();
+            // $("#processControlImage").hide();
+            // $("#processControlChecks").hide();
+            // $("#processControlImage").hide();
+            // $("#text1").hide(); $("#text2").hide(); $("#text3").hide(); $("#text4").hide(); $("#text5").hide();
+            // $("#Text1").hide(); $("#Text2").hide(); $("#Text3").hide(); $("#Text4").hide(); $("#Text5").hide();
+            // $("#number1").hide(); $("#number2").hide(); $("#number3").hide(); $("#number4").hide(); $("#number5").hide();
+            // $("#Number1").hide(); $("#Number2").hide(); $("#Number3").hide(); $("#Number4").hide(); $("#Number5").hide();
+            // $("#pcOkNotOkTitle").hide(); $("#pcOkNotOk").hide(); $("#pcNormalNotNormalTitle").hide(); $("#pcNormalNotNormal").hide(); 
 
             if(app.elementDetailView.elementDetailViewModel.surveyorFlag == true) {
                 $("#checkStatus").hide();
@@ -315,91 +315,91 @@ app.localization.registerView('formDetailView');
                 itemData = dataSource.getByUid(itemUid),
                 fixedData = formDetailViewModel.fixHierarchicalData(itemData);
             
-            if(itemData.ShowNum1 == true || itemData.ShowNum2 == true || itemData.ShowNum3 == true || itemData.ShowNum4 == true || itemData.ShowNum5 == true ||
-                itemData.ShowText1 == true || itemData.ShowText2 == true || itemData.ShowText3 == true || itemData.ShowText4 == true || itemData.ShowText5 == true ||
-                itemData.ShowOkNotOk1 == true || itemData.ShowNormal1 == true) {
-                    if(app.elementDetailView.elementDetailViewModel.surveyorFlag == true) {
-                        $("#processControlTitle").show();
-                    }
-                    else $("#processControlTitle").hide(); 
+            // if(itemData.ShowNum1 == true || itemData.ShowNum2 == true || itemData.ShowNum3 == true || itemData.ShowNum4 == true || itemData.ShowNum5 == true ||
+            //     itemData.ShowText1 == true || itemData.ShowText2 == true || itemData.ShowText3 == true || itemData.ShowText4 == true || itemData.ShowText5 == true ||
+            //     itemData.ShowOkNotOk1 == true || itemData.ShowNormal1 == true) {
+            //         if(app.elementDetailView.elementDetailViewModel.surveyorFlag == true) {
+            //             $("#processControlTitle").show();
+            //         }
+            //         else $("#processControlTitle").hide(); 
                     
-                    if(itemData.ShowText1 == true) {
-                        document.getElementById("text1inputTitle").innerHTML = itemData.TitleText1 + ':';
-                        $("#text1").show();
-                        $("#Text1").show();
-                    }
-                    if(itemData.ShowText2 == true) {
-                        document.getElementById("text2inputTitle").innerHTML = itemData.TitleText2 + ':';
-                        $("#text2").show();
-                        $("#Text2").show();
-                    }
-                    if(itemData.ShowText3 == true) {
-                        document.getElementById("text3inputTitle").innerHTML = itemData.TitleText3 + ':';
-                        $("#text3").show();
-                        $("#Text3").show();
-                    }
-                    if(itemData.ShowText4 == true) {
-                        document.getElementById("text4inputTitle").innerHTML = itemData.TitleText4 + ':';
-                        $("#text4").show();
-                        $("#Text4").show();
-                    }
-                    if(itemData.ShowText5 == true) {
-                        document.getElementById("text5inputTitle").innerHTML = itemData.TitleText5 + ':';
-                        $("#text5").show();
-                        $("#Text5").show();
-                    }
+            //         if(itemData.ShowText1 == true) {
+            //             document.getElementById("text1inputTitle").innerHTML = itemData.TitleText1 + ':';
+            //             $("#text1").show();
+            //             $("#Text1").show();
+            //         }
+            //         if(itemData.ShowText2 == true) {
+            //             document.getElementById("text2inputTitle").innerHTML = itemData.TitleText2 + ':';
+            //             $("#text2").show();
+            //             $("#Text2").show();
+            //         }
+            //         if(itemData.ShowText3 == true) {
+            //             document.getElementById("text3inputTitle").innerHTML = itemData.TitleText3 + ':';
+            //             $("#text3").show();
+            //             $("#Text3").show();
+            //         }
+            //         if(itemData.ShowText4 == true) {
+            //             document.getElementById("text4inputTitle").innerHTML = itemData.TitleText4 + ':';
+            //             $("#text4").show();
+            //             $("#Text4").show();
+            //         }
+            //         if(itemData.ShowText5 == true) {
+            //             document.getElementById("text5inputTitle").innerHTML = itemData.TitleText5 + ':';
+            //             $("#text5").show();
+            //             $("#Text5").show();
+            //         }
 
-                    if(itemData.ShowNum1 == true) {
-                        document.getElementById("number1inputTitle").innerHTML = itemData.TitleNum1 + ':';
-                        $("#number1").show();
-                        $("#Number1").show();
-                    }
-                    if(itemData.ShowNum2 == true) {
-                        document.getElementById("number2inputTitle").innerHTML = itemData.TitleNum2 + ':';
-                        $("#number2").show();
-                        $("#Number2").show();
-                    }
-                    if(itemData.ShowNum3 == true) {
-                        document.getElementById("number3inputTitle").innerHTML = itemData.TitleNum3 + ':';
-                        $("#number3").show();
-                        $("#Number3").show();
-                    }
-                    if(itemData.ShowNum4 == true) {
-                        document.getElementById("number4inputTitle").innerHTML = itemData.TitleNum4 + ':';
-                        $("#number4").show();
-                        $("#Number4").show();
-                    }
-                    if(itemData.ShowNum5 == true) {
-                        document.getElementById("number5inputTitle").innerHTML = itemData.TitleNum5 + ':';
-                        $("#number5").show();
-                        $("#Number5").show();
-                    }
+            //         if(itemData.ShowNum1 == true) {
+            //             document.getElementById("number1inputTitle").innerHTML = itemData.TitleNum1 + ':';
+            //             $("#number1").show();
+            //             $("#Number1").show();
+            //         }
+            //         if(itemData.ShowNum2 == true) {
+            //             document.getElementById("number2inputTitle").innerHTML = itemData.TitleNum2 + ':';
+            //             $("#number2").show();
+            //             $("#Number2").show();
+            //         }
+            //         if(itemData.ShowNum3 == true) {
+            //             document.getElementById("number3inputTitle").innerHTML = itemData.TitleNum3 + ':';
+            //             $("#number3").show();
+            //             $("#Number3").show();
+            //         }
+            //         if(itemData.ShowNum4 == true) {
+            //             document.getElementById("number4inputTitle").innerHTML = itemData.TitleNum4 + ':';
+            //             $("#number4").show();
+            //             $("#Number4").show();
+            //         }
+            //         if(itemData.ShowNum5 == true) {
+            //             document.getElementById("number5inputTitle").innerHTML = itemData.TitleNum5 + ':';
+            //             $("#number5").show();
+            //             $("#Number5").show();
+            //         }
                     
-                    if(itemData.image == true) {
-                        $("#processControlImage").show();
-                    }
+            //         if(itemData.image == true) {
+            //             $("#processControlImage").show();
+            //         }
 
-                    // console.log("itemData")
-                    // console.log(itemData)
-                    if(itemData.ShowOkNotOk1 == true) {
-                        // var listOkNotOK1 = app.formDetailView.formDetailViewModel._dataSourceOptions.transport.jsdo.getPicklist_OKNotOK1().response.picklistData;
-                        // console.log("list")
-                        // console.log(listOkNotOK1)
+            //         // console.log("itemData")
+            //         // console.log(itemData)
+            //         if(itemData.ShowOkNotOk1 == true) {
+            //             // var listOkNotOK1 = app.formDetailView.formDetailViewModel._dataSourceOptions.transport.jsdo.getPicklist_OKNotOK1().response.picklistData;
+            //             // console.log("list")
+            //             // console.log(listOkNotOK1)
 
-                        document.getElementById("okNotOkTitle").innerHTML = itemData.TitleOkNotOk1 + ':';
-                        // document.getElementById("pc_ok_label").innerHTML = itemData.TitleOkNotOk1 + ':';
-                        // document.getElementById("pc_not_ok_label").innerHTML = itemData.TitleOkNotOk1 + ':';
+            //             document.getElementById("okNotOkTitle").innerHTML = itemData.TitleOkNotOk1 + ':';
+            //             // document.getElementById("pc_ok_label").innerHTML = itemData.TitleOkNotOk1 + ':';
+            //             // document.getElementById("pc_not_ok_label").innerHTML = itemData.TitleOkNotOk1 + ':';
                        
-                        $("#pcOkNotOkTitle").show();
-                        $("#pcOkNotOk").show(); 
-                    }
+            //             $("#pcOkNotOkTitle").show();
+            //             $("#pcOkNotOk").show(); 
+            //         }
 
-                    if(itemData.ShowNormal1 == true) {
-                        document.getElementById("normalNotNormalTitle").innerHTML = itemData.TitleNormal1 + ':';
-                        $("#pcNormalNotNormalTitle").show();
-                        $("#pcNormalNotNormal").show(); 
-                    }
-                }
+            //         if(itemData.ShowNormal1 == true) {
+            //             document.getElementById("normalNotNormalTitle").innerHTML = itemData.TitleNormal1 + ':';
+            //             $("#pcNormalNotNormalTitle").show();
+            //             $("#pcNormalNotNormal").show(); 
+            //         }
+            //     }
 
             var dataSource = formDetailViewModel.get('dataSourceChecks');
             dataSource.filter({
@@ -419,14 +419,14 @@ app.localization.registerView('formDetailView');
                         document.getElementById("status_ok").checked = false;
                         document.getElementById("status_not_ok").checked = false;
                         document.getElementById("status_NA").checked = false;
-                        document.getElementById("pc_ok").checked = false;
-                        document.getElementById("pc_not_ok").checked = false;
-                        document.getElementById("pc_normal").checked = false;
-                        document.getElementById("pc_not_normal").checked = false;
+                        // document.getElementById("pc_ok").checked = false;
+                        // document.getElementById("pc_not_ok").checked = false;
+                        // document.getElementById("pc_normal").checked = false;
+                        // document.getElementById("pc_not_normal").checked = false;
 
                         var status = app.formDetailView.formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.getPicklist_status().response.picklistData;
-                        var OkNotOK1 = app.formDetailView.formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.getPicklist_OkNotOK1().response.picklistData;
-                        var Normal1 = app.formDetailView.formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.getPicklist_Normal1().response.picklistData;
+                        // var OkNotOK1 = app.formDetailView.formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.getPicklist_OkNotOK1().response.picklistData;
+                        // var Normal1 = app.formDetailView.formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.getPicklist_Normal1().response.picklistData;
                      
                         for(var i=0; i < status.length; i++) {
                             if(view[0].status == status[i].id) {
@@ -442,44 +442,44 @@ app.localization.registerView('formDetailView');
                             }
                         }
 
-                        if(view[0].OkNotOK1 != null) {
-                            for(var i=0; i < OkNotOK1.length; i++) {
-                                if(view[0].OkNotOK1 == OkNotOK1[i].id) {
-                                    switch(OkNotOK1[i].name) {
-                                        case "OK": document.getElementById("pc_ok").checked = true;
-                                            // $("#checkStatus").css('background-color', '#449d31');
-                                                break;
-                                        case "Not OK": document.getElementById("pc_not_ok").checked = true; 
-                                                    //$("#checkStatus").css('background-color', '#d12229');
-                                                    break;
-                                    }
-                                }
-                            }
-                        }
+                        // if(view[0].OkNotOK1 != null) {
+                        //     for(var i=0; i < OkNotOK1.length; i++) {
+                        //         if(view[0].OkNotOK1 == OkNotOK1[i].id) {
+                        //             switch(OkNotOK1[i].name) {
+                        //                 case "OK": document.getElementById("pc_ok").checked = true;
+                        //                     // $("#checkStatus").css('background-color', '#449d31');
+                        //                         break;
+                        //                 case "Not OK": document.getElementById("pc_not_ok").checked = true; 
+                        //                             //$("#checkStatus").css('background-color', '#d12229');
+                        //                             break;
+                        //             }
+                        //         }
+                        //     }
+                        // }
 
-                        if(view[0].Normal1 != null) {
-                            for(var i=0; i < Normal1.length; i++) {
-                                if(view[0].Normal1 == Normal1[i].id) {
-                                    switch(Normal1[i].name) {
-                                        case "Normal": document.getElementById("pc_normal").checked = true;
-                                            // $("#checkStatus").css('background-color', '#449d31');
-                                                break;
-                                        case "Not Normal": document.getElementById("pc_not_normal").checked = true; 
-                                                    //$("#checkStatus").css('background-color', '#d12229');
-                                                    break;
-                                    }
-                                }
-                            }
-                        }
+                        // if(view[0].Normal1 != null) {
+                        //     for(var i=0; i < Normal1.length; i++) {
+                        //         if(view[0].Normal1 == Normal1[i].id) {
+                        //             switch(Normal1[i].name) {
+                        //                 case "Normal": document.getElementById("pc_normal").checked = true;
+                        //                     // $("#checkStatus").css('background-color', '#449d31');
+                        //                         break;
+                        //                 case "Not Normal": document.getElementById("pc_not_normal").checked = true; 
+                        //                             //$("#checkStatus").css('background-color', '#d12229');
+                        //                             break;
+                        //             }
+                        //         }
+                        //     }
+                        // }
 
-                        var imageObj = $.parseJSON(view[0].image);
-                        view[0].image = processImage(formDetailViewModel.get('_dataSourceOptionsChecks').transport.jsdo.url + imageObj.src);
-                        if(view[0].imageURL != "null") {
-                            $("#addCapturePhotoForm").css("color", "red");
-                            // $("#addCapturePhotoFormImg").src = view[0].image; //view[0].imageURL
-                            document.getElementById("addCapturePhotoFormImg").setAttribute("src", view[0].image);
-                            // document.getElementById("addCapturePhotoFormImg").setAttribute("href", view[0].imageURL);
-                        }
+                        // var imageObj = $.parseJSON(view[0].image);
+                        // view[0].image = processImage(formDetailViewModel.get('_dataSourceOptionsChecks').transport.jsdo.url + imageObj.src);
+                        // if(view[0].imageURL != "null") {
+                        //     $("#addCapturePhotoForm").css("color", "red");
+                        //     // $("#addCapturePhotoFormImg").src = view[0].image; //view[0].imageURL
+                        //     document.getElementById("addCapturePhotoFormImg").setAttribute("src", view[0].image);
+                        //     // document.getElementById("addCapturePhotoFormImg").setAttribute("href", view[0].imageURL);
+                        // }
                         
                         var commentsC, text1;
                         if(view[0].Comments != "null") {
@@ -489,17 +489,17 @@ app.localization.registerView('formDetailView');
                             commentsC = '';
                         }
                        
-                        if(view[0].Text1 != null && view[0].Text1 != "null") { $("#text1input").val(view[0].Text1); } else { $("#text1input").val(''); }
-                        if(view[0].Text2 != null && view[0].Text2 != "null") { $("#text2input").val(view[0].Text2); } else { $("#text2input").val(''); }
-                        if(view[0].Text3 != null && view[0].Text3 != "null") { $("#text3input").val(view[0].Text3); } else { $("#text3input").val(''); }
-                        if(view[0].Text4 != null && view[0].Text4 != "null") { $("#text4input").val(view[0].Text4); } else { $("#text4input").val(''); }
-                        if(view[0].Text5 != null && view[0].Text5 != "null") { $("#text5input").val(view[0].Text5); } else { $("#text5input").val(''); }
+                        // if(view[0].Text1 != null && view[0].Text1 != "null") { $("#text1input").val(view[0].Text1); } else { $("#text1input").val(''); }
+                        // if(view[0].Text2 != null && view[0].Text2 != "null") { $("#text2input").val(view[0].Text2); } else { $("#text2input").val(''); }
+                        // if(view[0].Text3 != null && view[0].Text3 != "null") { $("#text3input").val(view[0].Text3); } else { $("#text3input").val(''); }
+                        // if(view[0].Text4 != null && view[0].Text4 != "null") { $("#text4input").val(view[0].Text4); } else { $("#text4input").val(''); }
+                        // if(view[0].Text5 != null && view[0].Text5 != "null") { $("#text5input").val(view[0].Text5); } else { $("#text5input").val(''); }
 
-                        if(view[0].Num1 != null && view[0].Num1 != "null") { $("#number1input").val(view[0].Num1); } else { $("#number1input").val(''); }
-                        if(view[0].Num2 != null && view[0].Num2 != "null") { $("#number2input").val(view[0].Num2); } else { $("#number2input").val(''); }
-                        if(view[0].Num3 != null && view[0].Num3 != "null") { $("#number3input").val(view[0].Num3); } else { $("#number3input").val(''); }
-                        if(view[0].Num4 != null && view[0].Num4 != "null") { $("#number4input").val(view[0].Num4); } else { $("#number4input").val(''); }
-                        if(view[0].Num5 != null && view[0].Num5 != "null") { $("#number5input").val(view[0].Num5); } else { $("#number5input").val(''); }
+                        // if(view[0].Num1 != null && view[0].Num1 != "null") { $("#number1input").val(view[0].Num1); } else { $("#number1input").val(''); }
+                        // if(view[0].Num2 != null && view[0].Num2 != "null") { $("#number2input").val(view[0].Num2); } else { $("#number2input").val(''); }
+                        // if(view[0].Num3 != null && view[0].Num3 != "null") { $("#number3input").val(view[0].Num3); } else { $("#number3input").val(''); }
+                        // if(view[0].Num4 != null && view[0].Num4 != "null") { $("#number4input").val(view[0].Num4); } else { $("#number4input").val(''); }
+                        // if(view[0].Num5 != null && view[0].Num5 != "null") { $("#number5input").val(view[0].Num5); } else { $("#number5input").val(''); }
 
                         $sigdiv.jSignature("importData", view[0].signature);
 
@@ -532,12 +532,12 @@ app.localization.registerView('formDetailView');
             document.getElementById("status_not_ok").checked = false;
             document.getElementById("status_ok").checked = false;
             document.getElementById("status_NA").checked = false;
-            document.getElementById("pc_ok").checked = false;
-            document.getElementById("pc_not_ok").checked = false;
-            document.getElementById("pc_normal").checked = false;
-            document.getElementById("pc_not_normal").checked = false;
+            // document.getElementById("pc_ok").checked = false;
+            // document.getElementById("pc_not_ok").checked = false;
+            // document.getElementById("pc_normal").checked = false;
+            // document.getElementById("pc_not_normal").checked = false;
             $("#checkComments").val('');
-            $("#addCapturePhotoForm").css("color", "black");
+            // $("#addCapturePhotoForm").css("color", "black");
             $('#signature').jSignature('clear');
             // app.mobileApp.navigate('#:back');
             /// end add model cancel
@@ -582,8 +582,8 @@ app.localization.registerView('formDetailView');
             function saveModel(data) {
                 /// start add form data save
                 var listStatus = app.formDetailView.formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.getPicklist_status().response.picklistData;
-                var listOkNotOK1 = app.formDetailView.formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.getPicklist_OkNotOK1().response.picklistData;
-                var listNormal1 = app.formDetailView.formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.getPicklist_Normal1().response.picklistData;
+                // var listOkNotOK1 = app.formDetailView.formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.getPicklist_OkNotOK1().response.picklistData;
+                // var listNormal1 = app.formDetailView.formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.getPicklist_Normal1().response.picklistData;
                 
                 for(var i=0; i < listStatus.length; i++) {
                     if($("#status_ok").is(':checked')) {
@@ -606,56 +606,56 @@ app.localization.registerView('formDetailView');
                     }
                 }
 
-                if(itemData.ShowText1 == true) { addModel.Text1 = $("#text1input").val(); }
-                if(itemData.ShowText2 == true) { addModel.Text2 = $("#text2input").val(); }
-                if(itemData.ShowText3 == true) { addModel.Text3 = $("#text3input").val(); }
-                if(itemData.ShowText4 == true) { addModel.Text4 = $("#text4input").val(); }
-                if(itemData.ShowText5 == true) { addModel.Text5 = $("#text5input").val(); }
+                // if(itemData.ShowText1 == true) { addModel.Text1 = $("#text1input").val(); }
+                // if(itemData.ShowText2 == true) { addModel.Text2 = $("#text2input").val(); }
+                // if(itemData.ShowText3 == true) { addModel.Text3 = $("#text3input").val(); }
+                // if(itemData.ShowText4 == true) { addModel.Text4 = $("#text4input").val(); }
+                // if(itemData.ShowText5 == true) { addModel.Text5 = $("#text5input").val(); }
 
-                if($("#number1input").val() > 9999999999 || $("#number2input").val() > 9999999999 || $("#number3input").val() > 9999999999 ||
-                $("#number4input").val() > 9999999999 || $("#number5input").val() > 9999999999) {
-                    alert("Invalid Number");
-                }
+                // if($("#number1input").val() > 9999999999 || $("#number2input").val() > 9999999999 || $("#number3input").val() > 9999999999 ||
+                // $("#number4input").val() > 9999999999 || $("#number5input").val() > 9999999999) {
+                //     alert("Invalid Number");
+                // }
 
-                if(itemData.ShowNum1 == true) { addModel.Num1 = $("#number1input").val(); }
-                if(itemData.ShowNum2 == true) { addModel.Num2 = $("#number2input").val(); }
-                if(itemData.ShowNum3 == true) { addModel.Num3 = $("#number3input").val(); }
-                if(itemData.ShowNum4 == true) { addModel.Num4 = $("#number4input").val(); }
-                if(itemData.ShowNum5 == true) { addModel.Num5 = $("#number5input").val(); }
+                // if(itemData.ShowNum1 == true) { addModel.Num1 = $("#number1input").val(); }
+                // if(itemData.ShowNum2 == true) { addModel.Num2 = $("#number2input").val(); }
+                // if(itemData.ShowNum3 == true) { addModel.Num3 = $("#number3input").val(); }
+                // if(itemData.ShowNum4 == true) { addModel.Num4 = $("#number4input").val(); }
+                // if(itemData.ShowNum5 == true) { addModel.Num5 = $("#number5input").val(); }
 
-                if(itemData.ShowOkNotOk1 == true) {
-                    for(var i=0; i < listOkNotOK1.length; i++) {
-                        if($("#pc_ok").is(':checked')) {
-                            if(listOkNotOK1[i].name == "OK") {
-                                addModel.OkNotOK1 = listOkNotOK1[i].id;
-                                break;
-                            }
-                        }
-                        else if($("#pc_not_ok").is(':checked')) {
-                            if(listOkNotOK1[i].name == "Not OK") {
-                                addModel.OkNotOK1 = listOkNotOK1[i].id;
-                                break;
-                            }
-                        }
-                    }
-                }
+                // if(itemData.ShowOkNotOk1 == true) {
+                //     for(var i=0; i < listOkNotOK1.length; i++) {
+                //         if($("#pc_ok").is(':checked')) {
+                //             if(listOkNotOK1[i].name == "OK") {
+                //                 addModel.OkNotOK1 = listOkNotOK1[i].id;
+                //                 break;
+                //             }
+                //         }
+                //         else if($("#pc_not_ok").is(':checked')) {
+                //             if(listOkNotOK1[i].name == "Not OK") {
+                //                 addModel.OkNotOK1 = listOkNotOK1[i].id;
+                //                 break;
+                //             }
+                //         }
+                //     }
+                // }
 
-                if(itemData.ShowNormal1 == true) {
-                    for(var i=0; i < listNormal1.length; i++) {
-                        if($("#pc_normal").is(':checked')) {
-                            if(listNormal1[i].name == "Normal") {
-                                addModel.Normal1 = listNormal1[i].id;
-                                break;
-                            }
-                        }
-                        else if($("#pc_not_normal").is(':checked')) {
-                            if(listNormal1[i].name == "Not Normal") {
-                                addModel.Normal1 = listNormal1[i].id;
-                                break;
-                            }
-                        }
-                    }
-                }
+                // if(itemData.ShowNormal1 == true) {
+                //     for(var i=0; i < listNormal1.length; i++) {
+                //         if($("#pc_normal").is(':checked')) {
+                //             if(listNormal1[i].name == "Normal") {
+                //                 addModel.Normal1 = listNormal1[i].id;
+                //                 break;
+                //             }
+                //         }
+                //         else if($("#pc_not_normal").is(':checked')) {
+                //             if(listNormal1[i].name == "Not Normal") {
+                //                 addModel.Normal1 = listNormal1[i].id;
+                //                 break;
+                //             }
+                //         }
+                //     }
+                // }
 
                 addModel.Comments = $("#checkComments").val();
                 addModel.signature = $("#signature").jSignature("getData");
@@ -671,43 +671,43 @@ app.localization.registerView('formDetailView');
                 //dataSource.one('change', function(e) {
                 dataSourceChecks.add(addModel);
                 dataSourceChecks.one('change', function(e) {
-                    var imagefile = $('#addCapturePhotoFormImg').attr('src');
-                    if(imagefile) {
-                         var options = new FileUploadOptions();
-                        var imageObj = $.parseJSON(current.image) 
-                        options.fileKey = "fileContents";
-                        options.fileName = "image";
-                        if (cordova.platformId == "android") {
-                            options.fileName += ".jpeg"
-                        }
-                        options.mimeType = "image/jpeg";
-                        options.params = {};  // if we need to send parameters to the server request 
-                        options.headers = {
-                            Connection: "Close"
-                        };
-                        options.chunkedMode = false;
-                        var ft = new FileTransfer();
-                        var urlRB = formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.url + imageObj.src + "?objName=" + formDetailViewModel._jsdoOptionsChecks.name;
+                    // var imagefile = $('#addCapturePhotoFormImg').attr('src');
+                    // if(imagefile) {
+                    //      var options = new FileUploadOptions();
+                    //     var imageObj = $.parseJSON(current.image) 
+                    //     options.fileKey = "fileContents";
+                    //     options.fileName = "image";
+                    //     if (cordova.platformId == "android") {
+                    //         options.fileName += ".jpeg"
+                    //     }
+                    //     options.mimeType = "image/jpeg";
+                    //     options.params = {};  // if we need to send parameters to the server request 
+                    //     options.headers = {
+                    //         Connection: "Close"
+                    //     };
+                    //     options.chunkedMode = false;
+                    //     var ft = new FileTransfer();
+                    //     var urlRB = formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.url + imageObj.src + "?objName=" + formDetailViewModel._jsdoOptionsChecks.name;
                     
-                        ft.upload(
-                            imagefile,
-                            encodeURI(urlRB),
-                            onFileUploadSuccess( ),
-                            onFileTransferFail,
-                            options,
-                            true);
-                    }
+                    //     ft.upload(
+                    //         imagefile,
+                    //         encodeURI(urlRB),
+                    //         onFileUploadSuccess( ),
+                    //         onFileTransferFail,
+                    //         options,
+                    //         true);
+                    // }
 
                     document.getElementById("status_ok").checked = false;
                     document.getElementById("status_not_ok").checked = false;
                     document.getElementById("status_NA").checked = false;
 
-                    document.getElementById("pc_ok").checked = false;
-                    document.getElementById("pc_not_ok").checked = false;
-                    document.getElementById("pc_normal").checked = false;
-                    document.getElementById("pc_not_normal").checked = false;
+                    // document.getElementById("pc_ok").checked = false;
+                    // document.getElementById("pc_not_ok").checked = false;
+                    // document.getElementById("pc_normal").checked = false;
+                    // document.getElementById("pc_not_normal").checked = false;
 
-                    $("#addCapturePhotoForm").css("color", "black");
+                    // $("#addCapturePhotoForm").css("color", "black");
 
                     app.elementDetailView.elementDetailViewModel.change_Percent = true;
                     app.elementDetailView.elementDetailViewModel.QC_click_flag = true;

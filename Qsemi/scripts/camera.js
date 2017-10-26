@@ -83,6 +83,10 @@ cameraApp.prototype = {
         }
         else if (document.getElementById(capturedPhoto).style.color == "red") {
             var popImg = "#" + capturedPhoto + "Pop";
+            // if(cordova.platformId == "android") {
+            //     alert("android")
+            //     document.getElementById(capturedPhoto + "Img").css("transform","rotate(90deg)");
+            // }
             $(popImg).kendoMobileModalView("open");
         }
     },
