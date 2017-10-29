@@ -1,14 +1,15 @@
 <div data-role="view" data-title="Details" data-model="app.elementDetailView.elementDetailViewModel" data-bind="events: { show: detailsShow }" id="elementDetailViewModelScreen" class="screen screen--detail">
     <header data-role="header" style="background-color: #351e45;">
-        <div data-role="navbar" class="header-text" style="background-color: #00c853; box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5)">
-            <a data-role="backbutton" data-align="left" data-bind="buttonText: strings.buttonsText.back"></a>
+        <div data-role="navbar" class="header-text" style="background-color: #00c853; box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3)">
+            <a data-icon="home" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
             <span id="elementDetaileDetailsTitle"></span>
-            <a id="editGeneralDetailsButtom" data-role="button" data-align="right" data-bind="events: { click: genearalDetailsEditClick }"></a>
+            <a id="editGeneralDetailsButtom" data-role="button" data-align="right" data-bind="events: { click: genearalDetailsEditClick }, buttonText: strings.buttonsText.edit" style="background-color:#00c853; border:none;"></a>
+            <a id="saveGeneralDetailsButtom" data-role="button" data-align="right" data-bind="events: { click: genearalDetailsSaveClick }, buttonText: strings.buttonsText.save" style="background-color:#00c853; border:none;"></a>
             <!--<span data-bind="text: currentItem['name']"></span>-->
         </div>
         <div style="background-color: #351e45;">
             <br/>
-            <br/>
+            <!--<br/>-->
             <center>
                 <span style="color: white; font-weight: bold;" data-bind="html: currentItem.name"></span>
                 <br />
@@ -16,7 +17,7 @@
                 <span id="elementStep" style="color: #808080; font-weight: bold;"></span>
                 <!--<span style="color: white;" data-bind="html: currentItem.name"></span><span style="color: #e9eaeb;"> - element step</span>-->
             </center>
-            <br/>
+            <!--<br/>-->
             <!--<table style="width: 100%;">
                 <tr>
                     <td style="width: 50%;">
@@ -27,7 +28,7 @@
                     </td>
                 </tr>
             </table>-->
-            <div data-role="tabstrip" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);">
+            <div data-role="tabstrip" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4); margin-top:2%;">
                 <a id="defaultOpen" style="font-size: 16px; font-weight: bold; background-color: #351e45; z-index:999; box-shadow:none;" onclick="openDetails()" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.elementDetails.generalDetails"></a>
                 <a id="QC_Button" style="font-size: 16px; font-weight: bold; background-color: #351e45; z-index:999;" onclick="openQC()" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.elementDetails.qc"></a>
             </div>
@@ -72,7 +73,8 @@
                     <table style="width: 100%;">
                         <tr>
                             <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.lastUpdateDate.title"></span></span></td>
-                            <td style="width: 35%;"><span data-bind="html: currentItem.LastUpdateDate"></span></td>
+                            <!--<td style="width: 35%;"><span data-bind="html: currentItem.LastUpdateDate"></span></td>-->
+                            <td style="width: 35%;"><span id="LastUpdateDateElem"></span></td>
                         </tr>
                     </table>
                 </li>

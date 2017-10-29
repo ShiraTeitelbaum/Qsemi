@@ -60,6 +60,39 @@
 
             bootstrap();
         }, false);
+        
+        document.addEventListener('resume', function() {
+            if(app.generalMapView.generalMapViewModel.gmapFlag == true) {
+                // alert("gmapFlag")
+                 cordova.plugins.diagnostic.isLocationAvailable(function(available){
+                    // alert("Location is " + (available ? "available" : "not available"));
+                    if(available == false) {
+                        alert("Location is not available")
+                        cordova.plugins.diagnostic.switchToLocationSettings();
+                    }
+                    else if(available == true && cordova.platformId == "ios") {
+                        app.generalMapView.generalMapViewModel.loadMap();
+                    }
+                }, function(error){
+                    alert("The following error occurred: "+error);
+                });
+            }
+            if(app.elementLocationMaps.elementLocationMapsModel.emapFlag == true) {
+                // alert("emapFlag")
+                cordova.plugins.diagnostic.isLocationAvailable(function(available){
+                    // alert("Location is " + (available ? "available" : "not available"));
+                    if(available == false) {
+                        alert("Location is not available")
+                        cordova.plugins.diagnostic.switchToLocationSettings();
+                    }
+                    else if(available == true && cordova.platformId == "ios") {
+                        app.elementLocationMaps.elementLocationMapsModel.loadMap();
+                    }
+                }, function(error){
+                    alert("The following error occurred: "+error);
+                });
+            }
+        }, false)
     } else {
         bootstrap();
     }

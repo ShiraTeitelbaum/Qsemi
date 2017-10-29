@@ -1,34 +1,61 @@
 <div data-role="view" data-title="View" data-layout="main" data-model="app.projectDetailView" data-show="app.projectDetailView.onShow" data-after-show="app.projectDetailView.afterShow" id="projectDetailViewScreen" class="screen">
     <header data-role="header">
-        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5)">
+        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3)">
 
             <center><span data-bind="text: strings.projectDetailView.title"></span></center>
 
             <!--<a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>-->
-            <a data-role="button" data-align="right" onclick="app.projectDetailView.projectDetailViewModel.logoutClick()" data-icon="logOutNew" style="color:white; background-color: transparent; border: 0;"></a>
+            <a data-role="button" data-rel="popover" href="#popover-hbar1" data-align="right"  data-position="end" data-icon="hbar-button" style="background-color:#00c853; border:none;"></a>
+            <!--<a data-role="button" data-align="right" onclick="app.projectDetailView.projectDetailViewModel.logoutClick()" data-icon="logOutNew" style="color:white; background-color: transparent; border: 0;"></a>-->
         </div>
     </header>
 
+    <div data-role="popover" id="popover-hbar1" data-popup='{"height":"30", "width":"150"}' style="border:none">
+        <div data-role="view" data-model="app.projectDetailView">
+            <ul data-role="listview" style="list-style:none; background-color:#F4F4F4;">
+                <li style="padding: 1.5px;">
+                    <a style="background-color:transparent;" class="version" >
+                        <span style="background-color:transparent;font-size:medium;">  
+                            <span>Version</span> 
+                        </span> 
+                    </a>
+                </li>
+                <li style="padding: 1.5px;">
+                    <a style="background-color:transparent;" data-role="button" onclick="app.projectDetailView.projectDetailViewModel.logoutClick()" data-align="left" data-icon="logOutNew" data-position="end" > 
+                        <span style="background-color:transparent;font-size:mediun;">  
+                            <span>Log Out</span> 
+                        </span> 
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
     <!-- START_CUSTOM_CODE_projectDetailView -->
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
-
+    <div style="background-color: white;">
+        <center>
+            <ul id="listOfProject2"  data-role="listview" data-auto-bind="false" data-style="none" data-template="projectDetailViewModelTemplate" data-bind="source: projectDetailViewModel.dataSource, events: {click: projectDetailViewModel.itemClick}"
+            data-pull-to-refresh="false" data-endless-scroll="false" style="overflow-x:hidden; padding-top: 2em;"></ul>
+        </center>
+    </div>
     <!-- END_CUSTOM_CODE_projectDetailView -->
-    <ul class="masterDetailView grid noSeparators cols-3" data-role="listview" data-auto-bind="false" data-style="inset" data-template="projectDetailViewModelTemplate" data-bind="source: projectDetailViewModel.dataSource, events: {click: projectDetailViewModel.itemClick}"
-    data-pull-to-refresh="false" data-endless-scroll="false">
-    </ul>
-
 
     <!-- START_CUSTOM_CODE_projectDetailViewModel -->
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
 
     <!-- END_CUSTOM_CODE_projectDetailViewModel -->
     <script type="text/x-kendo-template" id="projectDetailViewModelTemplate">
-        <div class="image-with-text ">
+        <div class="locationProj" id="listOfProject">
             # data = app.projectDetailView.projectDetailViewModel.fixHierarchicalData(data); #
 
-            <img src="#: data['LocationImage_URLUrl'] #">
-            <h3>#: data['LocationName'] #</h3>
+            <img src="#= data['LocationImage_URL'] #" alt="#: LocationName # image" />
+           
+            <center>
+                <label style="top:5.5em;color:black;font-size:4vw;">
+                    #: data['LocationName'] #
+                </label>
+            </center>
 
         </div>
     </script>

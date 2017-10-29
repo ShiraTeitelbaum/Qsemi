@@ -1,6 +1,6 @@
 <div data-role="view" data-title="View" data-layout="main" data-model="app.formDetailView" data-show="app.formDetailView.onShow" data-after-show="app.formDetailView.afterShow" id="formDetailViewScreen" class="screen">
     <header data-role="header">
-        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);">
+        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);">
 
             <!--<span data-bind="text: strings.formDetailView.title"></span>-->
             <span id="formNameCheckList"></span>
@@ -8,7 +8,7 @@
             <!--<a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>-->
 
             <!--<a data-role="button" data-align="right" data-bind="events: { click: formDetailViewModel.addClick }">Add</a></div>-->
-            <a data-role="backbutton" data-align="left" data-bind="buttonText: strings.buttonsText.back"></a>
+            <a data-icon="home" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
     </header>
 
 
@@ -19,15 +19,65 @@
     <div class="details-content screen__content screen__content--details" style="overflow-x:hidden; background-color: #e9eaeb; width: 100%; height: 100%;">
         <br/>
         <br/>
-        <!--data-bind="events: {click: openMap}"-->
-         <div id="surveyor" style="border-bottom: 1px solid #e9eaeb; background-color: white; width: 100%;" onclick="app.formDetailView.addItemViewModel.openMap()" >
+         <!--<div id="surveyor" style="border-bottom: 1px solid #e9eaeb; background-color: white; width: 100%;" onclick="app.formDetailView.addItemViewModel.openMap()" >
             <img src="images/getLocationIcon.png" style="height: 24px; width: 24px; margin-left: 2%; margin-top:3%;" />
             <a id="ChooseLocationOnMap" style="margin-bottom: 300px;">Get Element Location</a>
             <br/>
             <br/>
+        </div>-->
+        <div style="background-color: white; width: 100%;">
+            <div style="border-bottom: 1px solid #e9eaeb;">
+                <a id="addCapturePhoto" class="capturePhotoButtonClass" style="margin-bottom: 300px;margin-left: 2%;">Get Element Image</a>
+                <img src="images/cameraIcon.png" style="height: 24px; width: 24px; margin-left: 48%; margin-top:4%;" />
+                <br/>
+                <br/>
+            </div>
         </div>
+        <div data-role="modalview" id="addCapturePhotoPop" style="left:1px; width:95%; height:70%; background-color:#F4F4F4; ">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                    <div style="width:100%;">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="width:10%;">
+                                    <a data-role="button" onclick="app.formDetailView.formDetailViewModel.closeAddPopUpImg()" style="color:black;margin-bottom:0%;border-radius:0;border:none; background-color:transparent;">X</a>
+                                </td>
+                                <td style="width:90%;">
+                                    <center>
+                                        <span data-bind="text: strings.stagesFormImg.title" style="font-size:large;"></span>
+                                    </center>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div data-role="content" style="background-color: transparent; margin-top: 2%;">
+                    <img id="addCapturePhotoImg" style="width: 100%; height:100%;" />
+                </div>
+                <div data-role="footer" style="margin-bottom:3%; margin-top:3%; background-color:transparent">
+                    <div style="width:100%; margin-bottom:2%;">
+                        <center>
+                            <a data-role="button" class="capturePhotoButtonClass" id="addCapturePhotoForm_" style="color:white;margin-bottom:0%;border-radius:0;">
+                                <span data-bind="text: strings.stagesFormImg.changePhoto"></span>
+                            </a>
+                            <a onclick="app.formDetailView.formDetailViewModel.saveAddPopUpImg()" data-role="button" style="color:white;margin-bottom:0%;border-radius:0;">
+                                <span data-bind="text: strings.buttonsText.save"></span>
+                            </a>
+                            <!--<a onclick="app.formDetailView.formDetailViewModel.closeAddPopUpImg()" data-role="button" style="color:white;margin-bottom:0%;border-radius:0;">
+                                <span data-bind="text: strings.stagesFormImg.close"></span>
+                            </a>-->
+                        </center>
+                    </div>
+                        
+                </div>
+            </div>
+        <!--data-bind="events: {click: openMap}"-->
+        
 
-        <ul class="masterDetailView list" data-role="listview" data-auto-bind="false" data-style="inset" data-template="formDetailViewModelTemplate" data-bind="source: formDetailViewModel.dataSource, events: {click: formDetailViewModel.itemClick}"
+        <ul id="formCheckList" class="masterDetailView list" data-role="listview" data-auto-bind="false" data-style="inset" data-template="formDetailViewModelTemplate" data-bind="source: formDetailViewModel.dataSource, events: {click: formDetailViewModel.itemClick}"
+        data-pull-to-refresh="false" data-endless-scroll="false" style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0; border-bottom: 1px solid #e9eaeb;">
+        </ul>
+
+        <ul id="coreCheckList" class="masterDetailView list" data-role="listview" data-auto-bind="false" data-style="inset" data-template="coreDetailViewModelTemplate" data-bind="source: formDetailViewModel.dataSourceCore, events: {click: formDetailViewModel.itemCoreClick}"
         data-pull-to-refresh="false" data-endless-scroll="false" style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0; border-bottom: 1px solid #e9eaeb;">
         </ul>
 
@@ -41,6 +91,13 @@
             <div>
                 <h3>#: data['name'] #</h3>
                 <span>#: data['Description'].substring(0, 65) #</span><span>...</span>
+            </div>
+        </script>
+
+        <script type="text/x-kendo-template" id="coreDetailViewModelTemplate">
+            # data = app.formDetailView.formDetailViewModel.fixHierarchicalData(data); #
+            <div>
+                <h3>#: data['name'] #</h3>
             </div>
         </script>
         <!-- <table>

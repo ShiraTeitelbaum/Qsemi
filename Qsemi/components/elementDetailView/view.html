@@ -1,27 +1,54 @@
 <div data-role="view" data-title="View" data-layout="main" data-model="app.elementDetailView" data-show="app.elementDetailView.onShow" data-after-show="app.elementDetailView.afterShow" id="elementDetailViewScreen" class="screen">
     <header data-role="header" style="background-color: #351e45;">
-        <div data-role="navbar" class="header-text" style="background-color: #00c853; box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5)">
+        <div data-role="navbar" class="header-text" style="background-color: #00c853; box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3)">
 
             <!--<span data-bind="text: strings.elementDetailView.title"></span>-->
             <span id="elementDetailViewTitle"></span>
-            <a data-role="backbutton" data-align="left">Back</a>
+            <a data-icon="home" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
             <!--<a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>-->
+            <a data-role="button" data-rel="popover" href="#popover-hbar3" data-align="right"  data-position="end" data-icon="hbar-button" style="background-color:#00c853; border:none;"></a>
         </div>
         <br/>
-        <br/>
+        <!--<br/>-->
         <center>
             <span id="stageName" style="color: white; font-weight: bold;"></span>
             <!--<span style="color: white; font-size: 22px;">Step X</span>-->
         </center>
-        <br/>
-          <form class="km-filter-form custom-filter">
+        <!--<br/>-->
+          <form class="km-filter-form custom-filter" style="margin-top:2%;">
             <div class="km-filter-wrap">
                 <input id="search" type="search" placeholder="Search..." data-bind="events:{keyup: elementDetailViewModel.searchChange}">
             </div>
         </form>
     </header>
 
-
+    <div data-role="popover" id="popover-hbar3" data-popup='{"height":"30", "width":"150"}' style="border:none">
+        <div data-role="view" data-model="app.elementDetailView">
+            <ul data-role="listview" style="list-style:none; background-color:#F4F4F4;">
+                <li style="padding: 1.5px;">
+                    <a style="background-color:transparent;" class="version" >
+                        <span style="background-color:transparent;font-size:medium;">  
+                            <span>Version</span> 
+                        </span> 
+                    </a>
+                </li>
+                <li style="padding: 1.5px;">
+                    <a style="background-color:transparent;" class="projects" onclick="app.elementDetailView.elementDetailViewModel.goToProjects()">
+                        <span style="background-color:transparent;font-size:medium;">  
+                            <span>Projects</span> 
+                        </span> 
+                    </a>
+                </li>
+                <li style="padding: 1.5px;">
+                    <a style="background-color:transparent;" data-role="button" onclick="app.elementDetailView.elementDetailViewModel.logoutClick()" data-align="left" data-icon="logOutNew" data-position="end" > 
+                        <span style="background-color:transparent;font-size:mediun;">  
+                            <span>Log Out</span> 
+                        </span> 
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
     <!-- START_CUSTOM_CODE_elementDetailView -->
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
 
@@ -47,7 +74,7 @@
             <table style="width: 100%; height: 100%;">
                 <tr style="padding: 0; margin: 0;">
                     <td style="width: 80%;">
-                        <span style="font-size: 16px; margin-left: 5%;">#: data['name'] #</span>
+                        <span style="font-size: 16px; margin-left: 2%;">#: data['name'] #</span>
                     </td>
                     <td style="width: 10%;">
                     </td>

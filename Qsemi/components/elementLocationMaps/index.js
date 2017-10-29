@@ -214,6 +214,7 @@ app.localization.registerView('elementLocationMaps');
             pos: '',
             counter: 0,
             labelIndex : 0,
+            emapFlag: false,
             fixHierarchicalData: function(data) {
                 var result = {},
                     layout = {};
@@ -514,8 +515,25 @@ app.localization.registerView('elementLocationMaps');
     //                         ["Cancel","Later","Go"]);//buttons
     //                 });
     //             }
+    function dialog() {
+       cordova.plugins.diagnostic.isLocationAvailable(function(available){
+            // alert("Location is " + (available ? "available" : "not available"));
+            if(available == false) {
+                alert("Location is not available");
+                cordova.plugins.diagnostic.switchToLocationSettings();
+            }
+            // else if(available == true) {
+                elementLocationMapsModel.loadMap();
+            // }
+        }, function(error){
+            alert("The following error occurred: "+error);
+        });
+    }
     parent.set('onShow', function(e) {
+        elementLocationMapsModel.emapFlag = true;
         //  navigator.geolocation.getCurrentPosition(function(position){},calldialog());
+        dialog();
+
         var param = e.view.params.filter ? JSON.parse(e.view.params.filter) : null,
             isListmenu = false,
             backbutton = e.view.element && e.view.element.find('header [data-role="navbar"] .backButtonWrapper'),
@@ -548,7 +566,7 @@ app.localization.registerView('elementLocationMaps');
                 dataSource.one('change', setupMapView);
                 fetchFilteredData(param);
 
-                elementLocationMapsModel.loadMap();
+                // elementLocationMapsModel.loadMap();
             });
         /*} else {
             fetchFilteredData(param);

@@ -1,26 +1,3 @@
-/*#signatureEX img{ display: none !important; }
-#signatureCCAD img{ display: none !important; } 
-#signatureCI img{ display: none !important; } 
-#signatureCM img{ display: none !important; }
-#signatureCSACW img{ display: none !important; }
-#signatureC img{ display: none !important; }
-#signatureCWL img{ display: none !important; } 
-#signatureCP img{ display: none !important; }
-#signatureCW img{ display: none !important; }
-#signatureD img{ display: none !important; }
-#signatureEB img{ display: none !important; }
-#signatureGA img{ display: none !important; }
-#signatureMWL img{ display: none !important; }
-#signatureP img{ display: none !important; } 
-#signaturePSDTP img{ display: none !important; }
-#signaturePo img{ display: none !important; }
-#signatureR img{ display: none !important; }
-#signatureRWSC img{ display: none !important; }
-#signatureRWD img{ display: none !important; }
-#signatureRWL1 img{ display: none !important; }
-#signatureRWL2 img{ display: none !important; }
-#signatureTRCIC img{ display: none !important; }*/
-
 #signatureS img{ display: none !important; }
 #signature img{ display: none !important; }
 
@@ -777,6 +754,17 @@ Fields
     content: '\e30a';
     zoom: 115%;
 }
+
+#kendoUiMobileApp .km-hbar-button:after,
+#kendoUiMobileApp .km-hbar-button:before {
+    content: '\e0f1';
+}
+
+#kendoUiMobileApp .km-home:after,
+#kendoUiMobileApp .km-home:before {
+    content: '\e0af';
+}
+
 
 /* Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes */
 

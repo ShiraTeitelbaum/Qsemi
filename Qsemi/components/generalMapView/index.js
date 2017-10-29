@@ -213,6 +213,7 @@ app.localization.registerView('generalMapView');
             infoWindow: '',
             pos: '',
             elements: [],
+            gmapFlag: false,
             fixHierarchicalData: function(data) {
                 var result = {},
                     layout = {};
@@ -502,8 +503,9 @@ app.localization.registerView('generalMapView');
 
     function dialog() {
        cordova.plugins.diagnostic.isLocationAvailable(function(available){
-            alert("Location is " + (available ? "available" : "not available"));
+            // alert("Location is " + (available ? "available" : "not available"));
             if(available == false) {
+                alert("Location is not available");
                 cordova.plugins.diagnostic.switchToLocationSettings();
             }
             // else if(available == true) {
@@ -516,6 +518,7 @@ app.localization.registerView('generalMapView');
     
     parent.set('onShow', function(e) {
         //  navigator.geolocation.getCurrentPosition(function(position){generalMapViewModel.loadMap();}, dialog());
+        generalMapViewModel.gmapFlag = true;
         dialog();
                 
         var param = e.view.params.filter ? JSON.parse(e.view.params.filter) : null,

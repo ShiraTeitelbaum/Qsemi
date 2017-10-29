@@ -1,12 +1,17 @@
 <div data-role="view" data-title="Add" data-model="app.formDetailView.addItemViewModel" data-bind="events: { show: onShow, init: onInit }" id="formDetailViewModelAddScreen" class="screen screen--add add-item-view">
     <header data-role="header">
-        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);">
+        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);">
             <!--<span data-bind="text: strings.formDetailView.formDetailViewModel.addScreenHeaderValue"></span>-->
             <span id="checkName"></span> <!-- data-bind="text: itemData['name']" -->
             <a data-role="backbutton" data-align="left" data-bind="events: { click: onCancel }, buttonText: strings.buttonsText.cancel"></a>
             <!--<a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }">Save</a>-->
         </div>
     </header>
+    <footer data-role="footer">
+        <center>
+            <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }" style="border-radius: 0; width: 100%;">Save</a>
+        </center>
+    </footer>
     <!-- START_CUSTOM_CODE_formDetailViewModel -->
     <!-- END_CUSTOM_CODE_formDetailViewModel -->
     <div id="editableListForm163" class="form-view screen__content screen__content--form" style="overflow-x:hidden;  background-color: #e9eaeb; height:100%;">
@@ -144,12 +149,12 @@
                 </li>-->
 
                
-                <li id="processControlImage" style="border:none;">
+                <!--<li id="processControlImage" style="border:none;">
                     <a >
                         <img src="images/cameraIcon.png" style="height: 21px; width: 21px; margin-top:3%;" />
                         <span class="capturePhotoButtonClass" id="addCapturePhotoForm">Add Image</span>
                     </a>
-                </li>
+                </li>-->
 
                 <li style="border:none;border-bottom: 1px dashed #e9eaeb;;border-top: 1px dashed #e9eaeb;">
                     <span data-bind="text: strings.stagesFormComments.title" style="text-align: left;"></span>
@@ -157,7 +162,7 @@
                 </li>
                 <li style="border:none;">
                     <!--<span data-bind="text: strings.stagesFormSignature.title"></span>-->
-                    <a data-icon="km-signatureNew" data-bind="events:{click: openSignaturePopUp}, text: strings.stagesFormSignature.title"></a>
+                    <a data-icon="signatureNew" data-bind="events:{click: openSignaturePopUp}, text: strings.stagesFormSignature.title"></a>
                     <br />
                     <!--<a id="Reset" data-bind="text: strings.stagesFormSignature.clear" style="margin-left:65%; border-radius: 0; height: 20px; width: 120px; padding: 0;"></a>
                     <br/>
@@ -170,16 +175,16 @@
                         </label>
                     </div>-->
                 </li>
-                <li style="border:none;">
+                <!--<li style="border:none;">
                     <center>
                         <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }" style="border-radius: 0; width: 100%;">Save</a>
                     </center>
-                </li>
+                </li>-->
             </ul>
             
             <!--<div data-role="modalview" id="signaturePopUp" style="width:95%; height:40%; background-color:white; display:none; left:1px;  
             border: 2px solid rgba(11, 61, 2, 0.729412); box-shadow: rgba(0, 0, 0, 0.109804) 3px 5px 2px 5px, rgba(4, 56, 8, 0.619608) 1px 1px 8px 2px;">-->
-            <div data-role="modalview" id="signaturePopUp" style="left:1px; width:95%; height:36%; background-color:#F4F4F4; border: 1px solid rgba(0, 200, 83, 0.729412);">
+            <div data-role="modalview" id="signaturePopUp" style="left:1px; width:95%; height:36%; background-color:#F4F4F4;">
                 <!--<div style="width:100%;">
                     <span data-bind="text: strings.stagesFormSignature.title"></span>
                 </div>-->
@@ -213,15 +218,12 @@
                 </footer>
             </div>
 
-            <div data-role="modalview" id="addCapturePhotoFormPop" style="left:1px; width:95%; height:70%; background-color:#F4F4F4; border: 1px solid rgba(0, 200, 83, 0.729412);">
+            <!--<div data-role="modalview" id="addCapturePhotoFormPop" style="left:1px; width:95%; height:70%; background-color:#F4F4F4; border: 1px solid rgba(0, 200, 83, 0.729412);">
                 <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
                     <div style="width:100%;">
                         <center>
                             <span data-bind="text: strings.stagesFormImg.title" style="font-size:large;"></span>
                         </center>
-                        <!--<a data-bind="events:{click:closeAddPopUpImgForm}" data-role="button" style="border-radius:0; margin-left:80%;">
-                            <span data-bind="text: strings.stagesFormImg.close"></span>
-                        </a>-->
                     </div>
                 </div>
                 <div data-role="content" style="background-color: transparent; margin-top: 2%;">
@@ -240,7 +242,7 @@
                     </div>
                         
                 </div>
-            </div>
+            </div>-->
 
         <!-- START_CUSTOM_CODE_editableListForm163 -->
         <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->

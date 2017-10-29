@@ -14,6 +14,15 @@ app.localization.registerView('elementDetailView');
     var dataProvider = app.data.qcsemidataProvider,
         /// start global model properties
         current,
+         processImage = function(img) {
+
+            if (!img) {
+                var empty1x1png = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgYAAAAAMAASDVlMcAAAAASUVORK5CYII=';
+                img = 'data:image/png;base64,' + empty1x1png;
+            }
+
+            return img;
+        },
         /// end global model properties
         fetchFilteredData = function(paramFilter, searchFilter) {
             var model = parent.get('elementDetailViewModel'),
@@ -64,7 +73,58 @@ app.localization.registerView('elementDetailView');
             name: 'Steps',
             autoFill: false
         },
+        jsdoOptionsGallery = {
+            name: 'ElementGallery',
+            autoFill: false
+        },
         dataSourceOptions = {
+            type: 'jsdo',
+            transport: {},
+            requestEnd: function(e) {
+                var response = e.response;
+                var type = e.type;
+                //console.log(type); // displays "read"
+                //console.log(response);
+                /*if(type == "create")
+                {
+                    current = response;
+                    //updatedWorker = currentWorker;
+                }*/
+                 if(type == "update")
+                {
+                    current = response;
+                   
+                }
+            },
+            error: function(e) {
+                app.mobileApp.pane.loader.hide();
+                if (e.xhr) {
+                    var errorText = "";
+                    try {
+                        errorText = JSON.stringify(e.xhr);
+                    } catch (jsonErr) {
+                        errorText = e.xhr.responseText || e.xhr.statusText || 'An error has occurred!';
+                    }
+                    alert(errorText);
+                } else if (e.errorThrown) {
+                    alert(e.errorThrown);
+                }
+            },
+            schema: {
+                model: {
+                    fields: {
+                        'name': {
+                            field: 'name',
+                            defaultValue: ''
+                        },
+                    }
+                }
+            },
+            sort:{ field: "name", dir: "asc" },
+            serverFiltering: true,
+            serverSorting: true,
+        },
+        dataSourceOptionsGallery = {
             type: 'jsdo',
             transport: {},
             requestEnd: function(e) {
@@ -115,11 +175,13 @@ app.localization.registerView('elementDetailView');
         /// end data sources
         elementDetailViewModel = kendo.observable({
             _dataSourceOptions: dataSourceOptions,
+            _dataSourceOptionsGallery: dataSourceOptionsGallery,
             _jsdoOptions: jsdoOptions,
             _jsdoOptionsElementsType: jsdoOptionsElementsType,
             _jsdoOptionsForms: jsdoOptionsForms,
             _jsdoOptionsElementForms: jsdoOptionsElementForms,
             _jsdoOptionsSteps: jsdoOptionsSteps,
+            _jsdoOptionsGallery: jsdoOptionsGallery,
             marker: {},
             markers: [],
             dataSourceSteps: '',
@@ -128,6 +190,7 @@ app.localization.registerView('elementDetailView');
             stageList: '',
             page_scroller: '',
             formCheckListIds: [],
+            coreCheckListIds: [],
             QC_click_flag: false,
             change_Percent: false,
             surveyorFlag: false,
@@ -207,65 +270,101 @@ app.localization.registerView('elementDetailView');
 
                 return result;
             },
+            logoutClick: function() {
+                app.mobileApp.navigate('#components/authenticationView/view.html?logout=true');
+            },
+            goToProjects: function() {
+                app.mobileApp.navigate('#components/projectDetailView/view.html');
+            },
             itemClick: function(e) {
                 var dataItem = e.dataItem || elementDetailViewModel.originalItem;
                 elementDetailViewModel.QC_click_flag = false;
                 elementDetailViewModel.surveyorFlag = false;
                 elementDetailViewModel.change_Percent = false;
+                
                 app.mobileApp.navigate('#components/elementDetailView/details.html?uid=' + dataItem.uid);
 
             },
             elementStepClick: function(id) {
                 app.elementDetailView.elementDetailViewModel.surveyorFlag = false;
-                if(id == 0) {
-                     var jsdoOptionsElemForms = elementDetailViewModel.get('_jsdoOptionsElementForms'),
-                        jsdoElemForms = new progress.data.JSDO(jsdoOptionsElemForms);
-                    dataSourceOptions.transport.jsdo = jsdoElemForms;
-                    var dataSource = new kendo.data.DataSource(dataSourceOptions);
+                // if(id == 0) {
+                //     app.elementLocationMaps.elementLocationMapsModel.emapFlag = false;
+                //      var jsdoOptionsElemForms = elementDetailViewModel.get('_jsdoOptionsElementForms'),
+                //         jsdoElemForms = new progress.data.JSDO(jsdoOptionsElemForms);
+                //     dataSourceOptions.transport.jsdo = jsdoElemForms;
+                //     var dataSource = new kendo.data.DataSource(dataSourceOptions);
 
-                    dataSource.filter({
-                        logic: "and",
-                        filters: [
-                            { field: "R365596097", operator: "==", value: elementDetailViewModel.currentItem.id },
-                            { field: "stageNum", operator: "==", value: 0 }
-                        ]
-                    });
+                //     dataSource.filter({
+                //         logic: "and",
+                //         filters: [
+                //             { field: "R365596097", operator: "==", value: elementDetailViewModel.currentItem.id },
+                //             { field: "stageNum", operator: "==", value: 0 }
+                //         ]
+                //     });
 
-                    dataSource.fetch(function() {
-                        var dforms = dataSource.data();
+                //     dataSource.fetch(function() {
+                //         var dforms = dataSource.data();
+                //         var jsrow, jsrow2;
+                //         var form_id, form_name;
+                //         console.log("dforms")
+                //         console.log(dforms)
 
-                        var jsrow = jsdoElemForms.findById(dforms[0].id);
-                        var afterUpdateFn;
+                //         for(var i=0; i<dforms.length; i++) {
+                //             if(dforms[i].CoreData != 1) {
+                //                 jsrow = jsdoElemForms.findById(dforms[i].id);
+                //                 // jsrow.assign(dforms[i].id);
+                //                 form_id = dforms[i].id;
+                //                 form_name = dforms[i].name;
+                //             }
+                //             else if(dforms[i].CoreData == 1) {
+                //                 jsrow2 = jsdoElemForms.findById(dforms[i].id);
+                //                 // jsrow2.assign(dforms[i].id);
+                //             }
+                //         }
+                        
+                //         // console.log("jsrow")
+                //         // console.log(jsrow)
+                //         // console.log("jsrow2")
+                //         // console.log(jsrow2)
 
-                        jsrow.assign(dforms[0].id);
+                //         var afterUpdateFn;
+                //         jsrow.assign(jsrow.data.id);
+                //         // jsrow2.assign(jsrow2.data.id);
                             
-                        afterUpdateFn = function (jsdoElemForms, record, success, request) {
-                            jsdoElemForms.unsubscribe('afterUpdate', afterUpdateFn);
-                            if (success === true) {
-                                elementDetailViewModel.formCheckListIds = jsrow.data.R365599694;
+                //         afterUpdateFn = function (jsdoElemForms, record, success, request) {
+                //             jsdoElemForms.unsubscribe('afterUpdate', afterUpdateFn);
+                //             if (success === true) {
+                //                 elementDetailViewModel.formCheckListIds = jsrow.data.R365599694;
+                //                 // elementDetailViewModel.coreCheckListIds = jsrow2.data.R369426825;
+                //                 // console.log("jsrow.data")
+                //                 // console.log(jsrow.data)
+                //                 // console.log("jsrow2.data")
+                //                 // console.log(jsrow2.data)
                                 
-                                elementDetailViewModel.surveyorFlag = true;
+                //                 elementDetailViewModel.surveyorFlag = true;
                                                                         
-                                //app.mobileApp.navigate('#components/surveyorMarking/edit.html?elementUid=' + elementDetailViewModel.currentItem.uid+'&elementId='+elementDetailViewModel.currentItem.id);
-                                app.mobileApp.navigate('#components/formDetailView/view.html?formid='+dforms[0].id+'&formname='+dforms[0].name);
-                            } else {
-                                alert("error")
-                            }
-                        };
-                        jsdoElemForms.subscribe('afterUpdate', afterUpdateFn);
-                        jsdoElemForms.saveChanges();
-                    }); 
+                //                 //app.mobileApp.navigate('#components/surveyorMarking/edit.html?elementUid=' + elementDetailViewModel.currentItem.uid+'&elementId='+elementDetailViewModel.currentItem.id);
+                //                 app.mobileApp.navigate('#components/formDetailView/view.html?formid='+form_id+'&formname='+form_name+'&surveyorFlag=true'); //+'&coreFlag=true'
+                //             } else {
+                //                 alert("error")
+                //             }
+                //         };
+                //         jsdoElemForms.subscribe('afterUpdate', afterUpdateFn);
+                //         jsdoElemForms.saveChanges();
+                //     }); 
 
-                    // app.mobileApp.navigate('#components/surveyorMarking/edit.html?elementUid=' + this.currentItem.uid+'&elementId='+this.currentItem.id);
-                }
-                else
+                //     // app.mobileApp.navigate('#components/surveyorMarking/edit.html?elementUid=' + this.currentItem.uid+'&elementId='+this.currentItem.id);
+                // }
+                // else
                     app.mobileApp.navigate('#components/elementDetailView/stepFormList.html?stepid=' + id);
             },
             detailsShow: function(e) {
                 this.page_scroller = e.view.scroller;
                 elementDetaileDetailsTitle.innerHTML = sessionStorage.getItem("locationName");
                 elementStep.innerHTML = 'Step: ' + sessionStorage.getItem("stageName");
-                $("#spanEdit").hide();
+                $("#saveGeneralDetailsButtom").hide();
+                $("#spanBeforeEdit").hide();
+                $("#spanAfterEdit").hide();
                 if(e.view.params.mapFlag != undefined) {
                     var id = e.view.params.id,
                         stepnum = e.view.params.stepNum;
@@ -290,7 +389,7 @@ app.localization.registerView('elementDetailView');
                             dataSource.fetch(function() {
                                 var view = dataSource.data();
                                 elementDetailViewModel.setCurrentItemByUid(view[0].uid);
-
+                                document.getElementById("LastUpdateDateElem").innerHTML = kendo.toString(view[0].LastUpdateDate, "dd/MM/yyyy");
                                 if(this.QC_click_flag == true)
                                     document.getElementById("QC_Button").click();
                                 else document.getElementById("defaultOpen").click();
@@ -310,9 +409,10 @@ app.localization.registerView('elementDetailView');
                             
                     dataSource.fetch(function() {
                         var view = dataSource.data();
-                       
+                       console.log("view")
+                       console.log(view)
                         elementDetailViewModel.setCurrentItemByUid(view[0].uid);
-                        
+                        document.getElementById("LastUpdateDateElem").innerHTML = kendo.toString(view[0].LastUpdateDate, "dd/MM/yyyy");
                         if(elementDetailViewModel.QC_click_flag == true)
                             document.getElementById("QC_Button").click();
                         else document.getElementById("defaultOpen").click();
@@ -325,7 +425,7 @@ app.localization.registerView('elementDetailView');
                     
                     elementDetailViewModel.setCurrentItemByUid(uid);
                     /// start detail form show
-                    
+                    document.getElementById("LastUpdateDateElem").innerHTML = kendo.toString(itemModel.LastUpdateDate, "dd/MM/yyyy");
                     if(elementDetailViewModel.QC_click_flag == true)
                         document.getElementById("QC_Button").click();
                     else document.getElementById("defaultOpen").click();
@@ -333,20 +433,23 @@ app.localization.registerView('elementDetailView');
                 }
             },
             genearalDetailsEditClick: function(e) {
-                if(document.getElementById("editGeneralDetailsButtom").innerHTML == "Edit") {
-                    document.getElementById("editGeneralDetailsButtom").innerHTML = "Save";
+                    // document.getElementById("editGeneralDetailsButtom").innerHTML = "Save";
+                    $("#saveGeneralDetailsButtom").show();
+                    $("#editGeneralDetailsButtom").hide();
                     $("#spanBeforeLabel").hide();
                     $("#spanBeforeEdit").show();
                     $("#spanAfterLabel").hide();
                     $("#spanAfterEdit").show();
-                }
-                else if(document.getElementById("editGeneralDetailsButtom").innerHTML == "Save") {
-                    document.getElementById("editGeneralDetailsButtom").innerHTML = "Edit";
-                    $("#spanBeforeEdit").hide();
-                    $("#spanBeforeLabel").show();
-                    $("#spanAfterEdit").hide();
-                    $("#spanAfterLabel").show();
-                }
+            },
+            genearalDetailsSaveClick: function(e) {
+                elementDetailViewModel.page_scroller.reset();
+                // document.getElementById("editGeneralDetailsButtom").innerHTML = "Edit";
+                $("#saveGeneralDetailsButtom").hide();
+                $("#editGeneralDetailsButtom").show();
+                $("#spanBeforeEdit").hide();
+                $("#spanBeforeLabel").show();
+                $("#spanAfterEdit").hide();
+                $("#spanAfterLabel").show();
             },
             openQC1: function () {
                 this.QC_click_flag = true;
@@ -462,28 +565,106 @@ app.localization.registerView('elementDetailView');
                         console.log(dataSourceElemForms.data())
                     });
             },*/
+            // closeAddPopUpImg: function(e) {
+            //      $("#addCapturePhotoPop").kendoMobileModalView("close");
+            // },
+            // saveAddPopUpImg: function(e) {
+            //     var newElementGallery;
+            //      var jsdoOptionsGallery = elementDetailViewModel.get('_jsdoOptionsGallery'),
+            //             jsdoGallery = new progress.data.JSDO(jsdoOptionsGallery),
+            //             dataSourceOptionsGallery = elementDetailViewModel.get('_dataSourceOptionsGallery');
+            //         dataSourceOptionsGallery.transport.jsdo = jsdoGallery;
+            //     var dataSourceGallery = new kendo.data.DataSource(dataSourceOptionsGallery);
+
+            //     newElementGallery = {
+            //         R369676467: elementDetailViewModel.currentItem.id
+            //     };
+            //     var jsrow = jsdoGallery.add(newElementGallery);
+            //     var afterCreateFn;
+            //     afterCreateFn = function (jsdoGallery, record, success, request) {
+            //         jsdoGallery.unsubscribeAll('afterCreate', afterCreateFn);
+            //         if (success == true) {
+            //              var imagefile = $('#addCapturePhotoImg').attr('src');
+            //             if(imagefile) {
+            //                 var options = new FileUploadOptions();
+            //                 var imageObj = $.parseJSON(jsrow.data.image) 
+            //                 options.fileKey = "fileContents";
+            //                 options.fileName = "element_image";
+            //                 if (cordova.platformId == "android") {
+            //                     options.fileName += ".jpeg"
+            //                 }
+            //                 options.mimeType = "image/jpeg";
+            //                 options.params = {};  // if we need to send parameters to the server request 
+            //                 options.headers = {
+            //                     Connection: "Close"
+            //                 };
+            //                 options.chunkedMode = false;
+            //                 var ft = new FileTransfer();
+            //                 var urlRB = elementDetailViewModel._dataSourceOptionsGallery.transport.jsdo.url + imageObj.src + "?objName=" + elementDetailViewModel._jsdoOptionsGallery.name;
+                            
+            //                 ft.upload(
+            //                     imagefile,
+            //                     encodeURI(urlRB),
+            //                     onFileUploadSuccess( ),
+            //                     onFileTransferFail,
+            //                     options,
+            //                     true);
+            //             }
+            //         }
+            //     };
+            //     jsdoGallery.subscribe('afterCreate', afterCreateFn);
+            //     jsdoGallery.saveChanges();
+            // },
             stepFormsListShow: function(e) {
+                $("#coreDataTitle").hide();
+                $("#stageCores").hide();
                 var id = e.view.params.stepid;
-                var templateContent, template;
+                if(id == 0)
+                    $("#surveyor").show();
+                else 
+                    $("#surveyor").hide();
+                var templateContent, template, templateContentCore, templateCore;
                 //var step_id = id.substr(0, id.lastIndexOf(")"));
                 
                 templateContent = $("#formStageTemplate").html();
                 template = kendo.template(templateContent);
+                templateContentCore = $("#coreStageTemplate").html();
+                templateCore = kendo.template(templateContentCore);
                 
                 var dataSource = elementDetailViewModel.get('dataSourceElementForms')
                 dataSource.filter({
                      logic: "and",
                         filters: [
                             { field: "R365596097", operator: "==", value: elementDetailViewModel.currentItem.id },
-                            { field: "stageNum", operator: "==", value: id }
+                            { field: "stageNum", operator: "==", value: id }//,
+                            // { field: "CoreData", operator: "!=", value: true }
                             ]
                 });
                 dataSource.fetch(function() {
-                    var formsNames = dataSource.data();
-                    // console.log("formsNames")
-                    // console.log(formsNames)
+                    var forms = dataSource.data();
+                    var indexForm=0, indexCore=0;
+                    var formsNames=[], coresNames=[];
+                    // var formsNames = dataSource.data();
+                    // console.log("forms")
+                    // console.log(forms)
+                    for(var i=0; i<forms.length; i++) {
+                        if(forms[i].CoreData == 1) {
+                            coresNames[indexCore] = forms[i];
+                            indexCore++;
+                        }
+                        else {
+                            formsNames[indexForm] = forms[i];
+                            indexForm++;
+                        }
+                    }
                     var result = kendo.render(template, formsNames); //render the template
                     $("#stageForms").html(result); //append the result to the page
+                    if(indexCore != 0){
+                         var resultCores = kendo.render(templateCore, coresNames); //render the template
+                        $("#stageCores").html(resultCores); //append the result to the page
+                        $("#coreDataTitle").show();
+                        $("#stageCores").show();
+                    }
                 });
                 elementDetailViewModel.set('dataSourceElementForms',dataSource)
 
@@ -605,6 +786,42 @@ app.localization.registerView('elementDetailView');
                 }
                 return linkChunks[0] + this.get('currentItem.' + linkChunks[1]);
             },
+            openCoreStage: function(uid) {
+                var formUid = uid;
+
+                var dataSource = elementDetailViewModel.get('dataSourceElementForms'),
+                itemData = dataSource.getByUid(formUid),
+                fixedData = elementDetailViewModel.fixHierarchicalData(itemData);
+                
+                 var jsdoOptionsElemForms = elementDetailViewModel.get('_jsdoOptionsElementForms'),
+                        jsdoElemForms = new progress.data.JSDO(jsdoOptionsElemForms);
+                    dataSourceOptions.transport.jsdo = jsdoElemForms;
+                var dataSource = new kendo.data.DataSource(dataSourceOptions);
+
+                dataSource.filter({ field: "id", operator: "==", value: itemData.id });
+                dataSource.fetch(function() {
+                    var view = dataSource.data();
+                    
+                    var jsrow = jsdoElemForms.findById(itemData.id);
+                    var afterUpdateFn;
+
+                    jsrow.assign(itemData);
+                       
+                    afterUpdateFn = function (jsdoElemForms, record, success, request) {
+                        jsdoElemForms.unsubscribe('afterUpdate', afterUpdateFn);
+                        if (success === true) {
+                            elementDetailViewModel.coreCheckListIds = jsrow.data.R369426825;
+                            // console.log("jsrow")                                   
+                            // console.log(jsrow)
+                            app.mobileApp.navigate('#components/formDetailView/view.html?formid='+itemData.id+'&formname='+itemData.name+'&coreFlag=true');
+                        } else {
+                            alert("error")
+                        }
+                    };
+                    jsdoElemForms.subscribe('afterUpdate', afterUpdateFn);
+                    jsdoElemForms.saveChanges();
+                });
+            },
             openFormStage: function(uid) {
                 var formUid = uid;
 
@@ -630,8 +847,9 @@ app.localization.registerView('elementDetailView');
                         jsdoElemForms.unsubscribe('afterUpdate', afterUpdateFn);
                         if (success === true) {
                             elementDetailViewModel.formCheckListIds = jsrow.data.R365599694;
-                                   
-                            app.mobileApp.navigate('#components/formDetailView/view.html?formid='+itemData.id+'&formname='+itemData.name);
+                            // console.log("jsrow")
+                            // console.log(jsrow)    
+                            app.mobileApp.navigate('#components/formDetailView/view.html?formid='+itemData.id+'&formname='+itemData.name+'&coreFlag=false');
                         } else {
                             alert("error")
                         }
@@ -817,7 +1035,32 @@ app.localization.registerView('elementDetailView');
         // }
 
     });
+function onFileUploadSuccess() {
+        // alert("onFileUploadSuccess")
+        console.log("onFileUploadSuccess")
+         $("#addCapturePhoto").css("color", "black");
+        document.getElementById("addCapturePhotoImg").setAttribute("src", "");
+        $("#addCapturePhotoPop").kendoMobileModalView("close");
+    // sessionStorage.setItem("fileToUpload", "null");
+    // localStorage.setItem("fileName", "null");
+        /*window.plugins.toast.showWithOptions(
+            {
+            message: "התמונה עלתה בהצלחה",
+            duration: "short", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
+            position: "bottom",
+            addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+            }
+        );*/         
+    }
 
+function onFileTransferFail(error) {
+        console.log("FileTransfer Error:");
+        console.log(error)
+        console.log("Code: " + error.code);
+        console.log("Body:" + error.body);
+        console.log("Source: " + error.source);
+        console.log("Target: " + error.target);
+    }
 })(app.elementDetailView);
 
 // START_CUSTOM_CODE_elementDetailViewModel

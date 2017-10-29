@@ -61,6 +61,18 @@ app.localization.registerView('formDetailView');
             name: 'Check4',
             autoFill: false
         },
+        jsdoOptionsCore = {
+            name: 'CoreDataList',
+            autoFill: false
+        },
+         jsdoOptionsCoreChecks = {
+            name: 'CoreData',
+            autoFill: false
+        },
+         jsdoOptionsGallery = {
+            name: 'ElementGallery',
+            autoFill: false
+        },
         dataSourceOptions = {
             type: 'jsdo',
             transport: {},
@@ -153,13 +165,158 @@ app.localization.registerView('formDetailView');
             serverFiltering: true,
 
         },
+        dataSourceOptionsCoreChecks = {
+            type: 'jsdo',
+            transport: {},
+            requestEnd: function(e) {
+                var response = e.response;
+                var type = e.type;
+                //console.log(type); // displays "read"
+                //console.log(response);
+                if(type == "create")
+                {
+                    current = response;
+                    //updatedWorker = currentWorker;
+                }
+                 if(type == "update")
+                {
+                    current = response;
+                   
+                }
+            },
+            error: function(e) {
+                app.mobileApp.pane.loader.hide();
+                if (e.xhr) {
+                    var errorText = "";
+                    try {
+                        errorText = JSON.stringify(e.xhr);
+                    } catch (jsonErr) {
+                        errorText = e.xhr.responseText || e.xhr.statusText || 'An error has occurred!';
+                    }
+                    alert(errorText);
+                } else if (e.errorThrown) {
+                    alert(e.errorThrown);
+                }
+            },
+            schema: {
+                model: {
+                    fields: {
+                        'name': {
+                            field: 'name',
+                            defaultValue: ''
+                        },
+                    }
+                }
+            },
+            serverFiltering: true,
+
+        },
+        dataSourceOptionsCore = {
+            type: 'jsdo',
+            transport: {},
+            requestEnd: function(e) {
+                var response = e.response;
+                var type = e.type;
+                //console.log(type); // displays "read"
+                //console.log(response);
+                if(type == "create")
+                {
+                    current = response;
+                    //updatedWorker = currentWorker;
+                }
+                 if(type == "update")
+                {
+                    current = response;
+                   
+                }
+            },
+            error: function(e) {
+                app.mobileApp.pane.loader.hide();
+                if (e.xhr) {
+                    var errorText = "";
+                    try {
+                        errorText = JSON.stringify(e.xhr);
+                    } catch (jsonErr) {
+                        errorText = e.xhr.responseText || e.xhr.statusText || 'An error has occurred!';
+                    }
+                    alert(errorText);
+                } else if (e.errorThrown) {
+                    alert(e.errorThrown);
+                }
+            },
+            schema: {
+                model: {
+                    fields: {
+                        'name': {
+                            field: 'name',
+                            defaultValue: ''
+                        },
+                    }
+                }
+            },
+            serverFiltering: true,
+
+        },
+         dataSourceOptionsGallery = {
+            type: 'jsdo',
+            transport: {},
+            requestEnd: function(e) {
+                var response = e.response;
+                var type = e.type;
+                //console.log(type); // displays "read"
+                //console.log(response);
+                /*if(type == "create")
+                {
+                    current = response;
+                    //updatedWorker = currentWorker;
+                }*/
+                 if(type == "update")
+                {
+                    current = response;
+                   
+                }
+            },
+            error: function(e) {
+                app.mobileApp.pane.loader.hide();
+                if (e.xhr) {
+                    var errorText = "";
+                    try {
+                        errorText = JSON.stringify(e.xhr);
+                    } catch (jsonErr) {
+                        errorText = e.xhr.responseText || e.xhr.statusText || 'An error has occurred!';
+                    }
+                    alert(errorText);
+                } else if (e.errorThrown) {
+                    alert(e.errorThrown);
+                }
+            },
+            schema: {
+                model: {
+                    fields: {
+                        'name': {
+                            field: 'name',
+                            defaultValue: ''
+                        },
+                    }
+                }
+            },
+            sort:{ field: "name", dir: "asc" },
+            serverFiltering: true,
+            serverSorting: true,
+        },
         /// start data sources
         /// end data sources
         formDetailViewModel = kendo.observable({
             _dataSourceOptions: dataSourceOptions,
             _dataSourceOptionsChecks: dataSourceOptionsChecks,
+            _dataSourceOptionsCore: dataSourceOptionsCore,
+            _dataSourceOptionsCoreChecks: dataSourceOptionsCoreChecks,
+            _dataSourceOptionsGallery: dataSourceOptionsGallery,
             _jsdoOptions: jsdoOptions,
             _jsdoOptionsChecks: jsdoOptionsChecks,
+            _jsdoOptionsCore: jsdoOptionsCore,
+            _jsdoOptionsCoreChecks: jsdoOptionsCoreChecks,
+            _jsdoOptionsGallery: jsdoOptionsGallery,
             formName: '',
             formId: '',
             pageScroller: '',
@@ -214,6 +371,11 @@ app.localization.registerView('formDetailView');
 
                 return result;
             },
+            itemCoreClick: function(e) {
+                var dataItem = e.dataItem || formDetailViewModel.originalItem;
+                //app.mobileApp.navigate('#components/formDetailView/details.html?uid=' + dataItem.uid);
+                app.mobileApp.navigate('#components/formDetailView/addCoreData.html?uid=' + dataItem.uid);
+            },
             itemClick: function(e) {
                 var dataItem = e.dataItem || formDetailViewModel.originalItem;
                 //app.mobileApp.navigate('#components/formDetailView/details.html?uid=' + dataItem.uid);
@@ -235,6 +397,7 @@ app.localization.registerView('formDetailView');
                 formDetailViewModel.setCurrentItemByUid(uid);
 
                 /// start detail form show
+                alerT(111)
                 /// end detail form show
             },
             setCurrentItemByUid: function(uid) {
@@ -262,6 +425,57 @@ app.localization.registerView('formDetailView');
                 }
                 return linkChunks[0] + this.get('currentItem.' + linkChunks[1]);
             },
+            closeAddPopUpImg: function(e) {
+                $("#addCapturePhotoPop").kendoMobileModalView("close");
+            },
+            saveAddPopUpImg: function(e) {
+                var newElementGallery;
+                 var jsdoOptionsGallery = formDetailViewModel.get('_jsdoOptionsGallery'),
+                        jsdoGallery = new progress.data.JSDO(jsdoOptionsGallery),
+                        dataSourceOptionsGallery = formDetailViewModel.get('_dataSourceOptionsGallery');
+                    dataSourceOptionsGallery.transport.jsdo = jsdoGallery;
+                var dataSourceGallery = new kendo.data.DataSource(dataSourceOptionsGallery);
+
+                newElementGallery = {
+                    R369676467: app.elementDetailView.elementDetailViewModel.currentItem.id,
+                    R369888918: formDetailViewModel.formId
+                };
+                var jsrow = jsdoGallery.add(newElementGallery);
+                var afterCreateFn;
+                afterCreateFn = function (jsdoGallery, record, success, request) {
+                    jsdoGallery.unsubscribeAll('afterCreate', afterCreateFn);
+                    if (success == true) {
+                         var imagefile = $('#addCapturePhotoImg').attr('src');
+                        if(imagefile) {
+                            var options = new FileUploadOptions();
+                            var imageObj = $.parseJSON(jsrow.data.image) 
+                            options.fileKey = "fileContents";
+                            options.fileName = "element_image";
+                            if (cordova.platformId == "android") {
+                                options.fileName += ".jpeg"
+                            }
+                            options.mimeType = "image/jpeg";
+                            options.params = {};  // if we need to send parameters to the server request 
+                            options.headers = {
+                                Connection: "Close"
+                            };
+                            options.chunkedMode = false;
+                            var ft = new FileTransfer();
+                            var urlRB = formDetailViewModel._dataSourceOptionsGallery.transport.jsdo.url + imageObj.src + "?objName=" + formDetailViewModel._jsdoOptionsGallery.name;
+                            
+                            ft.upload(
+                                imagefile,
+                                encodeURI(urlRB),
+                                onFileUploadSuccess( ),
+                                onFileTransferFail,
+                                options,
+                                true);
+                        }
+                    }
+                };
+                jsdoGallery.subscribe('afterCreate', afterCreateFn);
+                jsdoGallery.saveChanges();
+            },
             /// start masterDetails view model functions
             /// end masterDetails view model functions
             currentItem: {}
@@ -283,6 +497,69 @@ app.localization.registerView('formDetailView');
                 'width': '300',
                 'height': '110'
                 }) // inits the jSignature widget. 
+        },
+        onShowCoreData: function(e) {
+            app.mobileApp.showLoading();
+            e.view.scroller.reset();
+            this.pageScroller = e.view.scroller;
+
+            var that = this,
+                itemUid = e.view.params.uid,
+                dataSource = formDetailViewModel.get('dataSourceCore'),
+                itemData = dataSource.getByUid(itemUid),
+                fixedData = formDetailViewModel.fixHierarchicalData(itemData);
+                
+                var dataSource = formDetailViewModel.get('dataSourceCoreChecks');
+                dataSource.filter({
+                    logic: "and",
+                    filters: [ 
+                        { field: "R369425614", operator: "==", value: itemData.id }, //checkList
+                        { field: "R369589302", operator: "==", value: formDetailViewModel.formId }, //dynamicForm
+                        { field: "LastUpdate", operator: "==", value: true }
+                        ]
+                });
+
+                dataSource.fetch(function() {
+                    var view = dataSource.data();
+                    // console.log("view")
+                    // console.log(view)
+                    if(view[0] != undefined) {
+                        var comments, data;
+
+                        if(view[0].Comments != "null") {
+                            comments = view[0].Comments;
+                        }  
+                        else {
+                            comments = '';
+                        }
+                       
+                       if(view[0].Data != "null") {
+                            data = view[0].Data;
+                        }  
+                        else {
+                            data = '';
+                        }
+
+                        that.set('itemData', itemData);
+                        that.set('addFormData', {
+                            Comments: comments,
+                            Data: data
+                            /// start add form data init
+                            /// end add form data init
+                        });
+                    }
+                    else {
+                        that.set('itemData', itemData);
+                        that.set('addFormData', {
+                            Comments: '',
+                            Data: ''
+                            /// start add form data init
+                            /// end add form data init
+                        });
+                    }
+                });
+                coreCheckName.innerHTML = formDetailViewModel.formName;
+            app.mobileApp.hideLoading();
         },
         onShow: function(e) {
             app.mobileApp.showLoading();
@@ -562,14 +839,58 @@ app.localization.registerView('formDetailView');
             // app.surveyorMarking.surveyorMarkingModel.mapFlag=true;
             // app.mobileApp.navigate('#components/elementLocationMaps/view.html');
         },
-        closeAddPopUpImgForm: function (e) {
-             $("#addCapturePhotoFormPop").kendoMobileModalView("close"); 
-        },
+        // closeAddPopUpImgForm: function (e) {
+        //      $("#addCapturePhotoFormPop").kendoMobileModalView("close"); 
+        // },
         openSignaturePopUp: function(e) {
             $("#signaturePopUp").kendoMobileModalView("open"); 
         },
         closeSignaturePopUp: function(e) {
             $("#signaturePopUp").kendoMobileModalView("close"); 
+        },
+        onSaveCoreClick: function(e) {
+            var addFormData = this.get('addFormData'),
+                filter = formDetailViewModel && formDetailViewModel.get('paramFilter'),
+                //dataSource = formDetailViewModel.get('dataSource'),
+                dataSourceCoreChecks = formDetailViewModel.get('dataSourceCoreChecks'),
+                itemData = this.get("itemData"),
+                addModel = {};
+
+                 function saveModel(data) {
+                    /// start add form data save
+                
+                    addModel.Data = $("#text1input").val();
+                    addModel.Comments = $("#coreCheckComments").val();
+                    addModel.R369589302 = formDetailViewModel.formId;
+                    addModel.R369425614 = itemData.id;
+                    addModel.name = itemData.name;
+                    addModel.locationId = sessionStorage.getItem("locationId");
+                    addModel.LastUpdate = true;
+                    /// end add form data save
+         
+                    //dataSource.add(addModel);
+                    //dataSource.one('change', function(e) {
+                    dataSourceCoreChecks.add(addModel);
+                    dataSourceCoreChecks.one('change', function(e) {
+                        app.elementDetailView.elementDetailViewModel.change_Percent = true;
+                        app.elementDetailView.elementDetailViewModel.QC_click_flag = true;
+
+                        $("#text1input").val('');
+                        $("#coreCheckComments").val('');
+                        alert("The check has been successfully saved");
+                        app.mobileApp.navigate('#:back');
+                    });
+
+                    dataSourceCoreChecks.sync();
+
+                    app.clearFormDomData('add-item-view');
+                };
+
+                /// start add form save
+                /// end add form save
+                /// start add form save handler
+                saveModel();
+                /// end add form save handler
         },
         onSaveClick: function(e) {
             var addFormData = this.get('addFormData'),
@@ -832,7 +1153,9 @@ app.localization.registerView('formDetailView');
             backbutton = e.view.element && e.view.element.find('header [data-role="navbar"] .backButtonWrapper'),
             dataSourceOptions = formDetailViewModel.get('_dataSourceOptions'),
             dataSourceOptionsChecks = formDetailViewModel.get('_dataSourceOptionsChecks'),
-            dataSource, dataSourceChecks;
+            dataSourceOptionsCore = formDetailViewModel.get('_dataSourceOptionsCore'),
+            dataSourceOptionsCoreChecks = formDetailViewModel.get('_dataSourceOptionsCoreChecks'),
+            dataSource, dataSourceChecks, dataSourceCore, dataSourceCoreChecks;
 
             formDetailViewModel.formId = e.view.params.formid;
 
@@ -846,12 +1169,141 @@ app.localization.registerView('formDetailView');
                 backbutton.css('visibility', 'hidden');
             }
         }
+        // console.log("e.view.params.coreFlag")
+        // console.log(e.view.params)
+        $("#checkListTitle").hide();
+        $("#coreDataTitle").hide();
+        if(e.view.params.coreFlag == "true") {
+            $("#surveyor").hide();
+            $("#formCheckList").hide();
+            $("#coreCheckList").show();
+            dataProvider.loadCatalogs().then(function _catalogsLoaded() {
+                var jsdoOptions = formDetailViewModel.get('_jsdoOptionsCore'),
+                    jsdo = new progress.data.JSDO(jsdoOptions);
 
-        //if (!formDetailViewModel.get('dataSource')) {
+                dataSourceOptionsCore.transport.jsdo = jsdo;
+                dataSourceCore = new kendo.data.DataSource(dataSourceOptionsCore);
+               
+                //dataSource.filter({ field: "R365599694", operator: "==", value: e.view.params.formid });
+                if(app.elementDetailView.elementDetailViewModel.coreCheckListIds != null) {
+                    var checkListFilters = [];
+                    for(var i=0; i < app.elementDetailView.elementDetailViewModel.coreCheckListIds.length; i++) {
+                        checkListFilters[i] = { field: "id", operator: "==", value: app.elementDetailView.elementDetailViewModel.coreCheckListIds[i] };
+                    }
+                    // console.log("checkListFilters")
+                    // console.log(checkListFilters)
+                    dataSourceCore.filter({
+                        logic: "or",
+                        filters: checkListFilters
+                    });
+                    formDetailViewModel.set('dataSourceCore', dataSourceCore);
+
+                }
+                // dataSourceCore.fetch(function() {
+                //     console.log("check list form")
+                //     console.log(dataSourceCore.data())
+                // });
+                formDetailViewModel.set('dataSourceCore', dataSourceCore);
+
+                var jsdoOptionsCoreChecks = formDetailViewModel.get('_jsdoOptionsCoreChecks'),
+                    jsdoCoreChecks = new progress.data.JSDO(jsdoOptionsCoreChecks);
+
+                dataSourceOptionsCoreChecks.transport.jsdo = jsdoCoreChecks;
+                dataSourceCoreChecks = new kendo.data.DataSource(dataSourceOptionsCoreChecks);
+                formDetailViewModel.set('dataSourceCoreChecks', dataSourceCoreChecks);
+
+                //fetchFilteredData(param);
+                formDetailViewModel.formName = e.view.params.formname;
+                formNameCheckList.innerHTML = e.view.params.formname; 
+            });
+        }
+        else if(e.view.params.surveyorFlag == "true") {
+            // alert("surveyorFlag")
+            $("#formCheckList").show();
+            $("#coreCheckList").show();
+            $("#surveyor").show();
+            $("#checkListTitle").show();
+            $("#coreDataTitle").show();
+            formDetailViewModel.formName = e.view.params.formname;
+            formNameCheckList.innerHTML = e.view.params.formname; 
+             var jsdoOptions = formDetailViewModel.get('_jsdoOptions'),
+                    jsdo = new progress.data.JSDO(jsdoOptions);
+               
+                dataSourceOptions.transport.jsdo = jsdo;
+                dataSource = new kendo.data.DataSource(dataSourceOptions);
+               
+                //dataSource.filter({ field: "R365599694", operator: "==", value: e.view.params.formid });
+                if(app.elementDetailView.elementDetailViewModel.formCheckListIds != null) {
+                    var checkListFilters = [];
+                    for(var i=0; i < app.elementDetailView.elementDetailViewModel.formCheckListIds.length; i++) {
+                        checkListFilters[i] = { field: "id", operator: "==", value: app.elementDetailView.elementDetailViewModel.formCheckListIds[i] };
+                    }
+
+                    dataSource.filter({
+                        logic: "or",
+                        filters: checkListFilters
+                    });
+                    formDetailViewModel.set('dataSource', dataSource);
+
+                }
+                // dataSource.fetch(function() {
+                //     console.log("check list form")
+                //     console.log(dataSource.data())
+                // });
+                formDetailViewModel.set('dataSource', dataSource);
+
+                var jsdoOptionsChecks = formDetailViewModel.get('_jsdoOptionsChecks'),
+                    jsdoChecks = new progress.data.JSDO(jsdoOptionsChecks);
+
+                dataSourceOptionsChecks.transport.jsdo = jsdoChecks;
+                dataSourceChecks = new kendo.data.DataSource(dataSourceOptionsChecks);
+                formDetailViewModel.set('dataSourceChecks', dataSourceChecks);
+
+            //     var jsdoOptionsCore = formDetailViewModel.get('_jsdoOptionsCore'),
+            //         jsdoCore = new progress.data.JSDO(jsdoOptionsCore);
+
+            //     dataSourceOptionsCore.transport.jsdo = jsdoCore;
+            //     dataSourceCore = new kendo.data.DataSource(dataSourceOptionsCore);
+               
+            //    console.log("app.elementDetailView.elementDetailViewModel.coreCheckListIds")
+            //         console.log(app.elementDetailView.elementDetailViewModel.coreCheckListIds)
+            //     //dataSource.filter({ field: "R365599694", operator: "==", value: e.view.params.formid });
+            //     if(app.elementDetailView.elementDetailViewModel.coreCheckListIds != null) {
+            //         var coreListFilters = [];
+                    
+            //         for(var i=0; i < app.elementDetailView.elementDetailViewModel.coreCheckListIds.length; i++) {
+            //             coreListFilters[i] = { field: "id", operator: "==", value: app.elementDetailView.elementDetailViewModel.coreCheckListIds[i] };
+            //         }
+            //         console.log("coreListFilters")
+            //         console.log(coreListFilters)
+            //         // dataSourceCore.filter({
+            //         //     logic: "or",
+            //         //     filters: coreListFilters
+            //         // });
+            //         formDetailViewModel.set('dataSourceCore', dataSourceCore);
+
+            //     }
+            //     dataSourceCore.fetch(function() {
+            //         console.log("core list form")
+            //         console.log(dataSourceCore.data())
+            //     });
+            //     formDetailViewModel.set('dataSourceCore', dataSourceCore);
+
+                var jsdoOptionsCoreChecks = formDetailViewModel.get('_jsdoOptionsCoreChecks'),
+                    jsdoCoreChecks = new progress.data.JSDO(jsdoOptionsCoreChecks);
+
+                dataSourceOptionsCoreChecks.transport.jsdo = jsdoCoreChecks;
+                dataSourceCoreChecks = new kendo.data.DataSource(dataSourceOptionsCoreChecks);
+                formDetailViewModel.set('dataSourceCoreChecks', dataSourceCoreChecks);
+        }
+        else {
+            //if (!formDetailViewModel.get('dataSource')) {
+            $("#formCheckList").show();
+            $("#coreCheckList").hide();
             dataProvider.loadCatalogs().then(function _catalogsLoaded() {
                 var jsdoOptions = formDetailViewModel.get('_jsdoOptions'),
                     jsdo = new progress.data.JSDO(jsdoOptions);
-
+               
                 dataSourceOptions.transport.jsdo = jsdo;
                 dataSource = new kendo.data.DataSource(dataSourceOptions);
                
@@ -898,15 +1350,18 @@ app.localization.registerView('formDetailView');
                 else $("#surveyor").hide();
                 
             });
-        //} else {
-            //fetchFilteredData(param);
-        //}
-
+            //} else {
+                //fetchFilteredData(param);
+            //}
+        }
     });
 
-    function onFileUploadSuccess() {
-        //alert("onFileUploadSuccess")
+function onFileUploadSuccess() {
+        // alert("onFileUploadSuccess")
         console.log("onFileUploadSuccess")
+         $("#addCapturePhoto").css("color", "black");
+        document.getElementById("addCapturePhotoImg").setAttribute("src", "");
+        $("#addCapturePhotoPop").kendoMobileModalView("close");
     // sessionStorage.setItem("fileToUpload", "null");
     // localStorage.setItem("fileName", "null");
         /*window.plugins.toast.showWithOptions(
@@ -927,7 +1382,6 @@ function onFileTransferFail(error) {
         console.log("Source: " + error.source);
         console.log("Target: " + error.target);
     }
-
 })(app.formDetailView);
 
 // START_CUSTOM_CODE_formDetailViewModel

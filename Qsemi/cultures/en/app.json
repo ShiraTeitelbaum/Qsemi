@@ -30,6 +30,9 @@
   "stagesFormComments": {
     "title": "Comments:"
   },
+  "stagesFormData": {
+    "title": "Data:"
+  },
   "stagesFormSignature": {
     "title": "Signature",
     "clear": "Clear",

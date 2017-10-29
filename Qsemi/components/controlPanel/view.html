@@ -1,12 +1,12 @@
 <div data-role="view" data-title="View" data-layout="main" data-model="app.controlPanel" data-show="app.controlPanel.onShow" data-after-show="app.controlPanel.afterShow" id="controlPanelScreen" class="screen">
     <header data-role="header">
-        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);"> <!-- style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);" -->
+        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);"> <!-- style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);" -->
 
             <center><label id="projectNameViewHome"></label></center>
             <!--<span data-bind="text: strings.controlPanel.title"></span>-->
-            <a data-role="backbutton" data-align="left" data-bind="buttonText: strings.buttonsText.back"></a>
+            <a data-icon="home" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
             <!--<a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>-->
-            
+            <a data-role="button" data-rel="popover" href="#popover-hbar2" data-align="right"  data-position="end" data-icon="hbar-button" style="background-color:#00c853; border:none;"></a>
         </div>
         <div style="background-color:#351e45; height:50px; width:100%; direction:rtl;">
                 <a onclick="app.controlPanel.controlPanelModel.openGeneralMap()" style="color:white;height:50px; font-weight:bold; direction:rtl; font-size:large;margin-right:6%;">
@@ -16,7 +16,33 @@
             </div>
     </header>
 
-
+    <div data-role="popover" id="popover-hbar2" data-popup='{"height":"30", "width":"150"}' style="border:none">
+        <div data-role="view" data-model="app.controlPanel">
+            <ul data-role="listview" style="list-style:none; background-color:#F4F4F4;">
+                <li style="padding: 1.5px;">
+                    <a style="background-color:transparent;" class="version" >
+                        <span style="background-color:transparent;font-size:medium;">  
+                            <span>Version</span> 
+                        </span> 
+                    </a>
+                </li>
+                <li style="padding: 1.5px;">
+                    <a style="background-color:transparent;" class="projects" onclick="app.controlPanel.controlPanelModel.goToProjects()">
+                        <span style="background-color:transparent;font-size:medium;">  
+                            <span>Projects</span> 
+                        </span> 
+                    </a>
+                </li>
+                <li style="padding: 1.5px;">
+                    <a style="background-color:transparent;" data-role="button" onclick="app.controlPanel.controlPanelModel.logoutClick()" data-align="left" data-icon="logOutNew" data-position="end" > 
+                        <span style="background-color:transparent;font-size:mediun;">  
+                            <span>Log Out</span> 
+                        </span> 
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
     <!-- START_CUSTOM_CODE_controlPanel -->
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
 

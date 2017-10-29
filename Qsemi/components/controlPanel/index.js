@@ -145,6 +145,12 @@ app.localization.registerView('controlPanel');
 
                 return result;
             },
+            logoutClick: function() {
+                app.mobileApp.navigate('#components/authenticationView/view.html?logout=true');
+            },
+            goToProjects: function() {
+                app.mobileApp.navigate('#components/projectDetailView/view.html');
+            },
             itemClick: function(e) {
                 var dataItem = e.dataItem || controlPanelModel.originalItem;
                 
@@ -268,6 +274,8 @@ app.localization.registerView('controlPanel');
     }
  
     parent.set('onShow', function(e) {
+        app.generalMapView.generalMapViewModel.gmapFlag = false;
+
         var param = e.view.params.filter ? JSON.parse(e.view.params.filter) : null,
             isListmenu = false,
             backbutton = e.view.element && e.view.element.find('header [data-role="navbar"] .backButtonWrapper'),

@@ -1,0 +1,52 @@
+<div data-role="view" data-title="Add" data-model="app.formDetailView.addItemViewModel" data-bind="events: { show: onShowCoreData }" id="formDetailViewModelAddCoreScreen" class="screen screen--add add-item-view">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);">
+            <!--<span data-bind="text: strings.formDetailView.formDetailViewModel.addScreenHeaderValue"></span>-->
+            <span id="coreCheckName"></span> <!-- data-bind="text: itemData['name']" -->
+            <a data-role="backbutton" data-align="left" data-bind="events: { click: onCOreCancel }, buttonText: strings.buttonsText.cancel"></a>
+            <!--<a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }">Save</a>-->
+        </div>
+    </header>
+    <footer data-role="footer">
+        <center>
+            <a data-role="button" data-align="right" data-bind="events: { click: onSaveCoreClick }" style="border-radius: 0; width: 100%;">Save</a>
+        </center>
+    </footer>
+    <!-- START_CUSTOM_CODE_formDetailViewModel -->
+    <!-- END_CUSTOM_CODE_formDetailViewModel -->
+    <div id="editableListForm163" class="form-view screen__content screen__content--form" style="overflow-x:hidden;  background-color: #e9eaeb; height:100%;">
+        <br/>
+        <br/>
+        <ul data-role="listview" data-style="inset" style="width:100%; margin-left:0;">
+                <li style="border:none;border-bottom: 1px solid #e9eaeb;">
+                    <span data-bind="text: itemData['name']" style="margin-left: 2%; margin-top: 20%; font-size: large; font-weight:bold;"></span>
+                </li>
+                <!--<li style="border:none;">
+                    <span data-bind="text: itemData['Description']" style="margin-top: 20%;"></span>
+                </li>-->
+                
+                <!--<li id="text1" style="border:none; ">
+                    <span id="text1inputTitle"  data-bind="text: strings.stagesFormData.title" style="text-align: left;"></span>
+                </li>-->
+                <li id="Text1" style="border:none;border-bottom: 1px dashed #e9eaeb;">
+                    <span id="text1inputTitle"  data-bind="text: strings.stagesFormData.title" style="text-align: left;"></span>
+                    <textarea id="text1input" data-bind="value: addFormData.Data" style="resize: none; width: 100%; border:1px solid black;"></textarea>
+                </li>
+
+                <li style="border:none;border-bottom: 1px dashed #e9eaeb;border-top: 1px dashed #e9eaeb;">
+                    <span data-bind="text: strings.stagesFormComments.title" style="text-align: left;"></span>
+                    <textarea id="coreCheckComments" data-bind="value: addFormData.Comments" rows="7" style="resize: none; width: 100%; border:1px solid black;"></textarea>
+                </li>
+
+                <!--<li style="border:none;">
+                    <center>
+                        <a data-role="button" data-align="right" data-bind="events: { click: onSaveCoreClick }" style="border-radius: 0; width: 100%;">Save</a>
+                    </center>
+                </li>-->
+            </ul>
+
+        <!-- START_CUSTOM_CODE_editableListForm163 -->
+        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+        <!-- END_CUSTOM_CODE_editableListForm163 -->
+    </div>
+</div>

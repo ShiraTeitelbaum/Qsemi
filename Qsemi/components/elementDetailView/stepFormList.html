@@ -1,41 +1,128 @@
 <div data-role="view" data-title="Details" data-model="app.elementDetailView.elementDetailViewModel" data-bind="events: { show: stepFormsListShow }" id="elementDetailStepFormsScreen" class="screen screen--detail">
     <header data-role="header">
-        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);">
-            <a data-role="backbutton" data-align="left" data-bind="buttonText: strings.buttonsText.back"></a>
+        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);">
+            <a data-icon="home" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a> <!--data-bind="buttonText: strings.buttonsText.back"-->
             <span id="element_step"></span>
             <!--<span data-bind="text: currentItem['name']"></span>-->
         </div>
     </header>
     <br/>
     <br/>
-    <div class="details-content screen__content screen__content--details" style="overflow-x:hidden; background-color: #e9eaeb; width: 100%; height: 100%;">
+    <div class="details-content screen__content screen__content--details" style="overflow-x:hidden; background-color: #e9eaeb; height: 100%;">
         <!--<ul id="stageForms" data-role="listview" data-style="inset" style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0;"></ul>-->
         <!--<ul id="stageForms" data-bind="source: elementDetailViewModel.dataSourceElemForms" data-template="formStageTemplate" data-role="listview" data-style="inset" style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0;"></ul>-->
-        <ul id="stageForms" class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" 
-        data-template="formStageTemplate" data-pull-to-refresh="true" data-endless-scroll="false" 
-        style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0; background-color: #FFFFFF"></ul>
-
-        <script type="text/x-kendo-template" id="formStageTemplate">
-            <div class="formList" id=#:data['uid']# onclick="app.elementDetailView.elementDetailViewModel.openFormStage(this.id)">
-                <table style="width: 100%; height: 100%;">
-                    <tr style="padding: 0; margin: 0;">
-                         # if(PercentageComplete == "null" || (PercentageComplete >= 0 && PercentageComplete <= 40)) { #
-                                <td id="redS" ></td>
-                            # } else if(PercentageComplete> 40 && PercentageComplete <= 70) { #
-                                <td id="orangeS"></td>
-                            # } else if(PercentageComplete > 70 && PercentageComplete <= 100) { #
-                                <td id="greenS"></td>
-                            # } #	
-                        <td style="width: 80%;">
-                            <span style="font-size: 14px; margin-left: 5%;">#: data['name'] #</span>
-                        </td>
-                        <td style="width: 10%;">
-                            
-                        </td>
-                    </tr>
-                </table>
+        <!--<div style="background-color: white; width: 100%;">
+            <div style="border-bottom: 1px solid #e9eaeb;">
+                <img src="images/cameraIcon.png" style="height: 24px; width: 24px; margin-left: 2%; margin-top:3%;" />
+                <a id="addCapturePhoto" class="capturePhotoButtonClass" style="margin-bottom: 300px;">Get Element Image</a>
+                <br/>
+                <br/>
             </div>
-        </script>
+        </div>-->
+        <br/>
+         <div id="surveyor" style="border-bottom: 1px solid #e9eaeb; background-color: white; width: 100%;" onclick="app.formDetailView.addItemViewModel.openMap()" >
+            <a id="ChooseLocationOnMap" style="margin-bottom: 300px; margin-left: 2%;">Get Element Location</a>
+            <img src="images/getLocationIcon.png" style="height: 24px; width: 24px; margin-top:4%; margin-left: 48%;" /> <!-- margin-right: 2%;  -->
+            <br/>
+            <br/>
+        </div>
+        <div style="background-color: white; width: 100%;">
+            <br/>
+            <span style="font-size: large; padding-left:3%;color:white; background-color:#00c853;">Check List </span>
+            <br/>
+            <br/>
+        </div>
+        <!--<div data-role="modalview" id="addCapturePhotoPop" style="left:1px; width:95%; height:70%; background-color:#F4F4F4; border: 1px solid rgba(0, 200, 83, 0.729412);">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                    <div style="width:100%;">
+                        <center>
+                            <span data-bind="text: strings.stagesFormImg.title" style="font-size:large;"></span>
+                        </center>
+                    </div>
+                </div>
+                <div data-role="content" style="background-color: transparent; margin-top: 2%;">
+                    <img id="addCapturePhotoImg" style="width: 100%; height:100%;" />
+                </div>
+                <div data-role="footer" style="margin-bottom:3%; margin-top:3%; background-color:transparent">
+                    <div style="width:100%; margin-bottom:2%;">
+                        <center>
+                            <a data-role="button" class="capturePhotoButtonClass" id="addCapturePhotoForm_" style="color:white;margin-bottom:0%;border-radius:0;">
+                                <span data-bind="text: strings.stagesFormImg.changePhoto"></span>
+                            </a>
+                            <a data-bind="events:{click:saveAddPopUpImg}" data-role="button" style="color:white;margin-bottom:0%;border-radius:0;">
+                                <span data-bind="text: strings.buttonsText.save"></span>
+                            </a>
+                            <a data-bind="events:{click:closeAddPopUpImg}" data-role="button" style="color:white;margin-bottom:0%;border-radius:0;">
+                                <span data-bind="text: strings.stagesFormImg.close"></span>
+                            </a>
+                        </center>
+                    </div>
+                        
+                </div>
+            </div>-->
+
+        <ul id="stageForms" class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" 
+            data-template="formStageTemplate" data-pull-to-refresh="true" data-endless-scroll="false" 
+            style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0; background-color: #FFFFFF;"></ul>
+            
+        <div id="coreDataTitle" style="background-color: white; width: 100%;">
+            <br />
+            <span style="font-size: large;color:white; padding-left:3%; background-color:#00c853;"">Core Data  </span>
+            <br/>
+            <br/>
+        </div>
+
+        <ul id="stageCores" class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" 
+            data-template="coreStageTemplate" data-pull-to-refresh="true" data-endless-scroll="false" 
+            style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0; background-color: #FFFFFF;"></ul>
+
+            <script type="text/x-kendo-template" id="formStageTemplate">
+                <div class="formList" id=#:data['uid']# onclick="app.elementDetailView.elementDetailViewModel.openFormStage(this.id)">
+                    <table style="width: 100%; height: 100%;">
+                        <tr style="padding: 0; margin: 0;">
+                            # if(PercentageComplete == "null" || (PercentageComplete >= 0 && PercentageComplete <= 40)) { #
+                                    <td id="redS" ></td>
+                                # } else if(PercentageComplete> 40 && PercentageComplete <= 70) { #
+                                    <td id="orangeS"></td>
+                                # } else if(PercentageComplete > 70 && PercentageComplete <= 100) { #
+                                    <td id="greenS"></td>
+                                # } #	
+                            <td style="width: 80%;">
+                                # if(data['name'].length > 43) { #
+                                    <span style="font-size: 14px; margin-left: 5%;">#: data['name'].substring(0, 43) #</span><span>...</span>
+                                # } else { #
+                                    <span style="font-size: 14px; margin-left: 5%;">#: data['name'].substring(0, 43) #</span>
+                                # } #
+                            </td>
+                            <td style="width: 10%;">
+                                
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </script>
+
+            <script type="text/x-kendo-template" id="coreStageTemplate">
+                <div class="coreList" id=#:data['uid']# onclick="app.elementDetailView.elementDetailViewModel.openCoreStage(this.id)">
+                    <table style="width: 100%; height: 100%;">
+                        <tr style="padding: 0; margin: 0;">
+                                # if(PercentageComplete == "null" || (PercentageComplete >= 0 && PercentageComplete <= 40)) { #
+                                    <td id="redS" ></td>
+                                # } else if(PercentageComplete> 40 && PercentageComplete <= 70) { #
+                                    <td id="orangeS"></td>
+                                # } else if(PercentageComplete > 70 && PercentageComplete <= 100) { #
+                                    <td id="greenS"></td>
+                                # } #	
+                            <td style="width: 80%;">
+                                <span style="font-size: 14px; margin-left: 5%;">#: data['name'] #</span>
+                            </td>
+                            <td style="width: 10%;">
+                                
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </script>
     <!-- START_CUSTOM_CODE_elementDetailViewModel -->
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
     </div>
