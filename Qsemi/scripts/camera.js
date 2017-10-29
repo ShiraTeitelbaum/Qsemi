@@ -92,6 +92,9 @@ cameraApp.prototype = {
     },
     _onPhotoDataSuccess: function (imageData) {
         var capturedPhoto = myid.toString();
+         var popImg = "#" + capturedPhoto + "Pop";
+        $(popImg).kendoMobileModalView("open");
+        
         if (capturedPhoto.endsWith("_")) {
             var n = capturedPhoto.length;
             capturedPhoto = capturedPhoto.slice(0, n - 1);
