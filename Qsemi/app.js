@@ -67,8 +67,9 @@
                  cordova.plugins.diagnostic.isLocationAvailable(function(available){
                     // alert("Location is " + (available ? "available" : "not available"));
                     if(available == false) {
-                        alert("Location is not available")
-                        cordova.plugins.diagnostic.switchToLocationSettings();
+                        // alert("Location is not available")
+                        $("#needGPSPopUp").kendoMobileModalView("open");
+                        // cordova.plugins.diagnostic.switchToLocationSettings();
                     }
                     else if(available == true && cordova.platformId == "ios") {
                         app.generalMapView.generalMapViewModel.loadMap();
@@ -82,8 +83,9 @@
                 cordova.plugins.diagnostic.isLocationAvailable(function(available){
                     // alert("Location is " + (available ? "available" : "not available"));
                     if(available == false) {
-                        alert("Location is not available")
-                        cordova.plugins.diagnostic.switchToLocationSettings();
+                        // alert("Location is not available")
+                        $("#needGPSElementPopUp").kendoMobileModalView("open");
+                        // cordova.plugins.diagnostic.switchToLocationSettings();
                     }
                     else if(available == true && cordova.platformId == "ios") {
                         app.elementLocationMaps.elementLocationMapsModel.loadMap();
@@ -91,6 +93,9 @@
                 }, function(error){
                     alert("The following error occurred: "+error);
                 });
+            }
+            else {
+                return;
             }
         }, false)
     } else {

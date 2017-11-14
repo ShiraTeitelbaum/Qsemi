@@ -1,19 +1,52 @@
 <div data-role="view" data-title="View" data-layout="main" data-model="app.controlPanel" data-show="app.controlPanel.onShow" data-after-show="app.controlPanel.afterShow" id="controlPanelScreen" class="screen">
     <header data-role="header">
         <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);"> <!-- style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);" -->
+            <table style="width:100%;">
+                <tr>
+                    <td style="width:10%;">
+                        <!--<a data-icon="home" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>-->
+                        <a data-icon="backIcon" data-role="button" data-align="left" style="background-color:#4fa81a;color:#4fa81a; border:none;"></a>
+                    </td>
+                    <td style="width:80%;">
+                        <center><label id="projectNameViewHome" style="font-family: Tahoma, Geneva, sans-serif;"></label></center>
+                    </td>
+                    <td style="width:10%;">
+                        <a data-role="button" data-rel="popover" href="#popover-hbar2" data-align="right"  data-position="end" data-icon="hbar-button" style="background-color:#4fa81a; border:none;"></a>
+                    </td>
+                </tr>
+            </table>
 
-            <center><label id="projectNameViewHome"></label></center>
-            <!--<span data-bind="text: strings.controlPanel.title"></span>-->
+            <!--<center><label id="projectNameViewHome" style="font-family: Tahoma, Geneva, sans-serif;"></label></center>
             <a data-icon="home" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
-            <!--<a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>-->
-            <a data-role="button" data-rel="popover" href="#popover-hbar2" data-align="right"  data-position="end" data-icon="hbar-button" style="background-color:#00c853; border:none;"></a>
+            <a data-role="button" data-rel="popover" href="#popover-hbar2" data-align="right"  data-position="end" data-icon="hbar-button" style="background-color:#4fa81a; border:none;"></a>-->
         </div>
-        <div style="background-color:#351e45; height:50px; width:100%; direction:rtl;">
-                <a onclick="app.controlPanel.controlPanelModel.openGeneralMap()" style="color:white;height:50px; font-weight:bold; direction:rtl; font-size:large;margin-right:6%;">
-                    <span data-bind="text: strings.controlPanel.mapTitle"></span>
-                    <img src="images/mapIcon.png" style="height: 24px; width: 16px; margin-left: 1px; margin-top:3%;"/>
-                </a>
-            </div>
+        <table style="background-color:#351e45;width:100%;height:50px;">
+            <tr style="width:100%;">
+                <td style="width:50%;direction:ltr;">
+                    <a onclick="app.controlPanel.controlPanelModel.openImpairment()" style="color:white;height:50px; font-weight:bold; direction:ltr; font-size:large;margin-left:6%;">
+                        <img src="images/ImpairtmentIcon.png" style="height: 24px; width: 16px; margin-left: 1px; margin-top:3%;font-family: Tahoma, Geneva, sans-serif;"/>
+                        <span>impairments</span> <!-- Quality impairment -->
+                    </a>
+                </td>
+                <td style="width:50%;direction:rtl;">
+                    <a onclick="app.controlPanel.controlPanelModel.openGeneralMap()" style="color:white;height:50px; font-weight:bold; direction:rtl; font-size:large;margin-right:6%;">
+                        <span data-bind="text: strings.controlPanel.mapTitle"></span>
+                        <img src="images/mapIcon.png" style="height: 24px; width: 16px; margin-left: 1px; margin-top:3%;font-family: Tahoma, Geneva, sans-serif;"/>
+                    </a>
+                </td>
+            </tr>
+        </table>
+        <!--<div style="background-color:#351e45; height:50px; width:100%; direction:rtl;">
+            <a onclick="app.controlPanel.controlPanelModel.openGeneralMap()" style="color:white;height:50px; font-weight:bold; direction:rtl; font-size:large;margin-right:6%;">
+                <span data-bind="text: strings.controlPanel.mapTitle"></span>
+                <img src="images/mapIcon.png" style="height: 24px; width: 16px; margin-left: 1px; margin-top:3%;font-family: Tahoma, Geneva, sans-serif;"/>
+            </a>
+        </div>
+        <div style="background-color:#351e45; height:50px; width:100%; direction:ltr;">
+            <a style="color:white;height:50px; font-weight:bold; direction:ltr; font-size:large;margin-left:6%;">
+                <span>Quality impairment</span>
+            </a>
+        </div>-->
     </header>
 
     <div data-role="popover" id="popover-hbar2" data-popup='{"height":"30", "width":"150"}' style="border:none">
@@ -21,22 +54,22 @@
             <ul data-role="listview" style="list-style:none; background-color:#F4F4F4;">
                 <li style="padding: 1.5px;">
                     <a style="background-color:transparent;" class="version" >
-                        <span style="background-color:transparent;font-size:medium;">  
-                            <span>Version</span> 
+                        <span data-bind="text: strings.menuOptions.version"  style="background-color:transparent;font-size:medium;font-family: Tahoma, Geneva, sans-serif;">  
+                            <!--<span>Version</span> -->
                         </span> 
                     </a>
                 </li>
                 <li style="padding: 1.5px;">
                     <a style="background-color:transparent;" class="projects" onclick="app.controlPanel.controlPanelModel.goToProjects()">
-                        <span style="background-color:transparent;font-size:medium;">  
-                            <span>Projects</span> 
+                        <span data-bind="text: strings.menuOptions.projects"  style="background-color:transparent;font-size:medium;font-family: Tahoma, Geneva, sans-serif;">  
+                            <!--<span>Projects</span> -->
                         </span> 
                     </a>
                 </li>
                 <li style="padding: 1.5px;">
-                    <a style="background-color:transparent;" data-role="button" onclick="app.controlPanel.controlPanelModel.logoutClick()" data-align="left" data-icon="logOutNew" data-position="end" > 
-                        <span style="background-color:transparent;font-size:mediun;">  
-                            <span>Log Out</span> 
+                    <a style="background-color:transparent;" data-role="button" onclick="app.controlPanel.controlPanelModel.logoutClick()" data-align="left" data-position="end" > 
+                        <span data-bind="text: strings.menuOptions.logout"  style="background-color:transparent;font-size:mediun;font-family: Tahoma, Geneva, sans-serif;">  
+                            <!--<span>Log Out</span> -->
                         </span> 
                     </a>
                 </li>
@@ -47,60 +80,59 @@
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
 
     <!-- END_CUSTOM_CODE_controlPanel -->
-    <!--<br />-->
-    <!--<br />-->
-    <div style="overflow-x:hidden; width:85%; height:100%; margin-right:7%; margin-left:7%; padding:0; margin-top:6%;">
+   
+    <div style="overflow-x:hidden; width:85%; height:100%; margin-right:7%; margin-left:7%; padding:0; margin-top:3%;">
         <center>
-            <div class="controlPanel" id="step_0" onclick="app.controlPanel.controlPanelModel.openStage(0)" style="background-image: url('images/step0-2.png'); width:91%;">
+            <div class="controlPanel" id="step_0" onclick="app.controlPanel.controlPanelModel.openStage(0)" style="font-family: Tahoma, Geneva, sans-serif;background-image: url('images/step0-2.png'); width:91%;"> <!-- url('images/1.png'); -->
                 <div class="stage">
                     <span class="stageCounter" id="stage0Counter"></span>
                     <br/>
                     <span class="stageName" data-bind="text: strings.controlPanel.stage0name"></span>
                 </div>
             </div>    
-            <div class="controlPanel" id="step_1" onclick="app.controlPanel.controlPanelModel.openStage(1)" style="background-image: url('images/step1.png'); width:87%;">
+            <div class="controlPanel" id="step_1" onclick="app.controlPanel.controlPanelModel.openStage(1)" style="font-family: Tahoma, Geneva, sans-serif;background-image: url('images/step1.png'); width:87%;"> <!-- url('images/2.png'); -->
                 <div class="stage">
                     <span class="stageCounter" id="stage1Counter"></span>
                     <br/>
                     <span class="stageName" data-bind="text: strings.controlPanel.stage1name"></span>
                 </div>
             </div>
-            <div class="controlPanel" id="step_2" onclick="app.controlPanel.controlPanelModel.openStage(2)" style="background-image: url('images/step2.png'); width:83%;">
+            <div class="controlPanel" id="step_2" onclick="app.controlPanel.controlPanelModel.openStage(2)" style="font-family: Tahoma, Geneva, sans-serif;background-image: url('images/step2.png'); width:83%;">
                 <div class="stage">
                     <span class="stageCounter" id="stage2Counter"></span>
                     <br/>
                     <span class="stageName" data-bind="text: strings.controlPanel.stage2name"></span>
                 </div>
             </div>
-            <div class="controlPanel" id="step_3" onclick="app.controlPanel.controlPanelModel.openStage(3)" style="background-image: url('images/step3.png'); width:79%;">
+            <div class="controlPanel" id="step_3" onclick="app.controlPanel.controlPanelModel.openStage(3)" style="font-family: Tahoma, Geneva, sans-serif;background-image: url('images/step3.png'); width:79%;">
                 <div class="stage">
                     <span class="stageCounter" id="stage3Counter"></span>
                     <br/>
                     <span class="stageName" data-bind="text: strings.controlPanel.stage3name"></span>
                 </div>
             </div>
-            <div class="controlPanel" id="step_4" onclick="app.controlPanel.controlPanelModel.openStage(4)" style="background-image: url('images/step4.png'); width:75%;">
+            <div class="controlPanel" id="step_4" onclick="app.controlPanel.controlPanelModel.openStage(4)" style="font-family: Tahoma, Geneva, sans-serif;background-image: url('images/step4.png'); width:75%;">
                 <div class="stage">
                     <span class="stageCounter" id="stage4Counter"></span>
                     <br/>
                     <span class="stageName" data-bind="text: strings.controlPanel.stage4name"></span>
                 </div>
             </div>
-            <div class="controlPanel" id="step_5" onclick="app.controlPanel.controlPanelModel.openStage(5)" style="background-image: url('images/step5.png'); width:71%;">
+            <div class="controlPanel" id="step_5" onclick="app.controlPanel.controlPanelModel.openStage(5)" style="font-family: Tahoma, Geneva, sans-serif;background-image: url('images/step5.png'); width:71%;">
                 <div class="stage">
                     <span class="stageCounter" id="stage5Counter"></span>
                     <br/>
                     <span class="stageName" data-bind="text: strings.controlPanel.stage5name"></span>
                 </div>
             </div>
-            <div class="controlPanel" id="step_6" onclick="app.controlPanel.controlPanelModel.openStage(6)" style="background-image: url('images/step6.png'); width:67%;">
+            <div class="controlPanel" id="step_6" onclick="app.controlPanel.controlPanelModel.openStage(6)" style="font-family: Tahoma, Geneva, sans-serif;background-image: url('images/step6.png'); width:67%;">
                 <div class="stage">
                     <span class="stageCounter" id="stage6Counter"></span>
                     <br/>
                     <span class="stageName" data-bind="text: strings.controlPanel.stage6name"></span>
                 </div>
             </div>
-            <div class="controlPanel" id="step_7" onclick="app.controlPanel.controlPanelModel.openStage(7)" style="background-image: url('images/step7.png'); width:63%;">
+            <div class="controlPanel" id="step_7" onclick="app.controlPanel.controlPanelModel.openStage(7)" style="font-family: Tahoma, Geneva, sans-serif;background-image: url('images/step7.png'); width:63%;">
                 <div class="stage">
                     <span class="stageCounter" id="stage7Counter"></span>
                     <br/>
@@ -109,13 +141,14 @@
             </div>
         </center>
     </div>
+
    <style>
        .controlPanel {
            background-size:cover;
            background-attachment: initial; 
            height:55px; 
-           
-       } /*margin-top:3px;*/
+           margin-top:1%;
+       } 
        .stageCounter {
            color:black; 
            font-weight:bold;
@@ -129,220 +162,9 @@
            padding-top:4%; 
        }
    </style>
-    <!--<br/>
-    <br/>-->
-    <!--<a data-role="button" onclick="app.controlPanel.controlPanelModel.openGeneralMap()"><img src="images/mapIcon.png" style="height: 20px; width: 18px; margin-left: 1px;"/><span>MAP</span></a>-->
-    <!--<div>-->
-        <!--<center>-->
-            <!--<ul id="controlPanelStagesList" class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" data-template="controlPanelModelTemplate" data-bind="source: controlPanelModel.dataSource, events: {click: controlPanelModel.itemClick}" data-pull-to-refresh="false" data-endless-scroll="false"></ul>-->
-
-            <!--<ul id="controlPanelStagesList" class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" data-pull-to-refresh="false" data-endless-scroll="false"></ul>-->
-
-            <!--<ul id="controlPanelStagesList" class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" data-endless-scroll="false">
-                <li>
-                    <div>
-                        <div>
-                            <h3>POLE FOUNDATION</h3>
-                        </div> 
-                        <center>
-                            <span id="stage1Counter" style="top:5.5em;color:black;font-size:small;font-family:Tahoma, Geneva, sans-serif;font-weight: bold;">50</span>
-                        </center>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <div>
-                            <h3>POLE ERECTION</h3>
-                        </div> 
-                        <center>
-                            <span id="stage1Counter" style="top:5.5em;color:black;font-size:small;font-family:Tahoma, Geneva, sans-serif;font-weight: bold;">50</span>
-                        </center>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <div>
-                            <h3>POLE EQUIPMENT & CANTILEVER</h3>
-                        </div> 
-                        <center>
-                            <span id="stage1Counter" style="top:5.5em;color:black;font-size:small;font-family:Tahoma, Geneva, sans-serif;font-weight: bold;">50</span>
-                        </center>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <div>
-                            <h3>OCS WIRES</h3>
-                        </div> 
-                        <center>
-                            <span id="stage1Counter" style="top:5.5em;color:black;font-size:small;font-family:Tahoma, Geneva, sans-serif;font-weight: bold;">50</span>
-                        </center>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <div>
-                            <h3>E&B</h3>
-                        </div> 
-                        <center>
-                            <span id="stage1Counter" style="top:5.5em;color:black;font-size:small;font-family:Tahoma, Geneva, sans-serif;font-weight: bold;">50</span>
-                        </center>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <div>
-                            <h3>TEST</h3>
-                        </div> 
-                        <center>
-                            <span id="stage1Counter" style="top:5.5em;color:black;font-size:small;font-family:Tahoma, Geneva, sans-serif;font-weight: bold;">50</span>
-                        </center>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <div>
-                            <h3>Completed</h3>
-                        </div> 
-                        <center>
-                            <span id="stage1Counter" style="top:5.5em;color:black;font-size:small;font-family:Tahoma, Geneva, sans-serif;font-weight: bold;">50</span>
-                        </center>
-                    </div>
-                </li>
-            </ul>-->
-        <!--</center>-->
-    <!--</div>-->
-    
-
 
     <!-- START_CUSTOM_CODE_controlPanelModel -->
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
 
     <!-- END_CUSTOM_CODE_controlPanelModel -->
-    <!--<script type="text/x-kendo-template" id="controlPanelModelTemplate">
-        <div class="image-with-text " id="stepsList">
-            # data = app.controlPanel.controlPanelModel.fixHierarchicalData(data); #
-            
-            <div>
-                 <div>
-                  <h3>#: data['name'] #</h3>
-                </div> 
-                <center>
-                    <label style="top:5.5em;color:black;font-size:small;font-family:Tahoma, Geneva, sans-serif;font-weight: bold;">
-                        #: data['CountOfElemnts'] #
-                    </label>
-                </center>
-            </div>
-            
-        </div>
-    </script>-->
-    
-    <!--<script>
-        var octData = [{
-                    category: "Impressions ",
-                    value: 434823,
-                    color: "#0e5a7e"
-                },{
-                    category: "Clicks",
-                    value: 356854,
-                    color: "#166f99"
-                },{
-                    category: "Unique Visitors",
-                    value: 280022,
-                    color: "#2185b4"
-                },{
-                    category: "Downloads",
-                    value: 190374,
-                    color: "#319fd2"
-                },{
-                    category: "Purchases",
-                    value: 120392,
-                    color: "#3eaee2"
-                }];
-    
-        function createChart(chartName,data,text){
-            $('#chart-oct').kendoChart({
-                legend: {
-                    visible: false
-                },
-                seriesDefaults: {
-                    labels: {
-                        template: "#= category # #= value #",
-                        visible: true,
-                        background: "transparent",
-                        color:"white",
-                        format: "N0"
-                    },
-                    dynamicSlope: false,
-                    dynamicHeight: false
-                },
-                series: [{
-                    type: "funnel",
-                    data: data
-                }],
-                tooltip: {
-                    visible: true,
-                    template: "#= category #"
-                }
-            });
-        }
-    
-        function refresh() {
-            //var slider = $('#neckSlider').data("kendoSlider");
-            //var chartNames = ["chart-oct", "chart-nov", "chart-dec"];
-    
-            //for (var idx in chartNames) {
-                var chart = $("#chart-oct").data("kendoChart");
-    
-                var options =
-                {
-                    seriesDefaults: {
-                        neckRatio: 0.3,//slider.value(),
-                        //dynamicHeight : $('#dynamicHeight').is(':checked'),
-                        dynamicSlope : true,//$('#dynamicSlope').is(':checked'),
-                        labels: {
-                            visible: true,
-                            background: "transparent",
-                            color:"white",
-                            format: "N0"
-                        },
-                    }
-                }
-    
-                chart.setOptions(options);
-                slider.enable(!options.seriesDefaults.dynamicSlope);
-            //}
-        }
-    
-        function createCharts() {
-            createChart('chart-oct', octData, "October");
-          //  createChart('chart-nov', novData, "November");
-            //createChart('chart-dec', decData, "December");
-        }
-    
-        $(document).ready(function () {
-            // $("#neckSlider").kendoSlider({
-            //     change: refresh,
-            //     value: 0.3,
-            //     min: 0,
-            //     max: 10,
-            //     smallStep: 0.01,
-            //     largeStep: 0.1,
-            //     showButtons: false
-            // });
-    
-            createCharts();
-    
-            //$('.box').on('click', ':checkbox', refresh);
-            $(document).bind("kendo:skinChange", createCharts);
-        });
-    </script>
-    <style>
-        #chart-oct {
-            display: inline-block;
-            width: 280px;
-            height: 300px;
-            margin: 15px 65px;
-        }
-    </style>-->
 </div>

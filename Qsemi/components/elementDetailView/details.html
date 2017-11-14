@@ -1,51 +1,49 @@
 <div data-role="view" data-title="Details" data-model="app.elementDetailView.elementDetailViewModel" data-bind="events: { show: detailsShow }" id="elementDetailViewModelScreen" class="screen screen--detail">
     <header data-role="header" style="background-color: #351e45;">
-        <div data-role="navbar" class="header-text" style="background-color: #00c853; box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3)">
-            <a data-icon="home" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
-            <span id="elementDetaileDetailsTitle"></span>
-            <a id="editGeneralDetailsButtom" data-role="button" data-align="right" data-bind="events: { click: genearalDetailsEditClick }, buttonText: strings.buttonsText.edit" style="background-color:#00c853; border:none;"></a>
-            <a id="saveGeneralDetailsButtom" data-role="button" data-align="right" data-bind="events: { click: genearalDetailsSaveClick }, buttonText: strings.buttonsText.save" style="background-color:#00c853; border:none;"></a>
-            <!--<span data-bind="text: currentItem['name']"></span>-->
+        <div data-role="navbar" class="header-text" style="background-color: #4fa81a; box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3)">
+             <table style="width:100%;">
+                <tr>
+                    <td style="width:10%;">
+                        <a data-icon="home" data-role="button" onclick="goHome()" data-align="left" style="background-color:transparent; border:none;font-family: Tahoma, Geneva, sans-serif;"></a>
+                        <a data-icon="backIcon" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
+                    </td>
+                    <td style="width:80%;">
+                        <center><span id="elementDetaileDetailsTitle"></span></center>
+                    </td>
+                    <td style="width:10%;">
+                        <a data-role="button" data-rel="popover" data-align="right" data-icon="hbar-button" data-position="end" style="background-color:#4fa81a;color:#4fa81a; border:none;"></a>
+                    </td>
+                </tr>
+            </table>
+            <!--<a data-icon="home" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;font-family: Tahoma, Geneva, sans-serif;"></a>
+            <center><span id="elementDetaileDetailsTitle"></span></center>
+            <a data-role="button" data-rel="popover" data-align="right" data-icon="hbar-button" data-position="end" style="background-color:#4fa81a;color:#4fa81a; border:none;"></a>-->
         </div>
-        <div style="background-color: #351e45;">
+        <div style="background-color: #351e45;font-family: Tahoma, Geneva, sans-serif;">
             <br/>
-            <!--<br/>-->
             <center>
-                <span style="color: white; font-weight: bold;" data-bind="html: currentItem.name"></span>
+                <span style="color: white; font-weight: bold; font-size:medium;" data-bind="html: currentItem.name"></span>
                 <br />
                 <br />
                 <span id="elementStep" style="color: #808080; font-weight: bold;"></span>
-                <!--<span style="color: white;" data-bind="html: currentItem.name"></span><span style="color: #e9eaeb;"> - element step</span>-->
             </center>
-            <!--<br/>-->
-            <!--<table style="width: 100%;">
-                <tr>
-                    <td style="width: 50%;">
-                        <a id="defaultOpen" style="color: white; font-size: 16px; font-weight: bold; border-color: red;"  onclick="openDetails()" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.elementDetails.generalDetails"></a>
-                    </td>
-                    <td style="width: 50%;">
-                        <a class="QC_Button" style="color: white; font-size: 16px; font-weight: bold; border-color: yellow;" onclick="openQC()" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.elementDetails.qc"></a>
-                    </td>
-                </tr>
-            </table>-->
             <div data-role="tabstrip" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4); margin-top:2%;">
                 <a id="defaultOpen" style="font-size: 16px; font-weight: bold; background-color: #351e45; z-index:999; box-shadow:none;" onclick="openDetails()" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.elementDetails.generalDetails"></a>
                 <a id="QC_Button" style="font-size: 16px; font-weight: bold; background-color: #351e45; z-index:999;" onclick="openQC()" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.elementDetails.qc"></a>
             </div>
         </div>
     </header>
-    <!--<br/>
-    <br/>-->
     <div id="elementDetailsAndQc" class="details-content screen__content screen__content--details">
         <div id="qc" style="overflow-x:hidden; background-color: #FFFFFF; width: 100%; height: 100%;">
-            <ul id="elementSteps" data-role="listview" data-style="inset" style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0;"></ul>
+            <ul id="elementSteps" data-role="listview" data-style="inset" style="font-family: Tahoma, Geneva, sans-serif;padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0;"></ul>
         
-        <!-- color: white; border-bottom: 1px white solid; padding-top: 3px; padding-bottom: 3px; padding-right: 3px; -->
         <script type="text/x-kendo-template" id="elementStepsTemplate">
-            # if(id != 7) { #
-                <div class="stepList" id=#:id# name=#:name# onclick="app.elementDetailView.elementDetailViewModel.elementStepClick(this.id)">
-            # } else { #
+            # if(id == 4 || id == 5 || id == 6) { #
+                <div class="stepList" id=#:id# name=#:name# onclick="app.elementDetailView.elementDetailViewModel.elementNoStepClick()">
+            # } else if(id == 7) { #
                 <div class="stepList" id=#:id# name=#:name#>
+            # } else { #
+                <div class="stepList" id=#:id# name=#:name# onclick="app.elementDetailView.elementDetailViewModel.elementStepClick(this.id)">
             # } #
             <table style="width: 100%; height: 100%;">
                 <tr style="padding: 0; margin: 0;">
@@ -67,7 +65,7 @@
         </div>
         </script>
         </div>
-        <div id="generalDetails" style="overflow-x:hidden; background-color: #FFFFFF; width: 100%; height: 100%;">
+        <div id="generalDetails" style="font-family: Tahoma, Geneva, sans-serif;overflow-x:hidden; background-color: #FFFFFF; width: 100%; height: 100%;">
             <ul data-role="listview" data-style="inset">
                 <li style="height: 40px; border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
                     <table style="width: 100%;">
@@ -193,7 +191,6 @@
                             <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.spanBefor.title"></span></td>
                             <td style="width: 35%;">
                                 <span id="spanBeforeLabel" data-bind="html: currentItem.SpanBefor"></span>
-                                <input type="text" id="spanBeforeEdit" style="border: 1px solid black;" />
                             </td>
                         </tr>
                     </table>
@@ -205,7 +202,6 @@
                             <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.spanAfter.title"></span></td>
                             <td style="width: 35%;">
                                 <span id="spanAfterLabel" data-bind="html: currentItem.SpanAfter"></span>
-                                <input type="text" id="spanAfterEdit" style="border: 1px solid black;" />
                             </td>
                         </tr>
                     </table>
@@ -229,28 +225,27 @@
 
     <!-- END_CUSTOM_CODE_elementDetailViewModel -->
 </div>
+    <script>
+        function goHome() {
+            setTimeout(function () {
+                app.mobileApp.navigate('#components/controlPanel/view.html');
+            }, 300);
+        }
+    </script>
 <script>
     function openDetails(e) {
         app.elementDetailView.elementDetailViewModel.page_scroller.reset();
         $("#defaultOpen").css('border-bottom', '3px solid white');
-        //$("#defaultOpen").css('box-shadow', '0px 5px 5px #888888');
         $("#QC_Button").css('border-bottom', 'none');
         $("#QC_Button").css('box-shadow', 'none');
-        //document.getElementById("defaultOpen").setAttribute("href", "#generalDetails");
-        document.getElementById("editGeneralDetailsButtom").innerHTML = "Edit";
-        $("#editGeneralDetailsButtom").show();
         $("#generalDetails").show();
         $("#qc").hide();
     }
     function openQC(e) {
-         /*var scroller = e.view.scroller;
-               scroller.reset();*/
         app.elementDetailView.elementDetailViewModel.page_scroller.reset();
         $("#QC_Button").css('border-bottom', '3px solid white');
-        //$("#QC_Button").css('box-shadow', '0px 5px 5px #888888');
         $("#defaultOpen").css('border-bottom', 'none');
         $("#defaultOpen").css('box-shadow', 'none');
-        //document.getElementById("QC_Button").setAttribute("href", "#qc");
         $("#editGeneralDetailsButtom").hide();
         app.elementDetailView.elementDetailViewModel.openQC1();
         $("#generalDetails").hide();

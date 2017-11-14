@@ -17,15 +17,24 @@
       "remembermeLabel": "Remember Me"
     }
   },
+  "menuOptions": {
+    "projects": "Projects",
+    "version": "Version",
+    "logout": "Log Out"
+  },
   "buttonsText": {
-      "save": "Save",
-      "cancel": "Cancel",
-      "back": "Back",
-      "edit": "Edit"
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back",
+    "edit": "Edit",
+    "settings": "Settings",
+    "ok": "Ok"
   },
   "stagesFormCheckBox": {
+    "title": "Status:",
     "valid": "Ok",
-    "invalid": "Not Ok"
+    "invalid": "Not Ok",
+    "notRellevant": "N/A"
   },
   "stagesFormComments": {
     "title": "Comments:"
@@ -38,21 +47,56 @@
     "clear": "Clear",
     "cancel": "Cancel"
   },
+  "stagesFormTitles": {
+    "qualityControl": "Quality Control",
+    "coreData": "Core Data"
+  },
   "stagesFormImg": {
     "title": "Image",
-    "close":"Close",
-    "changePhoto":"Change Photo"
+    "close": "Close",
+    "changePhoto": "Change Photo",
+    "addPhoto": "Add Image",
+    "getElementPhoto": "Get Element Image"
+  },
+  "stagesFormLocation": {
+    "title": "Location",
+    "validLocation": "Valid Element Locatiion"
   },
   "controlPanel": {
-      "mapTitle": "Map",
-      "stage0name": "SURVEYOR",
-      "stage1name": "FOUNDATION",
-      "stage2name": "ERECTION",
-      "stage3name": "EQUIPMENT & CANTILEVER",
-      "stage4name": "OCS WIRES",
-      "stage5name": "E&B",
-      "stage6name": "TEST",
-      "stage7name": "COMPLETED"
+    "mapTitle": "Map",
+    "stage0name": "SURVEYOR",
+    "stage1name": "FOUNDATION",
+    "stage2name": "ERECTION",
+    "stage3name": "EQUIPMENT & CANTILEVER",
+    "stage4name": "OCS WIRES",
+    "stage5name": "E&B",
+    "stage6name": "TEST",
+    "stage7name": "COMPLETED"
+  },
+  "stage0CoreForms": {
+    "geotechnical": "GEOTECHNICAL",
+    "casting": "CASTING",
+    "laboratory": "LABORATORY TEST"
+  },
+  "warningGPSMessage": {
+    "title": "Please Turn On GPS",
+    "text1": "Your Location Services are disabled.",
+    "text2": "The GPS is required to view the map.",
+    "text3": "Please enable GPS, with Wifi or 3G service"
+  },
+  "warningMessage": {
+    "needSignature": "Signature is missing",
+    "needDescription": "Description is missing",
+    "needDate": "Date is missing",
+    "noLocations": "The is no loaction for this impairment",
+    "needImage": "Image is missing"
+  },
+  "toastsMessages": {
+    "checkSuccess": "The check has been successfully saved",
+    "formSuccess": "The form has been successfully saved",
+    "uploadImageSuccess": "Image successfully uploaded",
+    "NCRSuccess": "The impairment has been successfully saved",
+    "locationSuccessAproved": "Location successfully approved"
   },
   "elementDetailView": {
     "title": "element",
@@ -156,7 +200,7 @@
           "title": "Track Layout:"
         },
         "profile": {
-          "title": "Profile:"
+          "title": "Profile (id):"
         },
         "kp": {
           "title": "KP:"
@@ -174,7 +218,7 @@
           "title": "Depth Found:"
         },
         "spanBefor": {
-          "title": "Span Befor:"
+          "title": "Span Before:"
         },
         "spanAfter": {
           "title": "Span After:"
@@ -185,253 +229,12 @@
       }
     }
   },
-  "poleSupportDrillingIfTransPlatesForm": {
-    "title": "Pole Support Drilling If Trans Plates",
-    "poleSupportDrillingIfTransPlatesFormModel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm4": {
-        "checkbox1": {
-          "title": "Checkbox1 Label",
-          "name": "checkbox1"
-        },
-        "checkbox2": {
-          "title": "Checkbox2 Label",
-          "name": "checkbox2"
-        },
-        "checkbox3": {
-          "title": "Checkbox3 Label",
-          "name": "checkbox3"
-        },
-        "checkbox4": {
-          "title": "Checkbox4 Label",
-          "name": "checkbox4"
-        },
-        "checkbox5": {
-          "title": "Checkbox5 Label",
-          "name": "checkbox5"
-        },
-        "comments1": {
-          "title": "Comments"
-        },
-        "comments2": {
-          "title": "Comments"
-        },
-        "comments3": {
-          "title": "Comments"
-        },
-        "comments4": {
-          "title": "Comments"
-        },
-        "comments5": {
-          "title": "Comments"
-        },
-        "completed": {
-          "title": "Completed"
-        },
-        "checkbox1NotOk": {
-          "title": "Checkbox1NotOk Label"
-        },
-        "checkbox2NotOk": {
-          "title": "Checkbox2NotOk Label"
-        },
-        "checkbox3NotOk": {
-          "title": "Checkbox3NotOk Label"
-        },
-        "checkbox4NotOk": {
-          "title": "Checkbox4NotOk Label"
-        },
-        "checkbox5NotOk": {
-          "title": "Checkbox5NotOk Label"
-        }
-      }
-    }
-  },
-  "cantCounterwAnchorsDrilling": {
-    "title": "Cant Counterw Anchors Drilling",
-    "cantCounterwAnchorsDrillingModel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm5": {}
-    }
-  },
-  "returnWire2Drilling": {
-    "title": "Return Wire 2 Drilling",
-    "returnWire2DrillingModel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm6": {}
-    }
-  },
-  "concreting": {
-    "title": "Concreting",
-    "concretingModel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm8": {}
-    }
-  },
-  "reinforcement": {
-    "title": "Reinforcement",
-    "reinforcementModel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm9": {}
-    }
-  },
-  "excavation": {
-    "title": "Excavation",
-    "excavationModel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm12": {}
-    }
-  },
-  "cantileverSupportAndCounterWeights": {
-    "title": "Cantilever Support & Counter Weights",
-    "cantileverSupportAndCounterWeightsModel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm13": {
-        "textField": {
-          "title": "Text field",
-          "placeholder": "Type here ..."
-        }
-      }
-    }
-  },
-  "portal": {
-    "title": "Portal",
-    "portalModel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm15": {}
-    }
-  },
-  "pole": {
-    "title": "Pole",
-    "poleModel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm16": {}
-    }
-  },
-  "returnWire2AndSupportAndConnection": {
-    "title": "Return Wire 2 & Support & Connection",
-    "returnWire2AndSupportAndConnectionModel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm17": {}
-    }
-  },
-  "cantileverInstallation": {
-    "title": "Cantilever Installation",
-    "cantileverInstallationModel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm18": {}
-    }
-  },
-  "cantileversManufacture": {
-    "title": "Cantilevers Manufacture",
-    "cantileversManufactureModel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm19": {}
-    }
-  },
-  "counterwWeight": {
-    "title": "Counterw Weight",
-    "counterwWeightModel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm21": {}
-    }
-  },
-  "couterwPulley": {
-    "title": "Couterw Pulley",
-    "couterwPulleyModel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm22": {}
-    }
-  },
-  "contactWireLaying": {
-    "title": "Contact Wire Laying",
-    "contactWireLayingModel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm23": {}
-    }
-  },
-  "droppers": {
-    "title": "Droppers",
-    "droppersModel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm24": {}
-    }
-  },
-  "messengerWireLaying": {
-    "title": "Messenger Wire Laying",
-    "messengerWireLayingModel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm25": {}
-    }
-  },
-  "returnWireLaying1": {
-    "title": "Return Wire Laying 1",
-    "returnWireLaying1Model": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm26": {
-        "textField1": {
-          "title": "Text field",
-          "placeholder": "Type here ..."
-        }
-      }
-    }
-  },
-  "returnWireLaying2": {
-    "title": "Return Wire Laying 2",
-    "returnWireLaying2Model": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm27": {}
-    }
-  },
-  "tieRodsClampsInsulatorsCrossBarsAndMidp": {
-    "title": "Tie Rods, Clamps' Insulators, Cross-Bars And MID-P",
-    "tieRodsClampsInsulatorsCrossBarsAndMidpModel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm28": {}
-    }
-  },
-  "eandB": {
-    "title": "E & B",
-    "eandBmodel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm29": {}
-    }
-  },
-  "generalAdjustement": {
-    "title": "General Adjustement",
-    "generalAdjustementModel": {
-      "submitButton": "Save",
-      "cancelButton": "Cancel",
-      "editableListForm30": {}
-    }
-  },
   "elementLocationMaps": {
-    "title": "Element Location Map",
+    "title": "Element Location",
     "elementLocationMapsModel": {
       "detailHeaderFieldValue": "Detail"
     }
   },
- 
   "surveyorMarking": {
     "title": "Surveyor Marking",
     "surveyorMarkingModel": {
@@ -476,170 +279,17 @@
       }
     }
   },
-  "poleSupportDrillingIfTransPlatesForm2": {
-    "title": "Pole Support Drilling If Trans Plates Form",
-    "poleSupportDrillingIfTransPlatesForm2Model": {
-      "editableListForm36": {}
-    }
-  },
+ 
   "projectDetailView": {
     "title": "projects",
     "projectDetailViewModel": {
       "detailHeaderFieldValue": "Detail"
     }
   },
-  "tryFormDetailView": {
-    "title": "try form 1",
-    "tryFormDetailViewModel": {
-      "detailHeaderFieldValue": "Detail",
-      "editScreenHeaderValue": "Edit",
-      "editableListForm40": {
-        "checkbox6": {
-          "title": "Label"
-        }
-      }
-    }
-  },
-  "poleSupportDrillingIfTransPlatesForm22": {
-    "title": "Pole Support Drilling If Trans Plates Form",
-    "poleSupportDrillingIfTransPlatesForm22Model": {
-      "editableListForm43": {}
-    }
-  },
   "mapView": {
     "title": "Map",
     "mapViewModel": {
       "detailHeaderFieldValue": "Detail"
-    }
-  },
-  "cantCounterwAnchorsDrilling2": {
-    "title": "Cant Counterw Anchors Drilling",
-    "cantCounterwAnchorsDrilling2Model": {
-      "editableListForm54": {}
-    }
-  },
-  "returnWire2Driliing2": {
-    "title": "Return Wire 2 Driliing",
-    "returnWire2Driliing2Model": {
-      "editableListForm59": {}
-    }
-  },
-  "concreting2": {
-    "title": "Concreting",
-    "concreting2Model": {
-      "editableListForm64": {}
-    }
-  },
-  "reinforcement2": {
-    "title": "Reinforcement",
-    "reinforcement2Model": {
-      "editableListForm69": {}
-    }
-  },
-  "excavation2": {
-    "title": "Excavation",
-    "excavation2Model": {
-      "editableListForm74": {}
-    }
-  },
-  "cantileverSupportAndCounterWeight2": {
-    "title": "Cantilever Support And Counter Weight",
-    "cantileverSupportAndCounterWeight2Model": {
-      "editableListForm79": {}
-    }
-  },
-  "portal2": {
-    "title": "Portal",
-    "portal2Model": {
-      "editableListForm84": {}
-    }
-  },
-  "pole2": {
-    "title": "Pole",
-    "pole2Model": {
-      "editableListForm93": {}
-    }
-  },
-  "returnWire2AndSupportAndConnection2": {
-    "title": "Return Wire 2 & Support & Connection",
-    "returnWire2AndSupportAndConnection2Model": {
-      "editableListForm98": {}
-    }
-  },
-  "cantileverInstallation2": {
-    "title": "Cantilever Installation",
-    "cantileverInstallation2Model": {
-      "editableListForm103": {}
-    }
-  },
-  "cantileverManufacture2": {
-    "title": "Cantilever Manufacture",
-    "cantileverManufacture2Model": {
-      "editableListForm112": {}
-    }
-  },
-  "counterwWeight2": {
-    "title": "Counterw Weight",
-    "counterwWeight2Model": {
-      "editableListForm117": {}
-    }
-  },
-  "counterwPulley2": {
-    "title": "Counterw Pulley",
-    "counterwPulley2Model": {
-      "editableListForm122": {}
-    }
-  },
-  "contactWireLaying2": {
-    "title": "Contact Wire Laying",
-    "contactWireLaying2Model": {
-      "editableListForm127": {}
-    }
-  },
-  "droppers2": {
-    "title": "Droppers",
-    "droppers2Model": {
-      "editableListForm132": {}
-    }
-  },
-  "messengerWireLaying2": {
-    "title": "Messenger Wire Laying",
-    "messengerWireLaying2Model": {
-      "editableListForm135": {}
-    }
-  },
-  "returnWireLaying12": {
-    "title": "Return Wire Laying 1",
-    "returnWireLaying12Model": {
-      "editableListForm140": {
-        "textAreaField": {
-          "title": "Textarea field"
-        }
-      }
-    }
-  },
-  "returnWireLaying22": {
-    "title": "Return Wire Laying 2",
-    "returnWireLaying22Model": {
-      "editableListForm145": {}
-    }
-  },
-  "tieRoadsClampsInsulatorsCrossBarAndMipd2": {
-    "title": "Tie-Roads Clamps' Insulators Cross-Bar And MIP-D",
-    "tieRoadsClampsInsulatorsCrossBarAndMipd2Model": {
-      "editableListForm150": {}
-    }
-  },
-  "eandB2": {
-    "title": "E & B",
-    "eandB2Model": {
-      "editableListForm155": {}
-    }
-  },
-  "generalAdjustement2": {
-    "title": "General Adjustement",
-    "generalAdjustement2Model": {
-      "editableListForm160": {}
     }
   },
   "generalMapView": {
@@ -663,5 +313,168 @@
         }
       }
     }
+  },
+  "geotechnicalForm": {
+    "title": "Geotechnical Form",
+    "geotechnicalFormModel": {
+      "addScreenHeaderValue": "Create",
+      "editableListForm166": {
+        "DrillingDate": {
+          "title": "Drilling Date:",
+          "placeholder": "Type here ..."
+        },
+        "EstimatedUnit": {
+          "title": "Estimated Unit:"
+        },
+        "TOP_LAYER": {
+          "title": "Top Layer Unit:"
+        },
+        "TopLayerTHICKNESS": {
+          "title": "Top Layer Thickness:"
+        },
+        "SecondLayerUNIT": {
+          "title": "Second Layer Unit:"
+        },
+        "SecondLayerTHICKNESS": {
+          "title": "Second Layer Thickness:"
+        },
+        "ThirdLayerUNIT": {
+          "title": "Third Layer Unit:"
+        },
+        "ThirdLayerTHICKNESS": {
+          "title": "Third Layer Thickness:"
+        },
+        "TotalDepth": {
+          "title": "Total Depth:"
+        },
+        "PlainTerraineStimated": {
+          "title": "Plain Terrain Etimated:"
+        },
+        "PlainTerrainACTUAL": {
+          "title": "Plain Terrain Actual:"
+        },
+        "secondLayerThickness": {
+          "title": "Second Layer Thickness:"
+        },
+        "COMMENTS": {
+          "title": "Comments:"
+        }
+      },
+      "editableListForm167": {}
+    }
+  },
+  "castingForm": {
+    "title": "CASTING",
+    "castingFormModel": {
+      "addScreenHeaderValue": "Create",
+      "editableListForm170": {
+        "FactoryName": {
+          "title": "Factory Name:"
+        },
+        "CASTINGDATE": {
+          "title": "Casting Date:"
+        },
+        "DESIGNEDDEPTH": {
+          "title": "Designed Depth:"
+        },
+        "MeasuredDEPTH": {
+          "title": "Measured Depth:"
+        },
+        "MIXTURENUMBER": {
+          "title": "Mixture Number:"
+        },
+        "ConcreteType": {
+          "title": "Concrete Type:"
+        },
+        "DeliveryNote": {
+          "title": "Delivery Note:"
+        },
+        "BATCH": {
+          "title": "Batch:"
+        },
+        "COMMENTS": {
+          "title": "Comments:"
+        }
+      },
+      "editableListForm171": {}
+    }
+  },
+  "laboratoryTestForm": {
+    "title": "LABORATORYTEST",
+    "laboratoryTestFormModel": {
+      "addScreenHeaderValue": "Create",
+      "editableListForm176": {
+        "concreteLaboratoTestResults": {
+          "title": "ConcreteLaboratoTestResults"
+        },
+        "DateOfReport": {
+          "title": "Date Of Report:"
+        },
+        "RECEIVED_REPORT": {
+          "title": "Recieved Report:"
+        },
+        "AVARAGE_STRENGTH_MPa": {
+          "title": "Avarage Strength MPa:"
+        },
+        "MINIMALSTRENGTHMPa": {
+          "title": "Minimal Strength MPa:"
+        },
+        "APPLIANCE_WITH_CODEREQUIREMENTS": {
+          "title": "Appliance With Coderquirements:"
+        },
+        "COMMENTS": {
+          "title": "Comments:"
+        }
+      },
+      "editableListForm177": {}
+    }
+  },
+  "impairmentDetailView": {
+    "title": "Impairments",
+    "elementName": "Element Name: ",
+    "checkName": "Check: ",
+    "noImpairments": "No Open Quality Impairments",
+    "impairmentDate": "Impairtment Date: ",
+    "status": "Status: ",
+    "correctTitle": "Proof Of Corrective Action",
+    "fixedTitle": "Mark if already corrected",
+    "correctDescription": "Correct Description:",
+    "correctDate": "Correct Date:",
+    "correctImage": "Image",
+    "correctSignature": "Signature",
+    "talkbubbleText1": "By choosing 'Approved' you are confirming",
+    "talkbubbleText2": "that the corrective actions were completed!",
+    "impairmentDetailsTitle": "Impairment Details",
+    "impairmentDetailsTitle2": "Impairment Details:",
+    "dueDate": "Due Date:",
+    "location": "Location",
+    "image1": "Image 1",
+    "image2": "Image 2",
+    "qualityImpairmentTitle": "Quality impairment"
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

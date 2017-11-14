@@ -306,6 +306,39 @@ app.localization.registerView('generalMapView');
                 }
                 return linkChunks[0] + this.get('currentItem.' + linkChunks[1]);
             },
+            getMapCenter: function () {
+                generalMapViewModel.infoWindow.setPosition(generalMapViewModel.pos);
+                generalMapViewModel.infoWindow.setContent('<br/>'+ 'You Are Here'); //Location found.
+                // generalMapViewModel.infoWindow.open(generalMapViewModel.map);
+                generalMapViewModel.map.setCenter(generalMapViewModel.pos);
+            },
+            loadElements: function() {
+                var jsdoOptionsElem = generalMapViewModel.get('_jsdoOptions'),
+                    jsdoElem = new progress.data.JSDO(jsdoOptionsElem);
+
+                dataSourceOptions.transport.jsdo = jsdoElem;
+                var dataSourceElem = new kendo.data.DataSource(dataSourceOptions);
+
+                dataSourceElem.filter({
+                    logic: "and",
+                    filters: [
+                        { field: "Latitude", operator: "neq", value: "NaN" },
+                        { field: "Latitude", operator: "neq", value: "null" },
+                        { field: "Longtitud", operator: "neq", value: "NaN" },
+                        { field: "Longtitud", operator: "neq", value: "null" },
+                        // { field: "elementStage", operator: "neq", value: "null" }, //**********
+                        { field: "locationId", operator:"==", value:sessionStorage.getItem("locationId") }
+                    ]
+                });
+
+                dataSourceElem.fetch(function() {
+                    var elementsWithLocation = dataSourceElem.data();
+                    console.log("elementsWithLocation")
+                    console.log(elementsWithLocation)
+                    app.generalMapView.generalMapViewModel.elements = elementsWithLocation;
+                    generalMapViewModel.loadMap();
+                });
+            },
             loadMap: function() {
                 // app.mobileApp.pane.loader.show();
                 //     generalMapViewModel.pos = {
@@ -313,7 +346,7 @@ app.localization.registerView('generalMapView');
                 //         lng: 35.18869
                 //   };
                     this.myOptions = {
-                        // center: generalMapViewModel.pos,
+                        // center: new google.maps.LatLng(31.77173, 35.18869),
                         zoom: 18,
                         mapTypeControl: true, 
                         mapTypeControlOptions: {
@@ -352,9 +385,6 @@ app.localization.registerView('generalMapView');
                         //         lng: 35.1908773
                         //   };
 
-                            /*infoWindow.setPosition(pos);
-                            infoWindow.setContent('Location found.');
-                            map.setCenter(pos);*/
                             generalMapViewModel.infoWindow.setPosition(generalMapViewModel.pos);
                             generalMapViewModel.infoWindow.setContent('<br/>'+ 'You Are Here'); //Location found.
                             // generalMapViewModel.infoWindow.open(generalMapViewModel.map);
@@ -381,13 +411,11 @@ app.localization.registerView('generalMapView');
             },
             showElements: function() {
                 var elementLocation;
-                // console.log("this.elements")
-                // console.log(this.elements)
+                
                 if(this.elements.length > 0) {
                     var i;
                     for(i=0; i<this.elements.length; i++) {
                         switch(this.elements[i].elementStage) {
-                            // case 0: 
                             case 1: 
                                 generalMapViewModel.addMarker(this.elements[i], this.map, 1);
                                 break;
@@ -411,12 +439,9 @@ app.localization.registerView('generalMapView');
                                 break;
                         }
                     }
-                    // console.log("I")
-                    // console.log(i)
                 }
             },
             attachMessage: function(marker, element) {
-                //this.elements
                 var contentString = '<div id="content">' + 
                     '<p><b>' + element.name + '</b></p>' +
                     '<div id="bodyContent">' +
@@ -467,6 +492,14 @@ app.localization.registerView('generalMapView');
                     });
                     this.attachMessage(marker, element);
                 },
+                closeNeedGPS: function(e) {
+                    $("#needGPSPopUp").kendoMobileModalView("close");
+                    app.mobileApp.navigate('#components/controlPanel/view.html');
+                },
+                openSettingsNeedGPS: function(e) {
+                    $("#needGPSPopUp").kendoMobileModalView("close");
+                    cordova.plugins.diagnostic.switchToLocationSettings();
+                },
             /// start masterDetails view model functions
             /// end masterDetails view model functions
             currentItem: {}
@@ -484,32 +517,18 @@ app.localization.registerView('generalMapView');
     } else {
         parent.set('generalMapViewModel', generalMapViewModel);
     }
-//   function calldialog() {
-                    
-//                     document.addEventListener("deviceready",function(){
-//                         //default dialog
-//                         cordova.dialogGPS("Your GPS is Disabled, this app needs to be enable to works.",//message
-//                             "Use GPS, with wifi or 3G.",//description
-//                             function(buttonIndex){//callback
-//                             switch(buttonIndex) {
-//                                 case 0: break;//cancel
-//                                 case 1: break;//neutro option
-//                                 case 2: break;//user go to configuration
-//                             }},
-//                             "Please Turn on GPS",//title
-//                             ["Cancel","Later","Go"]);//buttons
-//                     });
-//                 }
 
     function dialog() {
        cordova.plugins.diagnostic.isLocationAvailable(function(available){
             // alert("Location is " + (available ? "available" : "not available"));
             if(available == false) {
-                alert("Location is not available");
-                cordova.plugins.diagnostic.switchToLocationSettings();
+                // alert("Location is not available");
+                $("#needGPSPopUp").kendoMobileModalView("open");
+                // cordova.plugins.diagnostic.switchToLocationSettings();
             }
             // else if(available == true) {
-                generalMapViewModel.loadMap();
+                generalMapViewModel.loadElements();
+                // generalMapViewModel.loadMap();
             // }
         }, function(error){
             alert("The following error occurred: "+error);
@@ -517,7 +536,6 @@ app.localization.registerView('generalMapView');
     }
     
     parent.set('onShow', function(e) {
-        //  navigator.geolocation.getCurrentPosition(function(position){generalMapViewModel.loadMap();}, dialog());
         generalMapViewModel.gmapFlag = true;
         dialog();
                 
@@ -538,11 +556,6 @@ app.localization.registerView('generalMapView');
             }
         }
 
-        //app.mobileApp.pane.loader.show();
-        // generalMapViewModel.set('mapVisble', false);
-        // generalMapViewModel.set('itemDetailsVisible', false);
-
-        //if (!generalMapViewModel.get('dataSource')) {
             dataProvider.loadCatalogs().then(function _catalogsLoaded() {
                 var jsdoOptions = generalMapViewModel.get('_jsdoOptions'),
                     jsdo = new progress.data.JSDO(jsdoOptions);
@@ -552,106 +565,10 @@ app.localization.registerView('generalMapView');
                 generalMapViewModel.set('dataSource', dataSource);
                 dataSource.one('change', setupMapView);
                 fetchFilteredData(param);
-                // alert(111)
+                
+                // generalMapViewModel.loadElements();
                 // generalMapViewModel.loadMap();
-
-                /*app.mobileApp.pane.loader.show();
-                var myOptions = {
-                    zoom: 18,
-                    mapTypeControl: true, 
-                    mapTypeControlOptions: {
-                        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-                        position: google.maps.ControlPosition.TOP_CENTER
-                    },
-                    mapTypeId: google.maps.MapTypeId.ROADMAP,
-                    zoomControl: true,
-                    zoomControlOptions: {
-                        style: google.maps.ZoomControlStyle.LARGE,
-                        position: google.maps.ControlPosition.TOP_LEFT
-                    },
-                    scaleControl: true,
-                };
-                var mapElement = $("#generalMapViewModelMap");
-                var container = e.view.content;
-
-                 var map = new google.maps.Map(mapElement[0], myOptions);
-                 var infoWindow = new google.maps.InfoWindow({map: this.map});*/
-
-                /*if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function(position) {
-                        //var pos = {
-                            //lat: position.coords.latitude,
-                            //lng: position.coords.longitude
-                        //};
-                        var pos = {
-                            lat: 31.7660014,
-                            lng: 35.1908773
-                        };
-
-                        //infoWindow.setPosition(pos);
-                        //infoWindow.setContent('Location found.');
-                        //map.setCenter(pos);
-                        //infoWindow.setPosition(pos);
-                        //infoWindow.setContent('<br/>'+ 'You Are Here'); //Location found.
-                        infoWindow.open(map);
-                        map.setCenter(pos);
-                        
-                        //app.mobileApp.pane.loader.hide();
-                    }, function() {
-                        handleLocationError(true, infoWindow, map.getCenter());
-                    });*/
-
-                    /*dataSource.fetch(function() {
-                        var elements = dataSource.data();
-                        console.log("elements")
-                        console.log(elements)
-                        var elementLocation;
-                        for(var i=0; i<elements.length; i++) {
-                            if(elements[i].Latitude != "NaN" && elements[i].Longtitud != "NaN" && elements[i].elementStage != "null") {
-                                console.log("element")
-                                console.log(elements[i].elementStage)
-                                switch(elements[i].elementStage) {
-                                    case 1: console.log("1");  elementLocation = new google.maps.LatLng(elements[i].Latitude, elements[i].Longtitud);
-                                        generalMapViewModel.addMarker(elementLocation, this.map, 1);
-                                        break;
-                                    case 2: console.log("2");  elementLocation = new google.maps.LatLng(elements[i].Latitude, elements[i].Longtitud);
-                                        generalMapViewModel.addMarker(elementLocation,this.mapmap, 2);
-                                        break;
-                                    case 3: console.log("3"); elementLocation = new google.maps.LatLng(elements[i].Latitude, elements[i].Longtitud);
-                                        generalMapViewModel.addMarker(elementLocation, this.map, 3);
-                                        break;
-                                    case 4:  console.log("4"); elementLocation = new google.maps.LatLng(elements[i].Latitude, elements[i].Longtitud);
-                                        generalMapViewModel.addMarker(elementLocation, this.map, 4);
-                                        break;
-                                    case 5: console.log("5"); elementLocation = new google.maps.LatLng(elements[i].Latitude, elements[i].Longtitud);
-                                        generalMapViewModel.addMarker(elementLocation, this.map, 5);
-                                        break;
-                                    case 6: console.log("6"); elementLocation = new google.maps.LatLng(elements[i].Latitude, elements[i].Longtitud);
-                                        generalMapViewModel.addMarker(elementLocation, this.map, 6);
-                                        break;
-                                }
-                            }
-                        }
-                    });*/
-                /*} else {
-                    // Browser doesn't support Geolocation
-                    handleLocationError(false, infoWindow, map.getCenter());
-                    //app.mobileApp.pane.loader.hide();
-                }
-                function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-                    infoWindow.setPosition(pos);
-                    infoWindow.setContent(browserHasGeolocation ?
-                                        'Error: The Geolocation service failed.' :
-                                        'Error: Your browser doesn\'t support geolocation.');
-                    infoWindow.open(map);
-                }*/
             });
-            //app.mobileApp.pane.loader.hide();
-        /*} else {
-            fetchFilteredData(param);
-            generalMapViewModel.loadMap();
-        }*/
-
     });
 
     parent.set('onHide', function() {

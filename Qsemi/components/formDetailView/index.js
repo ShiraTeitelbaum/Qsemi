@@ -13,7 +13,7 @@ app.localization.registerView('formDetailView');
 (function(parent) {
     var dataProvider = app.data.qcsemidataProvider,
         /// start global model properties
-        current,
+        current, currentCheck, checklist, checks, 
         processImage = function(img) {
 
             if (!img) {
@@ -73,6 +73,10 @@ app.localization.registerView('formDetailView');
             name: 'ElementGallery',
             autoFill: false
         },
+        jsdoOptionsNCR = {
+            name: 'QualityImpairment',
+            autoFill: false
+        },
         dataSourceOptions = {
             type: 'jsdo',
             transport: {},
@@ -81,6 +85,11 @@ app.localization.registerView('formDetailView');
                 var type = e.type;
                 //console.log(type); // displays "read"
                 //console.log(response);
+                if(type == "read") {
+                    // console.log("response")
+                    // console.log(response)
+                    checklist = response;
+                }
                 if(type == "create")
                 {
                     current = response;
@@ -113,6 +122,10 @@ app.localization.registerView('formDetailView');
                             field: 'name',
                             defaultValue: ''
                         },
+                        'status': {
+                            field: 'status',
+                            defaultValue: 'red'
+                        }
                     }
                 }
             },
@@ -127,14 +140,19 @@ app.localization.registerView('formDetailView');
                 var type = e.type;
                 //console.log(type); // displays "read"
                 //console.log(response);
+                if(type == "read") {
+                    // console.log("checks response")
+                    // console.log(checks)
+                    checks = response;
+                }
                 if(type == "create")
                 {
-                    current = response;
+                    currentCheck = response;
                     //updatedWorker = currentWorker;
                 }
                  if(type == "update")
                 {
-                    current = response;
+                    currentCheck = response;
                    
                 }
             },
@@ -173,6 +191,9 @@ app.localization.registerView('formDetailView');
                 var type = e.type;
                 //console.log(type); // displays "read"
                 //console.log(response);
+                if(type == "read") {
+                    checks = response;
+                }
                 if(type == "create")
                 {
                     current = response;
@@ -219,6 +240,11 @@ app.localization.registerView('formDetailView');
                 var type = e.type;
                 //console.log(type); // displays "read"
                 //console.log(response);
+                if(type == "read") {
+                    // console.log("response")
+                    // console.log(response)
+                    checklist = response;
+                }
                 if(type == "create")
                 {
                     current = response;
@@ -304,6 +330,53 @@ app.localization.registerView('formDetailView');
             serverFiltering: true,
             serverSorting: true,
         },
+         dataSourceOptionsNCR = {
+            type: 'jsdo',
+            transport: {},
+            requestEnd: function(e) {
+                var response = e.response;
+                var type = e.type;
+                //console.log(type); // displays "read"
+                //console.log(response);
+                /*if(type == "create")
+                {
+                    current = response;
+                    //updatedWorker = currentWorker;
+                }*/
+                 if(type == "update")
+                {
+                    current = response;
+                   
+                }
+            },
+            error: function(e) {
+                app.mobileApp.pane.loader.hide();
+                if (e.xhr) {
+                    var errorText = "";
+                    try {
+                        errorText = JSON.stringify(e.xhr);
+                    } catch (jsonErr) {
+                        errorText = e.xhr.responseText || e.xhr.statusText || 'An error has occurred!';
+                    }
+                    alert(errorText);
+                } else if (e.errorThrown) {
+                    alert(e.errorThrown);
+                }
+            },
+            schema: {
+                model: {
+                    fields: {
+                        'name': {
+                            field: 'name',
+                            defaultValue: ''
+                        },
+                    }
+                }
+            },
+            sort:{ field: "name", dir: "asc" },
+            serverFiltering: true,
+            serverSorting: true,
+        },
         /// start data sources
         /// end data sources
         formDetailViewModel = kendo.observable({
@@ -312,14 +385,19 @@ app.localization.registerView('formDetailView');
             _dataSourceOptionsCore: dataSourceOptionsCore,
             _dataSourceOptionsCoreChecks: dataSourceOptionsCoreChecks,
             _dataSourceOptionsGallery: dataSourceOptionsGallery,
+            _dataSourceOptionsNCR: dataSourceOptionsNCR,
             _jsdoOptions: jsdoOptions,
             _jsdoOptionsChecks: jsdoOptionsChecks,
             _jsdoOptionsCore: jsdoOptionsCore,
             _jsdoOptionsCoreChecks: jsdoOptionsCoreChecks,
             _jsdoOptionsGallery: jsdoOptionsGallery,
+            _jsdoOptionsNCR: jsdoOptionsNCR,
             formName: '',
             formId: '',
             pageScroller: '',
+            elementDetails: {},
+            not_ok_flag: false,
+            currentCheckId: '',
             fixHierarchicalData: function(data) {
                 var result = {},
                     layout = {};
@@ -373,12 +451,12 @@ app.localization.registerView('formDetailView');
             },
             itemCoreClick: function(e) {
                 var dataItem = e.dataItem || formDetailViewModel.originalItem;
-                //app.mobileApp.navigate('#components/formDetailView/details.html?uid=' + dataItem.uid);
+               
                 app.mobileApp.navigate('#components/formDetailView/addCoreData.html?uid=' + dataItem.uid);
             },
             itemClick: function(e) {
                 var dataItem = e.dataItem || formDetailViewModel.originalItem;
-                //app.mobileApp.navigate('#components/formDetailView/details.html?uid=' + dataItem.uid);
+               
                 app.mobileApp.navigate('#components/formDetailView/add.html?uid=' + dataItem.uid);
 
             },
@@ -425,6 +503,32 @@ app.localization.registerView('formDetailView');
                 }
                 return linkChunks[0] + this.get('currentItem.' + linkChunks[1]);
             },
+            // loadImage: function(e) {
+            //     var jsdoOptionsGallery = formDetailViewModel.get('_jsdoOptionsGallery'),
+            //             jsdoGallery = new progress.data.JSDO(jsdoOptionsGallery),
+            //             dataSourceOptionsGallery = formDetailViewModel.get('_dataSourceOptionsGallery');
+            //         dataSourceOptionsGallery.transport.jsdo = jsdoGallery;
+            //     var dataSourceGallery = new kendo.data.DataSource(dataSourceOptionsGallery);
+
+            //     dataSourceGallery.filter({
+            //         logic: "and",
+            //         filters: [
+            //             { field: "R369676467", operator: '==', value: app.elementDetailView.elementDetailViewModel.currentItem.id},
+            //             { field: "R369888918", operator: '==', value: formDetailViewModel.formId}
+            //         ]
+            //     });
+                
+            //     dataSourceGallery.sort({ field: "updatedAt", dir: "desc" });
+
+            //     dataSourceGallery.fetch(function() {
+            //         var images = dataSourceGallery.data();
+            //         console.log("images")
+            //         console.log(images)
+            //     });                
+            // },
+            saveWarningPopUp: function(e) {
+                $("#warningPopUp").kendoMobileModalView("close");
+            },
             closeAddPopUpImg: function(e) {
                 $("#addCapturePhotoPop").kendoMobileModalView("close");
             },
@@ -466,7 +570,7 @@ app.localization.registerView('formDetailView');
                             ft.upload(
                                 imagefile,
                                 encodeURI(urlRB),
-                                onFileUploadSuccess( ),
+                                onFileUploadSuccess2( ),
                                 onFileTransferFail,
                                 options,
                                 true);
@@ -475,6 +579,67 @@ app.localization.registerView('formDetailView');
                 };
                 jsdoGallery.subscribe('afterCreate', afterCreateFn);
                 jsdoGallery.saveChanges();
+            },
+            showElementDetails: function() {
+                document.getElementById("LastUpdateDate").innerHTML = kendo.toString(formDetailViewModel.elementDetails.updatedAt, "dd/MM/yyyy"); 
+                document.getElementById("PoleType").innerHTML = formDetailViewModel.elementDetails.PoleType;
+                document.getElementById("Ancohorage").innerHTML = formDetailViewModel.elementDetails.Ancohorage;
+                document.getElementById("Sectionning").innerHTML = formDetailViewModel.elementDetails.Sectionning;
+                document.getElementById("SoilFound").innerHTML = formDetailViewModel.elementDetails.SoilFound;
+                document.getElementById("AnchoragesKP").innerHTML = formDetailViewModel.elementDetails.AnchoragesKP;
+                document.getElementById("TrackLayout").innerHTML = formDetailViewModel.elementDetails.TrackLayout;
+                document.getElementById("Profile").innerHTML = formDetailViewModel.elementDetails.Profile;
+                document.getElementById("KP").innerHTML = formDetailViewModel.elementDetails.KP;
+                document.getElementById("Embankment").innerHTML = formDetailViewModel.elementDetails.Embankment;
+                document.getElementById("AnchorageFoundation").innerHTML = formDetailViewModel.elementDetails.AnchorageFoundation;
+                document.getElementById("Foundation").innerHTML = formDetailViewModel.elementDetails.Foundation;
+                document.getElementById("DepthFound").innerHTML = formDetailViewModel.elementDetails.DepthFound;
+                document.getElementById("SpanBefor").innerHTML = formDetailViewModel.elementDetails.SpanBefor;
+                document.getElementById("SpanAfter").innerHTML = formDetailViewModel.elementDetails.SpanAfter;
+                document.getElementById("DepthAnchor").innerHTML = formDetailViewModel.elementDetails.DepthAnchor;
+            },
+            showFormImage: function(num) {
+                 var jsdoOptionsGallery = formDetailViewModel.get('_jsdoOptionsGallery'),
+                        jsdoGallery = new progress.data.JSDO(jsdoOptionsGallery),
+                        dataSourceOptionsGallery = formDetailViewModel.get('_dataSourceOptionsGallery');
+                    dataSourceOptionsGallery.transport.jsdo = jsdoGallery;
+                var dataSourceGallery = new kendo.data.DataSource(dataSourceOptionsGallery);
+            
+                if(num != 0) {
+                    dataSourceGallery.filter({
+                        logic: "and",
+                        filters: [ 
+                            { field: "R369676467", operator: "==", value: app.elementDetailView.elementDetailViewModel.currentItem.id },
+                            { field: "R369888918", operator: "==", value: formDetailViewModel.formId }
+                            ]});
+                }
+                else {
+                    dataSourceGallery.filter({ field: "R369676467", operator: "==", value: app.elementDetailView.elementDetailViewModel.currentItem.id });
+                }
+
+                dataSourceGallery.sort({ field: "updatedAt", dir: "desc" });
+
+                dataSourceGallery.fetch(function() {
+                    var view = dataSourceGallery.data();
+                    // console.log("view")
+                    // console.log(view)
+                    if(view[0] != undefined) {
+                        // var imageObj = $.parseJSON(view[0].image);
+                        // view[0].image = processImage(formDetailViewModel.get('_dataSourceOptionsGallery').transport.jsdo.url + imageObj.src);
+                        
+                        if(view[0].imageURL != "null") {
+                            $("#addCapturePhoto").css("color", "red");
+                            // var imageObj = $.parseJSON(view[0].image);
+                            // view[0].image = processImage(formDetailViewModel.get('_dataSourceOptionsGallery').transport.jsdo.url + imageObj.src);
+                                    
+                            document.getElementById("addCapturePhotoImg").src = view[0].imageURL;
+                            // document.getElementById("addCapturePhotoImg").setAttribute("src", view[0].image);
+                        }
+                        else {
+                            $("#addCapturePhoto").css("color", "black");
+                        }
+                    }
+                });
             },
             /// start masterDetails view model functions
             /// end masterDetails view model functions
@@ -486,6 +651,16 @@ app.localization.registerView('formDetailView');
         /// end add model properties
         /// start add model functions
         /// end add model functions
+         onInitCoreData: function(e) {
+               var $sigdiv = $("#signatureCore")
+            $sigdiv.jSignature({
+                'background-color': 'transparent',
+                'decor-color': 'transparent',
+                 //'height':'8em'
+                'width': '300',
+                'height': '110'
+                }) // inits the jSignature widget.
+        },
         onInit: function(e) {
             app.mobileApp.showLoading();
              var $sigdiv = $("#signature")
@@ -497,11 +672,29 @@ app.localization.registerView('formDetailView');
                 'width': '300',
                 'height': '110'
                 }) // inits the jSignature widget. 
+                 var $sigdivNCR = $("#signatureNCR")
+            $sigdivNCR.jSignature({
+                'background-color': 'transparent',
+                'decor-color': 'transparent',
+                 //'height':'8em'
+                'width': '300',
+                'height': '110'
+                }) // inits the jSignature widget.
         },
         onShowCoreData: function(e) {
             app.mobileApp.showLoading();
             e.view.scroller.reset();
             this.pageScroller = e.view.scroller;
+
+            $(".km-scroll-container").css("overflow", "hidden");
+            var $sigdiv = $("#signatureCore");
+            // after some doodling...
+            // $sigdiv.jSignature("reset") // clears the canvas and rerenders the decor on it.
+             $(".km-scroll-container").css("overflow", "hidden");
+            var $sigdiv2 = $("#signatureNCR");
+            // after some doodling...
+            // $sigdiv2.jSignature("reset") // clears the canvas and rerenders the decor on it.
+
 
             var that = this,
                 itemUid = e.view.params.uid,
@@ -521,8 +714,7 @@ app.localization.registerView('formDetailView');
 
                 dataSource.fetch(function() {
                     var view = dataSource.data();
-                    // console.log("view")
-                    // console.log(view)
+                   
                     if(view[0] != undefined) {
                         var comments, data;
 
@@ -540,6 +732,17 @@ app.localization.registerView('formDetailView');
                             data = '';
                         }
 
+                        if(view[0].signature != null) {
+                            document.getElementById("checkCoreSignature").style.color = "red";
+                        }
+                        else {
+                            document.getElementById("checkCoreSignature").style.color = "black";
+                        }
+
+                        if($("#signatureCore").jSignature("getData") == "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") {
+                             $sigdiv.jSignature("importData", view[0].signature);
+                        }
+                        
                         that.set('itemData', itemData);
                         that.set('addFormData', {
                             Comments: comments,
@@ -549,6 +752,9 @@ app.localization.registerView('formDetailView');
                         });
                     }
                     else {
+                         if($("#signatureCore").jSignature("getData") != "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") {
+                             document.getElementById("checkCoreSignature").style.color = "red";
+                        }
                         that.set('itemData', itemData);
                         that.set('addFormData', {
                             Comments: '',
@@ -564,17 +770,8 @@ app.localization.registerView('formDetailView');
         onShow: function(e) {
             app.mobileApp.showLoading();
             e.view.scroller.reset();
+            formDetailViewModel.not_ok_flag = false;
             this.pageScroller = e.view.scroller;
-
-            // $("#processControlTitle").hide();
-            // $("#processControlImage").hide();
-            // $("#processControlChecks").hide();
-            // $("#processControlImage").hide();
-            // $("#text1").hide(); $("#text2").hide(); $("#text3").hide(); $("#text4").hide(); $("#text5").hide();
-            // $("#Text1").hide(); $("#Text2").hide(); $("#Text3").hide(); $("#Text4").hide(); $("#Text5").hide();
-            // $("#number1").hide(); $("#number2").hide(); $("#number3").hide(); $("#number4").hide(); $("#number5").hide();
-            // $("#Number1").hide(); $("#Number2").hide(); $("#Number3").hide(); $("#Number4").hide(); $("#Number5").hide();
-            // $("#pcOkNotOkTitle").hide(); $("#pcOkNotOk").hide(); $("#pcNormalNotNormalTitle").hide(); $("#pcNormalNotNormal").hide(); 
 
             if(app.elementDetailView.elementDetailViewModel.surveyorFlag == true) {
                 $("#checkStatus").hide();
@@ -584,100 +781,23 @@ app.localization.registerView('formDetailView');
             $(".km-scroll-container").css("overflow", "hidden");
             var $sigdiv = $("#signature");
             // after some doodling...
-            $sigdiv.jSignature("reset") // clears the canvas and rerenders the decor on it.
+            // $sigdiv.jSignature("reset") // clears the canvas and rerenders the decor on it.
+            //    console.log("$('#signature').jSignature('getData')")
+            // console.log($("#signature").jSignature("getData"))
 
              var that = this,
                 itemUid = e.view.params.uid,
                 dataSource = formDetailViewModel.get('dataSource'),
                 itemData = dataSource.getByUid(itemUid),
                 fixedData = formDetailViewModel.fixHierarchicalData(itemData);
+
+            if(itemData.Description == "null") {
+                $("#description").hide();
+            }
+            else {
+                $("#description").show();
+            }
             
-            // if(itemData.ShowNum1 == true || itemData.ShowNum2 == true || itemData.ShowNum3 == true || itemData.ShowNum4 == true || itemData.ShowNum5 == true ||
-            //     itemData.ShowText1 == true || itemData.ShowText2 == true || itemData.ShowText3 == true || itemData.ShowText4 == true || itemData.ShowText5 == true ||
-            //     itemData.ShowOkNotOk1 == true || itemData.ShowNormal1 == true) {
-            //         if(app.elementDetailView.elementDetailViewModel.surveyorFlag == true) {
-            //             $("#processControlTitle").show();
-            //         }
-            //         else $("#processControlTitle").hide(); 
-                    
-            //         if(itemData.ShowText1 == true) {
-            //             document.getElementById("text1inputTitle").innerHTML = itemData.TitleText1 + ':';
-            //             $("#text1").show();
-            //             $("#Text1").show();
-            //         }
-            //         if(itemData.ShowText2 == true) {
-            //             document.getElementById("text2inputTitle").innerHTML = itemData.TitleText2 + ':';
-            //             $("#text2").show();
-            //             $("#Text2").show();
-            //         }
-            //         if(itemData.ShowText3 == true) {
-            //             document.getElementById("text3inputTitle").innerHTML = itemData.TitleText3 + ':';
-            //             $("#text3").show();
-            //             $("#Text3").show();
-            //         }
-            //         if(itemData.ShowText4 == true) {
-            //             document.getElementById("text4inputTitle").innerHTML = itemData.TitleText4 + ':';
-            //             $("#text4").show();
-            //             $("#Text4").show();
-            //         }
-            //         if(itemData.ShowText5 == true) {
-            //             document.getElementById("text5inputTitle").innerHTML = itemData.TitleText5 + ':';
-            //             $("#text5").show();
-            //             $("#Text5").show();
-            //         }
-
-            //         if(itemData.ShowNum1 == true) {
-            //             document.getElementById("number1inputTitle").innerHTML = itemData.TitleNum1 + ':';
-            //             $("#number1").show();
-            //             $("#Number1").show();
-            //         }
-            //         if(itemData.ShowNum2 == true) {
-            //             document.getElementById("number2inputTitle").innerHTML = itemData.TitleNum2 + ':';
-            //             $("#number2").show();
-            //             $("#Number2").show();
-            //         }
-            //         if(itemData.ShowNum3 == true) {
-            //             document.getElementById("number3inputTitle").innerHTML = itemData.TitleNum3 + ':';
-            //             $("#number3").show();
-            //             $("#Number3").show();
-            //         }
-            //         if(itemData.ShowNum4 == true) {
-            //             document.getElementById("number4inputTitle").innerHTML = itemData.TitleNum4 + ':';
-            //             $("#number4").show();
-            //             $("#Number4").show();
-            //         }
-            //         if(itemData.ShowNum5 == true) {
-            //             document.getElementById("number5inputTitle").innerHTML = itemData.TitleNum5 + ':';
-            //             $("#number5").show();
-            //             $("#Number5").show();
-            //         }
-                    
-            //         if(itemData.image == true) {
-            //             $("#processControlImage").show();
-            //         }
-
-            //         // console.log("itemData")
-            //         // console.log(itemData)
-            //         if(itemData.ShowOkNotOk1 == true) {
-            //             // var listOkNotOK1 = app.formDetailView.formDetailViewModel._dataSourceOptions.transport.jsdo.getPicklist_OKNotOK1().response.picklistData;
-            //             // console.log("list")
-            //             // console.log(listOkNotOK1)
-
-            //             document.getElementById("okNotOkTitle").innerHTML = itemData.TitleOkNotOk1 + ':';
-            //             // document.getElementById("pc_ok_label").innerHTML = itemData.TitleOkNotOk1 + ':';
-            //             // document.getElementById("pc_not_ok_label").innerHTML = itemData.TitleOkNotOk1 + ':';
-                       
-            //             $("#pcOkNotOkTitle").show();
-            //             $("#pcOkNotOk").show(); 
-            //         }
-
-            //         if(itemData.ShowNormal1 == true) {
-            //             document.getElementById("normalNotNormalTitle").innerHTML = itemData.TitleNormal1 + ':';
-            //             $("#pcNormalNotNormalTitle").show();
-            //             $("#pcNormalNotNormal").show(); 
-            //         }
-            //     }
-
             var dataSource = formDetailViewModel.get('dataSourceChecks');
             dataSource.filter({
                 logic: "and",
@@ -696,14 +816,8 @@ app.localization.registerView('formDetailView');
                         document.getElementById("status_ok").checked = false;
                         document.getElementById("status_not_ok").checked = false;
                         document.getElementById("status_NA").checked = false;
-                        // document.getElementById("pc_ok").checked = false;
-                        // document.getElementById("pc_not_ok").checked = false;
-                        // document.getElementById("pc_normal").checked = false;
-                        // document.getElementById("pc_not_normal").checked = false;
-
+                     
                         var status = app.formDetailView.formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.getPicklist_status().response.picklistData;
-                        // var OkNotOK1 = app.formDetailView.formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.getPicklist_OkNotOK1().response.picklistData;
-                        // var Normal1 = app.formDetailView.formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.getPicklist_Normal1().response.picklistData;
                      
                         for(var i=0; i < status.length; i++) {
                             if(view[0].status == status[i].id) {
@@ -719,45 +833,6 @@ app.localization.registerView('formDetailView');
                             }
                         }
 
-                        // if(view[0].OkNotOK1 != null) {
-                        //     for(var i=0; i < OkNotOK1.length; i++) {
-                        //         if(view[0].OkNotOK1 == OkNotOK1[i].id) {
-                        //             switch(OkNotOK1[i].name) {
-                        //                 case "OK": document.getElementById("pc_ok").checked = true;
-                        //                     // $("#checkStatus").css('background-color', '#449d31');
-                        //                         break;
-                        //                 case "Not OK": document.getElementById("pc_not_ok").checked = true; 
-                        //                             //$("#checkStatus").css('background-color', '#d12229');
-                        //                             break;
-                        //             }
-                        //         }
-                        //     }
-                        // }
-
-                        // if(view[0].Normal1 != null) {
-                        //     for(var i=0; i < Normal1.length; i++) {
-                        //         if(view[0].Normal1 == Normal1[i].id) {
-                        //             switch(Normal1[i].name) {
-                        //                 case "Normal": document.getElementById("pc_normal").checked = true;
-                        //                     // $("#checkStatus").css('background-color', '#449d31');
-                        //                         break;
-                        //                 case "Not Normal": document.getElementById("pc_not_normal").checked = true; 
-                        //                             //$("#checkStatus").css('background-color', '#d12229');
-                        //                             break;
-                        //             }
-                        //         }
-                        //     }
-                        // }
-
-                        // var imageObj = $.parseJSON(view[0].image);
-                        // view[0].image = processImage(formDetailViewModel.get('_dataSourceOptionsChecks').transport.jsdo.url + imageObj.src);
-                        // if(view[0].imageURL != "null") {
-                        //     $("#addCapturePhotoForm").css("color", "red");
-                        //     // $("#addCapturePhotoFormImg").src = view[0].image; //view[0].imageURL
-                        //     document.getElementById("addCapturePhotoFormImg").setAttribute("src", view[0].image);
-                        //     // document.getElementById("addCapturePhotoFormImg").setAttribute("href", view[0].imageURL);
-                        // }
-                        
                         var commentsC, text1;
                         if(view[0].Comments != "null") {
                             commentsC = view[0].Comments;
@@ -766,19 +841,16 @@ app.localization.registerView('formDetailView');
                             commentsC = '';
                         }
                        
-                        // if(view[0].Text1 != null && view[0].Text1 != "null") { $("#text1input").val(view[0].Text1); } else { $("#text1input").val(''); }
-                        // if(view[0].Text2 != null && view[0].Text2 != "null") { $("#text2input").val(view[0].Text2); } else { $("#text2input").val(''); }
-                        // if(view[0].Text3 != null && view[0].Text3 != "null") { $("#text3input").val(view[0].Text3); } else { $("#text3input").val(''); }
-                        // if(view[0].Text4 != null && view[0].Text4 != "null") { $("#text4input").val(view[0].Text4); } else { $("#text4input").val(''); }
-                        // if(view[0].Text5 != null && view[0].Text5 != "null") { $("#text5input").val(view[0].Text5); } else { $("#text5input").val(''); }
-
-                        // if(view[0].Num1 != null && view[0].Num1 != "null") { $("#number1input").val(view[0].Num1); } else { $("#number1input").val(''); }
-                        // if(view[0].Num2 != null && view[0].Num2 != "null") { $("#number2input").val(view[0].Num2); } else { $("#number2input").val(''); }
-                        // if(view[0].Num3 != null && view[0].Num3 != "null") { $("#number3input").val(view[0].Num3); } else { $("#number3input").val(''); }
-                        // if(view[0].Num4 != null && view[0].Num4 != "null") { $("#number4input").val(view[0].Num4); } else { $("#number4input").val(''); }
-                        // if(view[0].Num5 != null && view[0].Num5 != "null") { $("#number5input").val(view[0].Num5); } else { $("#number5input").val(''); }
-
-                        $sigdiv.jSignature("importData", view[0].signature);
+                        if(view[0].signature != null) {
+                            document.getElementById("checkSignature").style.color = "red";
+                        }
+                        else {
+                            document.getElementById("checkSignature").style.color = "black";
+                        }
+                        
+                         if($("#signature").jSignature("getData") == "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") {
+                            $sigdiv.jSignature("importData", view[0].signature);
+                        }
 
                         that.set('itemData', itemData);
                         that.set('addFormData', {
@@ -788,6 +860,9 @@ app.localization.registerView('formDetailView');
                         });
                     }
                     else {
+                         if($("#signature").jSignature("getData") != "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") {
+                            document.getElementById("checkSignature").style.color = "red";
+                        }
                         that.set('itemData', itemData);
 
                         that.set('addFormData', {
@@ -809,17 +884,15 @@ app.localization.registerView('formDetailView');
             document.getElementById("status_not_ok").checked = false;
             document.getElementById("status_ok").checked = false;
             document.getElementById("status_NA").checked = false;
-            // document.getElementById("pc_ok").checked = false;
-            // document.getElementById("pc_not_ok").checked = false;
-            // document.getElementById("pc_normal").checked = false;
-            // document.getElementById("pc_not_normal").checked = false;
+          
             $("#checkComments").val('');
-            // $("#addCapturePhotoForm").css("color", "black");
-            $('#signature').jSignature('clear');
-            // app.mobileApp.navigate('#:back');
+          
+            document.getElementById("checkSignature").style.color = "black";
+            
             /// end add model cancel
         }, 
         openMap: function () {
+            app.elementLocationMaps.elementLocationMapsModel.emapFlag = true;
             app.elementLocationMaps.elementLocationMapsModel.counter = 0;
             var jsdoOptions3 = app.elementDetailView.elementDetailViewModel.get('_jsdoOptions'),
                 jsdo3 = new progress.data.JSDO(jsdoOptions3);
@@ -836,27 +909,41 @@ app.localization.registerView('formDetailView');
                 app.surveyorMarking.surveyorMarkingModel.mapFlag=true;
                 app.mobileApp.navigate('#components/elementLocationMaps/view.html');
             });
-            // app.surveyorMarking.surveyorMarkingModel.mapFlag=true;
-            // app.mobileApp.navigate('#components/elementLocationMaps/view.html');
         },
-        // closeAddPopUpImgForm: function (e) {
-        //      $("#addCapturePhotoFormPop").kendoMobileModalView("close"); 
-        // },
         openSignaturePopUp: function(e) {
             $("#signaturePopUp").kendoMobileModalView("open"); 
         },
         closeSignaturePopUp: function(e) {
+            if($("#signature").jSignature("getData") != "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") {
+                document.getElementById("checkSignature").style.color = "red";
+            }
+            else document.getElementById("checkSignature").style.color = "black";
             $("#signaturePopUp").kendoMobileModalView("close"); 
+        },
+        openSignatureCorePopUp: function(e) {
+            $("#signatureCorePopUp").kendoMobileModalView("open");
+        },
+        closeSignatureCorePopUp: function(e) {
+            if($("#signatureCore").jSignature("getData") != "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") {
+                document.getElementById("checkCoreSignature").style.color = "red";
+            }
+            else document.getElementById("checkCoreSignature").style.color = "black";
+            $("#signatureCorePopUp").kendoMobileModalView("close");
         },
         onSaveCoreClick: function(e) {
             var addFormData = this.get('addFormData'),
                 filter = formDetailViewModel && formDetailViewModel.get('paramFilter'),
-                //dataSource = formDetailViewModel.get('dataSource'),
                 dataSourceCoreChecks = formDetailViewModel.get('dataSourceCoreChecks'),
                 itemData = this.get("itemData"),
                 addModel = {};
 
                  function saveModel(data) {
+                     if($("#signatureCore").jSignature("getData") == "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") {
+                        // alert("need signature");
+                        document.getElementById("warningPopUpText").innerHTML = app.formDetailView.get('strings').warningMessage.needSignature;//"Signature is missing";
+                        $("#warningPopUp").kendoMobileModalView("open");
+                        return;
+                    }
                     /// start add form data save
                 
                     addModel.Data = $("#text1input").val();
@@ -866,18 +953,26 @@ app.localization.registerView('formDetailView');
                     addModel.name = itemData.name;
                     addModel.locationId = sessionStorage.getItem("locationId");
                     addModel.LastUpdate = true;
+                    addModel.signature = $("#signatureCore").jSignature("getData");
                     /// end add form data save
          
-                    //dataSource.add(addModel);
-                    //dataSource.one('change', function(e) {
                     dataSourceCoreChecks.add(addModel);
                     dataSourceCoreChecks.one('change', function(e) {
                         app.elementDetailView.elementDetailViewModel.change_Percent = true;
                         app.elementDetailView.elementDetailViewModel.QC_click_flag = true;
 
+                        document.getElementById("checkCoreSignature").style.color = "black";
+
                         $("#text1input").val('');
                         $("#coreCheckComments").val('');
-                        alert("The check has been successfully saved");
+                        // alert("The check has been successfully saved");
+                        window.plugins.toast.showWithOptions(
+                        {
+                            message: app.formDetailView.get('strings').toastsMessages.checkSuccess,//"The check has been successfully saved",
+                            duration: "short", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
+                            position: "bottom",
+                            addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+                        }); 
                         app.mobileApp.navigate('#:back');
                     });
 
@@ -892,19 +987,179 @@ app.localization.registerView('formDetailView');
                 saveModel();
                 /// end add form save handler
         },
+        openSignatureNCRPopUp: function(e) {
+            $("#signatureNCRPopUp").kendoMobileModalView("open");
+        },
+        closeSignatureNCRPopUp: function(e) {
+            if($("#signatureNCR").jSignature("getData") != "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") {
+                    document.getElementById("NCRSignature").style.color = "red";
+                }
+                else {document.getElementById("NCRSignature").style.color = "black";}
+            $("#signatureNCRPopUp").kendoMobileModalView("close");
+        },
+        cancelNCR: function(e) {
+            $("#NCRPopUp").kendoMobileModalView("close");
+
+             var $sigdiv2 = $("#signatureNCR");
+            // after some doodling...
+            $sigdiv2.jSignature("reset") // clears the canvas and rerenders the decor on it
+
+            document.getElementById("NCRSignature").style.color = "black";
+            document.getElementById("addCapturePhotoNCR").style.color = "black";
+            $("#ImpairmentDetails").val('');
+
+            app.mobileApp.navigate('#:back');
+        },
+        saveNCR: function(e) {
+            // $("#NCRPopUp").kendoMobileModalView("close");
+
+            var newNCR;
+            var jsdoOptionsNCR = formDetailViewModel.get('_jsdoOptionsNCR'),
+                jsdoNCR = new progress.data.JSDO(jsdoOptionsNCR),
+                dataSourceOptionsNCR = formDetailViewModel.get('_dataSourceOptionsNCR');
+            dataSourceOptionsNCR.transport.jsdo = jsdoNCR;
+            var dataSourceNCR = new kendo.data.DataSource(dataSourceOptionsNCR);
+
+            if($("#signatureNCR").jSignature("getData") == "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") {
+                // alert(". signature");
+                document.getElementById("warningPopUpText").innerHTML = app.formDetailView.get('strings').warningMessage.needSignature; //"Signature is missing";
+                $("#warningPopUp").kendoMobileModalView("open");
+                return;
+            }
+            if($("#ImpairmentDetails").val() == '') {
+                // alert("need ncr description");
+                document.getElementById("warningPopUpText").innerHTML = app.formDetailView.get('strings').warningMessage.needDescription//"Description is missing";
+                $("#warningPopUp").kendoMobileModalView("open");
+                return;
+            }
+            
+            var date = moment($("#ImpairmentDestinationDate").val()).add(8,'h');
+            console.log("date")
+            console.log(date.toString())
+            
+            newNCR = {
+                R371573875: formDetailViewModel.currentCheckId.id, //check
+                R371733782: app.elementDetailView.elementDetailViewModel.currentItem.id,
+                name: formDetailViewModel.currentCheckId.name,
+                signature: $("#signatureNCR").jSignature("getData"),
+                Description: $("#ImpairmentDetails").val(),
+                Latitude: app.elementDetailView.elementDetailViewModel.currentItem.Latitude,
+                longitude: app.elementDetailView.elementDetailViewModel.currentItem.Longtitud,
+                locationId: sessionStorage.getItem("locationId"),
+                DestinationDate: date.toString(),
+                Fixed: false,
+                ElementName: app.elementDetailView.elementDetailViewModel.currentItem.name
+            };
+
+            $("#NCRPopUp").kendoMobileModalView("close");
+
+            var jsrow = jsdoNCR.add(newNCR);
+            var afterCreateFn;
+             afterCreateFn = function (jsdoNCR, record, success, request) {
+                 jsdoNCR.unsubscribeAll('afterCreate', afterCreateFn);
+                    if (success == true) {
+                         var $sigdiv2 = $("#signatureNCR");
+                        // after some doodling...
+                        $sigdiv2.jSignature("reset") // clears the canvas and rerenders the decor on it
+                        document.getElementById("NCRSignature").style.color = "black";
+                        document.getElementById("addCapturePhoto1NCR").style.color = "black";
+                        document.getElementById("addCapturePhoto2NCR").style.color = "black";
+                        $("#ImpairmentDetails").val('');
+                        $("#ImpairmentDestinationDate").val('');
+            
+                         var imagefile1 = $('#addCapturePhoto1NCRImg').attr('src');
+                         var imagefile2 = $('#addCapturePhoto2NCRImg').attr('src');
+                        if(imagefile1) {
+                            var options = new FileUploadOptions();
+                            var imageObj1 = $.parseJSON(jsrow.data.image) 
+                            options.fileKey = "fileContents";
+                            options.fileName = "NCR_Check_image1";
+                            if (cordova.platformId == "android") {
+                                options.fileName += ".jpeg"
+                            }
+                            options.mimeType = "image/jpeg";
+                            options.params = {};  // if we need to send parameters to the server request 
+                            options.headers = {
+                                Connection: "Close"
+                            };
+                            options.chunkedMode = false;
+                            var ft = new FileTransfer();
+                            var urlRB1 = formDetailViewModel._dataSourceOptionsNCR.transport.jsdo.url + imageObj1.src + "?objName=" + formDetailViewModel._jsdoOptionsNCR.name;
+
+                            ft.upload(
+                                imagefile1,
+                                encodeURI(urlRB1),
+                                onFileUploadSuccess1( ),
+                                onFileTransferFail1,
+                                options,
+                                true);
+                        }
+
+                        if(imagefile2) {
+                            var options = new FileUploadOptions();
+                            var imageObj2 = $.parseJSON(jsrow.data.image2) 
+                            options.fileKey = "fileContents";
+                            options.fileName = "NCR_Check_image2";
+                            if (cordova.platformId == "android") {
+                                options.fileName += ".jpeg"
+                            }
+                            options.mimeType = "image/jpeg";
+                            options.params = {};  // if we need to send parameters to the server request 
+                            options.headers = {
+                                Connection: "Close"
+                            };
+                            options.chunkedMode = false;
+                            var ft = new FileTransfer();
+                           
+                            var urlRB2 = formDetailViewModel._dataSourceOptionsNCR.transport.jsdo.url + imageObj2.src + "?objName=" + formDetailViewModel._jsdoOptionsNCR.name;
+
+                            ft.upload(
+                                imagefile2,
+                                encodeURI(urlRB2),
+                                onFileUploadSuccess1( ),
+                                onFileTransferFail1,
+                                options,
+                                true);
+                        }
+                    }
+             };
+             jsdoNCR.subscribe('afterCreate', afterCreateFn);
+            jsdoNCR.saveChanges();
+            
+            // app.mobileApp.navigate('#:back');
+            // alert("The NCR has been successfully saved");
+            window.plugins.toast.showWithOptions(
+            {
+                message: app.formDetailView.get('strings').toastsMessages.NCRSuccess,
+                duration: "short", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
+                position: "bottom",
+                addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+            }); 
+            app.mobileApp.navigate('#:back');
+        },
+        closeAddNCRPopUpImg1:function(e) {
+            $("#addCapturePhoto1NCRPop").kendoMobileModalView("close");
+        },
+        closeAddNCRPopUpImg2:function(e) {
+            $("#addCapturePhoto2NCRPop").kendoMobileModalView("close");
+        },
         onSaveClick: function(e) {
             var addFormData = this.get('addFormData'),
                 filter = formDetailViewModel && formDetailViewModel.get('paramFilter'),
-                //dataSource = formDetailViewModel.get('dataSource'),
                 dataSourceChecks = formDetailViewModel.get('dataSourceChecks'),
                 itemData = this.get("itemData"),
                 addModel = {};
             
             function saveModel(data) {
+                if($("#signature").jSignature("getData") == "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") {
+                    // alert("need signature");
+                    document.getElementById("warningPopUpText").innerHTML = app.formDetailView.get('strings').warningMessage.needSignature;//"Signature is missing";
+                    $("#warningPopUp").kendoMobileModalView("open");
+                    return;
+                }
+
                 /// start add form data save
                 var listStatus = app.formDetailView.formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.getPicklist_status().response.picklistData;
-                // var listOkNotOK1 = app.formDetailView.formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.getPicklist_OkNotOK1().response.picklistData;
-                // var listNormal1 = app.formDetailView.formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.getPicklist_Normal1().response.picklistData;
                 
                 for(var i=0; i < listStatus.length; i++) {
                     if($("#status_ok").is(':checked')) {
@@ -916,6 +1171,7 @@ app.localization.registerView('formDetailView');
                     else if($("#status_not_ok").is(':checked')) {
                         if(listStatus[i].name == "Not Ok") {
                             addModel.status = listStatus[i].id;
+                            formDetailViewModel.not_ok_flag = true;
                             break;
                         }
                     }
@@ -927,57 +1183,11 @@ app.localization.registerView('formDetailView');
                     }
                 }
 
-                // if(itemData.ShowText1 == true) { addModel.Text1 = $("#text1input").val(); }
-                // if(itemData.ShowText2 == true) { addModel.Text2 = $("#text2input").val(); }
-                // if(itemData.ShowText3 == true) { addModel.Text3 = $("#text3input").val(); }
-                // if(itemData.ShowText4 == true) { addModel.Text4 = $("#text4input").val(); }
-                // if(itemData.ShowText5 == true) { addModel.Text5 = $("#text5input").val(); }
-
-                // if($("#number1input").val() > 9999999999 || $("#number2input").val() > 9999999999 || $("#number3input").val() > 9999999999 ||
-                // $("#number4input").val() > 9999999999 || $("#number5input").val() > 9999999999) {
-                //     alert("Invalid Number");
-                // }
-
-                // if(itemData.ShowNum1 == true) { addModel.Num1 = $("#number1input").val(); }
-                // if(itemData.ShowNum2 == true) { addModel.Num2 = $("#number2input").val(); }
-                // if(itemData.ShowNum3 == true) { addModel.Num3 = $("#number3input").val(); }
-                // if(itemData.ShowNum4 == true) { addModel.Num4 = $("#number4input").val(); }
-                // if(itemData.ShowNum5 == true) { addModel.Num5 = $("#number5input").val(); }
-
-                // if(itemData.ShowOkNotOk1 == true) {
-                //     for(var i=0; i < listOkNotOK1.length; i++) {
-                //         if($("#pc_ok").is(':checked')) {
-                //             if(listOkNotOK1[i].name == "OK") {
-                //                 addModel.OkNotOK1 = listOkNotOK1[i].id;
-                //                 break;
-                //             }
-                //         }
-                //         else if($("#pc_not_ok").is(':checked')) {
-                //             if(listOkNotOK1[i].name == "Not OK") {
-                //                 addModel.OkNotOK1 = listOkNotOK1[i].id;
-                //                 break;
-                //             }
-                //         }
-                //     }
-                // }
-
-                // if(itemData.ShowNormal1 == true) {
-                //     for(var i=0; i < listNormal1.length; i++) {
-                //         if($("#pc_normal").is(':checked')) {
-                //             if(listNormal1[i].name == "Normal") {
-                //                 addModel.Normal1 = listNormal1[i].id;
-                //                 break;
-                //             }
-                //         }
-                //         else if($("#pc_not_normal").is(':checked')) {
-                //             if(listNormal1[i].name == "Not Normal") {
-                //                 addModel.Normal1 = listNormal1[i].id;
-                //                 break;
-                //             }
-                //         }
-                //     }
-                // }
-
+                if(addModel.status == undefined) {
+                    alert("must choose a status");
+                    return;
+                }
+                
                 addModel.Comments = $("#checkComments").val();
                 addModel.signature = $("#signature").jSignature("getData");
                 addModel.R365596106 = formDetailViewModel.formId;
@@ -988,54 +1198,38 @@ app.localization.registerView('formDetailView');
                 //addModel.name = !!addFormData.checkbox7;
                 /// end add form data save
          
-                //dataSource.add(addModel);
-                //dataSource.one('change', function(e) {
                 dataSourceChecks.add(addModel);
                 dataSourceChecks.one('change', function(e) {
-                    // var imagefile = $('#addCapturePhotoFormImg').attr('src');
-                    // if(imagefile) {
-                    //      var options = new FileUploadOptions();
-                    //     var imageObj = $.parseJSON(current.image) 
-                    //     options.fileKey = "fileContents";
-                    //     options.fileName = "image";
-                    //     if (cordova.platformId == "android") {
-                    //         options.fileName += ".jpeg"
-                    //     }
-                    //     options.mimeType = "image/jpeg";
-                    //     options.params = {};  // if we need to send parameters to the server request 
-                    //     options.headers = {
-                    //         Connection: "Close"
-                    //     };
-                    //     options.chunkedMode = false;
-                    //     var ft = new FileTransfer();
-                    //     var urlRB = formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.url + imageObj.src + "?objName=" + formDetailViewModel._jsdoOptionsChecks.name;
-                    
-                    //     ft.upload(
-                    //         imagefile,
-                    //         encodeURI(urlRB),
-                    //         onFileUploadSuccess( ),
-                    //         onFileTransferFail,
-                    //         options,
-                    //         true);
-                    // }
+                    formDetailViewModel.currentCheckId = currentCheck;
 
-                    document.getElementById("status_ok").checked = false;
-                    document.getElementById("status_not_ok").checked = false;
-                    document.getElementById("status_NA").checked = false;
-
-                    // document.getElementById("pc_ok").checked = false;
-                    // document.getElementById("pc_not_ok").checked = false;
-                    // document.getElementById("pc_normal").checked = false;
-                    // document.getElementById("pc_not_normal").checked = false;
-
-                    // $("#addCapturePhotoForm").css("color", "black");
+                    document.getElementById("checkSignature").style.color = "black";
 
                     app.elementDetailView.elementDetailViewModel.change_Percent = true;
                     app.elementDetailView.elementDetailViewModel.QC_click_flag = true;
 
+                    document.getElementById("status_ok").checked = false;
+                    document.getElementById("status_not_ok").checked = false;
+                    document.getElementById("status_NA").checked = false;
                     $("#checkComments").val('');
-                    alert("The check has been successfully saved");
-                    app.mobileApp.navigate('#:back');
+
+                    // alert("The check has been successfully saved");
+                    window.plugins.toast.showWithOptions(
+                    {
+                        message: app.formDetailView.get('strings').toastsMessages.checkSuccess,
+                        duration: "short", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
+                        position: "bottom",
+                        addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+                    }); 
+
+                     //if($("#status_not_ok").is(':checked')) {
+                    if(formDetailViewModel.not_ok_flag == true) {
+                        // alert("not ok")
+                        // app.mobileApp.navigate('#:back'); ???
+                        $("#NCRPopUp").kendoMobileModalView("open");
+                    }
+                    else {
+                        app.mobileApp.navigate('#:back');
+                    }
                 });
 
                 dataSourceChecks.sync();
@@ -1071,7 +1265,7 @@ app.localization.registerView('formDetailView');
             $(".km-scroll-container").css( "overflow", "hidden" );
             var $sigdiv = $("#signature");
             // after some doodling...
-            $sigdiv.jSignature("reset") // clears the canvas and rerenders the decor on it.
+            // $sigdiv.jSignature("reset") // clears the canvas and rerenders the decor on it.
 
             var that = this,
                 itemUid = e.view.params.uid,
@@ -1148,6 +1342,8 @@ app.localization.registerView('formDetailView');
     }
 
     parent.set('onShow', function(e) {
+        e.view.scroller.reset();
+        formDetailViewModel.elementDetails = app.elementDetailView.elementDetailViewModel.currentItem;
         var param = e.view.params.filter ? JSON.parse(e.view.params.filter) : null,
             isListmenu = false,
             backbutton = e.view.element && e.view.element.find('header [data-role="navbar"] .backButtonWrapper'),
@@ -1169,14 +1365,29 @@ app.localization.registerView('formDetailView');
                 backbutton.css('visibility', 'hidden');
             }
         }
-        // console.log("e.view.params.coreFlag")
-        // console.log(e.view.params)
+
+        $("#addCapturePhoto").css("color", "black");
+       formDetailViewModel.showElementDetails();
+       formDetailViewModel.showFormImage(e.view.params.stagenum);
+
+       if(e.view.params.stagenum == 0) {
+           $("#elementGeneralDetails").hide();
+           $("#elemImg").hide();
+       }
+       else {
+           $("#elementGeneralDetails").show();
+           $("#elemImg").show();
+       }
+        
         $("#checkListTitle").hide();
         $("#coreDataTitle").hide();
+
         if(e.view.params.coreFlag == "true") {
+            // formDetailViewModel.loadImage();
             $("#surveyor").hide();
             $("#formCheckList").hide();
             $("#coreCheckList").show();
+
             dataProvider.loadCatalogs().then(function _catalogsLoaded() {
                 var jsdoOptions = formDetailViewModel.get('_jsdoOptionsCore'),
                     jsdo = new progress.data.JSDO(jsdoOptions);
@@ -1184,14 +1395,14 @@ app.localization.registerView('formDetailView');
                 dataSourceOptionsCore.transport.jsdo = jsdo;
                 dataSourceCore = new kendo.data.DataSource(dataSourceOptionsCore);
                
-                //dataSource.filter({ field: "R365599694", operator: "==", value: e.view.params.formid });
                 if(app.elementDetailView.elementDetailViewModel.coreCheckListIds != null) {
+                    // console.log("app.elementDetailView.elementDetailViewModel.coreCheckListIds")
+                    // console.log(app.elementDetailView.elementDetailViewModel.coreCheckListIds)
                     var checkListFilters = [];
                     for(var i=0; i < app.elementDetailView.elementDetailViewModel.coreCheckListIds.length; i++) {
                         checkListFilters[i] = { field: "id", operator: "==", value: app.elementDetailView.elementDetailViewModel.coreCheckListIds[i] };
                     }
-                    // console.log("checkListFilters")
-                    // console.log(checkListFilters)
+               
                     dataSourceCore.filter({
                         logic: "or",
                         filters: checkListFilters
@@ -1199,11 +1410,9 @@ app.localization.registerView('formDetailView');
                     formDetailViewModel.set('dataSourceCore', dataSourceCore);
 
                 }
-                // dataSourceCore.fetch(function() {
-                //     console.log("check list form")
-                //     console.log(dataSourceCore.data())
-                // });
-                formDetailViewModel.set('dataSourceCore', dataSourceCore);
+                else {
+                    formDetailViewModel.set('dataSourceCore', '');
+                }
 
                 var jsdoOptionsCoreChecks = formDetailViewModel.get('_jsdoOptionsCoreChecks'),
                     jsdoCoreChecks = new progress.data.JSDO(jsdoOptionsCoreChecks);
@@ -1212,13 +1421,42 @@ app.localization.registerView('formDetailView');
                 dataSourceCoreChecks = new kendo.data.DataSource(dataSourceOptionsCoreChecks);
                 formDetailViewModel.set('dataSourceCoreChecks', dataSourceCoreChecks);
 
+                dataSourceCoreChecks.filter({
+                    logic: "and",
+                    filters: [
+                        {field: "R369589302", operator: "==", value: formDetailViewModel.formId},
+                        {field: "LastUpdate", operator: "==", value: true}
+                        ]
+                });
+
+                dataSourceCoreChecks.read().then(function() {
+                    var view = dataSourceCoreChecks.view();
+                        var greenFlag = false;
+                        for(var i=0; i<checklist.data.length; i++) {
+                            greenFlag = false;
+                            if(view.length == 0) {
+                                document.getElementById(checklist.data[i].id).style.background = "#d12229";
+                            }
+                            for(var j=0; j<view.length; j++) {
+                                if(checklist.data[i].id == view[j].R369425614) {
+                                    checklist.data[i].status = "green";//checklist.data[i].id;
+                                    document.getElementById(checklist.data[i].id).style.background = "#449d31";
+                                    greenFlag = true;
+                                    break;
+                                }
+                                if(greenFlag == false) {
+                                    document.getElementById(checklist.data[i].id).style.background = "#d12229";
+                                }
+                            }
+                        }
+                });
+           
                 //fetchFilteredData(param);
                 formDetailViewModel.formName = e.view.params.formname;
                 formNameCheckList.innerHTML = e.view.params.formname; 
             });
         }
         else if(e.view.params.surveyorFlag == "true") {
-            // alert("surveyorFlag")
             $("#formCheckList").show();
             $("#coreCheckList").show();
             $("#surveyor").show();
@@ -1232,7 +1470,6 @@ app.localization.registerView('formDetailView');
                 dataSourceOptions.transport.jsdo = jsdo;
                 dataSource = new kendo.data.DataSource(dataSourceOptions);
                
-                //dataSource.filter({ field: "R365599694", operator: "==", value: e.view.params.formid });
                 if(app.elementDetailView.elementDetailViewModel.formCheckListIds != null) {
                     var checkListFilters = [];
                     for(var i=0; i < app.elementDetailView.elementDetailViewModel.formCheckListIds.length; i++) {
@@ -1246,11 +1483,11 @@ app.localization.registerView('formDetailView');
                     formDetailViewModel.set('dataSource', dataSource);
 
                 }
-                // dataSource.fetch(function() {
-                //     console.log("check list form")
-                //     console.log(dataSource.data())
-                // });
-                formDetailViewModel.set('dataSource', dataSource);
+                else {
+                    formDetailViewModel.set('dataSource', '');
+                }
+               
+                // formDetailViewModel.set('dataSource', dataSource);
 
                 var jsdoOptionsChecks = formDetailViewModel.get('_jsdoOptionsChecks'),
                     jsdoChecks = new progress.data.JSDO(jsdoOptionsChecks);
@@ -1258,36 +1495,6 @@ app.localization.registerView('formDetailView');
                 dataSourceOptionsChecks.transport.jsdo = jsdoChecks;
                 dataSourceChecks = new kendo.data.DataSource(dataSourceOptionsChecks);
                 formDetailViewModel.set('dataSourceChecks', dataSourceChecks);
-
-            //     var jsdoOptionsCore = formDetailViewModel.get('_jsdoOptionsCore'),
-            //         jsdoCore = new progress.data.JSDO(jsdoOptionsCore);
-
-            //     dataSourceOptionsCore.transport.jsdo = jsdoCore;
-            //     dataSourceCore = new kendo.data.DataSource(dataSourceOptionsCore);
-               
-            //    console.log("app.elementDetailView.elementDetailViewModel.coreCheckListIds")
-            //         console.log(app.elementDetailView.elementDetailViewModel.coreCheckListIds)
-            //     //dataSource.filter({ field: "R365599694", operator: "==", value: e.view.params.formid });
-            //     if(app.elementDetailView.elementDetailViewModel.coreCheckListIds != null) {
-            //         var coreListFilters = [];
-                    
-            //         for(var i=0; i < app.elementDetailView.elementDetailViewModel.coreCheckListIds.length; i++) {
-            //             coreListFilters[i] = { field: "id", operator: "==", value: app.elementDetailView.elementDetailViewModel.coreCheckListIds[i] };
-            //         }
-            //         console.log("coreListFilters")
-            //         console.log(coreListFilters)
-            //         // dataSourceCore.filter({
-            //         //     logic: "or",
-            //         //     filters: coreListFilters
-            //         // });
-            //         formDetailViewModel.set('dataSourceCore', dataSourceCore);
-
-            //     }
-            //     dataSourceCore.fetch(function() {
-            //         console.log("core list form")
-            //         console.log(dataSourceCore.data())
-            //     });
-            //     formDetailViewModel.set('dataSourceCore', dataSourceCore);
 
                 var jsdoOptionsCoreChecks = formDetailViewModel.get('_jsdoOptionsCoreChecks'),
                     jsdoCoreChecks = new progress.data.JSDO(jsdoOptionsCoreChecks);
@@ -1297,7 +1504,7 @@ app.localization.registerView('formDetailView');
                 formDetailViewModel.set('dataSourceCoreChecks', dataSourceCoreChecks);
         }
         else {
-            //if (!formDetailViewModel.get('dataSource')) {
+            // formDetailViewModel.loadImage();
             $("#formCheckList").show();
             $("#coreCheckList").hide();
             dataProvider.loadCatalogs().then(function _catalogsLoaded() {
@@ -1307,7 +1514,6 @@ app.localization.registerView('formDetailView');
                 dataSourceOptions.transport.jsdo = jsdo;
                 dataSource = new kendo.data.DataSource(dataSourceOptions);
                
-                //dataSource.filter({ field: "R365599694", operator: "==", value: e.view.params.formid });
                 if(app.elementDetailView.elementDetailViewModel.formCheckListIds != null) {
                     var checkListFilters = [];
                     for(var i=0; i < app.elementDetailView.elementDetailViewModel.formCheckListIds.length; i++) {
@@ -1318,14 +1524,13 @@ app.localization.registerView('formDetailView');
                         logic: "or",
                         filters: checkListFilters
                     });
+                    
                     formDetailViewModel.set('dataSource', dataSource);
-
+                    
                 }
-                /*dataSource.fetch(function() {
-                    console.log("check list form")
-                    console.log(dataSource.data())
-                });*/
-                formDetailViewModel.set('dataSource', dataSource);
+                else {
+                    formDetailViewModel.set('dataSource', '');
+                }
 
                 var jsdoOptionsChecks = formDetailViewModel.get('_jsdoOptionsChecks'),
                     jsdoChecks = new progress.data.JSDO(jsdoOptionsChecks);
@@ -1334,7 +1539,38 @@ app.localization.registerView('formDetailView');
                 dataSourceChecks = new kendo.data.DataSource(dataSourceOptionsChecks);
                 formDetailViewModel.set('dataSourceChecks', dataSourceChecks);
 
-                //fetchFilteredData(param);
+                dataSourceChecks.filter({
+                    logic: "and",
+                    filters: [
+                        {field: "R365596106", operator: "==", value: formDetailViewModel.formId},
+                        {field: "LastUpdate", operator: "==", value: true}
+                        ]
+                });
+                
+                    dataSourceChecks.read().then(function() {
+                        var view = dataSourceChecks.view();
+                        var greenFlag = false;
+                        for(var i=0; i<checklist.data.length; i++) {
+                            greenFlag = false;
+                            if(view.length == 0) {
+                                document.getElementById(checklist.data[i].id).style.background = "#d12229";
+                            }
+                            for(var j=0; j<view.length; j++) {
+                                if(checklist.data[i].id == view[j].R365688751) {
+                                    checklist.data[i].status = "green";//checklist.data[i].id;
+                                    document.getElementById(checklist.data[i].id).style.background = "#449d31";
+                                    greenFlag = true;
+                                    break;
+                                }
+                                if(greenFlag == false) {
+                                    document.getElementById(checklist.data[i].id).style.background = "#d12229";
+                                }
+                            }
+                        }
+                    });
+                    // checklist.data.includes(view.foreach(function(){}));
+                    
+                // }
                 if(e.view.params.formname == "E") {
                     formDetailViewModel.formName = "E&B";
                     formNameCheckList.innerHTML = "E&B";    
@@ -1350,28 +1586,46 @@ app.localization.registerView('formDetailView');
                 else $("#surveyor").hide();
                 
             });
-            //} else {
-                //fetchFilteredData(param);
-            //}
         }
     });
 
-function onFileUploadSuccess() {
+function onFileUploadSuccess1() {
         // alert("onFileUploadSuccess")
         console.log("onFileUploadSuccess")
-         $("#addCapturePhoto").css("color", "black");
-        document.getElementById("addCapturePhotoImg").setAttribute("src", "");
-        $("#addCapturePhotoPop").kendoMobileModalView("close");
-    // sessionStorage.setItem("fileToUpload", "null");
-    // localStorage.setItem("fileName", "null");
-        /*window.plugins.toast.showWithOptions(
-            {
-            message: "התמונה עלתה בהצלחה",
+        
+        // app.mobileApp.navigate('#:back');
+
+        window.plugins.toast.showWithOptions(
+        {
+            message: app.formDetailView.get('strings').toastsMessages.uploadImageSuccess,
             duration: "short", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
             position: "bottom",
             addPixelsY: -40  // added a negative value to move it up a bit (default 0)
-            }
-        );*/         
+        });         
+    }
+
+function onFileTransferFail1(error) {
+        console.log("FileTransfer Error:");
+        console.log(error)
+        console.log("Code: " + error.code);
+        console.log("Body:" + error.body);
+        console.log("Source: " + error.source);
+        console.log("Target: " + error.target);
+    }
+
+function onFileUploadSuccess2() {
+       // alert("onFileUploadSuccess2")
+        console.log("onFileUploadSuccess2")
+       
+        $("#addCapturePhotoPop").kendoMobileModalView("close");
+       
+        window.plugins.toast.showWithOptions(
+        {
+            message: app.formDetailView.get('strings').toastsMessages.uploadImageSuccess,
+            duration: "short", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
+            position: "bottom",
+            addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+        });          
     }
 
 function onFileTransferFail(error) {

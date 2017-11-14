@@ -1,48 +1,57 @@
 <div data-role="view" data-title="View" data-layout="main" data-model="app.elementDetailView" data-show="app.elementDetailView.onShow" data-after-show="app.elementDetailView.afterShow" id="elementDetailViewScreen" class="screen">
     <header data-role="header" style="background-color: #351e45;">
-        <div data-role="navbar" class="header-text" style="background-color: #00c853; box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3)">
-
-            <!--<span data-bind="text: strings.elementDetailView.title"></span>-->
-            <span id="elementDetailViewTitle"></span>
+        <div data-role="navbar" class="header-text" style="font-family: Tahoma, Geneva, sans-serif;;background-color: #4fa81a; box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3)">
+            <table style="width:100%;">
+                <tr>
+                    <td style="width:10%;">
+                        <a data-role="button" data-icon="home" onclick="goHome()" data-align="left" style="background-color:transparent; border:none;"></a>
+                        <a data-icon="backIcon" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
+                    </td>
+                    <td style="width:80%;">
+                        <center><span id="elementDetailViewTitle"></span></center>
+                    </td>
+                    <td style="width:10%;">
+                        <a data-role="button" data-rel="popover" href="#popover-hbar3" data-align="right"  data-position="end" data-icon="hbar-button" style="background-color:#4fa81a; border:none;"></a>
+                    </td>
+                </tr>
+            </table>
+            <!--<span id="elementDetailViewTitle"></span>
             <a data-icon="home" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
-            <!--<a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>-->
-            <a data-role="button" data-rel="popover" href="#popover-hbar3" data-align="right"  data-position="end" data-icon="hbar-button" style="background-color:#00c853; border:none;"></a>
+            <a data-icon="backIcon" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
+            <a data-role="button" data-rel="popover" href="#popover-hbar3" data-align="right"  data-position="end" data-icon="hbar-button" style="background-color:#4fa81a; border:none;"></a>-->
         </div>
         <br/>
-        <!--<br/>-->
         <center>
-            <span id="stageName" style="color: white; font-weight: bold;"></span>
-            <!--<span style="color: white; font-size: 22px;">Step X</span>-->
+            <span id="stageName" style="color: white; font-weight: bold;font-family: Tahoma, Geneva, sans-serif;"></span>
         </center>
-        <!--<br/>-->
-          <form class="km-filter-form custom-filter" style="margin-top:2%;">
+          <form class="km-filter-form custom-filter" style="margin-top:2%;font-family: Tahoma, Geneva, sans-serif;">
             <div class="km-filter-wrap">
                 <input id="search" type="search" placeholder="Search..." data-bind="events:{keyup: elementDetailViewModel.searchChange}">
             </div>
         </form>
     </header>
 
-    <div data-role="popover" id="popover-hbar3" data-popup='{"height":"30", "width":"150"}' style="border:none">
+    <div data-role="popover" id="popover-hbar3" data-popup='{"height":"30", "width":"150"}' style="border:none;">
         <div data-role="view" data-model="app.elementDetailView">
             <ul data-role="listview" style="list-style:none; background-color:#F4F4F4;">
                 <li style="padding: 1.5px;">
                     <a style="background-color:transparent;" class="version" >
-                        <span style="background-color:transparent;font-size:medium;">  
-                            <span>Version</span> 
+                        <span data-bind="text: strings.menuOptions.version" style="background-color:transparent;font-size:medium;font-family: Tahoma, Geneva, sans-serif;">  
+                            <!--<span>Version</span> -->
                         </span> 
                     </a>
                 </li>
                 <li style="padding: 1.5px;">
                     <a style="background-color:transparent;" class="projects" onclick="app.elementDetailView.elementDetailViewModel.goToProjects()">
-                        <span style="background-color:transparent;font-size:medium;">  
-                            <span>Projects</span> 
+                        <span data-bind="text: strings.menuOptions.projects" style="background-color:transparent;font-size:medium;font-family: Tahoma, Geneva, sans-serif;">  
+                            <!--<span>Projects</span> -->
                         </span> 
                     </a>
                 </li>
                 <li style="padding: 1.5px;">
-                    <a style="background-color:transparent;" data-role="button" onclick="app.elementDetailView.elementDetailViewModel.logoutClick()" data-align="left" data-icon="logOutNew" data-position="end" > 
-                        <span style="background-color:transparent;font-size:mediun;">  
-                            <span>Log Out</span> 
+                    <a style="background-color:transparent;" data-role="button" onclick="app.elementDetailView.elementDetailViewModel.logoutClick()" data-align="left" data-position="end" > 
+                        <span data-bind="text: strings.menuOptions.logout" style="background-color:transparent;font-size:mediun;font-family: Tahoma, Geneva, sans-serif;">  
+                            <!--<span>Log Out</span> -->
                         </span> 
                     </a>
                 </li>
@@ -56,7 +65,7 @@
   
 
     <ul id="elements" class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" data-template="elementDetailViewModelTemplate" data-bind="source: elementDetailViewModel.dataSource, events: {click: elementDetailViewModel.itemClick}"
-    data-pull-to-refresh="true" data-endless-scroll="false" style="background-color: #FFFFFF; padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0;">
+    data-pull-to-refresh="true" data-endless-scroll="false" style="font-family: Tahoma, Geneva, sans-serif;background-color: #FFFFFF; padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0;">
     </ul>
 
 
@@ -64,14 +73,24 @@
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
 
     <!-- END_CUSTOM_CODE_elementDetailViewModel -->
-    <!-- <div id="elementLastUpdateDateField" class="field field--heading">
-            <span class="field__label" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.lastUpdateDate.title"></span>
-            <h3>#: kendo.toString(data['LastUpdateDate'], "dd/MM/yyyy") #</h3>
-        </div> -->
+    <script>
+        function goHome() {
+            setTimeout(function () {
+                app.mobileApp.navigate('#components/controlPanel/view.html');
+            }, 300);
+        }
+    </script>
+   <script>
+       $('#search').on('keydown', function(e) {
+            if (e.which == 13) {
+                e.preventDefault();
+            }
+        });
+   </script>
     <script type="text/x-kendo-template" id="elementDetailViewModelTemplate">
         # data = app.elementDetailView.elementDetailViewModel.fixHierarchicalData(data); #
-        <div class="elementList">
-            <table style="width: 100%; height: 100%;">
+        <div class="elementList" style="padding-top:0;">
+            <table style="width: 100%; height: 100%; padding-top:0;">
                 <tr style="padding: 0; margin: 0;">
                     <td style="width: 80%;">
                         <span style="font-size: 16px; margin-left: 2%;">#: data['name'] #</span>

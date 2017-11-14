@@ -1,0 +1,384 @@
+<div data-role="view" data-title="Edit" data-model="app.impairmentDetailView.editItemViewModel" data-bind="events: { show: onShow, init: onInit }" id="impairmentDetailViewModelEditScreen" class="screen screen--edit edit-item-view">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);">
+            <table style="width:100%;">
+                <tr>
+                    <td style="width:10%;">
+                        <a data-icon="home" data-role="button" onclick="goHome()" data-align="left" style="background-color:transparent; border:none;"></a>
+                        <a data-icon="backIcon" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
+                    </td>
+                    <td style="width:80%;">
+                         <!--<center><span data-bind="text: currentItem['name']"></span></center>-->
+                         <center><span data-bind="text: strings.impairmentDetailView.title"></span></center>
+                    </td>
+                    <td style="width:10%;">
+                       <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }, buttonText: strings.buttonsText.save" style="background-color:#4fa81a;color:#4fa81a; border:none;"></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </header>
+
+    <footer data-role="footer" style="background-color: #e9eaeb;"> 
+        <center>
+            <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }, buttonText: strings.buttonsText.save" style="border-radius: 0; width: 95%;font-family: Tahoma, Geneva, sans-serif;"></a> <!-- Save -->
+        </center>
+    </footer>
+
+    <!-- START_CUSTOM_CODE_impairmentDetailViewModel -->
+    <!-- END_CUSTOM_CODE_impairmentDetailViewModel -->
+    <div id="editableListForm180" class="form-view screen__content screen__content--form" style="overflow-x:hidden; background-color: #e9eaeb; width: 100%; height: 100%;">
+        <br/>
+        <div style="height:1em"></div>
+        <div style="width:100%;height:25%; background-color:#e9eaeb;">
+            <span style="box-shadow: 0px 2px 3px #A29E9E;background-color:#4fa81a;font-family: Tahoma, Geneva, sans-serif; color:white; text-align:center;padding-left: 6px;padding-top: 2px;padding-right: 12px;padding-bottom: 3px;">Check Name: <span data-bind="text:editFormData.name"></span></span> <!--data-bind="text:currentItem['name']"-->
+        </div>
+        <div id="impairtmentDetails" style="background-color: #FFFFFF; width: 100%;">
+            <br/>
+            <span style="padding-left:2%;" data-bind="text: strings.impairmentDetailView.elementName"></span><span id="nameElementImpairtment" data-bind="text: currenItem.ElementName"></span> <br/><br/>
+            <span style="padding-left:2%;" data-bind="text: strings.impairmentDetailView.impairmentDate"></span><span id="dateImpairtment"></span> <br/><br/>
+            <span style="padding-left:2%;margin-top:5%;" data-bind="text: strings.impairmentDetailView.status"></span><span id="statusImpairtment"></span> <br/><br/>
+        </div>
+        <br/>
+        <div style="height:1em"></div>
+        <div style="width:100%;height:25%; background-color:#e9eaeb;">
+            <span data-bind="text: strings.impairmentDetailView.correctTitle" style="box-shadow: 0px 2px 3px #A29E9E;background-color:#4fa81a;font-family: Tahoma, Geneva, sans-serif; color:white; text-align:center;padding-left: 6px;padding-top: 2px;padding-right: 12px;padding-bottom: 3px;"></span>
+        </div>
+       <div id="impairtmentCorrectingDetails" style="background-color: #FFFFFF; width: 100%;">
+            <br/>
+            <div class="divActions" id="ifYouCanTakeCare" name="divAlign" style="background-color:white;">
+                <table border="0" style="width:100%;">
+                    <tr style="width:100%">
+                        <td style="width:90%;padding: 1%;">
+                            <span data-bind="text: strings.impairmentDetailView.fixedTitle" style="color:rgba(0, 0, 0, 0.82);font-family:Tahoma, Geneva, sans-serif;"></span>
+                        </td>
+                        <td style="width:10%">
+                            <input id="tookCare" onclick="funcCbTakin()" type="checkbox" style="margin-top: 4%;line-height: 1.3em;"> 
+                            <!--<input type="checkbox" id="tookCare" onclick="funcCbTakin()" style="margin-top: 4%;" />-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div id="talkbubble">
+                                <div>
+                                    <table border="0" style="width:100%;">
+                                        <tr style="width:100%; height: 80%;">
+                                            <td style="width:90%;padding: 1%;" >
+                                                <span data-bind="text: strings.impairmentDetailView.correctDescription" style="color:rgba(0, 0, 0, 0.82);font-family:Tahoma, Geneva, sans-serif;"></span> <br/>
+                                                <textarea data-bind="text: editFormData.Fixdescription" id="correctImpairmentDetails" style="height:8em;margin-top:1%;margin-bottom:1%;resize: none; width: 100%; border-color: rgba(128, 128, 128, 0.5); font-family:Tahoma, Geneva, sans-serif;" dir="ltr"></textarea>
+                                            </td>
+                                        </tr>
+                                        <tr style="width:100%">
+                                            <td style="width:90%;padding: 1%;">
+                                                <span  data-bind="text: strings.impairmentDetailView.correctDate" style="color:rgba(0, 0, 0, 0.82);font-family:Tahoma, Geneva, sans-serif;">Correct Date:</span> <br/>
+                                                <input data-bind="value: editFormData.FixDate" type="date" id="correctImpairmentDate" style="border:1px solid rgba(128, 128, 128, 0.5);margin-top:1%;margin-bottom:1%;resize: none; width: 100%; border-color: rgba(128, 128, 128, 0.5); font-family:Tahoma, Geneva, sans-serif;" dir="ltr" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table style="width:97%;">
+                                        <tr>
+                                            <td style="width:90%;">
+                                                <span data-bind="text: strings.impairmentDetailView.correctImage" style="padding-left:2%;"></span>
+                                            </td>
+                                            <td style="width:10%;">
+                                                <a id="addCapturePhotoCorrect" class="capturePhotoButtonClass" data-icon="camera" data-role="button" data-align="left" style="color:black;background-color:transparent; border:none; margin-left: 43%;"></a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table style="width:97%;">
+                                        <tr style="width:100%">
+                                            <td style="width:90%;padding: 1%;">
+                                                <span data-bind="text: strings.impairmentDetailView.correctSignature" style="color:rgba(0, 0, 0, 0.82);font-family:Tahoma, Geneva, sans-serif;"></span>
+                                            </td>
+                                            <td style="width:10%">
+                                                <a id="NCRSignatureClose" data-icon="signatureNew" data-role="button" data-align="left" data-bind="events:{click: openSignatureCloseNCRPopUp}" style="color:black;background-color:transparent; border:none; margin-left: 45%;"></a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div id="talkbubbleStyle" class="animated fadeInDown">
+                                    <div style="text-align:center;" name="divAlign">
+                                        <span style="font-weight:200;font-family:Tahoma, Geneva, sans-serif;">
+                                            <b style="font-weight:200;margin-bottom:3%;margin-top:3%;margin-right:3%;margin-left:3%">
+                                                <span data-bind="text: strings.impairmentDetailView.talkbubbleText1" style="font-weight:200;font-family:Tahoma, Geneva, sans-serif;"></span>
+                                                <br /><span data-bind="text: strings.impairmentDetailView.talkbubbleText2" style="font-weight:200;font-family:Tahoma, Geneva, sans-serif;"></span>
+                                            </b>
+                                        </span>
+                                    </div>
+                                </div>
+                                <br />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+         <br/>
+        <div style="height:1em"></div>
+        <div style="width:100%;height:25%; background-color:#e9eaeb;">
+            <span data-bind="text: strings.impairmentDetailView.impairmentDetailsTitle" style="box-shadow: 0px 2px 3px #A29E9E;background-color:#4fa81a;font-family: Tahoma, Geneva, sans-serif; color:white; text-align:center;padding-left: 6px;padding-top: 2px;padding-right: 12px;padding-bottom: 3px;"></span>
+        </div>
+       <div id="impairtmentDetails" style="background-color: #FFFFFF; width: 100%;">
+           <br/>
+           <span style="padding-left:2%;"  data-bind="text: strings.impairmentDetailView.impairmentDetailsTitle2"></span>
+           <span style="padding-left:2%;" id="impaiDetails" data-bind="text: editFormData.Description"></span><br/><br/> <!--data-bind="text: currentItem['Description']"-->
+
+           <span style="padding-left:2%;" data-bind="text: strings.impairmentDetailView.dueDate"></span>
+           <span id="impaiDate" style="padding-left:2%;"></span>
+
+           <!--<center>-->
+            <table style="width:90%;">
+                 <tr>
+                    <td style="width:90%;">
+                        <span style="padding-left:2%;" data-bind="text: strings.impairmentDetailView.location"></span>
+                    </td>
+                    <td style="width:10%;">
+                        <a id="ncrElementLocation" data-icon="location" data-role="button" data-align="left" data-bind="events: {click: openNCRMap}" style="color:black;background-color:transparent; border:none; margin-left: 75%;"></a> 
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:90%;">
+                        <span style="padding-left:2%;" data-bind="text: strings.impairmentDetailView.image1"></span>
+                    </td>
+                    <td style="width:10%;">
+                        <a id="addCapturePhoto1Lik" data-bind="events: {click: openAddNCRPopUpImg1}" data-icon="camera" data-role="button" data-align="left" style="color:black;background-color:transparent; border:none; margin-left: 75%;"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:90%;">
+                        <span style="padding-left:2%;" data-bind="text: strings.impairmentDetailView.image2"></span>
+                    </td>
+                    <td style="width:10%;">
+                        <a id="addCapturePhoto2Lik" data-bind="events: {click: openAddNCRPopUpImg2}" data-icon="camera" data-role="button" data-align="left" style="color:black;background-color:transparent; border:none; margin-left: 75%;"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:90%;">
+                        <span style="padding-left:2%;" data-bind="text: strings.impairmentDetailView.correctSignature"></span>
+                    </td>
+                    <td style="width:10%;">
+                        <a id="NCRSignatureopen" data-icon="signatureNew" data-role="button" data-align="left" data-bind="events:{click: openSignatureopenNCRPopUp}" style="color:black;background-color:transparent; border:none; margin-left: 84%;"></a>
+                    </td>
+                </tr>
+            </table>
+           <!--</center>-->
+       </div>
+       <br/>
+
+        <div data-role="modalview" id="warningPopUpClosrNcr" style="left:1px; width:95%; height:25%; background-color:#F4F4F4;font-family: Tahoma, Geneva, sans-serif;">
+            <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                <center><span style="font-size:x-large; font-weight:bold;">!</span></center>
+            </div>
+            <div data-role="content" dir="ltr" style="background-color: transparent; margin-top: 3%;">
+                <center>
+                    <br/>
+                    <span id="warningPopUpTextNcr" style="font-size:large;"></span>
+                    <br/>
+                </center>
+            </div>
+            <footer data-role="footer" style="background-color: transparent;">
+                <div style="width:100%; margin-bottom:3%;">
+                    <center>
+                        <a data-role="button" data-bind="events: {click: closeWarningPopUpCloseNcr}" style="color:white;margin-bottom:0%;border-radius:0;"> <!--  onclick="app.impairmentDetailView.impairmentDetailViewModel.closeWarningPopUpCloseNcr()"  -->
+                            <span data-bind="text: strings.buttonsText.ok"></span> <!-- Ok -->
+                        </a>
+                    </center>
+                </div>
+            </footer>
+        </div>
+
+       <div data-role="modalview" id="signatureOpenNcrPopUp" style="left:1px; width:95%; height:36%; background-color:#F4F4F4;font-family: Tahoma, Geneva, sans-serif;">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                    <center>
+                        <span data-bind="text: strings.stagesFormSignature.title" style="margin-left:3%;font-size:large;"></span>
+                    </center>
+                </div>
+                <div data-role="content" dir="ltr" style="background-color: transparent; margin-top: 3%;">
+                    <center>
+                        <div style="border:1px solid rgba(128, 128, 128, 0.5); background-color: white; width:90%;">  
+                            <label class="km-label-above field field--textarea">  
+                                <div class='signature-wrapper'>
+                                    <div id='signatureOpenNCR'></div>
+                                    <input type='hidden' id='SignatureAdd-value' name='SignatureAdd-value'/>
+                                </div>
+                            </label>
+                        </div>
+                    </center>
+                </div>
+                <footer data-role="footer" style="background-color: transparent;">
+                    <div style="width:100%; margin-bottom:3%;">
+                        <center>
+                            <a data-role="button" style="margin-bottom:0%;border-radius:0;" data-bind="events:{click: closeSignatureOpenNCRPopUp}"><span data-bind="text: strings.stagesFormImg.close"></span></a>
+                            <!--<a id="Reset" data-role="button" style="margin-bottom:0%;border-radius:0;"><span data-bind="text: strings.stagesFormSignature.clear"></span></a>-->
+                        </center>
+                    </div>
+                </footer>
+            </div>
+
+            <div data-role="modalview" id="signatureCloseNcrPopUp" style="left:1px; width:95%; height:36%; background-color:#F4F4F4;font-family: Tahoma, Geneva, sans-serif;">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                    <center>
+                        <span data-bind="text: strings.stagesFormSignature.title" style="margin-left:3%;font-size:large;"></span>
+                    </center>
+                </div>
+                <div data-role="content" dir="ltr" style="background-color: transparent; margin-top: 3%;">
+                    <center>
+                        <div style="border:1px solid rgba(128, 128, 128, 0.5); background-color: white; width:90%;">  
+                            <label class="km-label-above field field--textarea">  
+                                <div class='signature-wrapper'>
+                                    <div id='signatureCloseNCR'></div>
+                                    <input type='hidden' id='SignatureAdd-value' name='SignatureAdd-value'/>
+                                </div>
+                            </label>
+                        </div>
+                    </center>
+                </div>
+                <footer data-role="footer" style="background-color: transparent;">
+                    <div style="width:100%; margin-bottom:3%;">
+                        <center>
+                            <a data-role="button" style="margin-bottom:0%;border-radius:0;" data-bind="events:{click: closeSignatureCloseNCRPopUp}"><span data-bind="text: strings.stagesFormImg.close"></span></a>
+                            <a id="ResetCloseNcr" data-role="button" style="margin-bottom:0%;border-radius:0;"><span data-bind="text: strings.stagesFormSignature.clear"></span></a>
+                        </center>
+                    </div>
+                </footer>
+            </div>
+
+            <div data-role="modalview" id="addCapturePhotoCorrectPop" style="left:1px; width:95%; height:70%; background-color:#F4F4F4;font-family: Tahoma, Geneva, sans-serif; ">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                    <div style="width:100%;">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="width:10%;">
+                                    <a data-role="button" data-bind="events: {click: closeAddNCRPopUpImgCorrect}" style="color:black;margin-bottom:0%;border-radius:0;border:none; background-color:transparent;">X</a>
+                                </td>
+                                <td style="width:90%;">
+                                    <center>
+                                        <span data-bind="text: strings.stagesFormImg.title" style="font-size:large;"></span>
+                                    </center>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div data-role="content" style="background-color: transparent; margin-top: 2%;">
+                    <img id="addCapturePhotoCorrectImg" src="" style="width: 100%; height:100%;" />
+                </div>
+                <div data-role="footer" style="margin-bottom:3%; margin-top:3%; background-color:transparent">
+                    <div style="width:100%; margin-bottom:2%;">
+                        <center>
+                            <a data-role="button" class="capturePhotoButtonClass" id="addCapturePhotoCorrect_" style="color:white;margin-bottom:0%;border-radius:0;">
+                                <span data-bind="text: strings.stagesFormImg.changePhoto"></span>
+                            </a>
+                        </center>
+                    </div>
+                </div>
+            </div>
+
+            <div data-role="modalview" id="addCapturePhoto1ncrPop" style="left:1px; width:95%; height:70%; background-color:#F4F4F4;font-family: Tahoma, Geneva, sans-serif; ">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                    <div style="width:100%;">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="width:10%;">
+                                    <a data-role="button" data-bind="events: {click: closeAddNCRPopUpImg1}" style="color:black;margin-bottom:0%;border-radius:0;border:none; background-color:transparent;">X</a>
+                                </td>
+                                <td style="width:90%;">
+                                    <center>
+                                        <span data-bind="text: strings.stagesFormImg.title" style="font-size:large;"></span>
+                                    </center>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div data-role="content" style="background-color: transparent; margin-top: 2%;">
+                    <img id="addCapturePhoto1ncrImg" src="" style="width: 100%; height:100%;" />
+                </div>
+                <!--<div data-role="footer" style="margin-bottom:3%; margin-top:3%; background-color:transparent">
+                    <div style="width:100%; margin-bottom:2%;">
+                        <center>
+                            <a data-role="button" class="capturePhotoButtonClass" id="addCapturePhoto1NCR_" style="color:white;margin-bottom:0%;border-radius:0;">
+                                <span data-bind="text: strings.stagesFormImg.changePhoto"></span>
+                            </a>
+                        </center>
+                    </div>
+                </div>-->
+            </div>
+
+            <div data-role="modalview" id="addCapturePhoto2ncrPop" style="left:1px; width:95%; height:70%; background-color:#F4F4F4;font-family: Tahoma, Geneva, sans-serif; ">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                    <div style="width:100%;">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="width:10%;">
+                                    <a data-role="button" data-bind="events: {click: closeAddNCRPopUpImg2}" style="color:black;margin-bottom:0%;border-radius:0;border:none; background-color:transparent;">X</a>
+                                </td>
+                                <td style="width:90%;">
+                                    <center>
+                                        <span data-bind="text: strings.stagesFormImg.title" style="font-size:large;"></span>
+                                    </center>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div data-role="content" style="background-color: transparent; margin-top: 2%;">
+                    <img id="addCapturePhoto2ncrImg" src="" style="width: 100%; height:100%;" />
+                </div>
+                <!--<div data-role="footer" style="margin-bottom:3%; margin-top:3%; background-color:transparent">
+                    <div style="width:100%; margin-bottom:2%;">
+                        <center>
+                            <a data-role="button" class="capturePhotoButtonClass" id="addCapturePhoto1NCR_" style="color:white;margin-bottom:0%;border-radius:0;">
+                                <span data-bind="text: strings.stagesFormImg.changePhoto"></span>
+                            </a>
+                        </center>
+                    </div>
+                </div>-->
+            </div>
+
+        <div data-role="modalview" id="impairmentLocationPopUp" style="left:1px; width:95%; height:83%; background-color:#F4F4F4;font-family: Tahoma, Geneva, sans-serif;">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                    <center>
+                        <span style="margin-left:3%;font-size:large;" data-bind="text: strings.impairmentDetailView.location"></span>
+                    </center>
+                </div>
+                <div data-role="content" dir="ltr" style="background-color: transparent; margin-top: 3%; height:100%;">
+                    <center>
+                        <div style="padding:1em;width:98%;height: 380px;border:1px solid rgba(128, 128, 128, 0.5);" id="impairment_map"></div>
+                    </center>
+                </div>
+                <footer data-role="footer" style="background-color: transparent;">
+                    <div style="width:100%; margin-bottom:3%;">
+                        <center>
+                            <a data-role="button" style="margin-bottom:0%;border-radius:0;" data-bind="events:{click: closeimpairmentLocationPopUp}"><span data-bind="text: strings.buttonsText.ok"></span></a>
+                        </center>
+                    </div>
+                </footer>
+            </div>
+        <!-- START_CUSTOM_CODE_editableListForm180 -->
+        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+        <!-- END_CUSTOM_CODE_editableListForm180 -->
+    </div>
+    <script>
+         $('#ResetCloseNcr').click(function(e){
+            $('#signatureCloseNCR').jSignature('clear');
+            e.preventDefault();
+        });
+
+        function goHome() {
+            setTimeout(function () {
+                app.mobileApp.navigate('#components/controlPanel/view.html');
+            }, 300);
+        }
+
+        function funcCbTakin() {
+            if (document.getElementById('tookCare').checked == true) {
+                talkbubble.hidden = false;
+                document.getElementById("NCRSignatureopen").style.color = "black";
+            }
+            else {
+                talkbubble.hidden = true;
+            }
+        }
+    </script>
+</div>

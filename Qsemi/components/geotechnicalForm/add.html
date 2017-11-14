@@ -1,0 +1,225 @@
+<div data-role="view" data-title="Add" data-model="app.geotechnicalForm.addItemViewModel" data-bind="events: { show: onShow, init: onInit }" id="geotechnicalFormModelAddScreen" class="screen screen--add add-item-view">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);">
+            <span>GEOTECHNICAL</span>
+            <a data-role="backbutton" data-align="left" data-bind="events: { click: onCancel }" style="background-color:transparent; border:none;">Cancel</a>
+            <!--<a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }">Save</a>-->
+        </div>
+    </header>
+    <!--<footer data-role="footer" style="background-color:#351e45;">
+        <center>
+            <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }" style="border-radius: 0; width: 100%;">Save</a>
+        </center>
+    </footer>-->
+     <footer data-role="footer" style="background-color: #e9eaeb;"> <!--background-color:#351e45;-->
+        <center>
+            <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }" style="border-radius: 0; width: 95%;">Save</a>
+        </center>
+    </footer>
+    <!-- START_CUSTOM_CODE_geotechnicalFormModel -->
+    <!-- END_CUSTOM_CODE_geotechnicalFormModel -->
+    <div id="editableListForm166" class="form-view screen__content screen__content--form">
+        <br/>
+        <br/>
+         <!--<ul data-role="listview" data-style="inset" style="width:100%; margin-left:0;">-->
+             <!--<li style="border: none; font-size: 16px;">
+                    <span data-bind="text: strings.geotechnicalForm.geotechnicalFormModel.editableListForm166.DrillingDate.title">
+                </li>
+                <li style="height: 45px;border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                  
+                                    <input id="DrillingDate" data-bind="value: addFormData.DrillingDate" type="date" style="margin-right:7%;padding: 0.5em;width:90%;border:1px solid rgba(128, 128, 128, 0.5);font-size:small;font-family: Tahoma, Geneva, sans-serif;">
+                           
+                    <br/>
+                </li>-->
+
+                <!--<li style="border: none; font-size: 16px;">
+                    <span data-bind="text: strings.geotechnicalForm.geotechnicalFormModel.editableListForm166.EstimatedUnit.title"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                  
+                                <input id="EstimatedUnit" data-bind="value: addFormData.EstimatedUnit" type="text" style="margin-right:7%;padding: 0.5em;width:90%;border:1px solid rgba(128, 128, 128, 0.5);font-size:small;font-family: Tahoma, Geneva, sans-serif;">
+                            
+                    <br/>
+                </li>-->
+                
+                <!--<li style="border: none; font-size: 16px;">
+                    <span data-bind="text: strings.geotechnicalForm.geotechnicalFormModel.editableListForm166.TOP_LAYER.title"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                 
+                                <input id="TOP_LAYER" data-bind="value: addFormData.TOP_LAYER" type="text" style="margin-right:7%;padding: 0.5em;width:90%;border:1px solid rgba(128, 128, 128, 0.5);font-size:small;font-family: Tahoma, Geneva, sans-serif;">
+                           
+                    <br/>
+                </li>-->
+
+                <!--<li style="border: none; font-size: 16px;">
+                    <span data-bind="text: strings.geotechnicalForm.geotechnicalFormModel.editableListForm166.TopLayerTHICKNESS.title"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                   
+                                <input id="TopLayerTHICKNESS" data-bind="value: addFormData.TopLayerTHICKNESS" type="text" style="margin-right:7%;padding: 0.5em;width:90%;border:1px solid rgba(128, 128, 128, 0.5);font-size:small;font-family: Tahoma, Geneva, sans-serif;">
+                         
+                    <br/>
+                </li>-->
+
+                <!--<li style="border: none; font-size: 16px;">
+                    <span data-bind="text: strings.geotechnicalForm.geotechnicalFormModel.editableListForm166.SecondLayerUNIT.title"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                  
+                                <input id="SecondLayerUNIT" data-bind="value: addFormData.SecondLayerUNIT" type="text" style="margin-right:7%;padding: 0.5em;width:90%;border:1px solid rgba(128, 128, 128, 0.5);font-size:small;font-family: Tahoma, Geneva, sans-serif;">
+                       
+                    <br/>
+                </li>-->
+
+                <!--<li style="border: none; font-size: 16px;">
+                    <span data-bind="text: strings.geotechnicalForm.geotechnicalFormModel.editableListForm166.SecondLayerTHICKNESS.title"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                 
+                                <input id="SecondLayerTHICKNESS" data-bind="value: addFormData.SecondLayerTHICKNESS" type="text" style="margin-right:7%;padding: 0.5em;width:90%;border:1px solid rgba(128, 128, 128, 0.5);font-size:small;font-family: Tahoma, Geneva, sans-serif;">
+                           
+                    <br/>
+                </li>-->
+
+                <!--<li style="border: none; font-size: 16px;">
+                    <span data-bind="text: strings.geotechnicalForm.geotechnicalFormModel.editableListForm166.ThirdLayerUNIT.title"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    
+                                <input id="ThirdLayerUNIT" data-bind="value: addFormData.ThirdLayerUNIT" type="text" style="margin-right:7%;padding: 0.5em;width:90%;border:1px solid rgba(128, 128, 128, 0.5);font-size:small;font-family: Tahoma, Geneva, sans-serif;">
+                          
+                    <br/>
+                </li>-->
+
+                <!--<li style="border: none; font-size: 16px;">
+                   <span data-bind="text: strings.geotechnicalForm.geotechnicalFormModel.editableListForm166.ThirdLayerTHICKNESS.title"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    
+                                <input id="ThirdLayerTHICKNESS" data-bind="value: addFormData.ThirdLayerTHICKNESS" type="text" style="margin-right:7%;padding: 0.5em;width:90%;border:1px solid rgba(128, 128, 128, 0.5);font-size:small;font-family: Tahoma, Geneva, sans-serif;">
+                           
+                    <br/>
+                </li>-->
+
+                <!--<li style="border: none; font-size: 16px;">
+                    <span data-bind="text: strings.geotechnicalForm.geotechnicalFormModel.editableListForm166.TotalDepth.title"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    
+                                <input id="TotalDepth" data-bind="value: addFormData.TotalDepth" type="text" style="margin-right:7%;padding: 0.5em;width:90%;border:1px solid rgba(128, 128, 128, 0.5);font-size:small;font-family: Tahoma, Geneva, sans-serif;">
+                     
+                    <br/>
+                </li>-->
+
+                <!--<li style="border: none; font-size: 16px;">
+                    <span data-bind="text: strings.geotechnicalForm.geotechnicalFormModel.editableListForm166.PlainTerraineStimated.title"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                   
+                                <input id="PlainTerraineStimated" data-bind="value: addFormData.PlainTerraineStimated" type="text" style="margin-right:7%;padding: 0.5em;width:90%;border:1px solid rgba(128, 128, 128, 0.5);font-size:small;font-family: Tahoma, Geneva, sans-serif;">
+                       
+                    <br/>
+                </li>-->
+                <!--<li style="border: none; font-size: 16px;">
+                    <span data-bind="text: strings.geotechnicalForm.geotechnicalFormModel.editableListForm166.PlainTerrainACTUAL.title"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    
+                                <input id="PlainTerrainACTUAL" data-bind="value: addFormData.PlainTerrainACTUAL" type="text" style="margin-right:7%;padding: 0.5em;width:90%;border:1px solid rgba(128, 128, 128, 0.5);font-size:small;font-family: Tahoma, Geneva, sans-serif;">
+                        
+                    <br/>
+                </li>-->
+
+                <!--<li style="border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <span data-bind="text: strings.geotechnicalForm.geotechnicalFormModel.editableListForm166.COMMENTS.title" style="text-align: left;"></span>
+                    <textarea id="checkComments" data-bind="value: addFormData.COMMENTS" rows="7" style="resize: none; width: 100%; border:1px solid rgba(128, 128, 128, 0.5);"></textarea>
+                </li>-->
+                
+                <!--<li style="border:none;">
+
+                    <a data-bind="text: strings.stagesFormSignature.title"></a>
+                    <a id="geotechnicalSignature" data-icon="signatureNew" data-role="button" data-align="left" data-bind="events:{click: openSignatureGPopUp}" style="color:black;background-color:transparent; border:none; margin-left: 68%; margin-top:1%;"></a>
+
+                    <br />
+                </li>-->
+            <!--</ul>-->
+            <!--<div data-role="modalview" id="signatureGeoPopUp" style="left:1px; width:95%; height:36%; background-color:#F4F4F4;">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                        <center>
+                            <span data-bind="text: strings.stagesFormSignature.title" style="font-size:large;"></span>
+                        </center>
+                </div>
+                <div data-role="content" dir="ltr" style="background-color: transparent; margin-top: 3%;">
+                    <center>
+                        <div style="border: 1px solid black; background-color: white; width:90%;">  
+                            <label class="km-label-above field field--textarea">  
+                                <div class='signature-wrapper'>
+                                    <div id='signatureGeo'></div>
+                                    <input type='hidden' id='SignatureAdd-value' name='SignatureAdd-value'/>
+                                </div>
+                            </label>
+                        </div>
+                    </center>
+                </div>
+                <footer data-role="footer" style="background-color: transparent;">
+                    <div style="width:100%; margin-bottom:3%;">
+                        <center>
+                            <a data-role="button" style="margin-bottom:0%;border-radius:0;" data-bind="events:{click: closeSignaturePopUp}"><span data-bind="text: strings.stagesFormImg.close"></span></a>
+                            <a id="ResetGeo" data-role="button" style="margin-bottom:0%;border-radius:0;"><span data-bind="text: strings.stagesFormSignature.clear"></span></a>
+                        </center>
+                    </div>
+                </footer>
+            </div>-->
+
+
+        <!--<form>
+            <ul class="form-content" data-role="listview" data-style="inset">
+                <li class="form-content-item">
+
+
+                    <label id="plainTerrainActualField" class="field km-listview-label field--text">
+                        <span class="field__label" data-bind="text: strings.geotechnicalForm.geotechnicalFormModel.editableListForm166.plainTerrainActual.title"></span>
+
+
+                        <input id="plainTerrainActual" data-bind="value: addFormData.plainTerrainActual, attr: { placeholder: strings.geotechnicalForm.geotechnicalFormModel.editableListForm166.plainTerrainActual.placeholder }" type="text">
+
+                    </label>
+                </li>
+                <li class="form-content-item">
+
+
+                    <label id="secondLayerThicknessField" class="field km-listview-label field--text">
+                        <span class="field__label" data-bind="text: strings.geotechnicalForm.geotechnicalFormModel.editableListForm166.secondLayerThickness.title"></span>
+
+
+                        <input id="secondLayerThickness" data-bind="value: addFormData.secondLayerThickness, attr: { placeholder: strings.geotechnicalForm.geotechnicalFormModel.editableListForm166.secondLayerThickness.placeholder }" type="text">
+
+                    </label>
+                </li>
+            </ul>
+        </form>-->
+        <!-- START_CUSTOM_CODE_editableListForm166 -->
+        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+        <!-- END_CUSTOM_CODE_editableListForm166 -->
+    </div>
+    <script>
+        //  $('#ResetGeo').click(function(e){
+        //     $('#signatureGeo').jSignature('clear');
+        //     e.preventDefault();
+        // });
+      var scroller;
+
+      function attachToScroller(e) {
+        scroller = e.view.scroller;
+      }
+
+      $("#geotechnicalFormModelAddScreen").on("touchstart mousedown", ".signature-wrapper", function () {
+        scroller.enabled = false;
+      });
+
+      $("#geotechnicalFormModelAddScreen").on("mouseup touchend", function () {
+        scroller.enabled = true;
+      });
+    </script>
+</div>

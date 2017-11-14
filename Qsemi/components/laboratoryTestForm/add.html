@@ -1,0 +1,153 @@
+<div data-role="view" data-title="Add" data-model="app.laboratoryTestForm.addItemViewModel" data-bind="events: { show: onShow, init: onInit }" id="laboratoryTestFormModelAddScreen" class="screen screen--add add-item-view">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);">
+            <a data-role="button" data-bind="buttonText: strings.buttonsText.cancel" data-align="right" data-icon="hbar-button" data-position="end" style="font-family: Tahoma, Geneva, sans-serif;background-color:#4fa81a;color:#4fa81a; border:none;"></a>
+            <center><span data-bind="text: strings.stage0CoreForms.laboratory"></span></center> <!-- LABORATORY TEST -->
+            <a data-role="backbutton" data-align="left" data-bind="events: { click: onCancel }, buttonText: strings.buttonsText.cancel" style="font-family: Tahoma, Geneva, sans-serif;background-color:transparent; border:none;"></a> <!--Cancel-->
+        </div>
+    </header>
+     <footer data-role="footer" style="background-color: #e9eaeb;"> 
+        <center>
+            <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }, buttonText: strings.buttonsText.save" style="border-radius: 0; width: 95%;font-family: Tahoma, Geneva, sans-serif;"></a> <!--Save-->
+        </center>
+    </footer>
+    <!-- START_CUSTOM_CODE_laboratoryTestFormModel -->
+    <!-- END_CUSTOM_CODE_laboratoryTestFormModel -->
+    <div id="editableListForm176" class="form-view screen__content screen__content--form" style="overflow-x:hidden;  background-color: #e9eaeb; height:100%;">
+        <br/>
+        <br/>
+         <ul data-role="listview" data-style="inset" style="font-family: Tahoma, Geneva, sans-serif;width:100%; margin-left:0;">
+             <li style="border: none; font-size: 16px;">
+                    <span data-bind="text: strings.laboratoryTestForm.laboratoryTestFormModel.editableListForm176.DateOfReport.title">
+                </li>
+                <li style="height: 45px;border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <input id="DateOfReport" data-bind="value: addFormData.DateOfReport" type="date" style="margin-right:17%;padding: 0.5em;width:80%;border:1px solid rgba(128, 128, 128, 0.5);font-size:small;font-family: Tahoma, Geneva, sans-serif;">
+                    <br/>
+                </li>
+
+                <li style="border: none; font-size: 16px;">
+                    <span data-bind="text: strings.laboratoryTestForm.laboratoryTestFormModel.editableListForm176.RECEIVED_REPORT.title"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                     <input id="RECEIVED_REPORT" data-bind="value: addFormData.RECEIVED_REPORT" style="margin-right:17%;padding: 0.5em;width:76%;height: 1.1em;border-radius:0;border:1px solid rgba(128, 128, 128, 0.5);font-size:small;font-family: Tahoma, Geneva, sans-serif;" dir="ltr" />
+                    <br/>
+                </li>
+                
+                <li style="border: none; font-size: 16px;">
+                    <span data-bind="text: strings.laboratoryTestForm.laboratoryTestFormModel.editableListForm176.AVARAGE_STRENGTH_MPa.title"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <input id="AVARAGE_STRENGTH_MPa" data-bind="value: addFormData.AVARAGE_STRENGTH_MPa" type="text" style="margin-right:17%;padding: 0.5em;width:80%;border:1px solid rgba(128, 128, 128, 0.5);font-size:small;font-family: Tahoma, Geneva, sans-serif;">
+                    <br/>
+                </li>
+
+                <li style="border: none; font-size: 16px;">
+                    <span data-bind="text: strings.laboratoryTestForm.laboratoryTestFormModel.editableListForm176.MINIMALSTRENGTHMPa.title"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <input id="MINIMALSTRENGTHMPa" data-bind="value: addFormData.MINIMALSTRENGTHMPa" type="text" style="margin-right:17%;padding: 0.5em;width:80%;border:1px solid rgba(128, 128, 128, 0.5);font-size:small;font-family: Tahoma, Geneva, sans-serif;">
+                    <br/>
+                </li>
+
+                <li style="border: none; font-size: 16px;">
+                    <span data-bind="text: strings.laboratoryTestForm.laboratoryTestFormModel.editableListForm176.APPLIANCE_WITH_CODEREQUIREMENTS.title"></span>
+                </li>
+                <li style="border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <input id="APPLIANCE_WITH_CODEREQUIREMENTS" data-bind="value: addFormData.APPLIANCE_WITH_CODEREQUIREMENTS" type="text" style="margin-right:17%;padding: 0.5em;width:80%;border:1px solid rgba(128, 128, 128, 0.5);font-size:small;font-family: Tahoma, Geneva, sans-serif;">
+                    <br/>
+                </li>
+
+                <li style="border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <span data-bind="text: strings.laboratoryTestForm.laboratoryTestFormModel.editableListForm176.COMMENTS.title" style="text-align: left;"></span>
+                    <textarea id="COMMENTS" data-bind="value: addFormData.COMMENTS" rows="7" style="resize: none; width: 100%; border:1px solid rgba(128, 128, 128, 0.5);"></textarea>
+                </li>
+
+                <li style="border:none;">
+                    <table border="0" style="width:100%">
+                        <tr style="width:100%">
+                            <td style="width:80%">
+                                <a data-bind="text: strings.stagesFormSignature.title"></a>
+                            </td>
+                            <td style="width:20%">
+                                <a id="laboratorySignature" data-icon="signatureNew" data-role="button" data-align="left" data-bind="events:{click: openSignatureLPopUp}" style="color:black;background-color:transparent; border:none; margin-left: 60%; margin-top:1%;"></a>
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                </li>
+            </ul>
+
+            <div data-role="modalview" id="signaturelabPopUp" style="font-family: Tahoma, Geneva, sans-serif;left:1px; width:95%; height:36%; background-color:#F4F4F4;">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                        <center>
+                            <span data-bind="text: strings.stagesFormSignature.title" style="font-size:large;"></span>
+                        </center>
+                </div>
+                <div data-role="content" dir="ltr" style="background-color: transparent; margin-top: 3%;">
+                    <center>
+                        <div style="border:1px solid rgba(128, 128, 128, 0.5); background-color: white; width:90%;"> <!-- height: 10%; width: 90%; --> 
+                            <label class="km-label-above field field--textarea">  
+                                <div class='signature-wrapper'>
+                                    <div id='signaturelab'></div>
+                                    <input type='hidden' id='SignatureAdd-value' name='SignatureAdd-value'/>
+                                </div>
+                            </label>
+                        </div>
+                    </center>
+                </div>
+                <footer data-role="footer" style="background-color: transparent;">
+                    <div style="width:100%; margin-bottom:3%;">
+                        <center>
+                            <a data-role="button" style="margin-bottom:0%;border-radius:0;" data-bind="events:{click: closeSignaturePopUp}"><span data-bind="text: strings.stagesFormImg.close"></span></a>
+                            <a id="ResetLab" data-role="button" style="margin-bottom:0%;border-radius:0;"><span data-bind="text: strings.stagesFormSignature.clear"></span></a>
+                        </center>
+                    </div>
+                </footer>
+            </div>
+
+            <div data-role="modalview" id="warningPopUpLab" style="font-family: Tahoma, Geneva, sans-serif;left:1px; width:95%; height:25%; background-color:#F4F4F4;">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                    <center><span style="font-size:x-large; font-weight:bold;">!</span></center>
+                </div>
+                <div data-role="content" dir="ltr" style="background-color: transparent; margin-top: 3%;">
+                    <center>
+                        <br/>
+                        <span id="warningPopUpLabText" style="font-size:large;"></span>
+                        <br/>
+                    </center>
+                </div>
+                <footer data-role="footer" style="background-color: transparent;">
+                    <div style="width:100%; margin-bottom:3%;">
+                        <center>
+                           <a data-role="button" onclick="app.laboratoryTestForm.laboratoryTestFormModel.saveWarningPopUp()" style="color:white;margin-bottom:0%;border-radius:0;"> <!--  data-bind="events: {click: saveNCR}" -->
+                                <span>Ok</span>
+                            </a>
+                        </center>
+                    </div>
+                </footer>
+            </div>
+       
+        <!-- START_CUSTOM_CODE_editableListForm176 -->
+        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+        <!-- END_CUSTOM_CODE_editableListForm176 -->
+    </div>
+     <script>
+         $('#ResetLab').click(function(e){
+            $('#signaturelab').jSignature('clear');
+            e.preventDefault();
+        });
+      var scroller;
+
+      function attachToScroller(e) {
+        scroller = e.view.scroller;
+      }
+
+      $("#laboratoryTestFormModelAddScreen").on("touchstart mousedown", ".signature-wrapper", function () {
+        scroller.enabled = false;
+      });
+
+      $("#laboratoryTestFormModelAddScreen").on("mouseup touchend", function () {
+        scroller.enabled = true;
+      });
+    </script>
+</div>

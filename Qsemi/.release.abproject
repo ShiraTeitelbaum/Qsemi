@@ -4,6 +4,7 @@
     "cordova-plugin-camera",
     "cordova-plugin-device",
     "cordova-plugin-device-orientation",
+    "cordova-plugin-dialogs",
     "cordova-plugin-file",
     "cordova-plugin-file-transfer",
     "cordova-plugin-geolocation",
@@ -13,6 +14,7 @@
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
     "cordova-plugin-vibration",
-    "cordova-plugin-whitelist"
+    "cordova-plugin-whitelist",
+    "nl.x-services.plugins.toast@2.5.2"
   ]
 }

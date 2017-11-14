@@ -1,5 +1,12 @@
 #signatureS img{ display: none !important; }
 #signature img{ display: none !important; }
+#signatureCore img{ display: none !important; }
+#signatureGeo img{ display: none !important; }
+#signatureCast img{ display: none !important; }
+#signaturelab img{ display: none !important; }
+#signatureNCR img{ display: none !important; } 
+#signatureOpenNCR img{ display: none !important; } 
+#signatureCloseNCR img{ display: none !important; } 
 
 #kendoUiMobileApp .block {
     display: block;
@@ -290,7 +297,7 @@ Fields
     -ms-flex-flow: row;
     flex-flow: row;
     -webkit-box-orient: horizontal;
-    background-color: #00c853;
+    background-color: #4fa81a;
     color: #FFFFFF;
 }
 
@@ -763,6 +770,39 @@ Fields
 #kendoUiMobileApp .km-home:after,
 #kendoUiMobileApp .km-home:before {
     content: '\e0af';
+}
+
+#kendoUiMobileApp .km-arrow-up:after,
+#kendoUiMobileApp .km-arrow-up:before {
+    content: "\e011";
+}
+
+#kendoUiMobileApp .km-arrow-down:after,
+#kendoUiMobileApp .km-arrow-down:before {
+    content: "\e012";
+}
+
+#kendoUiMobileApp .km-arrow-open:after,
+#kendoUiMobileApp .km-arrow-open:before {
+    content: "\e010";
+}
+
+#kendoUiMobileApp .km-camera:after,
+#kendoUiMobileApp .km-camera:before {
+    content: "\e0d0";
+    zoom:120%;
+}
+
+#kendoUiMobileApp .km-backIcon:after,
+#kendoUiMobileApp .km-backIcon:before {
+    content: "\e322";
+    zoom:120%;
+}
+
+#kendoUiMobileApp .km-location:after,
+#kendoUiMobileApp .km-location:before {
+    content: "\e0b4";
+    zoom:120%;
 }
 
 

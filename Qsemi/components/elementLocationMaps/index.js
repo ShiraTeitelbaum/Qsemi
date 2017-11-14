@@ -308,12 +308,6 @@ app.localization.registerView('elementLocationMaps');
                 return linkChunks[0] + this.get('currentItem.' + linkChunks[1]);
             },
             saveElementLocation: function(e) {
-                /*var tmp = (app.elementDetailView.elementDetailViewModel.marker.position).toString().split(",");
-                var latStr = (tmp[0]).substr(1, tmp[0].length);
-                var lat = parseFloat(latStr).toFixed(14);
-                var lngStr = (tmp[1]).substr(1, tmp[1].length-2);
-                var lng = parseFloat(lngStr).toFixed(14);*/
-                //app.surveyorMarking.surveyorMarkingModel.mapFlag=true;
                 var jsdoOptions3 = app.elementDetailView.elementDetailViewModel.get('_jsdoOptions'),
                     jsdo3 = new progress.data.JSDO(jsdoOptions3);
                 dataSourceOptions.transport.jsdo = jsdo3;
@@ -323,11 +317,14 @@ app.localization.registerView('elementLocationMaps');
 
                 dataSource3.fetch(function() {
                     var element = dataSource3.data();
-
+                    
                     var tmp = (app.elementDetailView.elementDetailViewModel.marker.position).toString().split(",");
                     var lat = parseFloat((tmp[0]).substr(1, tmp[0].length)).toFixed(8);
                     var lng = parseFloat((tmp[1]).substr(1, tmp[1].length-2)).toFixed(8);
 
+                    if(element.Latitude != lat && element.Longtitud != lng && element.Latitude != undefined && element.Longtitud != undefined) {
+                        alert("Note: You are change the element's locaion");
+                    }
                     var elementLocation = {
                         Latitude: lat,
                         Longtitud: lng
@@ -340,14 +337,103 @@ app.localization.registerView('elementLocationMaps');
                     afterUpdateFn = function(jsdo3, record, success, request) {
                         jsdo3.unsubscribe('afterUpdate', afterUpdateFn);
                         if(success === true) {
-                            //alert(2222)
+                            //URL of Google Static Maps.
+                            var staticMapUrl = "https://maps.googleapis.com/maps/api/staticmap";
+                    
+                            //Set the Google Map Center.
+                            // staticMapUrl += "?center=" + elementLocationMapsModel.myOptions.center.lat() + "," + elementLocationMapsModel.myOptions.center.lng();
+                            staticMapUrl += "?center=" + elementLocation.Latitude + "," + elementLocation.Longtitud;
+                    
+                            //Set the Google Map Size.
+                            staticMapUrl += "&size=220x350";
+                    
+                            //Set the Google Map Zoom.
+                            staticMapUrl += "&zoom=" + 16;//elementLocationMapsModel.myOptions.zoom;
+                    
+                            //Set the Google Map Type.
+                            staticMapUrl += "&maptype=" + elementLocationMapsModel.myOptions.mapTypeId;
+                    
+                            //Loop and add Markers.
+                             staticMapUrl += "&markers=color:red|" + app.elementDetailView.elementDetailViewModel.marker.position.lat() + "," + app.elementDetailView.elementDetailViewModel.marker.position.lng();
+                            // for (var i = 0; i < markers.length; i++) {
+                            //     staticMapUrl += "&markers=color:red|" + markers[i].lat + "," + markers[i].lng;
+                            // }
+                            // Display the Image of Google Map.
+                           
+                            var imgMap = document.getElementById("elementLocationMapsModelMap");
+                            imgMap.src = staticMapUrl;
+                            // imgMap.style.display = "block";
+                            var a = document.createElement("a");
+                            // document.body.appendChild(a);
+                            a.style = "display: none";
+                            a.href = staticMapUrl;
+                            a.download = name;
+                            a.click();
+
+                             var image = new Image();
+                             image.crossOrigin = 'anonymous';
+
+                            // create an empty canvas element
+                            var canvas = document.createElement("canvas"),
+                                canvasContext = canvas.getContext("2d");
+
+                            image.onload = function () {
+                                //Set canvas size is same as the picture
+                                canvas.width = image.width;
+                                canvas.height = image.height;
+                            
+                                // draw image into canvas element
+                                canvasContext.drawImage(image, 0, 0, image.width, image.height);
+                            
+                                // get canvas contents as a data URL (returns png format by default)
+                                var dataURL = canvas.toDataURL("image/jpeg");
+
+                                    var imagefile = dataURL;
+                                    if(imagefile) {
+                                         var options = new FileUploadOptions();
+                                        var imageObj = $.parseJSON(jsrow.data.StaticMap) 
+                                        options.fileKey = "fileContents";
+                                        options.fileName = "element_map_image";
+                                        if (cordova.platformId == "android") {
+                                            options.fileName += ".jpeg"
+                                        }
+                                        options.mimeType = "image/jpeg";
+                                        options.params = {};  // if we need to send parameters to the server request 
+                                        options.headers = {
+                                            Connection: "Close"
+                                        };
+                                        options.chunkedMode = false;
+                                        var ft = new FileTransfer();
+                                        var urlRB = app.elementDetailView.elementDetailViewModel._dataSourceOptions.transport.jsdo.url + imageObj.src + "?objName=" + app.elementDetailView.elementDetailViewModel._jsdoOptions.name;
+
+                                        ft.upload(
+                                            dataURL,
+                                            encodeURI(urlRB),
+                                            onFileUploadSuccess( ),
+                                            onFileTransferFail,
+                                            options,
+                                            true);
+                                     }
+                                };
+
+                            image.src = staticMapUrl;
+
+                            app.elementDetailView.elementDetailViewModel.change_Percent = true;
+                           document.getElementById("ChooseLocationOnMap").style.color = "red";
+                            // alert("Location successfully approved");
+                            window.plugins.toast.showWithOptions(
+                            {
+                                message: app.elementLocationMaps.get('strings').toastsMessages.locationSuccessAproved,
+                                duration: "short", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
+                                position: "bottom",
+                                addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+                            }); 
                             app.mobileApp.navigate('#:back');
                         }
                     };
                     jsdo3.subscribe('afterUpdate', afterUpdateFn);
                     jsdo3.saveChanges();
                 });
-                // app.mobileApp.navigate('#:back');
             },
             onCancel: function(e) {
                 app.surveyorMarking.surveyorMarkingModel.mapFlag=false;
@@ -355,12 +441,17 @@ app.localization.registerView('elementLocationMaps');
                 //app.mobileApp.navigate('#components/surveyorMarking/edit.html?elementUid=' + cuur.uid+'&elementId='+cuur.id);
                 app.mobileApp.navigate('#:back');
             },
+            getMapCenter: function() {
+                elementLocationMapsModel.infoWindow.setPosition(elementLocationMapsModel.pos);
+               
+                elementLocationMapsModel.map.setCenter(elementLocationMapsModel.pos);
+            },
             loadMap: function() {
                  this.myOptions = {
                     //maxZoom: 18,
                     //minZoom: 17,
                     zoom: 18,
-                    //center: new google.maps.LatLng('32.84939', '35.061912'),//{ lat: 32.84939, lng: 35.061912 },
+                    center: new google.maps.LatLng(31.77173, 35.18869),//{ lat: 32.84939, lng: 35.061912 },
                     mapTypeControl: true, 
                     mapTypeControlOptions: {
                         style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
@@ -382,49 +473,28 @@ app.localization.registerView('elementLocationMaps');
 
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function(position) {
-                        //alert("name: "+app.elementDetailView.elementDetailViewModel.currentItem.name)
-                        // var elementLat = app.elementDetailView.elementDetailViewModel.currentItem.Latitude;
-                        // var elementLng = app.elementDetailView.elementDetailViewModel.currentItem.Longtitud;
                         var elementLat = app.elementDetailView.elementDetailViewModel.elementLocation.Latitude;
                         var elementLng = app.elementDetailView.elementDetailViewModel.elementLocation.Longtitud;
 
                          if(elementLat != "NaN" && elementLat != "null" && elementLng != "NaN" && elementLng != "null") {
-                             /*var pos = {
-                                lat: elementLat,
-                                lng: elementLng
-                            };*/
+                            
                             elementLocationMapsModel.pos =  new google.maps.LatLng(elementLat, elementLng);
-                            //console.log("pos if")
-                         //console.log(elementLocationMapsModel.pos)
-                         //alert("pos if: "+elementLocationMapsModel.pos)
+                           
                          }
                          else {
                              elementLocationMapsModel.pos = {
                                 lat: position.coords.latitude,
                                 lng: position.coords.longitude
                             };
-                            //console.log("pos else")
-                         //console.log(elementLocationMapsModel.pos)
-                         //alert("pos else: "+elementLocationMapsModel.pos)
-                            //infoWindow.setContent('<br/>'+ 'You Are Here'); //Location found.
                          }
                          if(elementLat != "NaN" && elementLat != "null" && elementLng != "NaN" && elementLng != "null") {
-                             //alert("add marker")
+                           
                             elementLocationMapsModel.addMarker(elementLocationMapsModel.pos, elementLocationMapsModel.map);
                          }
-                         
-                         //console.log("pos")
-                         //console.log(elementLocationMapsModel.pos)
-                         //alert("pos: "+elementLocationMapsModel.pos)
-                        /*infoWindow.setPosition(pos);
-                        infoWindow.setContent('Location found.');
-                        map.setCenter(pos);*/
-                        //elementLocationMapsModel.infoWindow.setPosition(elementLocationMapsModel.pos);
-                        //infoWindow.setContent('<br/>'+ 'You Are Here'); //Location found.
+                          elementLocationMapsModel.infoWindow.setContent('<br/>'+ 'You Are Here'); //Location found.
                         elementLocationMapsModel.infoWindow.open(elementLocationMapsModel.map);
                         elementLocationMapsModel.map.setCenter(elementLocationMapsModel.pos);
                         
-                        //app.mobileApp.pane.loader.hide();
                     }, function() {
                         handleLocationError(true, elementLocationMapsModel.infoWindow, elementLocationMapsModel.map.getCenter());
                     });
@@ -432,29 +502,9 @@ app.localization.registerView('elementLocationMaps');
                     google.maps.event.addListener(elementLocationMapsModel.map, 'click', function(event) {
                         elementLocationMapsModel.addMarker(event.latLng, elementLocationMapsModel.map);
                      });
-
-                     /*google.maps.event.addListener(map, 'zoom_changed', function(event) {
-                        //infowindow.setContent('Zoom: ' + map.getZoom());
-                        var pos = {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude
-                        };
-                        infoWindow.setPosition(pos);
-                        map.setCenter(pos);
-                    });*/
-
-                    /*var elementLat = app.elementDetailView.elementDetailViewModel.currentItem.Latitude;//parseFloat(app.elementDetailView.elementDetailViewModel.currentItem.Latitude).toFixed(8);
-                    var elementLng = app.elementDetailView.elementDetailViewModel.currentItem.Longtitud;//parseFloat(app.elementDetailView.elementDetailViewModel.currentItem.Longtitud).toFixed(8);
-                    if(elementLat != "NaN" && elementLat != "null" && elementLng != "NaN" && elementLng != "null") {
-                        //var elementLocation = {lat: elementLat, lng: elementLng};
-                        var elementLocation = new google.maps.LatLng(elementLat, elementLng);
-                        
-                        elementLocationMapsModel.addMarker(elementLocation,elementLocationMapsModel. map);
-                    }*/
                 } else {
                     // Browser doesn't support Geolocation
                     handleLocationError(false, infoWindow, map.getCenter());
-                    //app.mobileApp.pane.loader.hide();
                 }
                 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                     infoWindow.setPosition(pos);
@@ -482,6 +532,16 @@ app.localization.registerView('elementLocationMaps');
                             });
                         }
                 },
+                closeNeedGPSElement: function(e) {
+                    $("#needGPSElementPopUp").kendoMobileModalView("close");
+                    app.elementLocationMaps.elementLocationMapsModel.emapFlag = false;
+                    var id = 0;
+                    app.mobileApp.navigate('#components/elementDetailView/stepFormList.html?stepid=' + id);
+                },
+                openSettingsNeedGPSElement: function(e) {
+                    $("#needGPSElementPopUp").kendoMobileModalView("close");
+                    cordova.plugins.diagnostic.switchToLocationSettings();
+                },
             /// start masterDetails view model functions
             /// end masterDetails view model functions
             currentItem: {}
@@ -499,28 +559,14 @@ app.localization.registerView('elementLocationMaps');
     } else {
         parent.set('elementLocationMapsModel', elementLocationMapsModel);
     }
-    // function calldialog() {
-                    
-    //                 document.addEventListener("deviceready",function(){
-    //                     //default dialog
-    //                     cordova.dialogGPS("Your GPS is Disabled, this app needs to be enable to works.",//message
-    //                         "Use GPS, with wifi or 3G.",//description
-    //                         function(buttonIndex){//callback
-    //                         switch(buttonIndex) {
-    //                             case 0: break;//cancel
-    //                             case 1: break;//neutro option
-    //                             case 2: break;//user go to configuration
-    //                         }},
-    //                         "Please Turn on GPS",//title
-    //                         ["Cancel","Later","Go"]);//buttons
-    //                 });
-    //             }
+
     function dialog() {
        cordova.plugins.diagnostic.isLocationAvailable(function(available){
             // alert("Location is " + (available ? "available" : "not available"));
             if(available == false) {
-                alert("Location is not available");
-                cordova.plugins.diagnostic.switchToLocationSettings();
+                // alert("Location is not available");
+                $("#needGPSElementPopUp").kendoMobileModalView("open");
+                // cordova.plugins.diagnostic.switchToLocationSettings();
             }
             // else if(available == true) {
                 elementLocationMapsModel.loadMap();
@@ -578,6 +624,27 @@ app.localization.registerView('elementLocationMaps');
         dataSource.unbind('change', setupMapView);
     });
 
+function onFileUploadSuccess() {
+        // alert("onFileUploadSuccess")
+        console.log("onFileUploadSuccess")
+        /*window.plugins.toast.showWithOptions(
+            {
+            message: "התמונה עלתה בהצלחה",
+            duration: "short", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
+            position: "bottom",
+            addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+            }
+        );*/         
+    }
+
+function onFileTransferFail(error) {
+        console.log("FileTransfer Error:");
+        console.log(error)
+        console.log("Code: " + error.code);
+        console.log("Body:" + error.body);
+        console.log("Source: " + error.source);
+        console.log("Target: " + error.target);
+    }
 })(app.elementLocationMaps);
 
 // START_CUSTOM_CODE_elementLocationMapsModel

@@ -66,6 +66,7 @@ cameraApp.prototype = {
         }
 
         else if (document.getElementById(capturedPhoto).style.color != "red") {
+            // alert("black")
             navigator.camera.getPicture(function () {
             var popImg = "#" + capturedPhoto + "Pop";
             document.getElementById(capturedPhoto).style.color = "red";
@@ -82,18 +83,17 @@ cameraApp.prototype = {
                 });
         }
         else if (document.getElementById(capturedPhoto).style.color == "red") {
+            //  var img = capturedPhoto + "Img";
             var popImg = "#" + capturedPhoto + "Pop";
-            // if(cordova.platformId == "android") {
-            //     alert("android")
-            //     document.getElementById(capturedPhoto + "Img").css("transform","rotate(90deg)");
+           
+            //  if (cordova.platformId == "android") {
+            //     document.getElementById(img).style.transform = "rotate(90deg)";
             // }
             $(popImg).kendoMobileModalView("open");
         }
     },
     _onPhotoDataSuccess: function (imageData) {
         var capturedPhoto = myid.toString();
-         var popImg = "#" + capturedPhoto + "Pop";
-        $(popImg).kendoMobileModalView("open");
         
         if (capturedPhoto.endsWith("_")) {
             var n = capturedPhoto.length;
@@ -105,12 +105,17 @@ cameraApp.prototype = {
         // else{
             var addPhoto = document.getElementById(capturedPhoto + 'Img');
             addPhoto.src = imageURI;
+          
         // }
         //crane operation photo edit
         if (document.getElementById(myid).style.color != "red") {
             var text = $('#file' + capturedPhoto);
             text.val(imageURI);
         }
+          console.log("capturedPhoto")
+            console.log(capturedPhoto + 'Pop')
+        var popup = capturedPhoto + 'Pop';
+        $("#"+popup).kendoMobileModalView("open");
     },
     
     _capturePhotoEdit: function () {

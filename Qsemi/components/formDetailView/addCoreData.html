@@ -1,15 +1,14 @@
-<div data-role="view" data-title="Add" data-model="app.formDetailView.addItemViewModel" data-bind="events: { show: onShowCoreData }" id="formDetailViewModelAddCoreScreen" class="screen screen--add add-item-view">
+<div data-role="view" data-title="Add" data-model="app.formDetailView.addItemViewModel" data-bind="events: { show: onShowCoreData, init: onInitCoreData }" id="formDetailViewModelAddCoreScreen" class="screen screen--add add-item-view">
     <header data-role="header">
-        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);">
-            <!--<span data-bind="text: strings.formDetailView.formDetailViewModel.addScreenHeaderValue"></span>-->
-            <span id="coreCheckName"></span> <!-- data-bind="text: itemData['name']" -->
-            <a data-role="backbutton" data-align="left" data-bind="events: { click: onCOreCancel }, buttonText: strings.buttonsText.cancel"></a>
-            <!--<a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }">Save</a>-->
+        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);font-family: Tahoma, Geneva, sans-serif;">
+            <a data-role="button" data-bind="buttonText: strings.buttonsText.cancel" data-align="right" data-icon="hbar-button" data-position="end" style="font-family: Tahoma, Geneva, sans-serif;background-color:#4fa81a;color:#4fa81a; border:none;"></a>
+            <center><span id="coreCheckName"></span></center> <!-- data-bind="text: itemData['name']" -->
+            <a data-role="backbutton" data-align="left" data-bind="events: { click: onCOreCancel }, buttonText: strings.buttonsText.cancel" style="font-family: Tahoma, Geneva, sans-serif;background-color:transparent;border:none;"></a>
         </div>
     </header>
-    <footer data-role="footer">
+     <footer data-role="footer" style="background-color: #e9eaeb;"> <!--background-color:#351e45;-->
         <center>
-            <a data-role="button" data-align="right" data-bind="events: { click: onSaveCoreClick }" style="border-radius: 0; width: 100%;">Save</a>
+            <a data-role="button" data-align="right" data-bind="events: { click: onSaveCoreClick }, text: strings.buttonsText.save" style="border-radius: 0; width: 95%;"></a> <!-- Save -->
         </center>
     </footer>
     <!-- START_CUSTOM_CODE_formDetailViewModel -->
@@ -17,17 +16,10 @@
     <div id="editableListForm163" class="form-view screen__content screen__content--form" style="overflow-x:hidden;  background-color: #e9eaeb; height:100%;">
         <br/>
         <br/>
-        <ul data-role="listview" data-style="inset" style="width:100%; margin-left:0;">
+        <ul data-role="listview" data-style="inset" style="width:100%; margin-left:0;font-family: Tahoma, Geneva, sans-serif;">
                 <li style="border:none;border-bottom: 1px solid #e9eaeb;">
-                    <span data-bind="text: itemData['name']" style="margin-left: 2%; margin-top: 20%; font-size: large; font-weight:bold;"></span>
+                    <span data-bind="text: itemData['name']" style="margin-top: 20%; font-size: large; font-weight:bold;"></span>
                 </li>
-                <!--<li style="border:none;">
-                    <span data-bind="text: itemData['Description']" style="margin-top: 20%;"></span>
-                </li>-->
-                
-                <!--<li id="text1" style="border:none; ">
-                    <span id="text1inputTitle"  data-bind="text: strings.stagesFormData.title" style="text-align: left;"></span>
-                </li>-->
                 <li id="Text1" style="border:none;border-bottom: 1px dashed #e9eaeb;">
                     <span id="text1inputTitle"  data-bind="text: strings.stagesFormData.title" style="text-align: left;"></span>
                     <textarea id="text1input" data-bind="value: addFormData.Data" style="resize: none; width: 100%; border:1px solid black;"></textarea>
@@ -38,15 +30,70 @@
                     <textarea id="coreCheckComments" data-bind="value: addFormData.Comments" rows="7" style="resize: none; width: 100%; border:1px solid black;"></textarea>
                 </li>
 
-                <!--<li style="border:none;">
-                    <center>
-                        <a data-role="button" data-align="right" data-bind="events: { click: onSaveCoreClick }" style="border-radius: 0; width: 100%;">Save</a>
-                    </center>
-                </li>-->
+                <li style="border:none;width:100%;">
+                    <table border="0" style="width:100%">
+                        <tr style="width:100%">
+                            <td style="width:80%">
+                                <a data-bind="text: strings.stagesFormSignature.title"></a>
+                            </td>
+                            <td style="width:20%">
+                                <a id="checkCoreSignature" data-icon="signatureNew" data-role="button" data-align="left" data-bind="events:{click: openSignatureCorePopUp}" style="color:black;background-color:transparent; border:none; margin-left: 60%; margin-top:1%;"></a>
+                            </td>
+                        </tr>
+                    </table>
+                    <!--<br />-->
+                </li>
             </ul>
+
+             <div data-role="modalview" id="signatureCorePopUp" style="left:1px; width:95%; height:36%; background-color:#F4F4F4;font-family: Tahoma, Geneva, sans-serif;">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                        <!--<center>-->
+                            <span data-bind="text: strings.stagesFormSignature.title" style="margin-left:3%;font-size:large;"></span>
+                        <!--</center>-->
+                </div>
+                <div data-role="content" dir="ltr" style="background-color: transparent; margin-top: 3%;">
+                    <center>
+                        <div style="border:1px solid rgba(128, 128, 128, 0.5); background-color: white; width:90%;">  
+                            <label class="km-label-above field field--textarea">  
+                                <div class='signature-wrapper'>
+                                    <div id='signatureCore'></div>
+                                    <input type='hidden' id='SignatureAdd-value' name='SignatureAdd-value'/>
+                                </div>
+                            </label>
+                        </div>
+                    </center>
+                </div>
+                <footer data-role="footer" style="background-color: transparent;">
+                    <div style="width:100%; margin-bottom:3%;">
+                        <center>
+                            <a data-role="button" style="margin-bottom:0%;border-radius:0;" data-bind="events:{click: closeSignatureCorePopUp}"><span data-bind="text: strings.stagesFormImg.close"></span></a>
+                            <a id="ResetCore" data-role="button" style="margin-bottom:0%;border-radius:0;"><span data-bind="text: strings.stagesFormSignature.clear"></span></a>
+                        </center>
+                    </div>
+                </footer>
+            </div>
 
         <!-- START_CUSTOM_CODE_editableListForm163 -->
         <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
         <!-- END_CUSTOM_CODE_editableListForm163 -->
     </div>
+    <script>
+         $('#ResetCore').click(function(e){
+            $('#signatureCore').jSignature('clear');
+            e.preventDefault();
+        });
+      var scroller;
+
+      function attachToScroller(e) {
+        scroller = e.view.scroller;
+      }
+
+      $("#formDetailViewModelEditScreen").on("touchstart mousedown", ".signature-wrapper", function () {
+        scroller.enabled = false;
+      });
+
+      $("#formDetailViewModelEditScreen").on("mouseup touchend", function () {
+        scroller.enabled = true;
+      });
+    </script>
 </div>

@@ -2,73 +2,73 @@
 class="screen">
 <!-- data-show="app.generalMapView.onShow"  -->
     <header data-role="header">
-        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3)">
+        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);font-family: Tahoma, Geneva, sans-serif;">
+            <table style="width:100%;">
+                <tr>
+                    <td style="width:10%;">
+                        <a data-icon="home" data-role="backbutton" data-align="right" style="background-color:#4fa81a;color:#4fa81a; border:none;"></a>
+                        <a data-icon="backIcon" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
+                    </td>
+                    <td style="width:80%;">
+                        <center><span data-bind="text: strings.generalMapView.title"></span></center>
+                    </td>
+                    <td style="width:10%;">
+                        
+                    </td>
+                </tr>
+            </table>
 
-            <span data-bind="text: strings.generalMapView.title"></span>
-            <a data-icon="home" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
+            <!--<a data-icon="home" data-role="backbutton" data-align="right" style="background-color:#4fa81a;color:#4fa81a; border:none;"></a>
+            <center><span data-bind="text: strings.generalMapView.title"></span></center>
+            <a data-icon="home" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>-->
             <!--<a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>-->
 
         </div>
     </header>
 
-    
-<!--<style>
-    .footerMapTD {
-       
-        font-size: small;
-    }
-</style>
-    <footer data-role="footer" style="background-color: white; height: 15%;">
-        <center>
-            <table style="width: 100%; height: 100px; ">
-                <tr>
-                    <td class="footerMapTD" style="width: 30%;">
-                        <img src="images/mapRed.png" style="height:18px; width:18px;" />
-                        <span>FOUNDATION</span>
-                    </td>
-                    <td class="footerMapTD" style="width: 26%;">
-                        <img src="images/mapOrange.png" style="height:18px; width:18px;" />
-                        <span>ERECTION</span>
-                    </td>
-                    <td class="footerMapTD" style="width: 43%;">
-                        <img src="images/mapYellow.png" style="height:18px; width:18px;" />
-                        <span>EQUIPMENT &</span>
-                        <span style="margin-left:14%">CANTILEVER</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="footerMapTD" style="width: 30%;">
-                        <img src="images/mapGreen.png" style="height:18px; width:18px;" />
-                        <span>OCS WIRES</span>
-                    </td>
-                    <td class="footerMapTD" style="width: 26%;">
-                        <img src="images/mapBlue.png" style="height:18px; width:18px;" />
-                        <span>E&B</span>
-                    </td>
-                    <td class="footerMapTD" style="width: 43%;">
-                        <img src="images/mapPurple.png" style="height:18px; width:18px;" />
-                        <span>TEST</span>
-                    </td>
-                </tr>
-            </table>
-        </center>
-    </footer>-->
     <footer data-role="footer" style="background-color:transparent;">
        <label class="circle2" style="position: absolute;bottom: 0.8em;left: 0.9em;z-index: 999;background-repeat:no-repeat;background-size:75%; background-position: center; "><br /><center style="color: white; margin: -2%;margin-left: -1%;  font-size: xx-large;">
            <img src="images/mapLegend.png" style="height:60%; width:90%;" />
         </center></label>
+         <label style="position: absolute;bottom: 1em;left: 16em;z-index: 999;background-repeat:no-repeat;background-size:100%; background-position: center;">
+            <center>
+                <img src="images/mapCenter.jpg" style="height:45%; width:45%;" onclick="app.generalMapView.generalMapViewModel.getMapCenter()" />
+            </center></label>
    </footer>
     <!-- START_CUSTOM_CODE_generalMapView -->
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
 
     <!-- END_CUSTOM_CODE_generalMapView -->
     <div id="generalMapViewModelMap" class="map"></div>
+    <img id="imgMap" alt="" style="display: none" />
 
-    <!--<div class="map-details details-content screen__content screen__content--details screen__content--map" data-bind="click: generalMapViewModel.itemClick, visible: generalMapViewModel.itemDetailsVisible">
-        <h3 data-bind="text: generalMapViewModel.originalItem.AnchorageFoundation"></h3>
-
-    </div>-->
-
+    <div data-role="modalview" id="needGPSPopUp" style="left:1px; width:85%; height:32%; background-color:#F4F4F4; ">
+        <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:5%;">
+            <div style="width:100%;">
+                <span data-bind="text: strings.warningGPSMessage.title" style="color:black; font-weight:bold; font-size:large; margin-left:6%;"></span> <!-- Please Turn On GPS -->
+            </div>
+        </div>
+        <br/>
+        <div data-role="content" style="background-color: transparent; margin-top: 2%;">
+            <span data-bind="text: strings.warningGPSMessage.text1" style="color:black; font-size:medium; margin-left:6%;"></span><br/><br/> <!-- Your Location Services are disabled. -->
+            <span data-bind="text: strings.warningGPSMessage.text2" style="color:black; font-size:medium; margin-left:6%;"></span><br/><br/> <!-- The GPS is required to view the map. -->
+            <span data-bind="text: strings.warningGPSMessage.text3" style="color:black; font-size:medium; margin-left:6%;"></span> <!-- Please enable GPS, with Wifi or 3G service -->
+        </div>
+        <div data-role="footer" style="margin-bottom:3%; margin-top:3%; background-color:transparent">
+            <div style="width:100%; margin-bottom:2%;">
+                <center>
+                    <a data-role="button" onclick="app.generalMapView.generalMapViewModel.closeNeedGPS()" style="color:white;margin-bottom:0%;border-radius:0;">
+                        <!-- onclick="app.formDetailView.formDetailViewModel.saveAddPopUpImg()" -->
+                        <span data-bind="text: strings.buttonsText.cancel"></span> <!-- CANCEL -->
+                    </a>
+                    <a data-role="button" onclick="app.generalMapView.generalMapViewModel.openSettingsNeedGPS()" style="color:white;margin-bottom:0%;border-radius:0;"> 
+                        <!-- onclick="app.formDetailView.formDetailViewModel.saveAddPopUpImg()" -->
+                        <span data-bind="text: strings.buttonsText.settings"></span> <!-- GO -->
+                    </a>
+                </center>
+            </div>
+        </div>
+    </div>
 
     <!-- START_CUSTOM_CODE_generalMapViewModel -->
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
@@ -83,7 +83,3 @@ class="screen">
         </div>
     </script>
 </div>
-
-<footer data-role="footer" style="background-color: red;">
-    <span>AAAA</span>
-</footer>

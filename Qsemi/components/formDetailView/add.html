@@ -1,203 +1,75 @@
 <div data-role="view" data-title="Add" data-model="app.formDetailView.addItemViewModel" data-bind="events: { show: onShow, init: onInit }" id="formDetailViewModelAddScreen" class="screen screen--add add-item-view">
     <header data-role="header">
         <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);">
-            <!--<span data-bind="text: strings.formDetailView.formDetailViewModel.addScreenHeaderValue"></span>-->
-            <span id="checkName"></span> <!-- data-bind="text: itemData['name']" -->
-            <a data-role="backbutton" data-align="left" data-bind="events: { click: onCancel }, buttonText: strings.buttonsText.cancel"></a>
-            <!--<a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }">Save</a>-->
+            <a data-role="button" data-bind="buttonText: strings.buttonsText.cancel" data-align="right" data-icon="hbar-button" data-position="end" style="font-family: Tahoma, Geneva, sans-serif;background-color:#4fa81a;color:#4fa81a; border:none;"></a>
+            <center><span id="checkName"></span></center>
+            <a data-role="backbutton" data-align="left" data-bind="events: { click: onCancel }, buttonText: strings.buttonsText.cancel" style="font-family: Tahoma, Geneva, sans-serif;background-color:transparent;border:none;"></a>
         </div>
     </header>
-    <footer data-role="footer">
+    <footer data-role="footer" style="background-color: #e9eaeb;"> 
         <center>
-            <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }" style="border-radius: 0; width: 100%;">Save</a>
+            <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }, buttonText: strings.buttonsText.save" style="border-radius: 0; width: 95%;font-family: Tahoma, Geneva, sans-serif;"></a> <!-- Save -->
         </center>
     </footer>
     <!-- START_CUSTOM_CODE_formDetailViewModel -->
     <!-- END_CUSTOM_CODE_formDetailViewModel -->
     <div id="editableListForm163" class="form-view screen__content screen__content--form" style="overflow-x:hidden;  background-color: #e9eaeb; height:100%;">
-        <!--<br/>
-         <div id="processControlCollapsible" data-role="collapsible" data-inset="true">
-            <h2><span style="font-size: medium; font-weight: bold;">Process Control</span></h2>
-            <p>AAAA</p>
-        </div>-->
         <br/>
         <br/>
-        <ul data-role="listview" data-style="inset" style="width:100%; margin-left:0;">
+        <ul data-role="listview" data-style="inset" style="width:100%; margin-left:0;font-family: Tahoma, Geneva, sans-serif;">
                 <li style="border:none;border-bottom: 1px solid #e9eaeb;">
-                    <span data-bind="text: itemData['name']" style="margin-left: 3%; margin-top: 20%; font-size: large; font-weight:bold;"></span>
+                    <span data-bind="text: itemData['name']" style="margin-top: 20%; font-size: large; font-weight:bold;"></span>
                 </li>
-                <li style="border:none;">
+                <li id="description" style="border:none;">
                     <span data-bind="text: itemData['Description']" style="margin-top: 20%;"></span>
                 </li>
                 <li id="checkStatus" style="border:none;border-bottom: 1px dashed #e9eaeb;">
+                    <span data-bind="text: strings.stagesFormCheckBox.title" style="text-align: left;margin-top:1%;"></span> <!-- Status: -->
                     <table style="width:100%">
                         <tr>
                             <td style="width:30%">
                                 <input id="status_ok" class="km-checkbox" value="1" name="fooby[2][]" type="checkbox"> 
-                                <label class="km-checkbox-label" for="status_ok"><span>Ok</span></label>
+                                <label class="km-checkbox-label" for="status_ok"><span data-bind="text: strings.stagesFormCheckBox.valid"></span></label> <!-- Ok -->
                             </td>
                             <td style="width:36%">
                                 <input id="status_not_ok" class="km-checkbox" value="1" name="fooby[2][]" type="checkbox" >
-                                <label class="km-checkbox-label" for="status_not_ok"><span>Not Ok</span></label>
+                                <label class="km-checkbox-label" for="status_not_ok"><span data-bind="text: strings.stagesFormCheckBox.invalid"></span></label> <!-- Not Ok -->
                             </td>
                             <td style="width:30%">
                                 <input id="status_NA" class="km-checkbox" value="1" name="fooby[2][]" type="checkbox" >
-                                <label class="km-checkbox-label" for="status_NA"><span>N/A</span></label>
+                                <label class="km-checkbox-label" for="status_NA"><span data-bind="text: strings.stagesFormCheckBox.notRellevant"></span></label> <!-- N/A -->
                             </td>
                         </tr>
                     </table>
                 </li>
-                <!--<li id="processControlTitle" style="border:none;">
-                    <span style="font-size: medium; font-weight: bold;">Process Control</span>
-                </li>-->
-
-                <!--<li id="text1" style="border:none;">
-                    <span id="text1inputTitle"></span>
-                </li>
-                <li id="Text1" style="height:35px; padding:0; border:none;">
-                    <input id="text1input" type="text" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
-                </li>
-                <li id="text2" style="border:none;">
-                    <span id="text2inputTitle"></span>
-                </li>
-                <li id="Text2" style="height:35px; padding:0; border:none;">
-                    <input id="text2input" type="text" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
-                </li>
-                <li id="text3" style="border:none;">
-                    <span id="text3inputTitle"></span>
-                </li>
-                <li id="Text3" style="height:35px; padding:0; border:none;">
-                    <input id="text3input" type="text" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
-                </li>
-                <li id="text4" style="border:none;">
-                    <span id="text4inputTitle"></span>
-                </li>
-                <li id="Text4" style="height:35px; padding:0; border:none;">
-                    <input id="text4input" type="text" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
-                </li>
-                <li id="text5" style="border:none;">
-                    <span id="text5inputTitle"></span>
-                </li>
-                <li id="Text5" style="height:35px; padding:0; border:none;">
-                    <input id="text5input" type="text" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
-                </li>-->
-
-                <!--<li id="number1" style="border:none;">
-                    <span id="number1inputTitle"></span>
-                </li>
-                <li id="Number1" style="height:35px; padding:0; border:none;">
-                    <input id="number1input" type="number" max="9999999999" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
-                </li>
-                <li id="number2" style="border:none;">
-                    <span id="number2inputTitle"></span>
-                </li>
-                <li id="Number2" style="height:35px; padding:0; border:none;">
-                    <input id="number2input" type="number" max="9999999999" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
-                </li>
-                <li id="number3" style="border:none;">
-                    <span id="number3inputTitle"></span>
-                </li>
-                <li id="Number3" style="height:35px; padding:0; border:none;">
-                    <input id="number3input" type="number" max="9999999999" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
-                </li>
-                <li id="number4" style="border:none;">
-                    <span id="number4inputTitle"></span>
-                </li>
-                <li id="Number4" style="height:35px; padding:0; border:none;">
-                    <input id="number4input" type="number" max="9999999999" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
-                </li>
-                <li id="number5" style="border:none;">
-                    <span id="number5inputTitle"></span>
-                </li>
-                <li id="Number5" style="height:35px; padding:0; border:none;">
-                    <input id="number5input" type="number" max="9999999999" style="height: 22px; border:1px solid black; border-radius: 3px; margin-bottom: 0.5%; margin-left: 3%; margin-right: 47%;" />
-                </li>-->
-
-                <!--<li id="pcOkNotOkTitle" style="border:none;">
-                    <span id="okNotOkTitle"></span>
-                </li>
-                <li id="pcOkNotOk" style="border:none;">
-                    <table style="width:60%">
-                        <tr>
-                            <td>
-                                <input id="pc_ok" class="km-checkbox" value="1" name="fooby[3][]" type="checkbox"> 
-                                <label class="km-checkbox-label" for="pc_ok"><span id="pc_ok_label">Ok</span></label>
-                            </td>
-                            <td>
-                                <input id="pc_not_ok" class="km-checkbox" value="1" name="fooby[3][]" type="checkbox" >
-                                <label class="km-checkbox-label" for="pc_not_ok"><span id="pc_not_ok_label">Not Ok</span></label>
-                            </td>
-                        </tr>
-                    </table>
-                </li>
-                <li id="pcNormalNotNormalTitle" style="border:none;">
-                    <span id="normalNotNormalTitle"></span>
-                </li>
-                <li id="pcNormalNotNormal" style="border:none;">
-                    <table style="width:75%">
-                        <tr>
-                            <td>
-                                <input id="pc_normal" class="km-checkbox" value="1" name="fooby[4][]" type="checkbox"> 
-                                <label class="km-checkbox-label" for="pc_normal"><span id="pc_normal_label">Normal</span></label>
-                            </td>
-                            <td>
-                                <input id="pc_not_normal" class="km-checkbox" value="1" name="fooby[4][]" type="checkbox" >
-                                <label class="km-checkbox-label" for="pc_not_normal"><span id="pc_not_normal_label">Not Normal</span></label>
-                            </td>
-                        </tr>
-                    </table>
-                </li>-->
-
-               
-                <!--<li id="processControlImage" style="border:none;">
-                    <a >
-                        <img src="images/cameraIcon.png" style="height: 21px; width: 21px; margin-top:3%;" />
-                        <span class="capturePhotoButtonClass" id="addCapturePhotoForm">Add Image</span>
-                    </a>
-                </li>-->
-
-                <li style="border:none;border-bottom: 1px dashed #e9eaeb;;border-top: 1px dashed #e9eaeb;">
+                
+                <li style="border:none;border-bottom: 1px dashed #e9eaeb;border-top: 1px dashed #e9eaeb;">
                     <span data-bind="text: strings.stagesFormComments.title" style="text-align: left;"></span>
                     <textarea id="checkComments" data-bind="value: addFormData.comments" rows="7" style="resize: none; width: 100%; border:1px solid black;"></textarea>
                 </li>
-                <li style="border:none;">
-                    <!--<span data-bind="text: strings.stagesFormSignature.title"></span>-->
-                    <a data-icon="signatureNew" data-bind="events:{click: openSignaturePopUp}, text: strings.stagesFormSignature.title"></a>
-                    <br />
-                    <!--<a id="Reset" data-bind="text: strings.stagesFormSignature.clear" style="margin-left:65%; border-radius: 0; height: 20px; width: 120px; padding: 0;"></a>
-                    <br/>
-                    <div style="border: 1px solid black; height: 10%; width: 100%; background-color: white; "> 
-                        <label class="km-label-above field field--textarea">  
-                            <div class='signature-wrapper' >
-                                <div id='signature'></div>
-                                <input type='hidden' id='SignatureAdd-value' name='SignatureAdd-value'/>
-                            </div>
-                        </label>
-                    </div>-->
+                <li style="border:none;width:100%;">
+                    <table border="0" style="width:100%">
+                        <tr style="width:100%">
+                            <td style="width:80%">
+                                <a data-bind="text: strings.stagesFormSignature.title"></a>
+                            </td>
+                            <td style="width:20%">
+                                <a id="checkSignature" data-icon="signatureNew" data-role="button" data-align="left" data-bind="events:{click: openSignaturePopUp}" style="color:black;background-color:transparent; border:none; margin-left: 60%; margin-top:1%;"></a>
+                            </td>
+                        </tr>
+                    </table>
                 </li>
-                <!--<li style="border:none;">
-                    <center>
-                        <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }" style="border-radius: 0; width: 100%;">Save</a>
-                    </center>
-                </li>-->
             </ul>
             
-            <!--<div data-role="modalview" id="signaturePopUp" style="width:95%; height:40%; background-color:white; display:none; left:1px;  
-            border: 2px solid rgba(11, 61, 2, 0.729412); box-shadow: rgba(0, 0, 0, 0.109804) 3px 5px 2px 5px, rgba(4, 56, 8, 0.619608) 1px 1px 8px 2px;">-->
-            <div data-role="modalview" id="signaturePopUp" style="left:1px; width:95%; height:36%; background-color:#F4F4F4;">
-                <!--<div style="width:100%;">
-                    <span data-bind="text: strings.stagesFormSignature.title"></span>
-                </div>-->
+            <div data-role="modalview" id="signaturePopUp" style="left:1px; width:95%; height:36%; background-color:#F4F4F4;font-family: Tahoma, Geneva, sans-serif;">
                 <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
-                        <center>
-                            <span data-bind="text: strings.stagesFormSignature.title" style="font-size:large;"></span>
-                        </center>
+                        <!--<center>-->
+                            <span data-bind="text: strings.stagesFormSignature.title" style="margin-left:3%;font-size:large;"></span>
+                        <!--</center>-->
                 </div>
                 <div data-role="content" dir="ltr" style="background-color: transparent; margin-top: 3%;">
                     <center>
-                        <!--<a id="Reset" data-bind="text: strings.stagesFormSignature.clear" style="border-radius: 0; padding: 0;"></a>-->
-                        <!--<br/>-->
-                        <div style="border: 1px solid black; background-color: white; width:90%;"> <!-- height: 10%; width: 90%; --> 
+                        <div style="border:1px solid rgba(128, 128, 128, 0.5); background-color: white; width:90%;">  
                             <label class="km-label-above field field--textarea">  
                                 <div class='signature-wrapper'>
                                     <div id='signature'></div>
@@ -207,7 +79,6 @@
                         </div>
                     </center>
                 </div>
-                <!--<br/>-->
                 <footer data-role="footer" style="background-color: transparent;">
                     <div style="width:100%; margin-bottom:3%;">
                         <center>
@@ -218,32 +89,187 @@
                 </footer>
             </div>
 
-            <!--<div data-role="modalview" id="addCapturePhotoFormPop" style="left:1px; width:95%; height:70%; background-color:#F4F4F4; border: 1px solid rgba(0, 200, 83, 0.729412);">
+            <div data-role="modalview" id="NCRPopUp" style="left:1px; width:95%; height:78%; background-color:#F4F4F4;font-family: Tahoma, Geneva, sans-serif;">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                    <center>
+                        <span style="font-size:large;margin-left:3%;" data-bind="text: strings.impairmentDetailView.qualityImpairmentTitle"></span><br/>
+                    </center>
+                </div>
+                <div data-role="content" dir="ltr" style="background-color: transparent; margin-top: 3%;">
+                        <div id="Description" style="border-bottom:1px dashed #e9eaeb; margin-bottom:1%;">
+                            <span style="font-size:medium;margin-left:3%;" data-bind="text: strings.impairmentDetailView.impairmentDetailsTitle2"></span><br/>
+                            <center style="height:10em;">
+                                <textarea id="ImpairmentDetails" style="height:95%;margin-top:1%;margin-bottom:1%;resize: none; width: 95%; border-color: rgba(128, 128, 128, 0.5); font-family:Tahoma, Geneva, sans-serif;" dir="ltr"></textarea>
+                            </center>
+                        </div>
+                        <div id="Date" style="border-bottom:1px dashed #e9eaeb; margin-top:1%;">
+                            <span style="font-size:medium;margin-left:3%;" data-bind="text: strings.impairmentDetailView.dueDate"></span><br/>
+                            <center>
+                                <input  type="date" id="ImpairmentDestinationDate" style="border:1px solid rgba(128, 128, 128, 0.5);margin-top:1%;margin-bottom:1%;resize: none; width: 95%; border-color: rgba(128, 128, 128, 0.5); font-family:Tahoma, Geneva, sans-serif;" dir="ltr" />
+                            </center>
+                        </div>
+                        <div id="Image1" style="border-bottom:1px dashed #e9eaeb;">
+                            <table border="0" style="width:100%">
+                                <tr style="width:100%">
+                                    <td style="width:80%">
+                                        <span style="font-size:medium;margin-left:3%;" data-bind="text: strings.impairmentDetailView.image1"></span>
+                                    </td>
+                                    <td style="width:20%">
+                                        <a id="addCapturePhoto1NCR" class="capturePhotoButtonClass" data-icon="camera" data-role="button" data-align="left" style="color:black;background-color:transparent; border:none; margin-left: 41%;"></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="Image2" style="border-bottom:1px dashed #e9eaeb;">
+                            <table border="0" style="width:100%">
+                                <tr style="width:100%">
+                                    <td style="width:80%">
+                                        <span style="font-size:medium;margin-left:3%;" data-bind="text: strings.impairmentDetailView.image2"></span>
+                                    </td>
+                                    <td style="width:20%">
+                                        <a id="addCapturePhoto2NCR" class="capturePhotoButtonClass" data-icon="camera" data-role="button" data-align="left" style="color:black;background-color:transparent; border:none; margin-left: 41%;"></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="Sign" style="border-bottom:1px dashed #e9eaeb;">
+                            <table border="0" style="width:100%">
+                            <tr style="width:100%">
+                                <td style="width:80%">
+                                    <span data-bind="text: strings.stagesFormSignature.title" style="font-size:medium;margin-left:3%;"></span> <!-- Signature -->
+                                </td>
+                                <td style="width:20%">
+                                    <a id="NCRSignature" data-icon="signatureNew" data-role="button" data-align="left" data-bind="events:{click: openSignatureNCRPopUp}" style="color:black;background-color:transparent; border:none; margin-left: 43%;"></a>
+                                </td>
+                            </tr>
+                        </table>
+                        </div>
+                </div>
+                <footer data-role="footer" style="background-color: transparent;">
+                    <div style="width:100%; margin-bottom:3%;">
+                        <center>
+                            <a data-role="button" data-bind="events: {click: cancelNCR}" style="color:white;margin-bottom:0%;border-radius:0;">
+                                <span data-bind="text: strings.buttonsText.cancel"></span> <!-- Cancel -->
+                            </a>
+                           <a data-role="button" data-bind="events: {click: saveNCR}" style="color:white;margin-bottom:0%;border-radius:0;">
+                                <span data-bind="text: strings.buttonsText.save"></span> <!-- Save -->
+                            </a>
+                        </center>
+                    </div>
+                </footer>
+            </div>
+
+            <div data-role="modalview" id="signatureNCRPopUp" style="left:1px; width:95%; height:36%; background-color:#F4F4F4;font-family: Tahoma, Geneva, sans-serif;">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                        <!--<center>-->
+                            <span data-bind="text: strings.stagesFormSignature.title" style="margin-left:3%;font-size:large;"></span>
+                        <!--</center>-->
+                </div>
+                <div data-role="content" dir="ltr" style="background-color: transparent; margin-top: 3%;">
+                    <center>
+                        <div style="border:1px solid rgba(128, 128, 128, 0.5); background-color: white; width:90%;">  
+                            <label class="km-label-above field field--textarea">  
+                                <div class='signature-wrapper'>
+                                    <div id='signatureNCR'></div>
+                                    <input type='hidden' id='SignatureAdd-value' name='SignatureAdd-value'/>
+                                </div>
+                            </label>
+                        </div>
+                    </center>
+                </div>
+                <footer data-role="footer" style="background-color: transparent;">
+                    <div style="width:100%; margin-bottom:3%;">
+                        <center>
+                            <a data-role="button" style="margin-bottom:0%;border-radius:0;" data-bind="events:{click: closeSignatureNCRPopUp}"><span data-bind="text: strings.stagesFormImg.close"></span></a>
+                            <a id="ResetNCR" data-role="button" style="margin-bottom:0%;border-radius:0;"><span data-bind="text: strings.stagesFormSignature.clear"></span></a>
+                        </center>
+                    </div>
+                </footer>
+            </div>
+
+            <div data-role="modalview" id="addCapturePhoto1NCRPop" style="left:1px; width:95%; height:70%; background-color:#F4F4F4;font-family: Tahoma, Geneva, sans-serif; ">
                 <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
                     <div style="width:100%;">
-                        <center>
-                            <span data-bind="text: strings.stagesFormImg.title" style="font-size:large;"></span>
-                        </center>
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="width:10%;">
+                                    <a data-role="button" data-bind="events: {click: closeAddNCRPopUpImg1}" style="color:black;margin-bottom:0%;border-radius:0;border:none; background-color:transparent;">X</a>
+                                </td>
+                                <td style="width:90%;">
+                                    <center>
+                                        <span data-bind="text: strings.stagesFormImg.title" style="font-size:large;"></span>
+                                    </center>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
                 <div data-role="content" style="background-color: transparent; margin-top: 2%;">
-                    <img id="addCapturePhotoFormImg" style="width: 100%; height:100%;" />
+                    <img id="addCapturePhoto1NCRImg" style="width: 100%; height:100%;" />
                 </div>
                 <div data-role="footer" style="margin-bottom:3%; margin-top:3%; background-color:transparent">
                     <div style="width:100%; margin-bottom:2%;">
                         <center>
-                            <a data-role="button" class="capturePhotoButtonClass" id="addCapturePhotoForm_" style="color:white;margin-bottom:0%;border-radius:0;">
+                            <a data-role="button" class="capturePhotoButtonClass" id="addCapturePhoto1NCR_" style="color:white;margin-bottom:0%;border-radius:0;">
                                 <span data-bind="text: strings.stagesFormImg.changePhoto"></span>
-                            </a>
-                            <a data-bind="events:{click:closeAddPopUpImgForm}" data-role="button" style="color:white;margin-bottom:0%;border-radius:0;">
-                                <span data-bind="text: strings.stagesFormImg.close"></span>
                             </a>
                         </center>
                     </div>
-                        
                 </div>
-            </div>-->
+            </div>
 
+              <div data-role="modalview" id="addCapturePhoto2NCRPop" style="left:1px; width:95%; height:70%; background-color:#F4F4F4;font-family: Tahoma, Geneva, sans-serif; ">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                    <div style="width:100%;">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="width:10%;">
+                                    <a data-role="button" data-bind="events: {click: closeAddNCRPopUpImg2}" style="color:black;margin-bottom:0%;border-radius:0;border:none; background-color:transparent;">X</a>
+                                </td>
+                                <td style="width:90%;">
+                                    <center>
+                                        <span data-bind="text: strings.stagesFormImg.title" style="font-size:large;"></span>
+                                    </center>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div data-role="content" style="background-color: transparent; margin-top: 2%;">
+                    <img id="addCapturePhoto2NCRImg" style="width: 100%; height:100%;" />
+                </div>
+                <div data-role="footer" style="margin-bottom:3%; margin-top:3%; background-color:transparent">
+                    <div style="width:100%; margin-bottom:2%;">
+                        <center>
+                            <a data-role="button" class="capturePhotoButtonClass" id="addCapturePhoto2NCR_" style="color:white;margin-bottom:0%;border-radius:0;">
+                                <span data-bind="text: strings.stagesFormImg.changePhoto"></span>
+                            </a>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            
+            <div data-role="modalview" id="warningPopUp" style="left:1px; width:95%; height:25%; background-color:#F4F4F4;font-family: Tahoma, Geneva, sans-serif;">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                    <center><span style="font-size:x-large; font-weight:bold;">!</span></center>
+                </div>
+                <div data-role="content" dir="ltr" style="background-color: transparent; margin-top: 3%;">
+                    <center>
+                        <br/>
+                        <span id="warningPopUpText" style="font-size:large;"></span>
+                        <br/>
+                    </center>
+                </div>
+                <footer data-role="footer" style="background-color: transparent;">
+                    <div style="width:100%; margin-bottom:3%;">
+                        <center>
+                           <a data-role="button" onclick="app.formDetailView.formDetailViewModel.saveWarningPopUp()" style="color:white;margin-bottom:0%;border-radius:0;"> <!--  data-bind="events: {click: saveNCR}" -->
+                                <span data-bind="text: strings.buttonsText.ok"></span> <!-- Ok -->
+                            </a>
+                        </center>
+                    </div>
+                </footer>
+            </div>
         <!-- START_CUSTOM_CODE_editableListForm163 -->
         <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
         <!-- END_CUSTOM_CODE_editableListForm163 -->
@@ -268,6 +294,10 @@
     <script>
          $('#Reset').click(function(e){
             $('#signature').jSignature('clear');
+            e.preventDefault();
+        });
+         $('#ResetNCR').click(function(e){
+            $('#signatureNCR').jSignature('clear');
             e.preventDefault();
         });
       var scroller;

@@ -1,0 +1,34 @@
+<div data-role="view" data-title="View" data-layout="main" data-model="app.geotechnicalForm" data-show="app.geotechnicalForm.onShow" data-after-show="app.geotechnicalForm.afterShow" id="geotechnicalFormScreen" class="screen">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+
+            <span data-bind="text: strings.geotechnicalForm.title"></span>
+
+            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
+
+            <a data-role="button" data-align="right" data-bind="events: { click: geotechnicalFormModel.addClick }">Add</a></div>
+    </header>
+
+
+    <!-- START_CUSTOM_CODE_geotechnicalForm -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_geotechnicalForm -->
+    <ul class="masterDetailView list noSeparators " data-role="listview" data-auto-bind="false" data-style="inset" data-template="geotechnicalFormModelTemplate" data-bind="source: geotechnicalFormModel.dataSource, events: {click: geotechnicalFormModel.itemClick}"
+    data-pull-to-refresh="false" data-endless-scroll="false">
+    </ul>
+
+
+    <!-- START_CUSTOM_CODE_geotechnicalFormModel -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_geotechnicalFormModel -->
+    <script type="text/x-kendo-template" id="geotechnicalFormModelTemplate">
+        <div class="image-with-text ">
+            # data = app.geotechnicalForm.geotechnicalFormModel.fixHierarchicalData(data); #
+
+            <h3>#: data['name'] #</h3>
+
+        </div>
+    </script>
+</div>

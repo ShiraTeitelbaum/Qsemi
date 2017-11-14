@@ -14,6 +14,8 @@
     <link href="styles/overrides.css" rel="stylesheet">
     <link href="styles/main.css" rel="stylesheet">
 
+     <link href="animate.min.css" rel="stylesheet" />
+
     <script async defer type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCG4jUolof0jhqQu0j1aNqSWfW_ms-wRKg&amp;sensor=true"></script>
 
     <script src="cordova.js"></script>
@@ -21,42 +23,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="kendo/js/kendo.mobile.min.js"></script>
     <script src="kendo/js/kendo.all.min.js"></script>
-    
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
     <script src="app.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js" integrity="sha256-lDcU9wi187tvmD2D2AvfRvhuVthZ5UxIP7Oh+Rk3yNw=" crossorigin="anonymous"></script>
     <script src="scripts/camera.js"></script>
     <script src="http://willowsystems.github.io/jSignature/js/libs/jSignature.min.js"></script>
-    
+
     <script src="lib/progress/progress.all.min.js"></script>
     <script src="dataProviders/qcsemidataProvider.js"></script>
 </head>
 
 <body id="kendoUiMobileApp">
+    <script src="components/impairmentDetailView/index.js"></script>
+    <script src="components/laboratoryTestForm/index.js"></script>
+    <script src="components/castingForm/index.js"></script>
+    <script src="components/geotechnicalForm/index.js"></script>
     <script src="components/formDetailView/index.js"></script>
 
-    <!--<script src="components/generalAdjustement2/index.js"></script>-->
-    <!--<script src="components/eandB2/index.js"></script>-->
-    <!--<script src="components/tieRoadsClampsInsulatorsCrossBarAndMipd2/index.js"></script>-->
-    <!--<script src="components/returnWireLaying22/index.js"></script>-->
-    <!--<script src="components/returnWireLaying12/index.js"></script>-->
-    <!--<script src="components/messengerWireLaying2/index.js"></script>-->
-    <!--<script src="components/droppers2/index.js"></script>-->
-    <!--<script src="components/contactWireLaying2/index.js"></script>-->
-    <!--<script src="components/counterwPulley2/index.js"></script>-->
-    <!--<script src="components/counterwWeight2/index.js"></script>-->
-    <!--<script src="components/cantileverManufacture2/index.js"></script>-->
-    <!--<script src="components/cantileverInstallation2/index.js"></script>-->
-    <!--<script src="components/returnWire2AndSupportAndConnection2/index.js"></script>-->
-    <!--<script src="components/pole2/index.js"></script>-->
-    <!--<script src="components/portal2/index.js"></script>-->
-    <!--<script src="components/cantileverSupportAndCounterWeight2/index.js"></script>-->
-    <!--<script src="components/excavation2/index.js"></script>-->
-    <!--<script src="components/reinforcement2/index.js"></script>-->
-    <!--<script src="components/concreting2/index.js"></script>-->
-    <!--<script src="components/returnWire2Driliing2/index.js"></script>-->
-    <!--<script src="components/cantCounterwAnchorsDrilling2/index.js"></script>-->
-    <!--<script src="components/poleSupportDrillingIfTransPlatesForm22/index.js"></script>-->
     <script src="components/projectDetailView/index.js"></script>
     <script src="components/surveyorMarking/index.js"></script>
     <script src="components/controlPanel/index.js"></script>
@@ -91,6 +76,7 @@
             </div>
         </header>
         <ul id="navigation-container" data-role="listview">
+            <li id="projectsViewModel"><a href="components/projectDetailView/view.html" data-position="end" data-icon="action"><span class="navigation-link-text" data-bind="text: strings.authenticationView.authenticationViewModel.logoutLabel"></span></a></li>
             <li id="authenticationViewModellogout"><a href="components/authenticationView/view.html?logout=true" data-position="end" data-icon="action"><span class="navigation-link-text" data-bind="text: strings.authenticationView.authenticationViewModel.logoutLabel"></span></a></li>
         </ul>
     </div>-->

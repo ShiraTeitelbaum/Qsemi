@@ -191,24 +191,6 @@ app.localization.registerView('controlPanel');
                         else if(steps[i].stageNum == 5 && steps[i].stageNum == num) { stepId = steps[i].id; break; }
                         else if(steps[i].stageNum == 6 && steps[i].stageNum == num) { stepId = steps[i].id; break; }
                         else if(steps[i].stageNum == 7 && steps[i].stageNum == num) { stepId = steps[i].id; break; }
-                        // switch(steps[i].stageNum) {
-                        //     case 0: alert(0); stepId = steps[i].id;
-                        //         break;
-                        //     case 1: alert(1);stepId = steps[i].id;
-                        //         break;
-                        //     case 2: alert(2);stepId = steps[i].id;
-                        //         break;
-                        //     case 3: alert(3);stepId = steps[i].id;
-                        //         break;
-                        //     case 4: alert(4);stepId = steps[i].id;
-                        //         break;
-                        //     case 5: alert(5);stepId = steps[i].id;
-                        //         break;
-                        //     case 6: alert(6);stepId = steps[i].id;
-                        //         break;
-                        //     case 7: alert(7);stepId = steps[i].id;
-                        //         break;
-                        // }
                     }
                     
                     app.mobileApp.navigate('#components/elementDetailView/view.html?stageId=' + stepId);
@@ -253,7 +235,25 @@ app.localization.registerView('controlPanel');
                 return linkChunks[0] + this.get('currentItem.' + linkChunks[1]);
             },
             openGeneralMap: function() {
-               app.mobileApp.navigate('#components/generalMapView/view.html');
+                // html2canvas(document.getElementById("container"), {
+                //     onrendered: function (canvas) {
+                //         var tempcanvas=document.createElement('canvas');
+                //         tempcanvas.width=800;
+                //         tempcanvas.height=800;
+                //         var context=tempcanvas.getContext('2d');
+                //         context.drawImage(canvas,-10,-120,300,550,0,0,600,600);
+                //         var link=document.createElement("a");
+                //         link.href=tempcanvas.toDataURL('image/jpg');   //function blocks CORS
+                //         link.download = 'screenshot.jpg';
+                //         link.click();
+                //         console.log("link.href")
+                //         console.log(link.href)
+                //     }
+                // });
+                app.mobileApp.navigate('#components/generalMapView/view.html');
+            },
+            openImpairment: function() {
+                app.mobileApp.navigate('#components/impairmentDetailView/view.html');
             },
             /// start masterDetails view model functions
             /// end masterDetails view model functions
@@ -294,7 +294,11 @@ app.localization.registerView('controlPanel');
         }
 
         $("#controlPanelTitle").innerHTML = sessionStorage.getItem("locationName");
-        
+         var stages = [{ "name": "SURVEYOR", "stageNum": 0 }, { "name": "FOUNDATION", "stageNum": 1 }, { "name": "ERECTION", "stageNum": 2 },
+                    { "name": "EQUIPMENT & CANTILEVER", "stageNum": 3 }, { "name": "OCS WIRES", "stageNum": 4 }, { "name": "E&B", "stageNum": 5 },
+                  { "name": "TEST", "stageNum": 6 }, { "name": "COMPLETED", "stageNum": 7 }];
+        app.elementDetailView.elementDetailViewModel.stageList = stages;
+
         //if (!controlPanelModel.get('dataSource')) {
             dataProvider.loadCatalogs().then(function _catalogsLoaded() {
                 var jsdoOptions = controlPanelModel.get('_jsdoOptions'),
@@ -315,41 +319,33 @@ app.localization.registerView('controlPanel');
 
                 fetchFilteredData(param);
 
-                 var jsdoOptionsElem = controlPanelModel.get('_jsdoOptionsElements'),
-                    jsdoElem = new progress.data.JSDO(jsdoOptionsElem);
+                //  var jsdoOptionsElem = controlPanelModel.get('_jsdoOptionsElements'),
+                //     jsdoElem = new progress.data.JSDO(jsdoOptionsElem);
 
-                dataSourceOptions.transport.jsdo = jsdoElem;
-                var dataSourceElem = new kendo.data.DataSource(dataSourceOptions);
+                // dataSourceOptions.transport.jsdo = jsdoElem;
+                // var dataSourceElem = new kendo.data.DataSource(dataSourceOptions);
 
-                dataSourceElem.filter({
-                    logic: "and",
-                    filters: [
-                        { field: "Latitude", operator: "neq", value: "NaN" },
-                        { field: "Latitude", operator: "neq", value: "null" },
-                        { field: "Longtitud", operator: "neq", value: "NaN" },
-                        { field: "Longtitud", operator: "neq", value: "null" },
-                        // { field: "elementStage", operator: "neq", value: "null" }, //**********
-                        { field: "locationId", operator:"==", value:sessionStorage.getItem("locationId") }
-                    ]
-                });
+                // dataSourceElem.filter({
+                //     logic: "and",
+                //     filters: [
+                //         { field: "Latitude", operator: "neq", value: "NaN" },
+                //         { field: "Latitude", operator: "neq", value: "null" },
+                //         { field: "Longtitud", operator: "neq", value: "NaN" },
+                //         { field: "Longtitud", operator: "neq", value: "null" },
+                //         // { field: "elementStage", operator: "neq", value: "null" }, //**********
+                //         { field: "locationId", operator:"==", value:sessionStorage.getItem("locationId") }
+                //     ]
+                // });
                 
                   var jsdoOptionsLocations = controlPanelModel.get('_jsdoOptionsLocations'),
                     jsdoLocations = new progress.data.JSDO(jsdoOptionsLocations);
 
                 dataSourceOptions.transport.jsdo = jsdoLocations;
                 var dataSourceLocations = new kendo.data.DataSource(dataSourceOptions);
-                dataSourceLocations.filter({ field: "locationId", operator:"==", value:sessionStorage.getItem("locationId") });
+                dataSourceLocations.filter({ field: "locationId", operator:"==", value: sessionStorage.getItem("locationId") });
 
-                //dataSourceLocations.filter({ field: "locationId", operator:"==", value:sessionStorage.getItem("locationId") });
                 app.mobileApp.showLoading();
-                dataSourceElem.fetch(function() {
-                    //app.mobileApp.showLoading();
-                    var elementsWithLocation = dataSourceElem.data();
-                    // console.log("elementsWithLocation")
-                    // console.log(elementsWithLocation)
-                    app.generalMapView.generalMapViewModel.elements = elementsWithLocation;
-                    
-                    dataSourceLocations.fetch(function() {
+                   dataSourceLocations.fetch(function() {
                         var location = dataSourceLocations.data();
                         // console.log("location")
                         // console.log(location)
@@ -363,17 +359,6 @@ app.localization.registerView('controlPanel');
                         document.getElementById("stage6Counter").innerHTML = location[0].stage6;
                         document.getElementById("stage7Counter").innerHTML = location[0].stage7;
                         
-                        // dataSource.fetch(function() {
-                        //     //app.mobileApp.showLoading();
-                            // var stages = dataSource.data();
-                            // console.log("stages")
-                            // console.log(stages)
-                            var stages = [{ "name": "SURVEYOR", "stageNum": 0 }, { "name": "FOUNDATION", "stageNum": 1 }, { "name": "ERECTION", "stageNum": 2 },
-                                     { "name": "EQUIPMENT & CANTILEVER", "stageNum": 3 }, { "name": "OCS WIRES", "stageNum": 4 }, { "name": "E&B", "stageNum": 5 },
-                                     { "name": "TEST", "stageNum": 6 }, { "name": "COMPLETED", "stageNum": 7 }];
-                            app.elementDetailView.elementDetailViewModel.stageList = stages;
-
-                        //     var list='', tmp, step0, step1, step2, step3, step4, step5, step6, step7;
                             for(var i=0; i < stages.length; i++) {
                                 switch(stages[i].name) {
                                     case "SURVEYOR": sessionStorage.setItem("stage0Name", stages[i].name);
@@ -394,63 +379,13 @@ app.localization.registerView('controlPanel');
                                                   break;
                                 }
                             }
-                        //     list=step0;
-                        //         list+=step1;
-                        //         list+=step2;
-                        //         list+=step3;
-                        //         list+=step4;
-                        //         list+=step5;
-                        //         list+=step6;
-                        //         list+=step7;
-
-                        //         document.getElementById("controlPanelStagesList").innerHTML = list;
-                        //         app.mobileApp.hideLoading();
-                        // });
                         app.mobileApp.hideLoading();
-                    });        
-                });
+                    }); 
+                // dataSourceElem.fetch(function() {
+                //     var elementsWithLocation = dataSourceElem.data();
+                //     app.generalMapView.generalMapViewModel.elements = elementsWithLocation;
+                // });
             });
-        /*} else {
-            fetchFilteredData(param);
-            
-            var jsdoOptionsElem = controlPanelModel.get('_jsdoOptionsElements'),
-                    jsdoElem = new progress.data.JSDO(jsdoOptionsElem);
-
-                dataSourceOptions.transport.jsdo = jsdoElem;
-                var dataSourceElem = new kendo.data.DataSource(dataSourceOptions);
-
-                 var jsdoOptionsLocations = controlPanelModel.get('_jsdoOptionsLocations'),
-                    jsdoLocations = new progress.data.JSDO(jsdoOptionsLocations);
-
-                dataSourceOptions.transport.jsdo = jsdoLocations;
-                var dataSourceLocations = new kendo.data.DataSource(dataSourceOptions);
-
-                dataSourceLocations.filter({ field: "locationId", operator:"==", value:sessionStorage.getItem("locationId") });
-
-                dataSourceElem.filter({
-                    logic: "and",
-                    filters: [
-                        { field: "Latitude", operator: "neq", value: "NaN" },
-                        { field: "Latitude", operator: "neq", value: "null" },
-                        { field: "Longtitud", operator: "neq", value: "NaN" },
-                        { field: "Longtitud", operator: "neq", value: "null" },
-                        { field: "elementStage", operator: "neq", value: "null" } //**********
-                    ]
-                });
-                
-                dataSourceElem.fetch(function() {
-                    var elementsWithLocation = dataSourceElem.data();
-
-                    app.generalMapView.generalMapViewModel.elements = elementsWithLocation;
-
-                    dataSourceLocations.fetch(function() {
-                        var locations = dataSourceLocations.data();
-                        console.log("locations2")
-                        console.log(locations)
-                    });
-                });
-        }*/
-
     });
 
 })(app.controlPanel);

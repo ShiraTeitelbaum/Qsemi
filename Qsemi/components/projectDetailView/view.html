@@ -1,8 +1,9 @@
 <div data-role="view" data-title="View" data-layout="main" data-model="app.projectDetailView" data-show="app.projectDetailView.onShow" data-after-show="app.projectDetailView.afterShow" id="projectDetailViewScreen" class="screen">
     <header data-role="header">
         <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3)">
+            <a data-role="button" data-rel="popover" data-align="left" data-icon="hbar-button" data-position="end" style="background-color:#4fa81a;color:#4fa81a; border:none;"></a>
 
-            <center><span data-bind="text: strings.projectDetailView.title"></span></center>
+            <center><span data-align="center" data-bind="text: strings.projectDetailView.title" style="font-family: Tahoma, Geneva, sans-serif;"></span></center>
 
             <a data-role="button" data-rel="popover" href="#popover-hbar1" data-align="right"  data-position="end" data-icon="hbar-button" style="background-color:#4fa81a; border:none;"></a>
         </div>
@@ -13,15 +14,15 @@
             <ul data-role="listview" style="list-style:none; background-color:#F4F4F4;">
                 <li style="padding: 1.5px;">
                     <a style="background-color:transparent;" class="version" >
-                        <span style="background-color:transparent;font-size:medium;">  
-                            <span>Version</span> 
+                        <span data-bind="text: strings.menuOptions.version" style="background-color:transparent;font-size:medium;font-family: Tahoma, Geneva, sans-serif;">  
+                            <!--<span>Version</span> -->
                         </span> 
                     </a>
                 </li>
                 <li style="padding: 1.5px;">
-                    <a style="background-color:transparent;" data-role="button" onclick="app.projectDetailView.projectDetailViewModel.logoutClick()" data-align="left" data-icon="logOutNew" data-position="end" > 
-                        <span style="background-color:transparent;font-size:mediun;">  
-                            <span>Log Out</span> 
+                    <a style="background-color:transparent;" data-role="button" onclick="app.projectDetailView.projectDetailViewModel.logoutClick()" data-align="left" data-position="end" > 
+                        <span data-bind="text: strings.menuOptions.logout" style="background-color:transparent;font-size:mediun;font-family: Tahoma, Geneva, sans-serif;">  
+                            <!--<span>Log Out</span> -->
                         </span> 
                     </a>
                 </li>
@@ -34,7 +35,7 @@
     <div style="background-color: white;">
         <center>
             <ul id="listOfProject2"  data-role="listview" data-auto-bind="false" data-style="none" data-template="projectDetailViewModelTemplate" data-bind="source: projectDetailViewModel.dataSource, events: {click: projectDetailViewModel.itemClick}"
-            data-pull-to-refresh="false" data-endless-scroll="false" style="overflow-x:hidden; padding-top: 2em;"></ul>
+            data-pull-to-refresh="false" data-endless-scroll="false" style="overflow-x:hidden; padding-top: 2em;font-family: Tahoma, Geneva, sans-serif;"></ul>
         </center>
     </div>
     <!-- END_CUSTOM_CODE_projectDetailView -->

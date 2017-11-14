@@ -1,14 +1,24 @@
 <div data-role="view" data-title="View" data-layout="main" data-model="app.formDetailView" data-show="app.formDetailView.onShow" data-after-show="app.formDetailView.afterShow" id="formDetailViewScreen" class="screen">
     <header data-role="header">
         <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);">
-
-            <!--<span data-bind="text: strings.formDetailView.title"></span>-->
-            <span id="formNameCheckList"></span>
-
-            <!--<a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>-->
-
-            <!--<a data-role="button" data-align="right" data-bind="events: { click: formDetailViewModel.addClick }">Add</a></div>-->
-            <a data-icon="home" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
+            <table style="width:100%;">
+                <tr>
+                    <td style="width:10%;">
+                        <a data-icon="home" data-role="button" onclick="goHome()" data-align="left" style="background-color:transparent; border:none;"></a>
+                        <a data-icon="backIcon" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
+                    </td>
+                    <td style="width:80%;">
+                         <center><span id="formNameCheckList"></span></center>
+                    </td>
+                    <td style="width:10%;">
+                        <a data-role="button" data-rel="popover" data-align="right" data-icon="hbar-button" data-position="end" style="background-color:#4fa81a;color:#4fa81a; border:none;"></a>
+                    </td>
+                </tr>
+            </table>
+            <!--<a data-role="button" data-rel="popover" data-align="right" data-icon="hbar-button" data-position="end" style="background-color:#4fa81a;color:#4fa81a; border:none;"></a>
+            <center><span id="formNameCheckList"></span></center>
+            <a data-icon="home" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>-->
+        </div>
     </header>
 
 
@@ -19,16 +29,159 @@
     <div class="details-content screen__content screen__content--details" style="overflow-x:hidden; background-color: #e9eaeb; width: 100%; height: 100%;">
         <br/>
         <br/>
-         <!--<div id="surveyor" style="border-bottom: 1px solid #e9eaeb; background-color: white; width: 100%;" onclick="app.formDetailView.addItemViewModel.openMap()" >
-            <img src="images/getLocationIcon.png" style="height: 24px; width: 24px; margin-left: 2%; margin-top:3%;" />
-            <a id="ChooseLocationOnMap" style="margin-bottom: 300px;">Get Element Location</a>
-            <br/>
-            <br/>
-        </div>-->
-        <div style="background-color: white; width: 100%;">
+        <div id="elementGeneralDetails" data-role="collapsible" data-icon-position="right" style="background-color:white; margin-bottom:0;"> <!-- data-collapse-icon="arrow-up" data-expand-icon="arrow-down" -->
+            <h3>General Details</h3>
+            <!--<h3 data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.elementDetails.generalDetails"></h2>    style="font-weight:normal;" -->
+            <ul data-role="listview" data-style="inset">
+                <li style="height: 40px; border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.lastUpdateDate.title"></span></span></td>
+                            <td style="width: 35%;"><span id="LastUpdateDate"></span></td>
+                        </tr>
+                    </table>
+                </li>
+
+                <li style="height: 40px; border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.poleType.title"></span></td>
+                            <td style="width: 35%;"><span id="PoleType"></span></td>
+                        </tr>
+                    </table>
+                </li>
+                
+                <li style="height: 40px; border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.ancohorage.title"></span></td>
+                            <td style="width: 35%;"><span id="Ancohorage"></span></td>
+                        </tr>
+                    </table>
+                </li>
+
+                <li style="height: 40px; border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.sectionning.title"></span></td>
+                            <td style="width: 35%;"><span id="Sectionning"></span></td>
+                        </tr>
+                    </table>
+                </li>
+
+                <li style="height: 40px; border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.soilFound.title"></span></td>
+                            <td style="width: 35%;"><span id="SoilFound"></span></td>
+                        </tr>
+                    </table>
+                </li>
+
+                <li style="height: 40px; border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.anchoragesKp.title"></span></td>
+                            <td style="width: 35%;"><span id="AnchoragesKP"></span></td>
+                        </tr>
+                    </table>
+                </li>
+
+                <li style="height: 40px; border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.trackLayout.title"></span></td>
+                            <td style="width: 35%;"><span id="TrackLayout"></span></td>
+                        </tr>
+                    </table>
+                </li>
+
+                <li style="height: 40px; border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.profile.title"></span></td>
+                            <td style="width: 35%;"><span id="Profile"></span></td>
+                        </tr>
+                    </table>
+                </li>
+
+                <li style="height: 40px; border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.kp.title"></span></td>
+                            <td style="width: 35%;"><span id="KP"></span></td>
+                        </tr>
+                    </table>
+                </li>
+
+                <li style="height: 40px; border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.embankment.title"></span></td>
+                            <td style="width: 35%;"><span id="Embankment"></span></td>
+                        </tr>
+                    </table>
+                </li>
+
+                <li style="height: 40px; border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.anchorageFoundation.title"></span></td>
+                            <td style="width: 35%;"><span id="AnchorageFoundation"></span></td>
+                        </tr>
+                    </table>
+                </li>
+
+                <li style="height: 40px; border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.foundation.title"></span></td>
+                            <td style="width: 35%;"><span id="Foundation"></span></td>
+                        </tr>
+                    </table>
+                </li>
+
+                <li style="height: 40px; border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.depthFound.title"></span></td>
+                            <td style="width: 35%;"><span id="DepthFound"></span></td>
+                        </tr>
+                    </table>
+                </li>
+
+                <li style="height: 40px; border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.spanBefor.title"></span></td>
+                            <td style="width: 35%;"><span id="SpanBefor"></span></td>
+                        </tr>
+                    </table>
+                </li>
+
+                <li style="height: 40px; border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.spanAfter.title"></span></td>
+                            <td style="width: 35%;"><span id="SpanAfter"></span></td>
+                        </tr>
+                    </table>
+                </li>
+
+                <li style="height: 40px; border-bottom-style: dashed; border-bottom-color: #e9eaeb; border-right: none; border-left: none; border-top: none; font-size: 16px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 65%;"><span data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.depthAnchor.title"></span></td>
+                            <td style="width: 35%;"><span id="DepthAnchor"></span></td>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
+        </div>
+        <div id="elemImg" style="background-color: white; width: 100%;">
             <div style="border-bottom: 1px solid #e9eaeb;">
-                <a id="addCapturePhoto" class="capturePhotoButtonClass" style="margin-bottom: 300px;margin-left: 2%;">Get Element Image</a>
-                <img src="images/cameraIcon.png" style="height: 24px; width: 24px; margin-left: 48%; margin-top:4%;" />
+                <a style="margin-bottom: 300px;margin-left: 3%;">Get Element Image</a>
+                <a id="addCapturePhoto" class="capturePhotoButtonClass" data-icon="camera" data-role="button" data-align="left" style="color:black;background-color:transparent; border:none; margin-left: 48%; margin-top:4%;"></a>
                 <br/>
                 <br/>
             </div>
@@ -51,31 +204,29 @@
                     </div>
                 </div>
                 <div data-role="content" style="background-color: transparent; margin-top: 2%;">
-                    <img id="addCapturePhotoImg" style="width: 100%; height:100%;" />
+                    <img id="addCapturePhotoImg" src="" style="width: 100%; height:100%;" />
                 </div>
                 <div data-role="footer" style="margin-bottom:3%; margin-top:3%; background-color:transparent">
                     <div style="width:100%; margin-bottom:2%;">
                         <center>
-                            <a data-role="button" class="capturePhotoButtonClass" id="addCapturePhotoForm_" style="color:white;margin-bottom:0%;border-radius:0;">
+                            <a data-role="button" class="capturePhotoButtonClass" id="addCapturePhoto_" style="color:white;margin-bottom:0%;border-radius:0;">
                                 <span data-bind="text: strings.stagesFormImg.changePhoto"></span>
                             </a>
                             <a onclick="app.formDetailView.formDetailViewModel.saveAddPopUpImg()" data-role="button" style="color:white;margin-bottom:0%;border-radius:0;">
                                 <span data-bind="text: strings.buttonsText.save"></span>
                             </a>
-                            <!--<a onclick="app.formDetailView.formDetailViewModel.closeAddPopUpImg()" data-role="button" style="color:white;margin-bottom:0%;border-radius:0;">
-                                <span data-bind="text: strings.stagesFormImg.close"></span>
-                            </a>-->
                         </center>
                     </div>
                         
                 </div>
             </div>
-        <!--data-bind="events: {click: openMap}"-->
-        
 
         <ul id="formCheckList" class="masterDetailView list" data-role="listview" data-auto-bind="false" data-style="inset" data-template="formDetailViewModelTemplate" data-bind="source: formDetailViewModel.dataSource, events: {click: formDetailViewModel.itemClick}"
         data-pull-to-refresh="false" data-endless-scroll="false" style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0; border-bottom: 1px solid #e9eaeb;">
         </ul>
+        <!--<ul id="formCheckList" class="masterDetailView list" data-role="listview" data-auto-bind="false" data-style="inset" data-bind="events: {click: formDetailViewModel.itemClick}"
+        data-pull-to-refresh="false" data-endless-scroll="false" style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0; border-bottom: 1px solid #e9eaeb;">
+        </ul>-->
 
         <ul id="coreCheckList" class="masterDetailView list" data-role="listview" data-auto-bind="false" data-style="inset" data-template="coreDetailViewModelTemplate" data-bind="source: formDetailViewModel.dataSourceCore, events: {click: formDetailViewModel.itemCoreClick}"
         data-pull-to-refresh="false" data-endless-scroll="false" style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0; border-bottom: 1px solid #e9eaeb;">
@@ -86,27 +237,68 @@
         <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
 
         <!-- END_CUSTOM_CODE_formDetailViewModel -->
+            <!--<table style="width: 100%; height: 100%;">
+                <tr style="padding: 0; margin: 0;">
+                    # if(status == "green") { #
+                            <td style="width: 3%;height: 100%;padding: 0;margin: 0; background-color:green;" ></td>
+                    # } else { #
+                            <td style="width: 3%;height: 100%;padding: 0;margin: 0; background-color:red;"></td>
+                    # } #
+                    <td style="width: 95%;">
+                        <span style="font-weight:bold; font-size:medium;width:80%;">#: data['name'] #</span><br/>
+                        # if(data['Description'] != "null") { #
+                            <span>#: data['Description'].substring(0, 65) #</span><span>...</span>
+                        # } #
+                    </td>
+                    <td style="width: 2%;">
+                        <a data-role="button" data-icon="arrow-open" style="color:black;background-color:transparent; border:none;"></a>
+                    </td>
+                </tr>
+            </table>-->
+            <!--<td style="width: 3%;height: 100%;padding: 0;margin: 0;"></td>-->
         <script type="text/x-kendo-template" id="formDetailViewModelTemplate">
             # data = app.formDetailView.formDetailViewModel.fixHierarchicalData(data); #
-            <div>
-                <h3>#: data['name'] #</h3>
-                <span>#: data['Description'].substring(0, 65) #</span><span>...</span>
-            </div>
+          
+            <table style="width: 100%; height: 100%;margin:0;">
+                <tr style="padding: 0; margin: 0;">
+                    <td id=#:data['id']# class="checklistStatus"></td>
+                    <td style="width: 95%;padding-left:3%;">
+                        <span style="font-weight:bold; font-size:medium;width:80%;">#: data['name'] #</span><br/>
+                        # if(data['Description'] != "null") { #
+                            <span>#: data['Description'].substring(0, 65) #</span><span>...</span>
+                        # } #
+                    </td>
+                    <td style="width: 2%;">
+                        <a data-role="button" data-icon="arrow-open" style="color:black;background-color:transparent; border:none;"></a>
+                    </td>
+                </tr>
+            </table>
         </script>
 
+        <!--  <div>
+                <a data-role="button" data-icon="arrow-open" data-align="left" style="color:black;background-color:transparent; border:none; margin-left:87%;position: absolute;top: 0.8em; z-index: 999;"></a>
+                <span style="font-weight:bold; font-size:medium;">#: data['name'] #</span>
+            </div>-->
         <script type="text/x-kendo-template" id="coreDetailViewModelTemplate">
             # data = app.formDetailView.formDetailViewModel.fixHierarchicalData(data); #
-            <div>
-                <h3>#: data['name'] #</h3>
-            </div>
+            <table style="width: 100%; height: 100%;margin:0;">
+                <tr style="padding: 0; margin: 0;">
+                    <td id=#:data['id']# class="checklistStatus"></td>
+                    <td style="width: 95%;padding-left:3%;">
+                        <span style="font-weight:bold; font-size:medium;width:80%;">#: data['name'] #</span>
+                    </td>
+                    <td style="width: 2%;">
+                        <a data-role="button" data-icon="arrow-open" style="color:black;background-color:transparent; border:none;"></a>
+                    </td>
+                </tr>
+            </table>
         </script>
-        <!-- <table>
-                    <tr>
-                        <span>#: data['name'] #</span>
-                    </tr>
-                    <tr>
-                        <span>#: data['Description'] #</span>
-                    </tr>
-                </table> -->
     </div>
+    <script>
+        function goHome() {
+            setTimeout(function () {
+                app.mobileApp.navigate('#components/controlPanel/view.html');
+            }, 300);
+        }
+    </script>
 </div>

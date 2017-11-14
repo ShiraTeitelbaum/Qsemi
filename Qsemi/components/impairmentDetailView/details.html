@@ -1,0 +1,193 @@
+<div data-role="view" data-title="Details" data-model="app.impairmentDetailView.impairmentDetailViewModel" data-bind="events: { show: detailsShow, init: detailsInit }" id="impairmentDetailViewModelScreen" class="screen screen--detail">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);">
+            <table style="width:100%;">
+                <tr>
+                    <td style="width:10%;">
+                        <a data-icon="home" data-role="button" onclick="goHome()" data-align="left" style="background-color:transparent; border:none;"></a>
+                        <a data-icon="backIcon" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
+                    </td>
+                    <td style="width:80%;">
+                         <!--<center><span data-bind="text: currentItem['name']"></span></center>-->
+                         <center><span>Impartment</span></center>
+                    </td>
+                    <td style="width:10%;">
+                       <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }" style="background-color:#4fa81a;color:#4fa81a; border:none;">Save</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </header>
+    <footer data-role="footer" style="background-color: #e9eaeb;"> 
+        <center>
+            <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }, buttonText: strings.buttonsText.save" style="border-radius: 0; width: 95%;font-family: Tahoma, Geneva, sans-serif;"></a> <!-- Save -->
+        </center>
+    </footer>
+
+    <div class="details-content screen__content screen__content--details" style="overflow-x:hidden; background-color: #e9eaeb; width: 100%; height: 100%;">
+        <br/>
+        <div style="height:1em"></div>
+        <div style="width:100%;height:25%; background-color:#e9eaeb;">
+            <span style="box-shadow: 0px 2px 3px #A29E9E;background-color:#449d31;font-family: Tahoma, Geneva, sans-serif; color:white; text-align:center;padding-left: 6px;padding-top: 2px;padding-right: 12px;padding-bottom: 3px;">Check Name: <span            data-bind="text:currentItem['name']"></span></span>
+        </div>
+        <div id="impairtmentDetails" style="background-color: #FFFFFF; width: 100%;">
+            <br/>
+            <span style="padding-left:2%;">Impairtment Date: </span><span id="dateImpairtment"></span> <br/><br/>
+            <span style="padding-left:2%;margin-top:5%;">Status: </span><span id="statusImpairtment"></span> <br/><br/>
+        </div>
+        <br/>
+        <div style="height:1em"></div>
+        <div style="width:100%;height:25%; background-color:#e9eaeb;">
+            <span style="box-shadow: 0px 2px 3px #A29E9E;background-color:#449d31;font-family: Tahoma, Geneva, sans-serif; color:white; text-align:center;padding-left: 6px;padding-top: 2px;padding-right: 12px;padding-bottom: 3px;">Proof Of Corrective Action</span>
+        </div>
+       <div id="impairtmentCorrectingDetails" style="background-color: #FFFFFF; width: 100%;">
+            <br/>
+            <div class="divActions" id="ifYouCanTakeCare" name="divAlign" style="background-color:white;">
+                <table border="0" style="width:100%;">
+                    <tr style="width:100%">
+                        <td style="width:90%;padding: 1%;">
+                            <span style="color:rgba(0, 0, 0, 0.82);font-family:Tahoma, Geneva, sans-serif;">Mark if already corrected</span>
+                        </td>
+                        <td style="width:10%">
+                            <input id="tookCare" onclick="funcCbTakin()" type="checkbox" style="margin-top: 4%;line-height: 1.3em;"> 
+                            <!--<input type="checkbox" id="tookCare" onclick="funcCbTakin()" style="margin-top: 4%;" />-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div id="talkbubble">
+                                <div>
+                                    <table border="0" style="width:100%;">
+                                        <tr style="width:100%; height: 80%;">
+                                            <td style="width:90%;padding: 1%;" >
+                                                <span style="color:rgba(0, 0, 0, 0.82);font-family:Tahoma, Geneva, sans-serif;">Correct Description:</span> <br/>
+                                                <textarea id="correctImpairmentDetails" style="height:8em;margin-top:1%;margin-bottom:1%;resize: none; width: 100%; border-color: rgba(128, 128, 128, 0.5); font-family:Tahoma, Geneva, sans-serif;" dir="ltr"></textarea>
+                                            </td>
+                                        </tr>
+                                        <tr style="width:100%">
+                                            <td style="width:90%;padding: 1%;">
+                                                <span style="color:rgba(0, 0, 0, 0.82);font-family:Tahoma, Geneva, sans-serif;">Correct Date:</span> <br/>
+                                                <input  type="date" id="correctImpairmentDate" style="border:1px solid rgba(128, 128, 128, 0.5);margin-top:1%;margin-bottom:1%;resize: none; width: 100%; border-color: rgba(128, 128, 128, 0.5); font-family:Tahoma, Geneva, sans-serif;" dir="ltr" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table style="width:97%;">
+                                        <tr style="width:100%">
+                                            <td style="width:90%;padding: 1%;">
+                                                <span style="color:rgba(0, 0, 0, 0.82);font-family:Tahoma, Geneva, sans-serif;">Signature</span>
+                                            </td>
+                                            <td style="width:10%">
+                                                <a id="NCRSignatureClose" data-icon="signatureNew" data-role="button" data-align="left" data-bind="events:{click: openSignatureCloseNCRPopUp}" style="color:black;background-color:transparent; border:none; margin-left: 43%;"></a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div id="talkbubbleStyle" class="animated fadeInDown">
+                                    <div style="text-align:center;" name="divAlign">
+                                        <span style="font-weight:200;font-family:Tahoma, Geneva, sans-serif;">
+                                            <b style="font-weight:200;margin-bottom:3%;margin-top:3%;margin-right:3%;margin-left:3%">
+                                                <span style="font-weight:200;font-family:Tahoma, Geneva, sans-serif;">By choosing 'Approved' you are confirming</span>
+                                                <br /><span style="font-weight:200;font-family:Tahoma, Geneva, sans-serif;">that the corrective actions were completed!</span>
+                                            </b>
+                                        </span>
+                                    </div>
+                                </div>
+                                <br />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+         <br/>
+        <div style="height:1em"></div>
+        <div style="width:100%;height:25%; background-color:#e9eaeb;">
+            <span style="box-shadow: 0px 2px 3px #A29E9E;background-color:#449d31;font-family: Tahoma, Geneva, sans-serif; color:white; text-align:center;padding-left: 6px;padding-top: 2px;padding-right: 12px;padding-bottom: 3px;">Impairment Details</span>
+        </div>
+       <div id="impairtmentDetails" style="background-color: #FFFFFF; width: 100%;">
+           <br/>
+           <span style="padding-left:2%;">Impairment Details:</span>
+           <span style="padding-left:2%;" id="impaiDetails" data-bind="text: currentItem['Description']"></span><br/><br/>
+
+           <span style="padding-left:2%;">Due Date:</span>
+           <span id="impaiDate" style="padding-left:2%;"></span>
+
+           <!--<center>-->
+            <table style="width:90%;">
+                <tr>
+                    <td style="width:90%;">
+                        <span style="padding-left:2%;">Image 1</span>
+                    </td>
+                    <td style="width:10%;">
+                        <a id="addCapturePhoto1Lik" class="capturePhotoButtonClass" data-icon="camera" data-role="button" data-align="left" style="color:black;background-color:transparent; border:none; margin-left: 75%;"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:90%;">
+                        <span style="padding-left:2%;">Image 2</span>
+                    </td>
+                    <td style="width:10%;">
+                        <a id="addCapturePhoto2Lik" class="capturePhotoButtonClass" data-icon="camera" data-role="button" data-align="left" style="color:black;background-color:transparent; border:none; margin-left: 75%;"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:90%;">
+                        <span style="padding-left:2%;">Signature</span>
+                    </td>
+                    <td style="width:10%;">
+                        <a id="NCRSignatureopen" data-icon="signatureNew" data-role="button" data-align="left" data-bind="events:{click: openSignatureopenNCRPopUp}" style="color:black;background-color:transparent; border:none; margin-left: 84%;"></a>
+                    </td>
+                </tr>
+            </table>
+           <!--</center>-->
+       </div>
+
+       <div data-role="modalview" id="signatureOpenNcrPopUp" style="left:1px; width:95%; height:36%; background-color:#F4F4F4;font-family: Tahoma, Geneva, sans-serif;">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                    <center>
+                        <span data-bind="text: strings.stagesFormSignature.title" style="margin-left:3%;font-size:large;"></span>
+                    </center>
+                </div>
+                <div data-role="content" dir="ltr" style="background-color: transparent; margin-top: 3%;">
+                    <center>
+                        <div style="border:1px solid rgba(128, 128, 128, 0.5); background-color: white; width:90%;">  
+                            <label class="km-label-above field field--textarea">  
+                                <div class='signature-wrapper'>
+                                    <div id='signatureOpenNCR'></div>
+                                    <input type='hidden' id='SignatureAdd-value' name='SignatureAdd-value'/>
+                                </div>
+                            </label>
+                        </div>
+                    </center>
+                </div>
+                <footer data-role="footer" style="background-color: transparent;">
+                    <div style="width:100%; margin-bottom:3%;">
+                        <center>
+                            <a data-role="button" style="margin-bottom:0%;border-radius:0;" data-bind="events:{click: closeSignatureOpenNCRPopUp}"><span data-bind="text: strings.stagesFormImg.close"></span></a>
+                            <!--<a id="Reset" data-role="button" style="margin-bottom:0%;border-radius:0;"><span data-bind="text: strings.stagesFormSignature.clear"></span></a>-->
+                        </center>
+                    </div>
+                </footer>
+            </div>
+    </div>
+    <!--<script>
+        function goHome() {
+            setTimeout(function () {
+                app.mobileApp.navigate('#components/controlPanel/view.html');
+            }, 300);
+        }
+
+        function funcCbTakin() {
+            if (document.getElementById('tookCare').checked == true) {
+                talkbubble.hidden = false;
+            }
+            else {
+                talkbubble.hidden = true;
+            }
+        }
+    </script>-->
+    <!-- START_CUSTOM_CODE_impairmentDetailViewModel -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_impairmentDetailViewModel -->
+</div>

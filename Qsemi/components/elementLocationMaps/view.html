@@ -2,17 +2,32 @@
 id="elementLocationMapsScreen" class="screen">
     <header data-role="header">
         <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);">
-            <a data-role="button" data-align="right" data-bind="events: { click: elementLocationMapsModel.saveElementLocation }">Save</a>
-
+             <table style="width:100%;">
+                <tr>
+                    <td style="width:10%;">
+                        <a data-role="button" data-align="left" data-bind="events: { click: elementLocationMapsModel.onCancel }, buttonText: strings.buttonsText.cancel" style="background-color:transparent;border:none;font-family: Tahoma, Geneva, sans-serif;"></a> <!--Cancel-->
+                    </td>
+                    <td style="width:80%;">
+                        <center><span data-bind="text: strings.elementLocationMaps.title"></span></center>
+                    </td>
+                    <td style="width:10%;">
+                        <a data-role="button" data-align="right" data-bind="events: { click: elementLocationMapsModel.saveElementLocation }, buttonText: strings.buttonsText.ok" style="font-family: Tahoma, Geneva, sans-serif;background-color:transparent;border:none;"></a> <!--Ok-->
+                    </td>
+                </tr>
+            </table>
+            <!--<a data-role="button" data-align="right" data-bind="events: { click: elementLocationMapsModel.saveElementLocation }" style="font-family: Tahoma, Geneva, sans-serif;background-color:transparent;border:none;">Ok</a>
             <span data-bind="text: strings.elementLocationMaps.title"></span>
-
-            <!--<a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>-->
-            <!--<a data-role="backbutton" data-align="left">Back</a>-->
-            <a data-role="button" data-align="left" data-bind="events: { click: elementLocationMapsModel.onCancel }">Cancel</a>
-
+            <a data-role="button" data-align="left" data-bind="events: { click: elementLocationMapsModel.onCancel }" style="background-color:transparent;border:none;font-family: Tahoma, Geneva, sans-serif;">Cancel</a>-->
         </div>
     </header>
 
+    <footer data-role="footer" style="background-color:transparent;">
+        <label style="position: absolute;bottom: 0.8em;left: 16em;z-index: 999;background-repeat:no-repeat;background-size:100%; background-position: center; "><br />
+            <center>
+            <img src="images/mapCenter.jpg" style="height:45%; width:45%;" onclick="app.elementLocationMaps.elementLocationMapsModel.getMapCenter()" />
+        </center></label>
+        <!--<a data-role="button" onclick="app.elementLocationMaps.elementLocationMapsModel.getMapCenter()" style="position: absolute;bottom: 0.8em;right: 0.9em;z-index: 999;background-repeat:no-repeat;background-size:75%; background-position: center;">centering</a>-->
+   </footer>
 
     <!-- START_CUSTOM_CODE_elementLocationMaps -->
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
@@ -20,7 +35,33 @@ id="elementLocationMapsScreen" class="screen">
     <!-- END_CUSTOM_CODE_elementLocationMaps -->
     <div id="elementLocationMapsModelMap" class="map"></div>
 
-
+    <div data-role="modalview" id="needGPSElementPopUp" style="font-family: Tahoma, Geneva, sans-serif;left:1px; width:85%; height:32%; background-color:#F4F4F4; ">
+         <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:5%;">
+            <div style="width:100%;">
+                <span data-bind="text: strings.warningGPSMessage.title" style="color:black; font-weight:bold; font-size:large; margin-left:6%;"></span> <!-- Please Turn On GPS -->
+            </div>
+        </div>
+        <br/>
+        <div data-role="content" style="background-color: transparent; margin-top: 2%;">
+            <span data-bind="text: strings.warningGPSMessage.text1" style="color:black; font-size:medium; margin-left:6%;"></span><br/><br/> <!-- Your Location Services are disabled. -->
+            <span data-bind="text: strings.warningGPSMessage.text2" style="color:black; font-size:medium; margin-left:6%;"></span><br/><br/> <!-- The GPS is required to view the map. -->
+            <span data-bind="text: strings.warningGPSMessage.text3" style="color:black; font-size:medium; margin-left:6%;"></span> <!-- Please enable GPS, with Wifi or 3G service -->
+        </div>
+        <div data-role="footer" style="margin-bottom:3%; margin-top:3%; background-color:transparent">
+            <div style="width:100%; margin-bottom:2%;">
+                <center>
+                    <a data-role="button" onclick="app.elementLocationMaps.elementLocationMapsModel.closeNeedGPSElement()" style="color:white;margin-bottom:0%;border-radius:0;">
+                        <!-- onclick="app.formDetailView.formDetailViewModel.saveAddPopUpImg()" -->
+                        <span data-bind="text: strings.buttonsText.cancel"></span> <!-- CANCEL -->
+                    </a>
+                    <a data-role="button" onclick="app.elementLocationMaps.elementLocationMapsModel.openSettingsNeedGPSElement()" style="color:white;margin-bottom:0%;border-radius:0;"> 
+                        <!-- onclick="app.formDetailView.formDetailViewModel.saveAddPopUpImg()" -->
+                        <span data-bind="text: strings.buttonsText.settings"></span> <!-- GO -->
+                    </a>
+                </center>
+            </div>
+        </div>
+    </div>
 
     <!--<div class="map-details details-content screen__content screen__content--details screen__content--map" data-bind="click: elementLocationMapsModel.itemClick, visible: elementLocationMapsModel.itemDetailsVisible">
         <h3 data-bind="text: elementLocationMapsModel.originalItem.name"></h3>
