@@ -4,7 +4,7 @@
              <table style="width:100%;">
                 <tr>
                     <td style="width:10%;">
-                        <a data-icon="home" data-role="button" onclick="goHome()" data-align="left" style="background-color:transparent; border:none;font-family: Tahoma, Geneva, sans-serif;"></a>
+                        <a data-icon="home" data-role="button" data-align="left" style="background-color:#4fa81a;color:#4fa81a; border:none;font-family: Tahoma, Geneva, sans-serif;"></a>
                         <a data-icon="backIcon" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
                     </td>
                     <td style="width:80%;">
@@ -30,9 +30,21 @@
             <div data-role="tabstrip" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4); margin-top:2%;">
                 <a id="defaultOpen" style="font-size: 16px; font-weight: bold; background-color: #351e45; z-index:999; box-shadow:none;" onclick="openDetails()" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.elementDetails.generalDetails"></a>
                 <a id="QC_Button" style="font-size: 16px; font-weight: bold; background-color: #351e45; z-index:999;" onclick="openQC()" data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.elementDetails.qc"></a>
+                <a id="NCR_Button" style="font-size: 16px; font-weight: bold; background-color: #351e45; z-index:999;" onclick="openNCR()" data-bind="text: strings.controlPanel.defects"></a>
             </div>
         </div>
     </header>
+
+    <footer id="elementMapButton" data-role="footer" onclick="app.formDetailView.addItemViewModel.openMap()" style="background-color:transparent;">
+        <label class="circle2" style="position: absolute;bottom: 1em;right: 0.6em;z-index: 999;background-repeat:no-repeat;background-size:75%; background-position: center; "><br />
+            <center style="color: white; margin: -2%;margin-left: -1%;  font-size: medium;">
+                <img src="images/mapIcon.png" style="height: 22px; width: 14px; margin-left: 1px; margin-top:1%;font-family: Tahoma, Geneva, sans-serif;"/><br/>
+                <span data-bind="text: strings.controlPanel.mapTitle"></span>
+            </center>
+        </label>
+   </footer>
+
+
     <div id="elementDetailsAndQc" class="details-content screen__content screen__content--details">
         <div id="qc" style="overflow-x:hidden; background-color: #FFFFFF; width: 100%; height: 100%;">
             <ul id="elementSteps" data-role="listview" data-style="inset" style="font-family: Tahoma, Geneva, sans-serif;padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0;"></ul>
@@ -64,6 +76,35 @@
             </table>
         </div>
         </script>
+        </div>
+        <div id="defectsList" style="overflow-x:hidden; width: 100%; height: 100%;">
+            <!--dataSourceNcr-->
+            <!-- data-template="ElementDefectsTemplate" data-bind="source: elementDetailViewModel.dataSourceNcr" -->
+            <ul id="elementImpartmentList" data-role="listview" data-auto-bind="false" data-style="inset" data-pull-to-refresh="false" data-endless-scroll="false">
+            </ul>
+            <script type="text/x-kendo-template" id="ElementDefectsTemplate">
+                # data = app.impairmentDetailView.impairmentDetailViewModel.fixHierarchicalData(data); #
+                <center id=#:data['id']# onclick="app.controlPanel.controlPanelModel.itemClickDefects(this.id)">
+                    <div class="rectangle"  style="width:100%;">
+                        <table style="width:100%;margin-right:0%;" border="0">
+                            <tr>
+                                <td style="width:98%;color: black;font-family:Tahoma, Geneva, sans-serif;font-weight: 200;font-size:small;">
+                                    #=kendo.toString(data['updatedAt'], "dd/MM/yyyy HH:mm")# <br />
+                                    <span data-bind="text: strings.controlPanel.elementName"></span><span style="font-weight: bold;font-size:small;">#: data['ElementName'] #</span><br/>
+                                    <span data-bind="text: strings.impairmentDetailView.checkName"></span><span style="font-weight: bold;font-size:small;">#: data['name'] #</span>
+                                </td>
+                                <td style="width: 2%;">
+                                    <a data-role="button" data-icon="arrow-open" style="color:black;background-color:transparent; border:none;"></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </center>
+            </script>
+            <br/>
+            <center>
+                <span id="noOpenElementDefects" data-bind="text: strings.impairmentDetailView.noImpairments"><span>
+            </center>
         </div>
         <div id="generalDetails" style="font-family: Tahoma, Geneva, sans-serif;overflow-x:hidden; background-color: #FFFFFF; width: 100%; height: 100%;">
             <ul data-role="listview" data-style="inset">
@@ -234,21 +275,43 @@
     </script>
 <script>
     function openDetails(e) {
+        // alert("defaultOpen")
         app.elementDetailView.elementDetailViewModel.page_scroller.reset();
         $("#defaultOpen").css('border-bottom', '3px solid white');
+        $("#NCR_Button").css('border-bottom', 'none');
         $("#QC_Button").css('border-bottom', 'none');
         $("#QC_Button").css('box-shadow', 'none');
         $("#generalDetails").show();
+        $("#elementMapButton").show();
         $("#qc").hide();
+        $("#defectsList").hide();
+        $("#elementImpartmentList").hide();
     }
     function openQC(e) {
         app.elementDetailView.elementDetailViewModel.page_scroller.reset();
         $("#QC_Button").css('border-bottom', '3px solid white');
+        $("#NCR_Button").css('border-bottom', 'none');
         $("#defaultOpen").css('border-bottom', 'none');
         $("#defaultOpen").css('box-shadow', 'none');
         $("#editGeneralDetailsButtom").hide();
         app.elementDetailView.elementDetailViewModel.openQC1();
         $("#generalDetails").hide();
+        $("#elementMapButton").hide();
+        $("#defectsList").hide();
+        $("#elementImpartmentList").hide();
         $("#qc").show();
+    }
+    function openNCR(e) {
+        app.elementDetailView.elementDetailViewModel.page_scroller.reset();
+        $("#NCR_Button").css('border-bottom', '3px solid white');
+        $("#defaultOpen").css('border-bottom', 'none');
+        $("#QC_Button").css('border-bottom', 'none');
+        $("#QC_Button").css('box-shadow', 'none');
+        app.elementDetailView.elementDetailViewModel.openNCR1();
+        $("#generalDetails").hide();
+        $("#elementMapButton").hide();
+        $("#qc").hide();
+        $("#defectsList").show();
+        $("#elementImpartmentList").show();
     }
 </script>
