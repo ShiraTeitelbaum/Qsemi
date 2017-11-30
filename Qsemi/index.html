@@ -14,7 +14,7 @@
     <link href="styles/overrides.css" rel="stylesheet">
     <link href="styles/main.css" rel="stylesheet">
 
-     <link href="animate.min.css" rel="stylesheet" />
+    <link href="animate.min.css" rel="stylesheet">
 
     <script async defer type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCG4jUolof0jhqQu0j1aNqSWfW_ms-wRKg&amp;sensor=true"></script>
 
@@ -24,7 +24,7 @@
     <script src="kendo/js/kendo.mobile.min.js"></script>
     <script src="kendo/js/kendo.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-
+    
     <script src="app.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js" integrity="sha256-lDcU9wi187tvmD2D2AvfRvhuVthZ5UxIP7Oh+Rk3yNw=" crossorigin="anonymous"></script>
@@ -36,6 +36,8 @@
 </head>
 
 <body id="kendoUiMobileApp">
+    <script src="components/elementSearchView/index.js"></script>
+    <script src="components/taskDetailView/index.js"></script>
     <script src="components/impairmentDetailView/index.js"></script>
     <script src="components/laboratoryTestForm/index.js"></script>
     <script src="components/castingForm/index.js"></script>
@@ -80,6 +82,112 @@
             <li id="authenticationViewModellogout"><a href="components/authenticationView/view.html?logout=true" data-position="end" data-icon="action"><span class="navigation-link-text" data-bind="text: strings.authenticationView.authenticationViewModel.logoutLabel"></span></a></li>
         </ul>
     </div>-->
+    <div id="appDrawer" data-position="left" data-role="drawer" style="width: 40%;background-color:#ffffff;" data-views="['controlPanelScreen', 'elementDetailViewScreen']">
+        <header style="width:100%;font-size:3vw;background-color:#e9eaeb;" data-role="header">
+            <div data-role="navbar" style="background:#4fa81a;color: white;font-weight: bold;left: 37%">
+                <center>
+                    <label style="font-size: 4vw;">
+                        <span data-bind="text: strings.menu.title"></span>
+                    </label>
+                </center>
+            </div>
+        </header>
+
+        <ul id="navigation-container-Projects" data-role="listview">
+            <li style="background:#4fa81a;color: white;font-size: 4vw;font-weight: bold;">
+                <a style="background:#4fa81a;">
+                    <center>
+                        <label style="background:#4fa81a">
+                            <span style="background:#4fa81a;" class="navigation-link-text" data-bind="text: strings.menu.title"></span>
+                        </label>
+                    </center>
+                </a>
+            </li>
+            <li>
+                <a href="components/projectDetailView/view.html" data-icon="projectNew">
+                    <!--<img alt="icon" class="k-image" src="kendo/styles/images/project.png" style="height: 1em;">-->
+                    <span class="navigation-link-text" data-bind="text: strings.menuOptions.projects"></span>
+                </a>
+            </li>
+            <!--<li>
+                <a href="components/equipmentMasterView/view.html" >
+                    <img alt="icon" class="k-image" src="kendo/styles/images/home.png" style="height: 1em;">
+                    <span class="navigation-link-text" data-bind="text: strings.equipmentMasterView.title"></span>
+                </a>
+            </li>-->
+            <!--<li>
+                <a href="components/equipmentTypeMasterView/view.html">
+                    <img alt="icon" class="k-image" src="kendo/styles/images/setting.png" style="height: 1em;">
+                    <span class="navigation-link-text" data-bind="text: strings.equipmentTypeMasterView.title"></span>
+                </a>
+            </li>-->
+            <!--<li>
+                <a href="components/toolSurveyMasterDetailView/view.html">
+                    <img alt="icon" class="k-image" src="kendo/styles/images/file.png" style="height: 1em;">
+
+                   <span class="navigation-link-text" data-bind="text: strings.toolSurveyMasterDetailView.title"></span>
+                </a>
+            </li>-->
+            <li id="authenticationViewModelProjectsLogout">
+                <a href="components/authenticationView/view.html?logout=true" data-position="end" data-icon="action">
+                    <span class="navigation-link-text" data-bind="text: strings.authenticationView.authenticationViewModel.logoutLabel"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div id="appDrawerProjects" data-position="left" data-role="drawer" style="width: 40%;background-color:#ffffff;" data-views="['projectDetailViewScreen']">
+        <header style="width:100%;font-size:3vw;background-color:#e9eaeb;" data-role="header">
+            <div data-role="navbar" class="header-text" style="background:#4fa81a;color: white;font-weight: bold;left: 37%">
+                <center>
+                    <label style="font-size: 4vw;">
+                        <span data-bind="text: strings.menu.title"></span>
+                    </label>
+                </center>
+            </div>
+        </header>
+
+        <ul id="navigation-container-Projects" data-role="listview">
+            <li style="background:#4fa81a;color: white;font-size: 4vw;font-weight: bold;">
+                <a style="background:#4fa81a;">
+                    <center>
+                        <label style="background:#4fa81a">
+                            <span style="background:#4fa81a;" class="navigation-link-text" data-bind="text: strings.menu.title"></span>
+                        </label>
+                    </center>
+                </a>
+            </li>
+            <!--<li>
+                <a href="components/projectView/view.html">
+                    <img alt="icon" class="k-image" src="kendo/styles/images/project.png" style="height: 1em;">
+                    <span class="navigation-link-text" data-bind="text: strings.projectView.title"></span>
+                </a>
+            </li>
+            <li>
+                <a href="components/equipmentMasterView/view.html" >
+                    <img alt="icon" class="k-image" src="kendo/styles/images/home.png" style="height: 1em;">
+                    <span class="navigation-link-text" data-bind="text: strings.equipmentMasterView.title"></span>
+                </a>
+            </li>
+            <li>
+                <a href="components/equipmentTypeMasterView/view.html">
+                    <img alt="icon" class="k-image" src="kendo/styles/images/setting.png" style="height: 1em;">
+                    <span class="navigation-link-text" data-bind="text: strings.equipmentTypeMasterView.title"></span>
+                </a>
+            </li>
+            <li>
+                <a href="components/toolSurveyMasterDetailView/view.html">
+                    <img alt="icon" class="k-image" src="kendo/styles/images/file.png" style="height: 1em;">
+
+                   <span class="navigation-link-text" data-bind="text: strings.toolSurveyMasterDetailView.title"></span>
+                </a>
+            </li>-->
+            <li id="authenticationViewModelProjectsLogout">
+                <a href="components/authenticationView/view.html?logout=true" data-position="end" data-icon="action">
+                    <span class="navigation-link-text" data-bind="text: strings.authenticationView.authenticationViewModel.logoutLabel"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
     <div id="notify" class="notify-pop-up">
         <span class="notify-pop-up__content"></span>
     </div>

@@ -215,6 +215,8 @@ app.localization.registerView('elementLocationMaps');
             counter: 0,
             labelIndex : 0,
             emapFlag: false,
+            backFlag: false,
+            elementDetailsFalg:false,
             fixHierarchicalData: function(data) {
                 var result = {},
                     layout = {};
@@ -307,6 +309,9 @@ app.localization.registerView('elementLocationMaps');
                 }
                 return linkChunks[0] + this.get('currentItem.' + linkChunks[1]);
             },
+            saveWarningPopUp: function() {
+                $("#warningPopUpL").kendoMobileModalView("close");
+            },
             saveElementLocation: function(e) {
                 var jsdoOptions3 = app.elementDetailView.elementDetailViewModel.get('_jsdoOptions'),
                     jsdo3 = new progress.data.JSDO(jsdoOptions3);
@@ -322,8 +327,10 @@ app.localization.registerView('elementLocationMaps');
                     var lat = parseFloat((tmp[0]).substr(1, tmp[0].length)).toFixed(8);
                     var lng = parseFloat((tmp[1]).substr(1, tmp[1].length-2)).toFixed(8);
 
-                    if(element.Latitude != lat && element.Longtitud != lng && element.Latitude != undefined && element.Longtitud != undefined) {
-                        alert("Note: You are change the element's locaion");
+                    if(element[0].Latitude != lat && element[0].Longtitud != lng && element[0].Latitude != undefined && element[0].Longtitud != undefined) {
+                        document.getElementById("warningPopUpTextL").innerHTML = app.elementLocationMaps.get('strings').warningMessage.noteLocaion;//"Signature is missing";
+                        $("#warningPopUpL").kendoMobileModalView("open");
+                        // return;
                     }
                     var elementLocation = {
                         Latitude: lat,
@@ -419,15 +426,17 @@ app.localization.registerView('elementLocationMaps');
                             image.src = staticMapUrl;
 
                             app.elementDetailView.elementDetailViewModel.change_Percent = true;
-                           document.getElementById("ChooseLocationOnMap").style.color = "red";
-                            // alert("Location successfully approved");
-                            window.plugins.toast.showWithOptions(
-                            {
-                                message: app.elementLocationMaps.get('strings').toastsMessages.locationSuccessAproved,
-                                duration: "short", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
-                                position: "bottom",
-                                addPixelsY: -40  // added a negative value to move it up a bit (default 0)
-                            }); 
+                           if(document.getElementById("ChooseLocationOnMap") != null) {
+                                document.getElementById("ChooseLocationOnMap").style.color = "red";
+                                // alert("Location successfully approved");
+                                window.plugins.toast.showWithOptions(
+                                {
+                                    message: app.elementLocationMaps.get('strings').toastsMessages.locationSuccessAproved,
+                                    duration: "short", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
+                                    position: "bottom",
+                                    addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+                                }); 
+                           }
                             app.mobileApp.navigate('#:back');
                         }
                     };
@@ -520,6 +529,20 @@ app.localization.registerView('elementLocationMaps');
                 // Add the marker at the clicked location, and add the next-available label
                 // from the array of alphabetical characters.
                 //alert(elementLocationMapsModel.counter)
+                    if(elementLocationMapsModel.elementDetailsFalg == true) {
+                        if(elementLocationMapsModel.counter < 1) {
+                            elementLocationMapsModel.counter = elementLocationMapsModel.counter+1;
+                            app.elementDetailView.elementDetailViewModel.marker = new google.maps.Marker({ //var marker = new google.maps.Marker({
+                                position: location,
+                                //label: elementLocationMapsModel.labels[elementLocationMapsModel.labelIndex++ % elementLocationMapsModel.labels.length],
+                                map: map,
+                                draggable: false,
+                                animation: google.maps.Animation.DROP,
+                                icon: 'images/addMapPinRed.png'
+                            });
+                        }
+                    }
+                    else {
                         if(elementLocationMapsModel.counter < 1) {
                             elementLocationMapsModel.counter = elementLocationMapsModel.counter+1;
                             app.elementDetailView.elementDetailViewModel.marker = new google.maps.Marker({ //var marker = new google.maps.Marker({
@@ -531,8 +554,10 @@ app.localization.registerView('elementLocationMaps');
                                 icon: 'images/addMapPinRed.png'
                             });
                         }
+                    }
                 },
                 closeNeedGPSElement: function(e) {
+                    // elementLocationMapsModel.backFlag = true;
                     $("#needGPSElementPopUp").kendoMobileModalView("close");
                     app.elementLocationMaps.elementLocationMapsModel.emapFlag = false;
                     var id = 0;
@@ -579,6 +604,9 @@ app.localization.registerView('elementLocationMaps');
         elementLocationMapsModel.emapFlag = true;
         //  navigator.geolocation.getCurrentPosition(function(position){},calldialog());
         dialog();
+        
+        if(e.view.params.detailsFlag != undefined)
+            elementLocationMapsModel.elementDetailsFalg = true;
 
         var param = e.view.params.filter ? JSON.parse(e.view.params.filter) : null,
             isListmenu = false,

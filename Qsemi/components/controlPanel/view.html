@@ -1,170 +1,277 @@
 <div data-role="view" data-title="View" data-layout="main" data-model="app.controlPanel" data-show="app.controlPanel.onShow" data-after-show="app.controlPanel.afterShow" id="controlPanelScreen" class="screen">
-    <header data-role="header">
-        <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);"> <!-- style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);" -->
-            <table style="width:100%;">
+    <header data-role="header" style="background-color: #351e45;">
+        <div data-role="navbar" class="header-text" style="background-color: #4fa81a; box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3)">
+             <table style="width:100%;">
                 <tr>
                     <td style="width:10%;">
-                        <!--<a data-icon="home" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>-->
-                        <a data-icon="backIcon" data-role="button" data-align="left" style="background-color:#4fa81a;color:#4fa81a; border:none;"></a>
+                        <!--<a data-icon="serach" data-role="button" data-align="right" style="background-color:#4fa81a;color:white; border:none;"></a>-->
+                        <a data-role="button" data-icon="search1" data-align="right" onclick="app.controlPanel.controlPanelModel.openSearch()" style="background-color:transparent; border:none;"></a>
                     </td>
-                    <td style="width:80%;">
-                        <center><label id="projectNameViewHome" style="font-family: Tahoma, Geneva, sans-serif;"></label></center>
+                    <td style="width:95%;">
+                        <center><span id="projectNameViewHome" style="font-family: Tahoma, Geneva, sans-serif;"></span></center>
                     </td>
                     <td style="width:10%;">
-                        <a data-role="button" data-rel="popover" href="#popover-hbar2" data-align="right"  data-position="end" data-icon="hbar-button" style="background-color:#4fa81a; border:none;"></a>
+                        <!--<a data-role="button" data-rel="popover" href="#popover-hbar2" data-align="right"  data-position="end" data-icon="hbar-button" style="background-color:#4fa81a; border:none;"></a>-->
+                        <a class="headerButton" data-role="button"  data-rel="drawer" data-align="left" data-icon="hbar-button" data-position="end" href="#appDrawer" style="background-color:#4fa81a; border:none;"></a>
                     </td>
                 </tr>
             </table>
-
-            <!--<center><label id="projectNameViewHome" style="font-family: Tahoma, Geneva, sans-serif;"></label></center>
-            <a data-icon="home" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
-            <a data-role="button" data-rel="popover" href="#popover-hbar2" data-align="right"  data-position="end" data-icon="hbar-button" style="background-color:#4fa81a; border:none;"></a>-->
         </div>
-        <table style="background-color:#351e45;width:100%;height:50px;">
-            <tr style="width:100%;">
-                <td style="width:50%;direction:ltr;">
-                    <a onclick="app.controlPanel.controlPanelModel.openImpairment()" style="color:white;height:50px; font-weight:bold; direction:ltr; font-size:large;margin-left:6%;">
-                        <img src="images/ImpairtmentIcon.png" style="height: 24px; width: 16px; margin-left: 1px; margin-top:3%;font-family: Tahoma, Geneva, sans-serif;"/>
-                        <span>impairments</span> <!-- Quality impairment -->
-                    </a>
-                </td>
-                <td style="width:50%;direction:rtl;">
-                    <a onclick="app.controlPanel.controlPanelModel.openGeneralMap()" style="color:white;height:50px; font-weight:bold; direction:rtl; font-size:large;margin-right:6%;">
-                        <span data-bind="text: strings.controlPanel.mapTitle"></span>
-                        <img src="images/mapIcon.png" style="height: 24px; width: 16px; margin-left: 1px; margin-top:3%;font-family: Tahoma, Geneva, sans-serif;"/>
-                    </a>
-                </td>
-            </tr>
-        </table>
-        <!--<div style="background-color:#351e45; height:50px; width:100%; direction:rtl;">
-            <a onclick="app.controlPanel.controlPanelModel.openGeneralMap()" style="color:white;height:50px; font-weight:bold; direction:rtl; font-size:large;margin-right:6%;">
-                <span data-bind="text: strings.controlPanel.mapTitle"></span>
-                <img src="images/mapIcon.png" style="height: 24px; width: 16px; margin-left: 1px; margin-top:3%;font-family: Tahoma, Geneva, sans-serif;"/>
-            </a>
+        <div style="background-color: #351e45;font-family: Tahoma, Geneva, sans-serif;">
+            <div data-role="tabstrip" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4); margin-top:2%;">
+                <a id="qcTab" style="font-size: 16px; font-weight: bold; background-color: #351e45; z-index:999;" onclick="openQcTab()" data-bind="text: strings.controlPanel.qualityControlTitle"></a>
+                <a id="defectsTab" style="font-size: 16px; font-weight: bold; background-color: #351e45; z-index:999;" onclick="openDefectsTab()" data-bind="text: strings.controlPanel.defects"></a>
+                <a id="taskTab" style="font-size: 16px; font-weight: bold; background-color: #351e45; z-index:999; box-shadow:none;" onclick="openTaskTab()" data-bind="text: strings.controlPanel.taskManagementTitle"></a>
+            </div>
         </div>
-        <div style="background-color:#351e45; height:50px; width:100%; direction:ltr;">
-            <a style="color:white;height:50px; font-weight:bold; direction:ltr; font-size:large;margin-left:6%;">
-                <span>Quality impairment</span>
-            </a>
-        </div>-->
     </header>
 
-    <div data-role="popover" id="popover-hbar2" data-popup='{"height":"30", "width":"150"}' style="border:none">
-        <div data-role="view" data-model="app.controlPanel">
-            <ul data-role="listview" style="list-style:none; background-color:#F4F4F4;">
-                <li style="padding: 1.5px;">
-                    <a style="background-color:transparent;" class="version" >
-                        <span data-bind="text: strings.menuOptions.version"  style="background-color:transparent;font-size:medium;font-family: Tahoma, Geneva, sans-serif;">  
-                            <!--<span>Version</span> -->
-                        </span> 
-                    </a>
-                </li>
-                <li style="padding: 1.5px;">
-                    <a style="background-color:transparent;" class="projects" onclick="app.controlPanel.controlPanelModel.goToProjects()">
-                        <span data-bind="text: strings.menuOptions.projects"  style="background-color:transparent;font-size:medium;font-family: Tahoma, Geneva, sans-serif;">  
-                            <!--<span>Projects</span> -->
-                        </span> 
-                    </a>
-                </li>
-                <li style="padding: 1.5px;">
-                    <a style="background-color:transparent;" data-role="button" onclick="app.controlPanel.controlPanelModel.logoutClick()" data-align="left" data-position="end" > 
-                        <span data-bind="text: strings.menuOptions.logout"  style="background-color:transparent;font-size:mediun;font-family: Tahoma, Geneva, sans-serif;">  
-                            <!--<span>Log Out</span> -->
-                        </span> 
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <!--<a onclick="app.controlPanel.controlPanelModel.openGeneralMap()" style="color:white;height:50px; font-weight:bold; direction:rtl; font-size:large;margin-right:6%;">
+        <span data-bind="text: strings.controlPanel.mapTitle"></span>
+        <img src="images/mapIcon.png" style="height: 24px; width: 16px; margin-left: 1px; margin-top:3%;font-family: Tahoma, Geneva, sans-serif;"/>
+    </a>-->
+    <footer id="mapButton" data-role="footer" onclick="app.controlPanel.controlPanelModel.openGeneralMap()" style="background-color:transparent;">
+        <label class="circle2" style="position: absolute;bottom: 1em;right: 0.6em;z-index: 999;background-repeat:no-repeat;background-size:75%; background-position: center; "><br />
+            <center style="color: white; margin: -2%;margin-left: -1%;  font-size: medium;">
+                <img src="images/mapIcon.png" style="height: 22px; width: 14px; margin-left: 1px; margin-top:1%;font-family: Tahoma, Geneva, sans-serif;"/><br/>
+                <span data-bind="text: strings.controlPanel.mapTitle"></span>
+            </center>
+        </label>
+   </footer>
+
     <!-- START_CUSTOM_CODE_controlPanel -->
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
 
     <!-- END_CUSTOM_CODE_controlPanel -->
    
-    <div style="overflow-x:hidden; width:85%; height:100%; margin-right:7%; margin-left:7%; padding:0; margin-top:3%;">
-        <center>
-            <div class="controlPanel" id="step_0" onclick="app.controlPanel.controlPanelModel.openStage(0)" style="font-family: Tahoma, Geneva, sans-serif;background-image: url('images/step0-2.png'); width:91%;"> <!-- url('images/1.png'); -->
-                <div class="stage">
-                    <span class="stageCounter" id="stage0Counter"></span>
-                    <br/>
-                    <span class="stageName" data-bind="text: strings.controlPanel.stage0name"></span>
-                </div>
-            </div>    
-            <div class="controlPanel" id="step_1" onclick="app.controlPanel.controlPanelModel.openStage(1)" style="font-family: Tahoma, Geneva, sans-serif;background-image: url('images/step1.png'); width:87%;"> <!-- url('images/2.png'); -->
-                <div class="stage">
-                    <span class="stageCounter" id="stage1Counter"></span>
-                    <br/>
-                    <span class="stageName" data-bind="text: strings.controlPanel.stage1name"></span>
-                </div>
-            </div>
-            <div class="controlPanel" id="step_2" onclick="app.controlPanel.controlPanelModel.openStage(2)" style="font-family: Tahoma, Geneva, sans-serif;background-image: url('images/step2.png'); width:83%;">
-                <div class="stage">
-                    <span class="stageCounter" id="stage2Counter"></span>
-                    <br/>
-                    <span class="stageName" data-bind="text: strings.controlPanel.stage2name"></span>
-                </div>
-            </div>
-            <div class="controlPanel" id="step_3" onclick="app.controlPanel.controlPanelModel.openStage(3)" style="font-family: Tahoma, Geneva, sans-serif;background-image: url('images/step3.png'); width:79%;">
-                <div class="stage">
-                    <span class="stageCounter" id="stage3Counter"></span>
-                    <br/>
-                    <span class="stageName" data-bind="text: strings.controlPanel.stage3name"></span>
-                </div>
-            </div>
-            <div class="controlPanel" id="step_4" onclick="app.controlPanel.controlPanelModel.openStage(4)" style="font-family: Tahoma, Geneva, sans-serif;background-image: url('images/step4.png'); width:75%;">
-                <div class="stage">
-                    <span class="stageCounter" id="stage4Counter"></span>
-                    <br/>
-                    <span class="stageName" data-bind="text: strings.controlPanel.stage4name"></span>
-                </div>
-            </div>
-            <div class="controlPanel" id="step_5" onclick="app.controlPanel.controlPanelModel.openStage(5)" style="font-family: Tahoma, Geneva, sans-serif;background-image: url('images/step5.png'); width:71%;">
-                <div class="stage">
-                    <span class="stageCounter" id="stage5Counter"></span>
-                    <br/>
-                    <span class="stageName" data-bind="text: strings.controlPanel.stage5name"></span>
-                </div>
-            </div>
-            <div class="controlPanel" id="step_6" onclick="app.controlPanel.controlPanelModel.openStage(6)" style="font-family: Tahoma, Geneva, sans-serif;background-image: url('images/step6.png'); width:67%;">
-                <div class="stage">
-                    <span class="stageCounter" id="stage6Counter"></span>
-                    <br/>
-                    <span class="stageName" data-bind="text: strings.controlPanel.stage6name"></span>
-                </div>
-            </div>
-            <div class="controlPanel" id="step_7" onclick="app.controlPanel.controlPanelModel.openStage(7)" style="font-family: Tahoma, Geneva, sans-serif;background-image: url('images/step7.png'); width:63%;">
-                <div class="stage">
-                    <span class="stageCounter" id="stage7Counter"></span>
-                    <br/>
-                    <span class="stageName" data-bind="text: strings.controlPanel.stage7name"></span>
-                </div>
-            </div>
-        </center>
+   <div id="Qc" style="overflow-x:hidden; width: 100%; height: 100%;">
+        <div style="overflow-x:hidden; width:100%; height:100%; padding:0; margin-top:3%;">
+            <table style="background-color:#fff; text-align: center;border-collapse: collapse;width: 100%;">
+                <tbody>
+                    <tr>
+                        <th style="background-color:#EAE9E4;border-bottom: 4px solid rgb(255,255,255);border-left: 1px solid #ddd;width: 50%;height: 50px; ">
+                            <span class="stageName" data-bind="text: strings.controlPanel.stage0name"></span>
+                        </th>
+                        <th style="background-color:#EAE9E4;border-bottom: 4px solid rgb(169,31,36);border-left: 1px solid #ddd;width: 50%;height: 50px; ">
+                            <span class="stageName" data-bind="text: strings.controlPanel.stage1name"></span>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td id="step_0" onclick="app.controlPanel.controlPanelModel.openStage(0)"  style="border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;line-height:60px;font-weight: bold;margin-top: 7px; ">
+                            <center style="border-top:1px solid #EAE9E4;">
+                                <a style="color: black; border: none; touch-action: none;">
+                                    <span class="stageCounter" id="stage0Counter"></span>
+                                    <a data-role="button" data-icon="arrow-open2" style="color:black;background-color:transparent; border:none;"></a>
+                                </a>
+                            </center>
+                        </td>
+                        <td id="step_1" onclick="app.controlPanel.controlPanelModel.openStage(1)" style="border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;line-height:60px;font-weight: bold;margin-top: 7px; ">
+                            <center>
+                                <a style="color: black; border: none;touch-action: none;">
+                                    <span class="stageCounter" id="stage1Counter"></span>
+                                    <a data-role="button" data-icon="arrow-open2" style="color:black;background-color:transparent; border:none;"></a>
+                                </a>
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="background-color:#EAE9E4;border-bottom: 4px solid rgb(202,95,40);border-left: 1px solid #ddd;width: 50%;height: 50px; ">
+                            <span class="stageName" data-bind="text: strings.controlPanel.stage2name"></span>
+                        </th>
+                        <th style="background-color:#EAE9E4;border-bottom: 4px solid rgb(230,206,30);border-left: 1px solid #ddd;width: 50%;height: 50px; ">
+                            <span class="stageName" data-bind="text: strings.controlPanel.stage3name"></span>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td id="step_2" onclick="app.controlPanel.controlPanelModel.openStage(2)" style="border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;line-height:60px;font-weight: bold;margin-top: 10px; ">
+                            <center>
+                                <a style="color: black; border: none; touch-action: none;">
+                                    <span class="stageCounter" id="stage2Counter"></span>
+                                    <a data-role="button" data-icon="arrow-open2" style="color:black;background-color:transparent; border:none;"></a>
+                                </a>
+                            </center>
+                        </td>
+                        <td id="step_3" onclick="app.controlPanel.controlPanelModel.openStage(3)" style="border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;line-height:60px;font-weight: bold;margin-top: 10px; ">
+                            <center>
+                                <a style="color: black; border: none; touch-action: none;">
+                                    <span class="stageCounter" id="stage3Counter"></span>
+                                    <a data-role="button" data-icon="arrow-open2" style="color:black;background-color:transparent; border:none;"></a>
+                                </a>
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="background-color:#EAE9E4;border-bottom: 4px solid rgb(0,144,75);border-left: 1px solid #ddd;width: 50%;height: 50px; ">
+                            <span class="stageName" data-bind="text: strings.controlPanel.stage4name"></span>
+                        </th>
+                        <th style="background-color:#EAE9E4;border-bottom: 4px solid rgb(17,113,185);border-left: 1px solid #ddd;width: 50%;height: 50px; ">
+                            <span class="stageName" data-bind="text: strings.controlPanel.stage5name"></span>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td id="step_4" onclick="app.controlPanel.controlPanelModel.openStage(4)" style="border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;line-height:60px;font-weight: bold;margin-top: 10px; ">
+                            <center>
+                                <a style="color: black; border: none; touch-action: none;">
+                                    <span class="stageCounter" id="stage4Counter"></span>
+                                    <a data-role="button" data-icon="arrow-open2" style="color:black;background-color:transparent; border:none;"></a>
+                                </a>
+                            </center>
+                        </td>
+                        <td id="step_5" onclick="app.controlPanel.controlPanelModel.openStage(5)" style="border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;line-height:60px;font-weight: bold;margin-top: 10px; ">
+                            <center>
+                                <a style="color: black; border: none;touch-action: none;">
+                                    <span class="stageCounter" id="stage5Counter"></span>
+                                    <a data-role="button" data-icon="arrow-open2" style="color:black;background-color:transparent; border:none;"></a>
+                                </a>
+                            </center>
+                        </td>
+                    </tr>
+                     <tr>
+                        <th style="background-color:#EAE9E4;border-bottom: 4px solid rgb(101,50,143);border-left: 1px solid #ddd;width: 50%;height: 50px; ">
+                            <span class="stageName" data-bind="text: strings.controlPanel.stage6name"></span>
+                        </th>
+                        <th style="background-color:#EAE9E4;border-bottom: 4px solid rgb(90,89,92);border-left: 1px solid #ddd;width: 50%;height: 50px; ">
+                            <span class="stageName" data-bind="text: strings.controlPanel.stage7name"></span>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td id="step_6" onclick="app.controlPanel.controlPanelModel.openStage(6)" style="border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;line-height:60px;font-weight: bold;margin-top: 10px; ">
+                            <center>
+                                <a style="color: black; border: none; touch-action: none;">
+                                    <span class="stageCounter" id="stage6Counter"></span>
+                                    <a data-role="button" data-icon="arrow-open2" style="color:black;background-color:transparent; border:none;"></a>
+                                </a>
+                            </center>
+                        </td>
+                        <td id="step_7" onclick="app.controlPanel.controlPanelModel.openStage(7)" style="border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;line-height:60px;font-weight: bold;margin-top: 10px; ">
+                            <center>
+                                <a style="color: black; border: none;  touch-action: none;">
+                                    <span class="stageCounter" id="stage7Counter"></span>
+                                    <a data-role="button" data-icon="arrow-open2" style="color:black;background-color:transparent; border:none;"></a>
+                                </a>
+                            </center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-   <style>
-       .controlPanel {
-           background-size:cover;
-           background-attachment: initial; 
-           height:55px; 
-           margin-top:1%;
-       } 
-       .stageCounter {
-           color:black; 
-           font-weight:bold;
-       }
-       .stageName {
-           color:black; 
-           font-weight:bold;
-       }
-       .stage {
-           margin-left:4%; 
-           padding-top:4%; 
-       }
-   </style>
+    <div id="defects" style="overflow-x:hidden; width: 100%; height: 100%;">
+        <ul id="impartmentList" data-role="listview" data-auto-bind="false" data-style="inset" data-template="impairmentDetailViewModelTemplate" data-bind="source: controlPanelModel.dataSourceDefects"
+            data-pull-to-refresh="false" data-endless-scroll="false">
+        </ul>
+        <!--, events: {click: controlPanelModel.itemClickDefects}-->
 
-    <!-- START_CUSTOM_CODE_controlPanelModel -->
+        <center>
+            <span id="noOpenImpairments" data-bind="text: strings.impairmentDetailView.noImpairments"><span>
+        </center>
+        <!-- id=#:data['id']# onclick="app.controlPanel.controlPanelModel.itemClickDefects(this.id)"-->
+        <script type="text/x-kendo-template" id="impairmentDetailViewModelTemplate">
+            # data = app.impairmentDetailView.impairmentDetailViewModel.fixHierarchicalData(data); #
+            <center id=#:data['id']# onclick="app.controlPanel.controlPanelModel.itemClickDefects(this.id)">
+                <div class="rectangle"  style="width:100%;">
+                    <table style="width:100%;margin-right:0%;" border="0">
+                        <tr>
+                            <td style="width:98%;color: black;font-family:Tahoma, Geneva, sans-serif;font-weight: 200;font-size:small;">
+                                #=kendo.toString(data['updatedAt'], "dd/MM/yyyy HH:mm")# <br />
+                                <span data-bind="text: strings.impairmentDetailView.elementName"></span><span style="font-weight: bold;font-size:small;">#: data['ElementName'] #</span><br/>
+                                <span data-bind="text: strings.impairmentDetailView.checkName"></span><span style="font-weight: bold;font-size:small;">#: data['name'] #</span>
+                            </td>
+                            <td style="width: 2%;">
+                                <a data-role="button" data-icon="arrow-open2" style="color:black;background-color:transparent; border:none;"></a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </center>
+        </script>
+    </div>
+
+    <div id="tasks" style="overflow-x:hidden; width: 100%; height: 100%;">
+        <!--, events: {click: controlPanelModel.itemClickTasks}-->
+        <ul id="tasksList" data-role="listview" data-auto-bind="false" data-style="inset" data-template="taskDetailViewModelTemplate" data-bind="source: controlPanelModel.dataSourceWork"
+        data-pull-to-refresh="false" data-endless-scroll="false"></ul>
+
+        <center>
+            <span id="noOpenTasks" data-bind="text: strings.taskDetailView.noTasks"><span>
+        </center>
+        <!-- id=#:data['id']# onclick="app.controlPanel.controlPanelModel.itemClickDefects(this.id)"-->
+        <script type="text/x-kendo-template" id="taskDetailViewModelTemplate">
+            # data = app.taskDetailView.taskDetailViewModel.fixHierarchicalData(data); #
+            <center  id=#:data['id']# onclick="app.controlPanel.controlPanelModel.itemClickTasks(this.id)">
+                <div class="rectangle" style="width:100%;">
+                    <table style="width:100%;margin-right:0%;" border="0">
+                        <tr>
+                            <td style="width:98%;color: black;font-family:Tahoma, Geneva, sans-serif;font-weight: 200;font-size:small;">
+                                <span data-bind="text: strings.taskDetailView.tpStartTitle"></span><span style="font-weight: bold;font-size:small;">#= kendo.toString(data['TPStart'], "dd/MM/yyyy HH:mm") #</span><br/>
+                                <span data-bind="text: strings.taskDetailView.tpEndTitle"></span><span style="font-weight: bold;font-size:small;">#= kendo.toString(data['TPEnd'], "dd/MM/yyyy HH:mm") #</span><br/>
+                                <span data-bind="text: strings.taskDetailView.taskTitle"></span><span style="font-weight: bold;font-size:small;">#: data['name'] #</span><br/>
+                            </td>
+                            <td style="width: 2%;">
+                                <a data-role="button" data-icon="arrow-open2" style="color:black;background-color:transparent; border:none;"></a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </center>
+        </script>
+    </div>
+
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
 
     <!-- END_CUSTOM_CODE_controlPanelModel -->
+    <script>
+        function openTaskTab() {
+            app.controlPanel.controlPanelModel.page_scroller.reset();
+            $("#taskTab").css('border-bottom', '3px solid white');
+            $("#qcTab").css('border-bottom', 'none');
+            $("#defectsTab").css('border-bottom', 'none');
+            $("#tasks").show();
+            $("#Qc").hide();
+            $("#mapButton").hide();
+            $("#defects").hide();
+            $("#noOpenImpairments").hide();
+            $("#impartmentList").hide();
+
+            app.controlPanel.controlPanelModel.taskTabFlag =true;
+             app.controlPanel.controlPanelModel.qcTabFlag =false;
+             app.controlPanel.controlPanelModel.ncrTabFlag =false;
+            app.controlPanel.controlPanelModel.openTaskTab1();
+        }
+        function openQcTab() {
+            app.controlPanel.controlPanelModel.page_scroller.reset();
+            $("#qcTab").css('border-bottom', '3px solid white');
+            $("#taskTab").css('border-bottom', 'none');
+            $("#defectsTab").css('border-bottom', 'none');
+            $("#tasks").hide();
+            $("#Qc").show();
+            $("#mapButton").show();
+            $("#defects").hide();
+            $("#noOpenImpairments").hide();
+            $("#impartmentList").hide();
+
+            app.controlPanel.controlPanelModel.qcTabFlag =true;
+            app.controlPanel.controlPanelModel.ncrTabFlag =false;
+            app.controlPanel.controlPanelModel.taskTabFlag =false;
+            app.controlPanel.controlPanelModel.openQcTab1();
+        }
+        function openDefectsTab() {
+            app.controlPanel.controlPanelModel.page_scroller.reset();
+            $("#defectsTab").css('border-bottom', '3px solid white');
+            $("#taskTab").css('border-bottom', 'none');
+            $("#qcTab").css('border-bottom', 'none');
+            $("#tasks").hide();
+            $("#Qc").hide();
+            $("#mapButton").hide();
+            $("#defects").show();
+            $("#noOpenImpairments").hide();
+            $("#impartmentList").show();
+
+            app.controlPanel.controlPanelModel.ncrTabFlag =true;
+            app.controlPanel.controlPanelModel.qcTabFlag =false;
+            app.controlPanel.controlPanelModel.taskTabFlag =false;
+            app.controlPanel.controlPanelModel.openDefectsTab1();
+        }
+    </script>
 </div>

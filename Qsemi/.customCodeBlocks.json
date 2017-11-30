@@ -284,6 +284,16 @@
             "file": ".html",
             "tag": "editableListForm84",
             "block": "<!-- START_CUSTOM_CODE_editableListForm84 -->\n        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n        <!-- END_CUSTOM_CODE_editableListForm84 -->"
+        },
+        {
+            "file": ".html",
+            "tag": "elementSearchViewModel",
+            "block": "<!-- START_CUSTOM_CODE_elementSearchViewModel -->\n    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->\n\n    <!-- END_CUSTOM_CODE_elementSearchViewModel -->"
+        },
+        {
+            "file": ".js",
+            "tag": "elementSearchViewModel",
+            "block": "// START_CUSTOM_CODE_elementSearchViewModel\n// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes\n\n// you can handle the beforeFill / afterFill events here. For example:\n/*\napp.elementSearchView.elementSearchViewModel.get('_jsdoOptions').events = {\n    'beforeFill' : [ {\n        scope : app.elementSearchView.elementSearchViewModel,\n        fn : function (jsdo, success, request) {\n            // beforeFill event handler statements ...\n        }\n    } ]\n};\n*/\n// END_CUSTOM_CODE_elementSearchViewModel"
         }
     ]
 }

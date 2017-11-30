@@ -41,6 +41,11 @@
 
     if (window.cordova) {
         document.addEventListener('deviceready', function() {
+            //  document.addEventListener('backbutton', function () {
+            //     alert("elementLocationMapsModel.backFlag")
+            //     alert(app.elementLocationMaps.elementLocationMapsModel.backFlag)
+            // });
+
             if (navigator && navigator.splashscreen) {
                 navigator.splashscreen.hide();
             }

@@ -12,10 +12,49 @@ app.localization.registerView('authenticationView');
 // END_CUSTOM_CODE_authenticationView
 (function(parent) {
     var provider = app.data.qcsemidataProvider,
+        currentUser, currentWorker,
+        jsdoOptions = {
+             name: 'OurUserLocationSEMI',
+             //name: 'OurUserLocation',
+             autoFill: false
+         },
+        dataSourceOptions = {
+             type: 'jsdo',
+             transport: {},
+             requestEnd: function(e) {
+                var response = e.response;
+                var type = e.type;
+                //console.log(type); // displays "read"
+                //console.log(response);
+                 if(type == "read")
+                {
+                    currentUser = response.data[0];
+                    authenticationViewModel.current_User = response.data[0];
+                   console.log("currentUser")
+                   console.log(currentUser)
+                }
+            },
+             schema: {
+                 model: {
+                     fields: {
+                         'name': {
+                             field: 'name',
+                             defaultValue: ''
+                         },
+                         'id': {
+                             field: 'id',
+                             defaultValue: ''
+                         },
+                     }
+                 }
+             }, serverFiltering: true,
+         },
+        
+        dataSource = new kendo.data.DataSource({
+            pageSize: 50
+        }),
 
-        //signinRedirect = 'elementDetailView',
         signinRedirect = 'projectDetailView',
-        //signinRedirect = 'controlPanel',
         rememberKey = 'qcsemidataProvider_authData_authenticationViewModel',
         init = function(error, result) {
             $('.status').text('');
@@ -67,6 +106,23 @@ app.localization.registerView('authenticationView');
                 model = parent.authenticationViewModel || {},
                 logout = model.logout;
 
+             provider.loadCatalogs().then(function _catalogsLoaded() {
+                var jsdoOptions = authenticationViewModel.get('_jsdoOptions'),
+                    jsdo = new progress.data.JSDO(jsdoOptions),
+                    dataSourceOptions = authenticationViewModel.get('_dataSourceOptions'),
+                    dataSource;
+
+                dataSourceOptions.transport.jsdo = jsdo;
+
+                dataSource = new kendo.data.DataSource(dataSourceOptions);
+
+                dataSource.filter({
+                    field: "LoginName",
+                    operator: "==",
+                    value: localStorage.getItem("name")
+                });
+             });
+
             if (logout) {
                 model.set('logout', null);
             }
@@ -99,21 +155,25 @@ app.localization.registerView('authenticationView');
             email: '',
             password: '',
             errorMessage: '',
+            current_User: '',
+            current_Worker: '',
+            _jsdoOptions: jsdoOptions,
+            _dataSourceOptions: dataSourceOptions,
             validateData: function(data) {
                 var model = authenticationViewModel;
 
                 if (!data.email && !data.password) {
-                    model.set('errorMessage', 'Missing credentials.');
+                    model.set('errorMessage', app.authenticationView.get('strings').authenticationView.MissingCredentials);//'Missing credentials.');
                     return false;
                 }
 
                 if (!data.email) {
-                    model.set('errorMessage', 'Missing username or email.');
+                    model.set('errorMessage', app.authenticationView.get('strings').authenticationView.MissingUsernameOrEmail);//'Missing username or email.');
                     return false;
                 }
 
                 if (!data.password) {
-                    model.set('errorMessage', 'Missing password.');
+                    model.set('errorMessage', app.authenticationView.get('strings').authenticationView.MissingPassword);// 'Missing password.');
                     return false;
                 }
 
@@ -123,6 +183,8 @@ app.localization.registerView('authenticationView');
                 var model = authenticationViewModel,
                     email = model.email.toLowerCase(),
                     password = model.password;
+                
+                localStorage.setItem("name", email);
 
                 if (!model.validateData(model)) {
                     return false;

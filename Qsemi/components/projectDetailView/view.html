@@ -1,34 +1,44 @@
 <div data-role="view" data-title="View" data-layout="main" data-model="app.projectDetailView" data-show="app.projectDetailView.onShow" data-after-show="app.projectDetailView.afterShow" id="projectDetailViewScreen" class="screen">
     <header data-role="header">
         <div data-role="navbar" class="header-text" style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3)">
-            <a data-role="button" data-rel="popover" data-align="left" data-icon="hbar-button" data-position="end" style="background-color:#4fa81a;color:#4fa81a; border:none;"></a>
-
-            <center><span data-align="center" data-bind="text: strings.projectDetailView.title" style="font-family: Tahoma, Geneva, sans-serif;"></span></center>
-
-            <a data-role="button" data-rel="popover" href="#popover-hbar1" data-align="right"  data-position="end" data-icon="hbar-button" style="background-color:#4fa81a; border:none;"></a>
+            <table style="width:100%;font-family: Tahoma, Geneva, sans-serif;">
+                <tr>
+                    <td style="width:15%;">
+                        <!--<a data-role="button" class="headerButton" data-rel="popover" data-align="left" data-icon="hbar-button" data-position="end" style="background-color:#4fa81a;color:#4fa81a; border:none;"></a>-->
+                        <a class="headerButton" data-role="button"  data-rel="drawer" data-align="right" data-icon="hbar-button" data-position="end" style="color:#4fa81a;background-color:#4fa81a; border:none;"></a>
+                        <a class="headerButton" data-role="button"  data-rel="drawer" data-align="right" data-icon="hbar-button" data-position="end" style="color:#4fa81a;background-color:#4fa81a; border:none;"></a>
+                    </td>
+                    <td style="width:70%;">
+                        <center><span data-align="center" data-bind="text: strings.projectDetailView.title" style="font-family: Tahoma, Geneva, sans-serif;"></span></center>
+                    </td>
+                    <td style="width:15%;">
+                        <a class="headerButton" data-role="button"  data-rel="drawer" data-align="left" data-icon="hbar-button" data-position="end" href="#appDrawerProjects" style="background-color:#4fa81a; border:none;"></a>
+                        <a class="headerButton" data-role="button"  data-rel="drawer" data-align="left" data-icon="hbar-button" data-position="end" style="background-color:#4fa81a;color:#4fa81a; border:none;"></a>
+                    </td>
+                </tr>
+            </table>
+            <!--<a data-role="button" data-rel="popover" href="#popover-hbar1" data-align="right"  data-position="end" data-icon="hbar-button" style="background-color:#4fa81a; border:none;"></a>-->
         </div>
     </header>
 
-    <div data-role="popover" id="popover-hbar1" data-popup='{"height":"30", "width":"150"}' style="border:none">
+    <!--<div data-role="popover" id="popover-hbar1" data-popup='{"height":"30", "width":"150"}' style="border:none">
         <div data-role="view" data-model="app.projectDetailView">
             <ul data-role="listview" style="list-style:none; background-color:#F4F4F4;">
                 <li style="padding: 1.5px;">
                     <a style="background-color:transparent;" class="version" >
                         <span data-bind="text: strings.menuOptions.version" style="background-color:transparent;font-size:medium;font-family: Tahoma, Geneva, sans-serif;">  
-                            <!--<span>Version</span> -->
                         </span> 
                     </a>
                 </li>
                 <li style="padding: 1.5px;">
                     <a style="background-color:transparent;" data-role="button" onclick="app.projectDetailView.projectDetailViewModel.logoutClick()" data-align="left" data-position="end" > 
                         <span data-bind="text: strings.menuOptions.logout" style="background-color:transparent;font-size:mediun;font-family: Tahoma, Geneva, sans-serif;">  
-                            <!--<span>Log Out</span> -->
                         </span> 
                     </a>
                 </li>
             </ul>
         </div>
-    </div>
+    </div>-->
 
     <!-- START_CUSTOM_CODE_projectDetailView -->
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->

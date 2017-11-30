@@ -224,20 +224,20 @@ app.localization.registerView('castingForm');
         /// start add model functions
         /// end add model functions
         onInit: function(e) {
-             var $sigdiv = $("#signatureCast")
-            $sigdiv.jSignature({
-                'background-color': 'transparent',
-                'decor-color': 'transparent',
-                'color': 'black',
-                 //'height':'8em'
-                'width': '300',
-                'height': '110'
-                }) // inits the jSignature widget. 
+            //  var $sigdiv = $("#signatureCast")
+            // $sigdiv.jSignature({
+            //     'background-color': 'transparent',
+            //     'decor-color': 'transparent',
+            //     'color': 'black',
+            //      //'height':'8em'
+            //     'width': '300',
+            //     'height': '110'
+            //     }) // inits the jSignature widget. 
         },
         onShow: function(e) {
-            $(".km-scroll-container").css("overflow", "hidden");
-            var $sigdiv = $("#signatureCast");
-            // after some doodling...
+            // $(".km-scroll-container").css("overflow", "hidden");
+            // var $sigdiv = $("#signatureCast");
+            // // after some doodling...
             // $sigdiv.jSignature("reset") // clears the canvas and rerenders the decor on it.
             this.set('addFormData', {
                 factoryName: '',
@@ -310,6 +310,10 @@ app.localization.registerView('castingForm');
         },
         onShow: function(e) {
             e.view.scroller.reset();
+
+            document.getElementById("element_name12").innerHTML = app.elementDetailView.elementDetailViewModel.currentItem.name;
+            document.getElementById("step_name12").innerHTML = (app.geotechnicalForm.get('strings').controlPanel.stage1name).toLowerCase();
+            document.getElementById("form_name12").innerHTML = (app.geotechnicalForm.get('strings').stage0CoreForms.casting).toLowerCase();
 
               $(".km-scroll-container").css("overflow", "hidden");
             var $sigdiv = $("#signatureCast");
@@ -441,8 +445,13 @@ app.localization.registerView('castingForm');
                 itemData = this.get('itemData'),
                 dataSource = castingFormModel.get('dataSource');
             
+            if($("#castingSignature").val() == '' || editFormData.FactoryName == '' || editFormData.MIXTURENUMBER == '' || editFormData.DeliveryNote == '' ||
+            editFormData.BATCH  == '' || editFormData.MeasuredDEPTH == '' || editFormData.DESIGNEDDEPTH == '' || editFormData.ConcreteType == '') {
+                  document.getElementById("warningPopUpCastText").innerHTML = app.castingForm.get('strings').warningMessage.detailsMissing;//"Signature is missing";
+                $("#warningPopUpCast").kendoMobileModalView("open");
+                return;
+            }
             if($("#signatureCast").jSignature("getData") == "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") {
-                // alert("need signature");
                  document.getElementById("warningPopUpCastText").innerHTML = app.castingForm.get('strings').warningMessage.needSignature;//"Signature is missing";
                 $("#warningPopUpCast").kendoMobileModalView("open");
                 return;
@@ -470,7 +479,6 @@ app.localization.registerView('castingForm');
                     dataSource.one('sync', function(e) {
                         /// start edit form data save success
                         /// end edit form data save success
-                        // alert("The check has been successfully updated");
                         	window.plugins.toast.showWithOptions(
                             {
                                 message: app.formDetailView.get('strings').toastsMessages.formSuccess,
@@ -552,7 +560,6 @@ app.localization.registerView('castingForm');
                                 true);
                         }
                         app.clearFormDomData('edit-item-view');
-                        // alert("The check has been successfully saved");
                         window.plugins.toast.showWithOptions(
                         {
                             message: app.formDetailView.get('strings').toastsMessages.checkSuccess,
@@ -563,7 +570,7 @@ app.localization.registerView('castingForm');
                         app.mobileApp.navigate('#:back');
                     }
                     else {
-                        alert("error")
+                        // alert("error")
                     }
                 };
                 jsdo.subscribe('afterCreate', afterCreateFn);

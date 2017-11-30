@@ -4,8 +4,8 @@
              <table style="width:100%;">
                 <tr>
                     <td style="width:10%;">
-                        <a data-icon="home" data-role="button" onclick="goHome()" data-align="left" style="font-family: Tahoma, Geneva, sans-serif;background-color:transparent; border:none;"></a>
                         <a data-icon="backIcon" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
+                        <a data-icon="home" data-role="button" data-align="left" style="font-family: Tahoma, Geneva, sans-serif;background-color:#4fa81a;color:#4fa81a; border:none;"></a>
                     </td>
                     <td style="width:80%;">
                          <center><span id="element_step"></span></center>
@@ -20,11 +20,18 @@
             <a data-role="button" data-rel="popover" data-align="right" data-icon="hbar-button" data-position="end" style="font-family: Tahoma, Geneva, sans-serif;background-color:#4fa81a;color:#4fa81a; border:none;"></a>-->
         </div>
     </header>
-    <br/>
-    <br/>
+    <!--<br/>-->
+    <!--<div style="margin-top:2%;margin-left:2%;">
+        <span style="color:gray;" data-bind="text: currentItem['name'], events: {click: goToElementPage}"></span><span style="color:gray;"> >> </span><span style="font-weight:bold;" id="step_name">step name</span>
+    </div>-->
+    <div style="margin-top:2%;margin-left:2%;">
+        <span style="color:gray;" data-bind="text: currentItem['name']"></span><span style="color:gray;"> >> </span><span style="font-weight:bold;" id="step_name">step name</span>
+    </div>
+    <!--<br/>-->
     <div class="details-content screen__content screen__content--details" style="overflow-x:hidden; background-color: #e9eaeb; height: 100%;">
-        <br/>
-         <div id="surveyor" style="border-bottom: 1px solid #e9eaeb; background-color: white; width: 100%;font-family: Tahoma, Geneva, sans-serif;">
+        <!--<br/>-->
+         <div id="surveyor" style="margin-top:2%;border-bottom: 1px solid #e9eaeb; background-color: white; width: 100%;font-family: Tahoma, Geneva, sans-serif;">
+             <!--<br/>-->
              <table border="0" style="width:100%">
                 <tr style="width:100%">
                     <td style="width:80%">

@@ -12,10 +12,18 @@
         </center>
     </footer>
     <!-- START_CUSTOM_CODE_formDetailViewModel -->
+    <!--<div style="margin-top:2%;margin-left:2%;">
+        <span style="color:gray;" id="element_name2" data-bind="events: {click: goToElementPage3}"></span><span style="color:gray;"> >> </span><span style="color:gray;" id="step_name2" data-bind="events: {click: goToStepPage3}"></span>
+        <span style="color:gray;"> >> </span><span style="color:gray;" id="form_name2"></span><span style="color:gray;"> >> </span><span style="font-weight:bold;" id="check_name"></span>
+    </div>-->
+    <div style="margin-top:2%;margin-left:2%;">
+        <span style="color:gray;" id="element_name2"></span><span style="color:gray;"> >> </span><span style="color:gray;" id="step_name2"></span>
+        <span style="color:gray;"> >> </span><span style="color:gray;" id="form_name2"></span><span style="color:gray;"> >> </span><span style="font-weight:bold;" id="check_name"></span>
+    </div>
     <!-- END_CUSTOM_CODE_formDetailViewModel -->
     <div id="editableListForm163" class="form-view screen__content screen__content--form" style="overflow-x:hidden;  background-color: #e9eaeb; height:100%;">
-        <br/>
-        <br/>
+        <!--<br/>
+        <br/>-->
         <ul data-role="listview" data-style="inset" style="width:100%; margin-left:0;font-family: Tahoma, Geneva, sans-serif;">
                 <li style="border:none;border-bottom: 1px solid #e9eaeb;">
                     <span data-bind="text: itemData['name']" style="margin-top: 20%; font-size: large; font-weight:bold;"></span>
@@ -43,9 +51,26 @@
                     </table>
                 </li>
                 
-                <li style="border:none;border-bottom: 1px dashed #e9eaeb;border-top: 1px dashed #e9eaeb;">
+                <li style="border:none;border-bottom: 1px dashed #e9eaeb;">
                     <span data-bind="text: strings.stagesFormComments.title" style="text-align: left;"></span>
                     <textarea id="checkComments" data-bind="value: addFormData.comments" rows="7" style="resize: none; width: 100%; border:1px solid black;"></textarea>
+                </li>
+                <li style="border:none;border-bottom: 1px dashed #e9eaeb;">
+                    <span data-bind="text: strings.stagesFormName.title" style="text-align: left;"></span>
+                    <span id="CreatedBy" data-bind="text: addFormData.CreatedByText" style="margin-top:2%;margin-left:2%;margin-right:17%;padding: 0.5em;width:95%;font-size:small;font-family: Tahoma, Geneva, sans-serif;"></span>
+                </li>
+                <li id="checkNCR" style="border:none;width:100%;border-bottom: 1px dashed #e9eaeb;">
+                    <table border="0" style="width:100%">
+                        <tr style="width:100%">
+                            <td style="width:94%">
+                                <a data-bind="text: strings.stagesFormMCR.title"></a>
+                            </td>
+                            <td style="width:20%">
+                                <!--<a id="checkNCR" data-icon="signatureNew" data-role="button" data-align="left" data-bind="events:{click: openSignaturePopUp}" style="color:black;background-color:transparent; border:none; margin-left: 60%; margin-top:1%;"></a>-->
+                                <img id="checkNcrImg" src="images/checkNcrIcon.png" data-bind="events:{click: openNCR}" style="margin-left:5px;height:22px;width:8px;"/>
+                            </td>
+                        </tr>
+                    </table>
                 </li>
                 <li style="border:none;width:100%;">
                     <table border="0" style="width:100%">
@@ -69,7 +94,7 @@
                 </div>
                 <div data-role="content" dir="ltr" style="background-color: transparent; margin-top: 3%;">
                     <center>
-                        <div style="border:1px solid rgba(128, 128, 128, 0.5); background-color: white; width:90%;">  
+                        <div style="border:1px solid rgba(128, 128, 128, 0.5); background-color: white; width:90%">  
                             <label class="km-label-above field field--textarea">  
                                 <div class='signature-wrapper'>
                                     <div id='signature'></div>
@@ -82,7 +107,7 @@
                 <footer data-role="footer" style="background-color: transparent;">
                     <div style="width:100%; margin-bottom:3%;">
                         <center>
-                            <a data-role="button" style="margin-bottom:0%;border-radius:0;" data-bind="events:{click: closeSignaturePopUp}"><span data-bind="text: strings.stagesFormImg.close"></span></a>
+                            <a data-role="button" style="margin-bottom:0%;border-radius:0;" data-bind="events:{click: closeSignaturePopUp}"><span data-bind="text: strings.buttonsText.save"></span></a>
                             <a id="Reset" data-role="button" style="margin-bottom:0%;border-radius:0;"><span data-bind="text: strings.stagesFormSignature.clear"></span></a>
                         </center>
                     </div>
@@ -180,7 +205,7 @@
                 <footer data-role="footer" style="background-color: transparent;">
                     <div style="width:100%; margin-bottom:3%;">
                         <center>
-                            <a data-role="button" style="margin-bottom:0%;border-radius:0;" data-bind="events:{click: closeSignatureNCRPopUp}"><span data-bind="text: strings.stagesFormImg.close"></span></a>
+                            <a data-role="button" style="margin-bottom:0%;border-radius:0;" data-bind="events:{click: closeSignatureNCRPopUp}"><span data-bind="text: strings.buttonsText.save"></span></a>
                             <a id="ResetNCR" data-role="button" style="margin-bottom:0%;border-radius:0;"><span data-bind="text: strings.stagesFormSignature.clear"></span></a>
                         </center>
                     </div>

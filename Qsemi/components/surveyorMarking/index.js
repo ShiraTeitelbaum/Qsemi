@@ -222,9 +222,7 @@ app.localization.registerView('surveyorMarking');
                 // after some doodling...
                 $sigdiv.jSignature("reset") // clears the canvas and rerenders the decor on it.
             }
-            
-            //console.log("on show")
-            //alert("on show")
+           
             app.elementLocationMaps.elementLocationMapsModel.counter = 0;
             
             var that = this,
@@ -388,7 +386,6 @@ app.localization.registerView('surveyorMarking');
                         afterCreateFn = function(jsdo2, record, success, request) {
                             jsdo2.unsubscribeAll('afterCreate', afterCreateFn);
                             if(success === true) {
-                                //alert(11111)
                                 var jsdoOptions3 = app.elementDetailView.elementDetailViewModel.get('_jsdoOptions'),
                                     jsdo3 = new progress.data.JSDO(jsdoOptions3);
                                 dataSourceOptions.transport.jsdo = jsdo3;
@@ -415,7 +412,6 @@ app.localization.registerView('surveyorMarking');
                                     afterUpdateFn = function(jsdo3, record, success, request) {
                                         jsdo3.unsubscribe('afterUpdate', afterUpdateFn);
                                         if(success === true) {
-                                            //alert(2222)
                                         }
                                     };
                                     jsdo3.subscribe('afterUpdate', afterUpdateFn);

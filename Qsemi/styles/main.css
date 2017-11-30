@@ -7,6 +7,7 @@
 #signatureNCR img{ display: none !important; } 
 #signatureOpenNCR img{ display: none !important; } 
 #signatureCloseNCR img{ display: none !important; } 
+#signatureTask img{ display: none !important; } 
 
 #kendoUiMobileApp .block {
     display: block;
@@ -756,6 +757,13 @@ Fields
 
 
 /* START_CUSTOM_CODE_kendoUiMobileApp */
+
+#kendoUiMobileApp .km-projectNew:after,
+#kendoUiMobileApp .km-projectNew:before {
+    content: '\e0ab';
+    zoom: 120%;
+}
+
 #kendoUiMobileApp .km-signatureNew:after,
 #kendoUiMobileApp .km-signatureNew:before {
     content: '\e30a';
@@ -787,9 +795,21 @@ Fields
     content: "\e010";
 }
 
+#kendoUiMobileApp .km-arrow-open2:after,
+#kendoUiMobileApp .km-arrow-open2:before {
+    content: "\e010";
+    zoom: 90%;
+}
+
 #kendoUiMobileApp .km-camera:after,
 #kendoUiMobileApp .km-camera:before {
     content: "\e0d0";
+    zoom:120%;
+}
+
+#kendoUiMobileApp .km-search1:after,
+#kendoUiMobileApp .km-search1:before {
+    content: "\e07f";
     zoom:120%;
 }
 

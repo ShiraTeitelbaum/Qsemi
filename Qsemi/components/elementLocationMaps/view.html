@@ -35,17 +35,39 @@ id="elementLocationMapsScreen" class="screen">
     <!-- END_CUSTOM_CODE_elementLocationMaps -->
     <div id="elementLocationMapsModelMap" class="map"></div>
 
-    <div data-role="modalview" id="needGPSElementPopUp" style="font-family: Tahoma, Geneva, sans-serif;left:1px; width:85%; height:32%; background-color:#F4F4F4; ">
+    <div data-role="modalview" id="warningPopUpL" style="left:1px; width:95%; height:25%; background-color:#F4F4F4;font-family: Tahoma, Geneva, sans-serif;">
+        <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+            <center><span style="font-size:x-large; font-weight:bold;">!</span></center>
+        </div>
+        <div data-role="content" dir="ltr" style="background-color: transparent; margin-top: 3%;">
+            <center>
+                <br/>
+                <span id="warningPopUpTextL" style="font-size:large;"></span>
+                <br/>
+            </center>
+        </div>
+        <footer data-role="footer" style="background-color: transparent;">
+            <div style="width:100%; margin-bottom:3%;">
+                <center>
+                    <a data-role="button" onclick="app.elementLocationMaps.elementLocationMapsModel.saveWarningPopUp()" style="color:white;margin-bottom:0%;border-radius:0;"> <!--  data-bind="events: {click: saveNCR}" -->
+                        <span data-bind="text: strings.buttonsText.ok"></span> <!-- Ok -->
+                    </a>
+                </center>
+            </div>
+        </footer>
+    </div>
+
+    <div data-role="modalview" id="needGPSElementPopUp" style="font-family: Tahoma, Geneva, sans-serif;left:1px; width:85%; height:38%; background-color:#F4F4F4; ">
          <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:5%;">
             <div style="width:100%;">
                 <span data-bind="text: strings.warningGPSMessage.title" style="color:black; font-weight:bold; font-size:large; margin-left:6%;"></span> <!-- Please Turn On GPS -->
             </div>
         </div>
         <br/>
-        <div data-role="content" style="background-color: transparent; margin-top: 2%;">
-            <span data-bind="text: strings.warningGPSMessage.text1" style="color:black; font-size:medium; margin-left:6%;"></span><br/><br/> <!-- Your Location Services are disabled. -->
-            <span data-bind="text: strings.warningGPSMessage.text2" style="color:black; font-size:medium; margin-left:6%;"></span><br/><br/> <!-- The GPS is required to view the map. -->
-            <span data-bind="text: strings.warningGPSMessage.text3" style="color:black; font-size:medium; margin-left:6%;"></span> <!-- Please enable GPS, with Wifi or 3G service -->
+        <div data-role="content" style="background-color: transparent; margin-top: 2%;margin-left:6%;">
+            <span data-bind="text: strings.warningGPSMessage.text1" style="color:black; font-size:medium; "></span><br/><br/> <!-- Your Location Services are disabled. -->
+            <span data-bind="text: strings.warningGPSMessage.text2" style="color:black; font-size:medium; "></span><br/><br/> <!-- The GPS is required to view the map. -->
+            <span data-bind="text: strings.warningGPSMessage.text3" style="color:black; font-size:medium; "></span> <!-- Please enable GPS, with Wifi or 3G service -->
         </div>
         <div data-role="footer" style="margin-bottom:3%; margin-top:3%; background-color:transparent">
             <div style="width:100%; margin-bottom:2%;">

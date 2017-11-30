@@ -394,6 +394,7 @@ app.localization.registerView('formDetailView');
             _jsdoOptionsNCR: jsdoOptionsNCR,
             formName: '',
             formId: '',
+            stageNum: '',
             pageScroller: '',
             elementDetails: {},
             not_ok_flag: false,
@@ -456,7 +457,8 @@ app.localization.registerView('formDetailView');
             },
             itemClick: function(e) {
                 var dataItem = e.dataItem || formDetailViewModel.originalItem;
-               
+            //    formDetailViewModel.setCurrentItemByUid(dataItem.uid);
+
                 app.mobileApp.navigate('#components/formDetailView/add.html?uid=' + dataItem.uid);
 
             },
@@ -475,7 +477,6 @@ app.localization.registerView('formDetailView');
                 formDetailViewModel.setCurrentItemByUid(uid);
 
                 /// start detail form show
-                alerT(111)
                 /// end detail form show
             },
             setCurrentItemByUid: function(uid) {
@@ -502,6 +503,12 @@ app.localization.registerView('formDetailView');
                     return this.get('currentItem.' + linkChunks[1]);
                 }
                 return linkChunks[0] + this.get('currentItem.' + linkChunks[1]);
+            },
+            goToElementPage2: function(e) {
+                app.mobileApp.navigate('#components/elementDetailView/details.html?uid=' + app.elementDetailView.elementDetailViewModel.currentItem.uid+'&breadFlag=true');
+            },
+            goToStepPage2: function(e) {
+                app.mobileApp.navigate('#components/elementDetailView/view.html?stageId=' + app.controlPanel.controlPanelModel.step_id);
             },
             // loadImage: function(e) {
             //     var jsdoOptionsGallery = formDetailViewModel.get('_jsdoOptionsGallery'),
@@ -651,6 +658,7 @@ app.localization.registerView('formDetailView');
         /// end add model properties
         /// start add model functions
         /// end add model functions
+        currentCheck,
          onInitCoreData: function(e) {
                var $sigdiv = $("#signatureCore")
             $sigdiv.jSignature({
@@ -701,6 +709,14 @@ app.localization.registerView('formDetailView');
                 dataSource = formDetailViewModel.get('dataSourceCore'),
                 itemData = dataSource.getByUid(itemUid),
                 fixedData = formDetailViewModel.fixHierarchicalData(itemData);
+
+            document.getElementById("form_name4").innerHTML = (formDetailViewModel.formName).toLowerCase();
+            document.getElementById("element_name4").innerHTML = app.elementDetailView.elementDetailViewModel.currentItem.name;
+            document.getElementById("step_name4").innerHTML = (app.elementDetailView.elementDetailViewModel.stepsNames[formDetailViewModel.stageNum].name).toLowerCase();
+            if(itemData.name.length > 30) {
+                document.getElementById("check_name4").innerHTML = (itemData.name).substring(0, 30) + "...";
+            }
+            else document.getElementById("check_name4").innerHTML = (itemData.name).substring(0, 30);
                 
                 var dataSource = formDetailViewModel.get('dataSourceCoreChecks');
                 dataSource.filter({
@@ -772,6 +788,7 @@ app.localization.registerView('formDetailView');
             e.view.scroller.reset();
             formDetailViewModel.not_ok_flag = false;
             this.pageScroller = e.view.scroller;
+            $("#checkNCR").hide();
 
             if(app.elementDetailView.elementDetailViewModel.surveyorFlag == true) {
                 $("#checkStatus").hide();
@@ -784,12 +801,22 @@ app.localization.registerView('formDetailView');
             // $sigdiv.jSignature("reset") // clears the canvas and rerenders the decor on it.
             //    console.log("$('#signature').jSignature('getData')")
             // console.log($("#signature").jSignature("getData"))
+            var $sigdivNCR = $("#signatureNCR")
+            // after some doodling...
+            $sigdivNCR.jSignature("reset") // clears the canvas and rerenders the decor on it.
 
              var that = this,
                 itemUid = e.view.params.uid,
                 dataSource = formDetailViewModel.get('dataSource'),
                 itemData = dataSource.getByUid(itemUid),
                 fixedData = formDetailViewModel.fixHierarchicalData(itemData);
+                console.log("itemData")
+                console.log(itemData)
+
+            document.getElementById("form_name2").innerHTML = (formDetailViewModel.formName).toLowerCase();
+            document.getElementById("element_name2").innerHTML = app.elementDetailView.elementDetailViewModel.currentItem.name;
+            document.getElementById("step_name2").innerHTML = (app.elementDetailView.elementDetailViewModel.stepsNames[formDetailViewModel.stageNum].name).toLowerCase();
+            document.getElementById("check_name").innerHTML = (itemData.name).substring(0, 30) + "...";
 
             if(itemData.Description == "null") {
                 $("#description").hide();
@@ -811,6 +838,8 @@ app.localization.registerView('formDetailView');
                 //dataSource.sort({ field: "Index", dir: "asc" });
                 dataSource.fetch(function() {
                     var view = dataSource.data();
+                    console.log("view##########")
+                    console.log(view)
                     
                     if(view[0] != undefined) {
                         document.getElementById("status_ok").checked = false;
@@ -851,10 +880,18 @@ app.localization.registerView('formDetailView');
                          if($("#signature").jSignature("getData") == "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") {
                             $sigdiv.jSignature("importData", view[0].signature);
                         }
+                      
+                        if(view[0].R371573875 != null && view[0].R371573875 != "null") {
+                            console.log("view[0].R371573875")
+                            console.log(view[0].R371573875)
+                            $("#checkNCR").show();
+                        }
 
+                        currentCheck = view[0];
                         that.set('itemData', itemData);
                         that.set('addFormData', {
                             comments: commentsC,
+                            CreatedByText: view[0].CreatedByText
                             /// start add form data init
                             /// end add form data init
                         });
@@ -863,8 +900,8 @@ app.localization.registerView('formDetailView');
                          if($("#signature").jSignature("getData") != "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") {
                             document.getElementById("checkSignature").style.color = "red";
                         }
-                        that.set('itemData', itemData);
 
+                        that.set('itemData', itemData);
                         that.set('addFormData', {
                             comments: '',
                             /// start add form data init
@@ -891,7 +928,52 @@ app.localization.registerView('formDetailView');
             
             /// end add model cancel
         }, 
-        openMap: function () {
+        checkNcrStatus: function() {
+            var jsdoOptionsNCR = formDetailViewModel.get('_jsdoOptionsNCR'),
+                jsdoNCR = new progress.data.JSDO(jsdoOptionsNCR),
+                dataSourceOptionsNCR = formDetailViewModel.get('_dataSourceOptionsNCR');
+            dataSourceOptionsNCR.transport.jsdo = jsdoNCR;
+            var dataSourceNCR = new kendo.data.DataSource(dataSourceOptionsNCR);
+
+            if(currentCheck != undefined) {
+                // dataSourceNCR.filter({field: "R371573875", operator: '==', value: this.get('itemData').id});
+                dataSourceNCR.filter({ field: "R371573875", operator: "==", value: currentCheck.id });
+                dataSourceNCR.fetch(function() {
+                    var ncr = dataSourceNCR.data();
+                    if(ncr[0].Fixed == 0) {
+                        return false;
+                    }
+                    //Fixed
+                });
+            }
+        },
+        openNCR: function(e) {
+            document.getElementById("addCapturePhotoNCR").style.color = "black";
+            var jsdoOptionsNCR = formDetailViewModel.get('_jsdoOptionsNCR'),
+                jsdoNCR = new progress.data.JSDO(jsdoOptionsNCR),
+                dataSourceOptionsNCR = formDetailViewModel.get('_dataSourceOptionsNCR');
+            dataSourceOptionsNCR.transport.jsdo = jsdoNCR;
+            var dataSourceNCR = new kendo.data.DataSource(dataSourceOptionsNCR);
+
+            // dataSourceNCR.filter({field: "R371573875", operator: '==', value: this.get('itemData').id});
+            dataSourceNCR.filter({ field: "R371573875", operator: "==", value: currentCheck.id });
+            dataSourceNCR.fetch(function() {
+                var ncr = dataSourceNCR.data();
+               
+                app.mobileApp.navigate('#components/impairmentDetailView/edit.html?id='+ncr[0].id);
+            });
+
+            // app.mobileApp.navigate('#components/impairmentDetailView/edit.html?checkDetailsFlag=true&checkId='+formDetailViewModel.currentItem.id);
+        },
+        goToElementPage3: function(e) {
+            app.elementDetailView.elementDetailViewModel.change_Percent = true;
+            app.mobileApp.navigate('#components/elementDetailView/details.html?uid=' + app.elementDetailView.elementDetailViewModel.currentItem.uid+'&breadFlag=true');
+        },
+        goToStepPage3: function(e) {
+              app.elementDetailView.elementDetailViewModel.change_Percent = true;
+            app.mobileApp.navigate('#components/elementDetailView/view.html?stageId=' + app.controlPanel.controlPanelModel.step_id);
+        },
+        openMap: function (num) {
             app.elementLocationMaps.elementLocationMapsModel.emapFlag = true;
             app.elementLocationMaps.elementLocationMapsModel.counter = 0;
             var jsdoOptions3 = app.elementDetailView.elementDetailViewModel.get('_jsdoOptions'),
@@ -907,7 +989,9 @@ app.localization.registerView('formDetailView');
                 if(element[0] != undefined) 
                     app.elementDetailView.elementDetailViewModel.elementLocation = element[0];
                 app.surveyorMarking.surveyorMarkingModel.mapFlag=true;
-                app.mobileApp.navigate('#components/elementLocationMaps/view.html');
+                if(num == 2)
+                    app.mobileApp.navigate('#components/elementLocationMaps/view.html?detailsFlag=true');
+                else app.mobileApp.navigate('#components/elementLocationMaps/view.html');
             });
         },
         openSignaturePopUp: function(e) {
@@ -939,7 +1023,6 @@ app.localization.registerView('formDetailView');
 
                  function saveModel(data) {
                      if($("#signatureCore").jSignature("getData") == "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") {
-                        // alert("need signature");
                         document.getElementById("warningPopUpText").innerHTML = app.formDetailView.get('strings').warningMessage.needSignature;//"Signature is missing";
                         $("#warningPopUp").kendoMobileModalView("open");
                         return;
@@ -965,7 +1048,6 @@ app.localization.registerView('formDetailView');
 
                         $("#text1input").val('');
                         $("#coreCheckComments").val('');
-                        // alert("The check has been successfully saved");
                         window.plugins.toast.showWithOptions(
                         {
                             message: app.formDetailView.get('strings').toastsMessages.checkSuccess,//"The check has been successfully saved",
@@ -1005,7 +1087,7 @@ app.localization.registerView('formDetailView');
             $sigdiv2.jSignature("reset") // clears the canvas and rerenders the decor on it
 
             document.getElementById("NCRSignature").style.color = "black";
-            document.getElementById("addCapturePhotoNCR").style.color = "black";
+            // document.getElementById("addCapturePhotoNCR").style.color = "black";
             $("#ImpairmentDetails").val('');
 
             app.mobileApp.navigate('#:back');
@@ -1021,13 +1103,11 @@ app.localization.registerView('formDetailView');
             var dataSourceNCR = new kendo.data.DataSource(dataSourceOptionsNCR);
 
             if($("#signatureNCR").jSignature("getData") == "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") {
-                // alert(". signature");
                 document.getElementById("warningPopUpText").innerHTML = app.formDetailView.get('strings').warningMessage.needSignature; //"Signature is missing";
                 $("#warningPopUp").kendoMobileModalView("open");
                 return;
             }
             if($("#ImpairmentDetails").val() == '') {
-                // alert("need ncr description");
                 document.getElementById("warningPopUpText").innerHTML = app.formDetailView.get('strings').warningMessage.needDescription//"Description is missing";
                 $("#warningPopUp").kendoMobileModalView("open");
                 return;
@@ -1036,6 +1116,7 @@ app.localization.registerView('formDetailView');
             var date = moment($("#ImpairmentDestinationDate").val()).add(8,'h');
             console.log("date")
             console.log(date.toString())
+            var d = new Date(date);
             
             newNCR = {
                 R371573875: formDetailViewModel.currentCheckId.id, //check
@@ -1046,7 +1127,7 @@ app.localization.registerView('formDetailView');
                 Latitude: app.elementDetailView.elementDetailViewModel.currentItem.Latitude,
                 longitude: app.elementDetailView.elementDetailViewModel.currentItem.Longtitud,
                 locationId: sessionStorage.getItem("locationId"),
-                DestinationDate: date.toString(),
+                DestinationDate: d.setHours(d.getHours()+8),//date.toString(),
                 Fixed: false,
                 ElementName: app.elementDetailView.elementDetailViewModel.currentItem.name
             };
@@ -1127,7 +1208,6 @@ app.localization.registerView('formDetailView');
             jsdoNCR.saveChanges();
             
             // app.mobileApp.navigate('#:back');
-            // alert("The NCR has been successfully saved");
             window.plugins.toast.showWithOptions(
             {
                 message: app.formDetailView.get('strings').toastsMessages.NCRSuccess,
@@ -1152,7 +1232,6 @@ app.localization.registerView('formDetailView');
             
             function saveModel(data) {
                 if($("#signature").jSignature("getData") == "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") {
-                    // alert("need signature");
                     document.getElementById("warningPopUpText").innerHTML = app.formDetailView.get('strings').warningMessage.needSignature;//"Signature is missing";
                     $("#warningPopUp").kendoMobileModalView("open");
                     return;
@@ -1160,11 +1239,12 @@ app.localization.registerView('formDetailView');
 
                 /// start add form data save
                 var listStatus = app.formDetailView.formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.getPicklist_status().response.picklistData;
-                
+                var status_ok_flag = false,status_not_ok_flag = false;
                 for(var i=0; i < listStatus.length; i++) {
                     if($("#status_ok").is(':checked')) {
                         if(listStatus[i].name == "Ok") {
                             addModel.status = listStatus[i].id;
+                            status_ok_flag = true;
                             break;
                         }
                     }
@@ -1172,6 +1252,7 @@ app.localization.registerView('formDetailView');
                         if(listStatus[i].name == "Not Ok") {
                             addModel.status = listStatus[i].id;
                             formDetailViewModel.not_ok_flag = true;
+                            status_not_ok_flag = true;
                             break;
                         }
                     }
@@ -1184,7 +1265,8 @@ app.localization.registerView('formDetailView');
                 }
 
                 if(addModel.status == undefined) {
-                    alert("must choose a status");
+                    document.getElementById("warningPopUpText").innerHTML = app.formDetailView.get('strings').warningMessage.needSatus;//"Signature is missing";
+                    $("#warningPopUp").kendoMobileModalView("open");
                     return;
                 }
                 
@@ -1195,6 +1277,7 @@ app.localization.registerView('formDetailView');
                 addModel.name = itemData.name;
                 addModel.locationId = sessionStorage.getItem("locationId");
                 addModel.LastUpdate = true;
+                addModel.index = itemData.Index;
                 //addModel.name = !!addFormData.checkbox7;
                 /// end add form data save
          
@@ -1207,12 +1290,11 @@ app.localization.registerView('formDetailView');
                     app.elementDetailView.elementDetailViewModel.change_Percent = true;
                     app.elementDetailView.elementDetailViewModel.QC_click_flag = true;
 
-                    document.getElementById("status_ok").checked = false;
-                    document.getElementById("status_not_ok").checked = false;
-                    document.getElementById("status_NA").checked = false;
-                    $("#checkComments").val('');
+                    // document.getElementById("status_ok").checked = false;
+                    // document.getElementById("status_not_ok").checked = false;
+                    // document.getElementById("status_NA").checked = false;
+                    // $("#checkComments").val('');
 
-                    // alert("The check has been successfully saved");
                     window.plugins.toast.showWithOptions(
                     {
                         message: app.formDetailView.get('strings').toastsMessages.checkSuccess,
@@ -1221,13 +1303,41 @@ app.localization.registerView('formDetailView');
                         addPixelsY: -40  // added a negative value to move it up a bit (default 0)
                     }); 
 
-                     //if($("#status_not_ok").is(':checked')) {
                     if(formDetailViewModel.not_ok_flag == true) {
-                        // alert("not ok")
-                        // app.mobileApp.navigate('#:back'); ???
                         $("#NCRPopUp").kendoMobileModalView("open");
                     }
+                    else if(status_ok_flag == true && status_not_ok_flag == false) {
+                            var jsdoOptionsNCR = formDetailViewModel.get('_jsdoOptionsNCR'),
+                            jsdoNCR = new progress.data.JSDO(jsdoOptionsNCR),
+                            dataSourceOptionsNCR = formDetailViewModel.get('_dataSourceOptionsNCR');
+                        dataSourceOptionsNCR.transport.jsdo = jsdoNCR;
+                        var dataSourceNCR = new kendo.data.DataSource(dataSourceOptionsNCR);
+
+                        if(currentCheck != undefined) {
+                           dataSourceNCR.filter({ field: "R371573875", operator: "==", value: currentCheck.id });
+                            dataSourceNCR.fetch(function() {
+                                var ncr = dataSourceNCR.data();
+                               if(ncr[0] != undefined && ncr[0].Fixed == 0) {
+                                document.getElementById("warningPopUpText").innerHTML = app.formDetailView.get('strings').warningMessage.notSaveStatus;
+                                $("#warningPopUp").kendoMobileModalView("open");
+                                    // return;
+                                }
+                                else {
+                                    document.getElementById("status_ok").checked = false;
+                                    document.getElementById("status_not_ok").checked = false;
+                                    document.getElementById("status_NA").checked = false;
+                                    $("#checkComments").val('');
+                                    app.mobileApp.navigate('#:back');
+                                }
+                                //Fixed
+                            });
+                         }
+                    }
                     else {
+                        document.getElementById("status_ok").checked = false;
+                        document.getElementById("status_not_ok").checked = false;
+                        document.getElementById("status_NA").checked = false;
+                        $("#checkComments").val('');
                         app.mobileApp.navigate('#:back');
                     }
                 });
@@ -1368,7 +1478,19 @@ app.localization.registerView('formDetailView');
 
         $("#addCapturePhoto").css("color", "black");
        formDetailViewModel.showElementDetails();
+       formDetailViewModel.stageNum = e.view.params.stagenum;
+       console.log("e.view.params")
+       console.log(e.view.params)
        formDetailViewModel.showFormImage(e.view.params.stagenum);
+       
+       document.getElementById("element_name1").innerHTML = formDetailViewModel.elementDetails.name;
+       console.log("app.elementDetailView.elementDetailViewModel.stepsNames[e.view.params.stagenum]")
+       console.log(e.view.params.stagenum)
+       console.log(app.elementDetailView.elementDetailViewModel.stepsNames[e.view.params.stagenum])
+       document.getElementById("step_name1").innerHTML = (app.elementDetailView.elementDetailViewModel.stepsNames[e.view.params.stagenum].name).toLowerCase();
+        if(e.view.params.stagenum == 5)
+            document.getElementById("form_name1").innerHTML = "E&B";
+        else document.getElementById("form_name1").innerHTML = (e.view.params.formname).toLowerCase();
 
        if(e.view.params.stagenum == 0) {
            $("#elementGeneralDetails").hide();
@@ -1452,8 +1574,14 @@ app.localization.registerView('formDetailView');
                 });
            
                 //fetchFilteredData(param);
-                formDetailViewModel.formName = e.view.params.formname;
-                formNameCheckList.innerHTML = e.view.params.formname; 
+                if(e.view.params.stagenum == 5) {
+                    formDetailViewModel.formName = "E&B";
+                    formNameCheckList.innerHTML = "E&B";
+                }
+                else { 
+                    formDetailViewModel.formName = (e.view.params.formname).toLowerCase();
+                    formNameCheckList.innerHTML = e.view.params.formname;
+                } 
             });
         }
         else if(e.view.params.surveyorFlag == "true") {
@@ -1462,8 +1590,16 @@ app.localization.registerView('formDetailView');
             $("#surveyor").show();
             $("#checkListTitle").show();
             $("#coreDataTitle").show();
-            formDetailViewModel.formName = e.view.params.formname;
-            formNameCheckList.innerHTML = e.view.params.formname; 
+            if(e.view.params.stagenum == 5) {
+                formDetailViewModel.formName = "E&B";
+                formNameCheckList.innerHTML = "E&B";
+            }
+            else { 
+                formDetailViewModel.formName = (e.view.params.formname).toLowerCase();
+                formNameCheckList.innerHTML = e.view.params.formname;
+            } 
+            // formDetailViewModel.formName = e.view.params.formname;
+            // formNameCheckList.innerHTML = e.view.params.formname; 
              var jsdoOptions = formDetailViewModel.get('_jsdoOptions'),
                     jsdo = new progress.data.JSDO(jsdoOptions);
                
@@ -1524,6 +1660,12 @@ app.localization.registerView('formDetailView');
                         logic: "or",
                         filters: checkListFilters
                     });
+
+                    dataSource.sort({ field: "Index", dir: "asc" });
+                    dataSource.fetch(function() {
+                        console.log("view")
+                        console.log(dataSource.data())
+                    });
                     
                     formDetailViewModel.set('dataSource', dataSource);
                     
@@ -1549,21 +1691,46 @@ app.localization.registerView('formDetailView');
                 
                     dataSourceChecks.read().then(function() {
                         var view = dataSourceChecks.view();
+                        var listStatusChecks = app.formDetailView.formDetailViewModel._dataSourceOptionsChecks.transport.jsdo.getPicklist_status().response.picklistData;
+                        var notOkStatus;
+                        for(var i=0; i<listStatusChecks.length; i++)
+                            if(listStatusChecks[i].name == "Not Ok")
+                                notOkStatus = listStatusChecks[i].id;
+                        console.log("notOkStatus")
+                        console.log(notOkStatus)
+
                         var greenFlag = false;
-                        for(var i=0; i<checklist.data.length; i++) {
-                            greenFlag = false;
-                            if(view.length == 0) {
-                                document.getElementById(checklist.data[i].id).style.background = "#d12229";
-                            }
-                            for(var j=0; j<view.length; j++) {
-                                if(checklist.data[i].id == view[j].R365688751) {
-                                    checklist.data[i].status = "green";//checklist.data[i].id;
-                                    document.getElementById(checklist.data[i].id).style.background = "#449d31";
-                                    greenFlag = true;
-                                    break;
-                                }
-                                if(greenFlag == false) {
+                        console.log("checklist")
+                        console.log(checklist)
+                        if(checklist != null) {
+                            for(var i=0; i<checklist.data.length; i++) {
+                                greenFlag = false;
+                                if(view.length == 0) {
                                     document.getElementById(checklist.data[i].id).style.background = "#d12229";
+                                }
+                                $("#"+checklist.data[i].id+'checkNcr').hide();
+                                for(var j=0; j<view.length; j++) {
+                                    if(checklist.data[i].id == view[j].R365688751) {
+                                        checklist.data[i].status = "green";//checklist.data[i].id;
+                                        document.getElementById(checklist.data[i].id).style.background = "#449d31";
+                                        console.log(view[j])
+                                        if(view[j].status == notOkStatus) {
+                                            checklist.data[i].status = "red";
+                                            $("#"+checklist.data[i].id+'checkNcr').show();
+                                            document.getElementById(checklist.data[i].id).style.background = "#d12229";
+                                        }
+                                        else { 
+                                            $("#"+checklist.data[i].id+'checkNcr').show();
+                                            document.getElementById(checklist.data[i].id).style.background = "#449d31";
+                                        }
+                                        greenFlag = true;
+                                        break;
+                                    }
+                                    if(greenFlag == false) {
+                                        document.getElementById(checklist.data[i].id).style.background = "#d12229";
+                                        // document.getElementById("checkNcr").hide();
+                                        $("#"+checklist.data[i].id+'checkNcr').hide();
+                                    }
                                 }
                             }
                         }
@@ -1579,6 +1746,11 @@ app.localization.registerView('formDetailView');
                     formDetailViewModel.formName = e.view.params.formname;
                     formNameCheckList.innerHTML = e.view.params.formname; 
                 }
+
+                 if(e.view.params.stagenum == 5) {
+                    formDetailViewModel.formName = "E&B";
+                    formNameCheckList.innerHTML = "E&B";
+                }
               
                 if(e.view.params.formname == "SURVEYOR MARKING") {
                     $("#surveyor").show();
@@ -1590,7 +1762,6 @@ app.localization.registerView('formDetailView');
     });
 
 function onFileUploadSuccess1() {
-        // alert("onFileUploadSuccess")
         console.log("onFileUploadSuccess")
         
         // app.mobileApp.navigate('#:back');

@@ -5,6 +5,7 @@
         jsdoSettings = {
             serviceURI: 'https://www.rollbase.com/rest/jsdo/',
             catalogURIs: 'https://www.rollbase.com/rest/jsdo/catalog/serviceQCSEMI.json',
+            // catalogURIs: 'https://www.rollbase.com/rest/jsdo/catalog/allobjects.json',
             authenticationModel: 'form'
         },
         userFunctions = {

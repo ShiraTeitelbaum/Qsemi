@@ -27,7 +27,7 @@ class="screen">
     </header>
 
     <footer data-role="footer" style="background-color:transparent;">
-       <label class="circle2" style="position: absolute;bottom: 0.8em;left: 0.9em;z-index: 999;background-repeat:no-repeat;background-size:75%; background-position: center; "><br /><center style="color: white; margin: -2%;margin-left: -1%;  font-size: xx-large;">
+       <label class="circle3" style="position: absolute;bottom: 5em;left: 0.9em;z-index: 999;background-repeat:no-repeat;background-size:75%; background-position: center; "><br /><center style="color: white; margin: -2%;margin-left: -1%;  font-size: xx-large;">
            <img src="images/mapLegend.png" style="height:60%; width:90%;" />
         </center></label>
          <label style="position: absolute;bottom: 1em;left: 16em;z-index: 999;background-repeat:no-repeat;background-size:100%; background-position: center;">
@@ -42,17 +42,17 @@ class="screen">
     <div id="generalMapViewModelMap" class="map"></div>
     <img id="imgMap" alt="" style="display: none" />
 
-    <div data-role="modalview" id="needGPSPopUp" style="left:1px; width:85%; height:32%; background-color:#F4F4F4; ">
+    <div data-role="modalview" id="needGPSPopUp" style="left:1px; width:85%; height:38%; background-color:#F4F4F4; ">
         <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:5%;">
             <div style="width:100%;">
                 <span data-bind="text: strings.warningGPSMessage.title" style="color:black; font-weight:bold; font-size:large; margin-left:6%;"></span> <!-- Please Turn On GPS -->
             </div>
         </div>
         <br/>
-        <div data-role="content" style="background-color: transparent; margin-top: 2%;">
-            <span data-bind="text: strings.warningGPSMessage.text1" style="color:black; font-size:medium; margin-left:6%;"></span><br/><br/> <!-- Your Location Services are disabled. -->
-            <span data-bind="text: strings.warningGPSMessage.text2" style="color:black; font-size:medium; margin-left:6%;"></span><br/><br/> <!-- The GPS is required to view the map. -->
-            <span data-bind="text: strings.warningGPSMessage.text3" style="color:black; font-size:medium; margin-left:6%;"></span> <!-- Please enable GPS, with Wifi or 3G service -->
+        <div data-role="content" style="background-color: transparent; margin-top: 2%;margin-left:6%;">
+            <span data-bind="text: strings.warningGPSMessage.text1" style="color:black; font-size:medium; "></span><br/><br/> <!-- Your Location Services are disabled. -->
+            <span data-bind="text: strings.warningGPSMessage.text2" style="color:black; font-size:medium; "></span><br/><br/> <!-- The GPS is required to view the map. -->
+            <span data-bind="text: strings.warningGPSMessage.text3" style="color:black; font-size:medium; "></span> <!-- Please enable GPS, with Wifi or 3G service -->
         </div>
         <div data-role="footer" style="margin-bottom:3%; margin-top:3%; background-color:transparent">
             <div style="width:100%; margin-bottom:2%;">

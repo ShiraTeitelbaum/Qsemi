@@ -199,21 +199,21 @@ app.localization.registerView('geotechnicalForm');
         /// start add model functions
         /// end add model functions
         onInit: function(e) {
-             var $sigdiv = $("#signatureGeo")
-            $sigdiv.jSignature({
-                'background-color': 'transparent',
-                'decor-color': 'transparent',
-                 //'height':'8em'
-                'width': '300',
-                'height': '110'
-                }) // inits the jSignature widget.
+            //  var $sigdiv = $("#signatureGeo")
+            // $sigdiv.jSignature({
+            //     'background-color': 'transparent',
+            //     'decor-color': 'transparent',
+            //      //'height':'8em'
+            //     'width': '300',
+            //     'height': '110'
+            //     }) // inits the jSignature widget.
         },
         onShow: function(e) {
             e.view.scroller.reset();
             var that = this;
 
-             $(".km-scroll-container").css("overflow", "hidden");
-            var $sigdiv = $("#signatureGeo");
+            //  $(".km-scroll-container").css("overflow", "hidden");
+            // var $sigdiv = $("#signatureGeo");
             // after some doodling...
             // $sigdiv.jSignature("reset") // clears the canvas and rerenders the decor on it.
 
@@ -409,6 +409,10 @@ app.localization.registerView('geotechnicalForm');
         },
         onShow: function(e) {
              e.view.scroller.reset();
+
+            document.getElementById("element_name11").innerHTML = app.elementDetailView.elementDetailViewModel.currentItem.name;
+            document.getElementById("step_name11").innerHTML = (app.geotechnicalForm.get('strings').controlPanel.stage1name).toLowerCase();
+            document.getElementById("form_name11").innerHTML = (app.geotechnicalForm.get('strings').stage0CoreForms.geotechnical).toLowerCase();
            
               $(".km-scroll-container").css("overflow", "hidden");
             var $sigdiv = $("#signatureGeo");
@@ -523,11 +527,18 @@ app.localization.registerView('geotechnicalForm');
                 editFormData = this.get('editFormData'),
                 itemData = this.get('itemData'),
                 dataSource = geotechnicalFormModel.get('dataSource');
-            console.log("$('#signatureGeo').jSignature('getData')")
-                console.log($("#signatureGeo").jSignature("getData"))
+       console.log("editFormData.EstimatedUnit")
+       console.log(editFormData.EstimatedUnit)
+            if($("#DrillingDate").val() == '' || editFormData.EstimatedUnit == '' || editFormData.TOP_LAYER == '' || editFormData.TopLayerTHICKNESS == '' ||
+            editFormData.SecondLayerUNIT == '' || editFormData.ThirdLayerTHICKNESS == '' || editFormData.TotalDepth == '' ||
+            editFormData.PlainTerraineStimated == '' || editFormData.PlainTerrainACTUAL == '') {
+                document.getElementById("warningPopUpGeoText").innerHTML = app.geotechnicalForm.get('strings').warningMessage.detailsMissing;//"Signature is missing";
+                $("#warningPopUpGeo").kendoMobileModalView("open");
+                return;
+            }
+
             if($("#signatureGeo").jSignature("getData") == "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") {
-                // alert("need signature");
-                document.getElementById("warningPopUpGeoText").innerHTML = app.geotechnicalFormModel.get('strings').warningMessage.needSignature;//"Signature is missing";
+                document.getElementById("warningPopUpGeoText").innerHTML = app.geotechnicalForm.get('strings').warningMessage.needSignature;//"Signature is missing";
                 $("#warningPopUpGeo").kendoMobileModalView("open");
                 return;
             }
@@ -557,14 +568,13 @@ app.localization.registerView('geotechnicalForm');
                     dataSource.one('sync', function(e) {
                         /// start edit form data save success
                         /// end edit form data save success
-                        // alert("The check has been successfully updated");
-                        // window.plugins.toast.showWithOptions(
-                        // {
-                        //     message: "The form has been successfully updated",
-                        //     duration: "short", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
-                        //     position: "bottom",
-                        //     addPixelsY: -40  // added a negative value to move it up a bit (default 0)
-                        // }); 
+                        window.plugins.toast.showWithOptions(
+                        {
+                            message: app.formDetailView.get('strings').toastsMessages.formSuccess,
+                            duration: "short", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
+                            position: "bottom",
+                            addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+                        }); 
                         app.mobileApp.navigate('#:back');
                     });
 
@@ -613,18 +623,17 @@ app.localization.registerView('geotechnicalForm');
                     jsdo.unsubscribeAll('afterCreate', afterCreateFn);
                     if (success == true) {
                         app.clearFormDomData('edit-item-view');
-                        // alert("The check has been successfully saved");
-                        // window.plugins.toast.showWithOptions(
-                        // {
-                        //     message: app.formDetailView.get('strings').toastsMessages.formSuccess,
-                        //     duration: "short", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
-                        //     position: "bottom",
-                        //     addPixelsY: -40  // added a negative value to move it up a bit (default 0)
-                        // }); 
+                        window.plugins.toast.showWithOptions(
+                        {
+                            message: app.formDetailView.get('strings').toastsMessages.formSuccess,
+                            duration: "short", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
+                            position: "bottom",
+                            addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+                        }); 
                         app.mobileApp.navigate('#:back');
                     }
                     else {
-                        alert("error")
+                        // alert("error")
                     }
                 };
                 jsdo.subscribe('afterCreate', afterCreateFn);

@@ -234,18 +234,18 @@ app.localization.registerView('impairmentDetailView');
         editFormData: {},
         onInit: function(e) {
             // app.mobileApp.showLoading();
-             var $sigdiv = $("#signatureOpenNCR")
-            $sigdiv.jSignature({
-                'background-color': 'transparent',
-                'decor-color': 'transparent',
-                'color': 'black',
-                 //'height':'8em'
-                'width': '300',
-                'height': '110'
-                }) // inits the jSignature widget. 
+            //  var $sigdiv = $("#signatureOpenNCR")
+            // $sigdiv.jSignature({
+            //     'background-color': 'transparent',
+            //     'decor-color': 'transparent',
+            //     'color': 'black',
+            //      //'height':'8em'
+            //     'width': '300',
+            //     'height': '110'
+            //     }) // inits the jSignature widget. 
 
-            var $sigdiv2 = $("#signatureCloseNCR")
-            $sigdiv2.jSignature({
+            var $sigdiv = $("#signatureCloseNCR")
+            $sigdiv.jSignature({
                 'background-color': 'transparent',
                 'decor-color': 'transparent',
                 'color': 'black',
@@ -255,97 +255,135 @@ app.localization.registerView('impairmentDetailView');
                 }) // inits the jSignature widget. 
         },
         onShow: function(e) {
+            projectName.innerHTML = sessionStorage.getItem("locationName");
+            e.view.scroller.reset();
+            document.getElementById("tookCare").checked = false;
+            talkbubble.hidden = true;
+            document.getElementById("projectName").innerHTML = sessionStorage.getItem("locationName");
+
+            // dataProvider.loadCatalogs().then(function _catalogsLoaded() {
+                var jsdoOptions = impairmentDetailViewModel.get('_jsdoOptions'),
+                    jsdo = new progress.data.JSDO(jsdoOptions),
+                    dataSourceOptions = impairmentDetailViewModel.get('_dataSourceOptions');
+                
+                dataSourceOptions.transport.jsdo = jsdo;
+                var dataSource = new kendo.data.DataSource(dataSourceOptions);
+                impairmentDetailViewModel.set('dataSource', dataSource);
+            // });
+
             $(".km-scroll-container").css("overflow", "hidden");
-            var $sigdiv = $("#signatureOpenNCR");
+            // var $sigdiv = $("#signatureOpenNCR");
+            // after some doodling...
+            // $sigdiv.jSignature("reset") // clears the canvas and rerenders the decor on it.
+
+            $(".km-scroll-container").css("overflow", "hidden");
+            var $sigdiv = $("#signatureCloseNCR");
             // after some doodling...
             $sigdiv.jSignature("reset") // clears the canvas and rerenders the decor on it.
 
-            $(".km-scroll-container").css("overflow", "hidden");
-            var $sigdiv2 = $("#signatureCloseNCR");
-            // after some doodling...
-            $sigdiv2.jSignature("reset") // clears the canvas and rerenders the decor on it.
-
             var that = this,
-                itemUid = e.view.params.uid,
-                dataSource = impairmentDetailViewModel.get('dataSource'),
-                itemData = dataSource.getByUid(itemUid),
+                itemId = e.view.params.id,
+                // dataSource = impairmentDetailViewModel.get('dataSource'),
+                itemData /*= dataSource.getByUid(itemUid)*/,
+                fixedData /*= impairmentDetailViewModel.fixHierarchicalData(itemData)*/;
+            console.log("itemId")
+            console.log(itemId)
+            // dataSource.filter({ field: "id", operator: "==", vlaue: 371891572 });
+            dataSource.fetch(function() {
+                var view = dataSource.data();
+                console.log("view")
+                console.log(view)
+                for(var i=0;i<view.length; i++) {
+                    if(view[i].id == itemId) {
+                        itemData = dataSource.getByUid(view[i].uid);
+                        impairmentDetailViewModel.setCurrentItemByUid(view[i].uid);
+                    }
+                }
+                // itemData = dataSource.getByUid(view[0].uid);
+                    
                 fixedData = impairmentDetailViewModel.fixHierarchicalData(itemData);
+                that.set('itemData', itemData);
+                console.log("itemData")
+                    console.log(itemData)
+                    console.log("impairmentDetailViewModel.currentItem")
+                    console.log(impairmentDetailViewModel.currentItem)
 
+                impairmentDetailViewModel.currentImpairment = itemData;
+                document.getElementById("nameElementImpairtment").innerHTML = itemData.ElementName;
+
+                var fixed_description;
+                if(itemData.Fixdescription != "null")
+                    fixed_description = itemData.Fixdescription;
+                else fixed_description = '';
+
+                that.set('editFormData', {
+                    name: itemData.name,
+                    DestinationDate: itemData.DestinationDate,
+                    FixDate: itemData.FixDate,
+                    longitude: itemData.longitude,
+                    Latitude: itemData.Latitude,
+                    image: itemData.image,
+                    image2: itemData.image2,
+                    Description: itemData.Description,
+                    Fixdescription: fixed_description,
+                    signature: itemData.signature,
+                    signatureClose: itemData.signatureClose
+                    /// start edit form data init
+                    /// end edit form data init
+                });
+
+                if(itemData.longitude != null && itemData.Latitude != null)
+                    document.getElementById("ncrElementLocation").style.color = "red";
+
+                if(itemData.Fixed == 1) {
+                    document.getElementById("tookCare").checked = true;
+                    talkbubble.hidden = false;
+                }
+                else {
+                    document.getElementById("tookCare").checked = false;
+                    talkbubble.hidden = true;
+                }
+
+                if(itemData.signature != "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") { 
+                    // $sigdiv.jSignature("importData", itemData.signature);
+                    document.getElementById("signatureOpenNCR").src = itemData.signature;
+                    document.getElementById("NCRSignatureopen").style.color = "red";
+                }
+                else document.getElementById("NCRSignatureopen").style.color = "black";
+    
+                document.getElementById("NCRSignatureClose").style.color = "black";
+
+                document.getElementById("dateImpairtment").innerHTML = kendo.toString(itemData.updatedAt, "dd/MM/yyyy HH:mm");
+
+                if(itemData.fixed != 1)
+                    document.getElementById("statusImpairtment").innerHTML = "open impairtment";
+                // else document.getElementById("statusImpairtment").innerHTML = "close impairtment";
+
+                document.getElementById("impaiDate").innerHTML = kendo.toString(itemData.DestinationDate, "dd/MM/yyyy");
+
+                if(itemData.imageURL != null && itemData.imageURL != "null" && itemData.imageURL != '') {
+                    document.getElementById("addCapturePhoto1Lik").style.color = "red";
+                    // var imageObj = $.parseJSON(itemData.image);
+                    // itemData.image = processImage(impairmentDetailViewModel.get('_dataSourceOptions').transport.jsdo.url + imageObj.src);
+
+                    document.getElementById("addCapturePhoto1ncrImg").src = itemData.imageURL;
+                }
+                else document.getElementById("addCapturePhoto1Lik").style.color = "black";
+            
+                if(itemData.imageURL1 != null && itemData.imageURL1 != "null" && itemData.imageURL1 != '') {
+                    document.getElementById("addCapturePhoto2Lik").style.color = "red";
+                    // var imageObj2 = $.parseJSON(itemData.image2);
+                    // itemData.image2 = processImage(impairmentDetailViewModel.get('_dataSourceOptions').transport.jsdo.url + imageObj2.src);
+                    document.getElementById("addCapturePhoto2ncrImg").src = itemData.imageURL1;
+                }
+                else document.getElementById("addCapturePhoto2Lik").style.color = "black";
+
+                document.getElementById("addCapturePhotoCorrect").style.color = "black";
+            });
             /// start edit form before itemData
             /// end edit form before itemData
 
-            this.set('itemData', itemData);
-            impairmentDetailViewModel.currentImpairment = itemData;
-            
-            var fixed_description;
-            if(itemData.Fixdescription != "null")
-                fixed_description = itemData.Fixdescription;
-            else fixed_description = '';
-
-            this.set('editFormData', {
-                name: itemData.name,
-                DestinationDate: itemData.DestinationDate,
-                FixDate: itemData.FixDate,
-                longitude: itemData.longitude,
-                Latitude: itemData.Latitude,
-                image: itemData.image,
-                image2: itemData.image2,
-                Description: itemData.Description,
-                Fixdescription: fixed_description,
-                signature: itemData.signature,
-                signatureClose: itemData.signatureClose
-                /// start edit form data init
-                /// end edit form data init
-            });
-
-            if(itemData.longitude != null && itemData.Latitude != null)
-                document.getElementById("ncrElementLocation").style.color = "red";
-
-            if(itemData.Fixed == 1) {
-                document.getElementById("tookCare").checked = true;
-                talkbubble.hidden = false;
-            }
-            else {
-                document.getElementById("tookCare").checked = false;
-                talkbubble.hidden = true;
-            }
-
-             if(itemData.signature != "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") { 
-                $sigdiv.jSignature("importData", itemData.signature);
-                document.getElementById("NCRSignatureopen").style.color = "red";
-             }
-             else document.getElementById("NCRSignatureopen").style.color = "black";
-  
-             document.getElementById("NCRSignatureClose").style.color = "black";
-
-            document.getElementById("dateImpairtment").innerHTML = kendo.toString(itemData.updatedAt, "dd/MM/yyyy HH:mm");
-            // document.getElementById("nameElementImpairtment").innerHTML = 
-
-            if(itemData.fixed != 1)
-                document.getElementById("statusImpairtment").innerHTML = "open impairtment";
-            else document.getElementById("statusImpairtment").innerHTML = "close impairtment";
-
-            document.getElementById("impaiDate").innerHTML = kendo.toString(itemData.DestinationDate, "dd/MM/yyyy");
-
-            if(itemData.imageURL != null && itemData.imageURL != "null" && itemData.imageURL != '') {
-                document.getElementById("addCapturePhoto1Lik").style.color = "red";
-                // var imageObj = $.parseJSON(itemData.image);
-                // itemData.image = processImage(impairmentDetailViewModel.get('_dataSourceOptions').transport.jsdo.url + imageObj.src);
-
-                document.getElementById("addCapturePhoto1ncrImg").src = itemData.imageURL;
-            }
-            else document.getElementById("addCapturePhoto1Lik").style.color = "black";
-           
-            if(itemData.imageURL1 != null && itemData.imageURL1 != "null" && itemData.imageURL1 != '') {
-                document.getElementById("addCapturePhoto2Lik").style.color = "red";
-                // var imageObj2 = $.parseJSON(itemData.image2);
-                // itemData.image2 = processImage(impairmentDetailViewModel.get('_dataSourceOptions').transport.jsdo.url + imageObj2.src);
-                document.getElementById("addCapturePhoto2ncrImg").src = itemData.imageURL1;
-            }
-            else document.getElementById("addCapturePhoto2Lik").style.color = "black";
-
-            document.getElementById("addCapturePhotoCorrect").style.color = "black";
-
+            // this.set('itemData', itemData);
             /// start edit form show
             /// end edit form show
         },
@@ -355,7 +393,6 @@ app.localization.registerView('impairmentDetailView');
         },
         openNCRMap: function(e) {
             if(impairmentDetailViewModel.currentImpairment.longitude == null && impairmentDetailViewModel.currentImpairment.Latitude == null) {
-                // alert("The is no loaction for this impairment")
                 document.getElementById("warningPopUpTextNcr").innerHTML = app.impairmentDetailView.get('strings').warningMessage.noLocations;
                 $("#warningPopUpClosrNcr").kendoMobileModalView("open");
             }
@@ -400,7 +437,6 @@ app.localization.registerView('impairmentDetailView');
         addMarker: function(location, map) {
         // Add the marker at the clicked location, and add the next-available label
         // from the array of alphabetical characters.
-        //alert(elementLocationMapsModel.counter)
              var marker = new google.maps.Marker({ //var marker = new google.maps.Marker({
                 position: location,
                 //label: elementLocationMapsModel.labels[elementLocationMapsModel.labelIndex++ % elementLocationMapsModel.labels.length],
@@ -426,7 +462,6 @@ app.localization.registerView('impairmentDetailView');
             if($("#signatureCloseNCR").jSignature("getData") != "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") {
                 // document.getElementById("warningPopUpText").innerHTML = app.formDetailView.get('strings').warningMessage.needSignature;
                 // $("#warningPopUpClosrNcr").kendoMobileModalView("open");
-                // alert("need signature");
                 document.getElementById("NCRSignatureClose").style.color = "red";
                 // return;
             }
@@ -459,21 +494,16 @@ app.localization.registerView('impairmentDetailView');
             if($("#tookCare").is(':checked')) {
                 itemData.set('Fixed', true);
                 if($("#correctImpairmentDetails").val() == '') {
-                    // alert("need correct description")
                     document.getElementById("warningPopUpTextNcr").innerHTML = app.impairmentDetailView.get('strings').warningMessage.needDescription;
                     $("#warningPopUpClosrNcr").kendoMobileModalView("open");
                     return;
                 }
                 if($("#correctImpairmentDate").val() == '') {
-                    // alert("need correct date")
                     document.getElementById("warningPopUpTextNcr").innerHTML = app.impairmentDetailView.get('strings').warningMessage.needDate;
                     $("#warningPopUpClosrNcr").kendoMobileModalView("open");
                     return;
                 }
-                console.log("document.getElementById('addCapturePhotoCorrectImg').src")
-                console.log(document.getElementById("addCapturePhotoCorrectImg").src)
                 if(document.getElementById("addCapturePhotoCorrectImg").src == "") {
-                    // alert("need correct date")
                     document.getElementById("warningPopUpTextNcr").innerHTML = app.impairmentDetailView.get('strings').warningMessage.needImage;
                     $("#warningPopUpClosrNcr").kendoMobileModalView("open");
                     return;
@@ -481,7 +511,6 @@ app.localization.registerView('impairmentDetailView');
                 if($("#signatureCloseNCR").jSignature("getData") == "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABuCAYAAACdmi6mAAADPUlEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjrtgBvYgNGNQAAAABJRU5ErkJggg==") {
                     document.getElementById("warningPopUpTextNcr").innerHTML = app.formDetailView.get('strings').warningMessage.needSignature;
                     $("#warningPopUpClosrNcr").kendoMobileModalView("open");
-                    // alert("need signature");
                     return;
                 }
             }
@@ -599,6 +628,7 @@ app.localization.registerView('impairmentDetailView');
 
                 dataSourceOptions.transport.jsdo = jsdo;
                 dataSource = new kendo.data.DataSource(dataSourceOptions);
+                
                 // dataSource.filter({ field: "locationId", operator: "==", value: sessionStorage.getItem("locationId") });
                 dataSource.filter({
                     logic: "and",
@@ -627,7 +657,6 @@ app.localization.registerView('impairmentDetailView');
 
     });
 function onFileUploadSuccess3() {
-       // alert("onFileUploadSuccess2")
         console.log("onFileUploadSuccess2")
        
         // $("#addCapturePhotoPop").kendoMobileModalView("close");

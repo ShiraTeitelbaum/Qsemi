@@ -379,10 +379,10 @@
 
 /*Active state for drawer navigation*/
 .km-flat #navigation-container .active {
-  background-color: #10c4b2;
+  background-color: #e9eaeb;
 }
 .km-flat .km-drawer .km-content {
-  background-color: #fcfcfc;
+  background-color: #e9eaeb;
 }
 /* Links */
 .km-flat a.link {
@@ -626,10 +626,22 @@
     border: 2px solid #e9eaeb;
 }
 
+#elementImpartmentList > li {
+    padding: 0.25em;
+    border-style: none;
+    background-color:#e9eaeb;
+}
+
 #impartmentList > li {
     padding: 0.25em;
     border-style: none;
      background-color:#e9eaeb;
+}
+
+#tasksList > li {
+    padding: 0.25em;
+    border-style: none;
+    background-color:#e9eaeb;
 }
 
 .divActions {
@@ -649,4 +661,55 @@
     color: white;
     border-color: red;
     border-style: solid;
+}
+
+.controlPanel {
+    background-size:cover;
+    background-attachment: initial; 
+    height:55px; 
+    margin-top:1%;
+} 
+.stageCounter {
+    color:black; 
+    font-weight:400;
+    font-size:small;
+}
+.stageName {
+    color:black; 
+    font-weight:400;
+    font-size:small;
+}
+.stage {
+    margin-left:4%; 
+    padding-top:4%; 
+}
+
+.circle2 {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background: #351e45;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.circle2:hover {
+    width: 68px;
+    height: 68px;
+}
+
+.circle3 {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+}
+
+.circle3:hover {
+    width: 68px;
+    height: 68px;
 }

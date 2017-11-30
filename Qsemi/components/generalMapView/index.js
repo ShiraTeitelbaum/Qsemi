@@ -520,9 +520,7 @@ app.localization.registerView('generalMapView');
 
     function dialog() {
        cordova.plugins.diagnostic.isLocationAvailable(function(available){
-            // alert("Location is " + (available ? "available" : "not available"));
             if(available == false) {
-                // alert("Location is not available");
                 $("#needGPSPopUp").kendoMobileModalView("open");
                 // cordova.plugins.diagnostic.switchToLocationSettings();
             }
@@ -531,7 +529,7 @@ app.localization.registerView('generalMapView');
                 // generalMapViewModel.loadMap();
             // }
         }, function(error){
-            alert("The following error occurred: "+error);
+            // alert("The following error occurred: "+error);
         });
     }
     

@@ -1,38 +1,28 @@
 'use strict';
 
-app.projectDetailView = kendo.observable({
+app.elementSearchView = kendo.observable({
     onShow: function() {},
     afterShow: function() {}
 });
-app.localization.registerView('projectDetailView');
+app.localization.registerView('elementSearchView');
 
-// START_CUSTOM_CODE_projectDetailView
+// START_CUSTOM_CODE_elementSearchView
 // Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes
 
-// END_CUSTOM_CODE_projectDetailView
+// END_CUSTOM_CODE_elementSearchView
 (function(parent) {
     var dataProvider = app.data.qcsemidataProvider,
         /// start global model properties
 
-        processImage = function(img) {
-
-            if (!img) {
-                var empty1x1png = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgYAAAAAMAASDVlMcAAAAASUVORK5CYII=';
-                img = 'data:image/png;base64,' + empty1x1png;
-            }
-
-            return img;
-        },
-
         /// end global model properties
         fetchFilteredData = function(paramFilter, searchFilter) {
-            var model = parent.get('projectDetailViewModel'),
+            var model = parent.get('elementSearchViewModel'),
                 dataSource;
 
             if (model) {
                 dataSource = model.get('dataSource');
             } else {
-                parent.set('projectDetailViewModel_delayedFetch', paramFilter || null);
+                parent.set('elementSearchViewModel_delayedFetch', paramFilter || null);
                 return;
             }
 
@@ -55,23 +45,12 @@ app.localization.registerView('projectDetailView');
         },
 
         jsdoOptions = {
-            name: 'OurUserLocationSEMI',
+            name: 'element2',
             autoFill: false
         },
         dataSourceOptions = {
             type: 'jsdo',
             transport: {},
-            change: function(e) {
-                var data = this.data();
-                for (var i = 0; i < data.length; i++) {
-                    var dataItem = data[i];
-
-                    dataItem['LocationImage_URLUrl'] =
-                        processImage(dataItem['LocationImage_URL']);
-
-                }
-
-            },
             error: function(e) {
                 app.mobileApp.pane.loader.hide();
                 if (e.xhr) {
@@ -89,12 +68,8 @@ app.localization.registerView('projectDetailView');
             schema: {
                 model: {
                     fields: {
-                        'UserName': {
-                            field: 'UserName',
-                            defaultValue: ''
-                        },
-                        'LocationImage_URL': {
-                            field: 'LocationImage_URL',
+                        'name': {
+                            field: 'name',
                             defaultValue: ''
                         },
                     }
@@ -102,18 +77,41 @@ app.localization.registerView('projectDetailView');
             },
             serverFiltering: true,
 
-            serverSorting: true,
-            sort: {
-                field: 'LocationName',
-                dir: 'asc'
-            },
-
         },
         /// start data sources
         /// end data sources
-        projectDetailViewModel = kendo.observable({
+        elementSearchViewModel = kendo.observable({
             _dataSourceOptions: dataSourceOptions,
             _jsdoOptions: jsdoOptions,
+            searchChange: function(e) {
+                var searchVal = e.target.value, searchFilterOr,
+                    searchFilter = { logic: "and", filters: [] };
+
+                searchFilter.filters.push({ field: "locationId", operator: "==", value: sessionStorage.getItem("locationId") });
+
+                searchFilterOr = { 
+                    logic: "or", 
+                    filters: [
+                        { field: "name", operator: "contains", value: searchVal },
+                        // { field: "R363890883", operator: "==", value: elementDetailViewModel.stepId }
+                    ] 
+                };
+
+                searchFilter.filters.push(searchFilterOr);
+                fetchFilteredData(elementSearchViewModel.get('paramFilter'), searchFilter);
+
+                // var searchVal = e.target.value,
+                //     searchFilter;
+
+                // if (searchVal) {
+                //     searchFilter = {
+                //         field: 'name',
+                //         operator: 'contains',
+                //         value: searchVal
+                //     };
+                // }
+                // fetchFilteredData(elementSearchViewModel.get('paramFilter'), searchFilter);
+            },
             fixHierarchicalData: function(data) {
                 var result = {},
                     layout = {};
@@ -165,60 +163,37 @@ app.localization.registerView('projectDetailView');
 
                 return result;
             },
-            logoutClick: function() {
-                app.mobileApp.navigate('#components/authenticationView/view.html?logout=true');
-            },
-            itemClick: function(e) {
-                var dataItem = e.dataItem || projectDetailViewModel.originalItem;
+            itemClick: function(id) {
+                // var dataItem = e.dataItem || elementSearchViewModel.originalItem;
 
-                var locationName = dataItem.LocationName;
-                var locationId = dataItem.locationId;
-                var userId = dataItem.UserId;
-                var userRole = dataItem.UserRole;
-
-                sessionStorage.setItem("locationName", locationName);
-                sessionStorage.setItem("locationId", locationId);
-                sessionStorage.setItem("userId", userId);
-                sessionStorage.setItem("userRole", userRole);
-                //sessionStorage.setItem("isActiveShow", "isHome");
-
-                app.controlPanel.controlPanelModel.taskTabFlag =false;
-                app.controlPanel.controlPanelModel.qcTabFlag =false;
-                app.controlPanel.controlPanelModel.ncrTabFlag =false;
-
-                setTimeout(function () {
-                    app.mobileApp.navigate('#components/controlPanel/view.html');
-                    // app.mobileApp.navigate('#components/controlPanel/view2.html');
-                }, 300);
-
-                //app.mobileApp.navigate('#components/projectDetailView/details.html?uid=' + dataItem.uid);
+                app.mobileApp.navigate('#components/elementDetailView/details.html?id=' + id+'&searchFlag=true');
 
             },
             detailsShow: function(e) {
                 var uid = e.view.params.uid,
-                    dataSource = projectDetailViewModel.get('dataSource'),
+                    dataSource = elementSearchViewModel.get('dataSource'),
                     itemModel = dataSource.getByUid(uid);
 
-                projectDetailViewModel.setCurrentItemByUid(uid);
+                elementSearchViewModel.setCurrentItemByUid(uid);
 
                 /// start detail form show
                 /// end detail form show
             },
             setCurrentItemByUid: function(uid) {
                 var item = uid,
-                    dataSource = projectDetailViewModel.get('dataSource'),
+                    dataSource = elementSearchViewModel.get('dataSource'),
                     itemModel = dataSource.getByUid(item);
 
-                if (!itemModel.UserName) {
-                    itemModel.UserName = String.fromCharCode(160);
+                if (!itemModel.name) {
+                    itemModel.name = String.fromCharCode(160);
                 }
 
                 /// start detail form initialization
                 /// end detail form initialization
 
-                projectDetailViewModel.set('originalItem', itemModel);
-                projectDetailViewModel.set('currentItem',
-                    projectDetailViewModel.fixHierarchicalData(itemModel));
+                elementSearchViewModel.set('originalItem', itemModel);
+                elementSearchViewModel.set('currentItem',
+                    elementSearchViewModel.fixHierarchicalData(itemModel));
 
                 return itemModel;
             },
@@ -236,23 +211,26 @@ app.localization.registerView('projectDetailView');
 
     if (typeof dataProvider.sbProviderReady === 'function') {
         dataProvider.sbProviderReady(function dl_sbProviderReady() {
-            parent.set('projectDetailViewModel', projectDetailViewModel);
-            var param = parent.get('projectDetailViewModel_delayedFetch');
+            parent.set('elementSearchViewModel', elementSearchViewModel);
+            var param = parent.get('elementSearchViewModel_delayedFetch');
             if (typeof param !== 'undefined') {
-                parent.set('projectDetailViewModel_delayedFetch', undefined);
+                parent.set('elementSearchViewModel_delayedFetch', undefined);
                 fetchFilteredData(param);
             }
         });
     } else {
-        parent.set('projectDetailViewModel', projectDetailViewModel);
+        parent.set('elementSearchViewModel', elementSearchViewModel);
     }
 
     parent.set('onShow', function(e) {
         var param = e.view.params.filter ? JSON.parse(e.view.params.filter) : null,
             isListmenu = false,
             backbutton = e.view.element && e.view.element.find('header [data-role="navbar"] .backButtonWrapper'),
-            dataSourceOptions = projectDetailViewModel.get('_dataSourceOptions'),
+            dataSourceOptions = elementSearchViewModel.get('_dataSourceOptions'),
             dataSource;
+        
+        elementDetailViewTitle1.innerHTML = sessionStorage.getItem("locationName");
+        $("#search").val('');
 
         if (param || isListmenu) {
             backbutton.show();
@@ -265,60 +243,38 @@ app.localization.registerView('projectDetailView');
             }
         }
 
-        // navigator.geolocation.getCurrentPosition(function(position){},function(error){
-        //     calldialog();
-        // });
-
-        // function calldialog() {
-        //     alert("calldialog")
-        //     document.addEventListener("deviceready",function(){
-        //         //default dialog
-        //         cordova.dialogGPS("Your GPS is Disabled, this app needs to be enable to works.",//message
-        //             "Use GPS, with wifi or 3G.",//description
-        //             function(buttonIndex){//callback
-        //               switch(buttonIndex) {
-        //                 case 0: break;//cancel
-        //                 case 1: break;//neutro option
-        //                 case 2: break;//user go to configuration
-        //               }},
-        //               "Please Turn on GPS",//title
-        //               ["Cancel","Later","Go"]);//buttons
-        //     });
-        // }
-
-        //if (!projectDetailViewModel.get('dataSource')) {
+        // if (!elementSearchViewModel.get('dataSource')) {
             dataProvider.loadCatalogs().then(function _catalogsLoaded() {
-                var jsdoOptions = projectDetailViewModel.get('_jsdoOptions'),
-                email = app.authenticationView.authenticationViewModel.get('email'),
+                var jsdoOptions = elementSearchViewModel.get('_jsdoOptions'),
                     jsdo = new progress.data.JSDO(jsdoOptions);
 
                 dataSourceOptions.transport.jsdo = jsdo;
                 dataSource = new kendo.data.DataSource(dataSourceOptions);
-                dataSource.filter( { field: "LoginName", operator: "eq", value: email });
-                projectDetailViewModel.set('dataSource', dataSource);
+                dataSource.filter({ field: "locationId", operator: "==", value: sessionStorage.getItem("locationId") }); 
+                elementSearchViewModel.set('dataSource', dataSource);
 
-                //fetchFilteredData(param);
+                // fetchFilteredData(param);
             });
-        //} else {
-            //fetchFilteredData(param);
-        //}
+        // } else {
+        //     fetchFilteredData(param);
+        // }
 
     });
 
-})(app.projectDetailView);
+})(app.elementSearchView);
 
-// START_CUSTOM_CODE_projectDetailViewModel
+// START_CUSTOM_CODE_elementSearchViewModel
 // Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes
 
 // you can handle the beforeFill / afterFill events here. For example:
 /*
-app.projectDetailView.projectDetailViewModel.get('_jsdoOptions').events = {
+app.elementSearchView.elementSearchViewModel.get('_jsdoOptions').events = {
     'beforeFill' : [ {
-        scope : app.projectDetailView.projectDetailViewModel,
+        scope : app.elementSearchView.elementSearchViewModel,
         fn : function (jsdo, success, request) {
             // beforeFill event handler statements ...
         }
     } ]
 };
 */
-// END_CUSTOM_CODE_projectDetailViewModel
+// END_CUSTOM_CODE_elementSearchViewModel

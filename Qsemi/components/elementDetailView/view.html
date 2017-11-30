@@ -4,14 +4,16 @@
             <table style="width:100%;">
                 <tr>
                     <td style="width:10%;">
-                        <a data-role="button" data-icon="home" onclick="goHome()" data-align="left" style="background-color:transparent; border:none;"></a>
-                        <a data-icon="backIcon" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
+                        <a data-icon="backIcon" data-align="right" style="background-color:#4fa81a;color:#4fa81a; border:none;"></a>
+                        <a data-role="button" data-icon="home" onclick="goHome()" data-align="right" style="background-color:transparent; border:none;"></a>
                     </td>
                     <td style="width:80%;">
                         <center><span id="elementDetailViewTitle"></span></center>
                     </td>
                     <td style="width:10%;">
-                        <a data-role="button" data-rel="popover" href="#popover-hbar3" data-align="right"  data-position="end" data-icon="hbar-button" style="background-color:#4fa81a; border:none;"></a>
+                        <!--<a data-role="button" data-rel="popover" href="#popover-hbar3" data-align="right"  data-position="end" data-icon="hbar-button" style="background-color:#4fa81a; border:none;"></a>-->
+                        <a class="headerButton" data-role="button"  data-rel="drawer" data-align="left" data-icon="hbar-button" data-position="end" href="#appDrawer" style="background-color:#4fa81a; border:none;"></a>
+                        <a class="headerButton" data-role="button"  data-rel="drawer" data-align="left" data-icon="hbar-button" data-position="end" style="background-color:#4fa81a;color:#4fa81a; border:none;"></a>
                     </td>
                 </tr>
             </table>

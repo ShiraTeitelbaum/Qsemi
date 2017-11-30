@@ -77,7 +77,105 @@ app.localization.registerView('elementDetailView');
             name: 'ElementGallery',
             autoFill: false
         },
+        jsdoOptionsNCR = {
+            name: 'QualityImpairment',
+            autoFill: false
+        },
         dataSourceOptions = {
+            type: 'jsdo',
+            transport: {},
+            requestEnd: function(e) {
+                var response = e.response;
+                var type = e.type;
+                //console.log(type); // displays "read"
+                //console.log(response);
+                /*if(type == "create")
+                {
+                    current = response;
+                    //updatedWorker = currentWorker;
+                }*/
+                 if(type == "update")
+                {
+                    current = response;
+                   
+                }
+            },
+            error: function(e) {
+                app.mobileApp.pane.loader.hide();
+                if (e.xhr) {
+                    var errorText = "";
+                    try {
+                        errorText = JSON.stringify(e.xhr);
+                    } catch (jsonErr) {
+                        errorText = e.xhr.responseText || e.xhr.statusText || 'An error has occurred!';
+                    }
+                    alert(errorText);
+                } else if (e.errorThrown) {
+                    alert(e.errorThrown);
+                }
+            },
+            schema: {
+                model: {
+                    fields: {
+                        'name': {
+                            field: 'name',
+                            defaultValue: ''
+                        },
+                    }
+                }
+            },
+            sort:{ field: "name", dir: "asc" },
+            serverFiltering: true,
+            serverSorting: true,
+        },
+           dataSourceOptionsT = {
+            type: 'jsdo',
+            transport: {},
+            requestEnd: function(e) {
+                var response = e.response;
+                var type = e.type;
+                //console.log(type); // displays "read"
+                //console.log(response);
+                /*if(type == "create")
+                {
+                    current = response;
+                    //updatedWorker = currentWorker;
+                }*/
+                 if(type == "update")
+                {
+                    current = response;
+                   
+                }
+            },
+            error: function(e) {
+                app.mobileApp.pane.loader.hide();
+                if (e.xhr) {
+                    var errorText = "";
+                    try {
+                        errorText = JSON.stringify(e.xhr);
+                    } catch (jsonErr) {
+                        errorText = e.xhr.responseText || e.xhr.statusText || 'An error has occurred!';
+                    }
+                    alert(errorText);
+                } else if (e.errorThrown) {
+                    alert(e.errorThrown);
+                }
+            },
+            schema: {
+                model: {
+                    fields: {
+                        'name': {
+                            field: 'name',
+                            defaultValue: ''
+                        },
+                    }
+                }
+            },
+            sort:{ field: "name", dir: "asc" },
+            serverFiltering: true,
+            serverSorting: true,
+        },
+        dataSourceOptionsNCR = {
             type: 'jsdo',
             transport: {},
             requestEnd: function(e) {
@@ -175,13 +273,16 @@ app.localization.registerView('elementDetailView');
         /// end data sources
         elementDetailViewModel = kendo.observable({
             _dataSourceOptions: dataSourceOptions,
+            _dataSourceOptionsT: dataSourceOptionsT,
             _dataSourceOptionsGallery: dataSourceOptionsGallery,
+            _dataSourceOptionsNCR: dataSourceOptionsNCR,
             _jsdoOptions: jsdoOptions,
             _jsdoOptionsElementsType: jsdoOptionsElementsType,
             _jsdoOptionsForms: jsdoOptionsForms,
             _jsdoOptionsElementForms: jsdoOptionsElementForms,
             _jsdoOptionsSteps: jsdoOptionsSteps,
             _jsdoOptionsGallery: jsdoOptionsGallery,
+            _jsdoOptionsNCR: jsdoOptionsNCR,
             marker: {},
             markers: [],
             dataSourceSteps: '',
@@ -192,9 +293,11 @@ app.localization.registerView('elementDetailView');
             formCheckListIds: [],
             coreCheckListIds: [],
             QC_click_flag: false,
+            NCR_click_flag: false,
             change_Percent: false,
             surveyorFlag: false,
             elementLocation: {},
+            elementName:'',
             searchChange: function(e) {
                 var searchVal = e.target.value, searchFilterOr,
                     searchFilter = { logic: "and", filters: [] };
@@ -269,28 +372,38 @@ app.localization.registerView('elementDetailView');
             goToProjects: function() {
                 app.mobileApp.navigate('#components/projectDetailView/view.html');
             },
+            goToElementPage: function(e) {
+                app.mobileApp.navigate('#components/elementDetailView/details.html?uid=' + elementDetailViewModel.currentItem.uid+'&breadFlag=true');
+            },
             itemClick: function(e) {
                 var dataItem = e.dataItem || elementDetailViewModel.originalItem;
                 elementDetailViewModel.QC_click_flag = false;
+                elementDetailViewModel.NCR_click_flag = false;
                 elementDetailViewModel.surveyorFlag = false;
                 elementDetailViewModel.change_Percent = false;
-                
-                app.mobileApp.navigate('#components/elementDetailView/details.html?uid=' + dataItem.uid);
+                elementDetailViewModel.elementName = dataItem.name;
 
+                // app.elementLocationMaps.elementLocationMapsModel.backFlag = false;
+
+                app.mobileApp.navigate('#components/elementDetailView/details.html?uid=' + dataItem.uid);
+            },
+            itemClickDefects: function(id) {
+                app.mobileApp.navigate('#components/impairmentDetailView/edit.html?id=' + id);
             },
             openGeotechnical: function(e) {
                 app.mobileApp.navigate('#components/geotechnicalForm/edit.html?elementUid=' + elementDetailViewModel.currentItem.uid+'&elementId='+elementDetailViewModel.currentItem.id);
             },
             openCast: function(e) {
-                // alert(444)
                 app.mobileApp.navigate('#components/castingForm/edit.html?elementUid=' + elementDetailViewModel.currentItem.uid+'&elementId='+elementDetailViewModel.currentItem.id);
             },
             openLaboratory: function(e) {
-                // alert(555)
                 app.mobileApp.navigate('#components/laboratoryTestForm/add.html?elementUid=' + elementDetailViewModel.currentItem.uid+'&elementId='+elementDetailViewModel.currentItem.id);
             },
+            openElementMap: function(e) {
+                
+            },
             elementNoStepClick: function () {
-                alert("The current step is currently unavailable");
+                // alert("The current step is currently unavailable");
             },
             elementStepClick: function(id) {
                 app.elementDetailView.elementDetailViewModel.surveyorFlag = false;
@@ -304,6 +417,7 @@ app.localization.registerView('elementDetailView');
                 $("#saveGeneralDetailsButtom").hide();
                 $("#spanBeforeEdit").hide();
                 $("#spanAfterEdit").hide();
+                $("#noOpenElementDefects").hide();
                 if(e.view.params.mapFlag != undefined) {
                     var id = e.view.params.id,
                         stepnum = e.view.params.stepNum;
@@ -329,8 +443,10 @@ app.localization.registerView('elementDetailView');
                                 elementDetailViewModel.setCurrentItemByUid(view[0].uid);
                                
                                 document.getElementById("LastUpdateDateElem").innerHTML = kendo.toString(view[0].updatedAt, "dd/MM/yyyy");
-                                if(this.QC_click_flag == true)
+                                if(elementDetailViewModel.QC_click_flag == true)
                                     document.getElementById("QC_Button").click();
+                                else if(elementDetailViewModel.NCR_click_flag == true) 
+                                    document.getElementById("NCR_Button").click();
                                 else document.getElementById("defaultOpen").click();
                             });
                         });
@@ -347,13 +463,36 @@ app.localization.registerView('elementDetailView');
                             
                     dataSource.fetch(function() {
                         var view = dataSource.data();
-                       console.log("view")
-                       console.log(view)
+                      
                         elementDetailViewModel.setCurrentItemByUid(view[0].uid);
                         document.getElementById("LastUpdateDateElem").innerHTML = kendo.toString(view[0].updatedAt, "dd/MM/yyyy");
                         if(elementDetailViewModel.QC_click_flag == true)
                             document.getElementById("QC_Button").click();
+                        else if(elementDetailViewModel.NCR_click_flag == true) 
+                            document.getElementById("NCR_Button").click();
                         else document.getElementById("defaultOpen").click();
+                    });
+                }
+                else if(e.view.params.searchFlag != undefined) {
+                    app.mobileApp.showLoading();
+                    var jsdoOptions = elementDetailViewModel.get('_jsdoOptions'),
+                        dataSourceOptions = elementDetailViewModel.get('_dataSourceOptions'),
+                        jsdo = new progress.data.JSDO(jsdoOptions);
+
+                    dataSourceOptions.transport.jsdo = jsdo;
+                    dataSource = new kendo.data.DataSource(dataSourceOptions);
+                    dataSource.filter({ field: "id", operator: "==", value: e.view.params.id });
+                    elementDetailViewModel.set('dataSource', dataSource);
+                    dataSource.fetch(function() {
+                        var view = dataSource.data();
+                        elementDetailViewModel.setCurrentItemByUid(view[0].uid);
+                        document.getElementById("LastUpdateDateElem").innerHTML = kendo.toString(view[0].updatedAt, "dd/MM/yyyy");
+                        if(elementDetailViewModel.QC_click_flag == true)
+                            document.getElementById("QC_Button").click();
+                        else if(elementDetailViewModel.NCR_click_flag == true) 
+                            document.getElementById("NCR_Button").click();
+                        else document.getElementById("defaultOpen").click();
+                        app.mobileApp.hideLoading();
                     });
                 }
                 else {
@@ -361,17 +500,54 @@ app.localization.registerView('elementDetailView');
                      dataSource = elementDetailViewModel.get('dataSource'),
                     itemModel = dataSource.getByUid(uid);
                     
-                    elementDetailViewModel.setCurrentItemByUid(uid);
+                    if(e.view.params.breadFlag == undefined) {
+                        elementDetailViewModel.setCurrentItemByUid(uid);
+                        document.getElementById("LastUpdateDateElem").innerHTML = kendo.toString(itemModel.updatedAt, "dd/MM/yyyy");
+                    }
+                    else document.getElementById("LastUpdateDateElem").innerHTML = kendo.toString(elementDetailViewModel.currentItem.updatedAt, "dd/MM/yyyy");
                     /// start detail form show
-                    document.getElementById("LastUpdateDateElem").innerHTML = kendo.toString(itemModel.updatedAt, "dd/MM/yyyy");
+                    // document.getElementById("LastUpdateDateElem").innerHTML = kendo.toString(itemModel.updatedAt, "dd/MM/yyyy");
                     if(elementDetailViewModel.QC_click_flag == true)
                         document.getElementById("QC_Button").click();
+                    else if(elementDetailViewModel.NCR_click_flag == true) 
+                        document.getElementById("NCR_Button").click();
                     else document.getElementById("defaultOpen").click();
                     /// end detail form show
                 }
             },
+            openNCR1: function() {
+                elementDetailViewModel.NCR_click_flag = true;
+                $("#noOpenElementDefects").hide();
+                //jsdoOptionsNCR
+                var jsdoOptionsNcr = elementDetailViewModel.get('_jsdoOptionsNCR'),
+                    jsdoNcr = new progress.data.JSDO(jsdoOptionsNcr),
+                    dataSourceOptionsN = elementDetailViewModel.get('_dataSourceOptionsNCR');
+
+                dataSourceOptionsN.transport.jsdo = jsdoNcr;
+                var dataSourceNcr = new kendo.data.DataSource(dataSourceOptionsN);
+                console.log("elementDetailViewModel.currentItem")
+                console.log(elementDetailViewModel.currentItem)
+                dataSourceNcr.filter({ field: "R371733782", operator: '==', value: elementDetailViewModel.currentItem.id});
+                elementDetailViewModel.set('dataSourceNcr', dataSourceNcr)
+                // dataSourceNcr
+                $("#elementImpartmentList").show();
+                var listView= $("#elementImpartmentList").kendoMobileListView({
+                    dataSource: dataSourceNcr ,
+                    template: kendo.template($("#ElementDefectsTemplate").html())
+                });
+                dataSourceNcr.fetch(function() {
+                    console.log("ncr")
+                    console.log(dataSourceNcr.data())
+                    if(dataSourceNcr.data().length == 0) {
+                        $("#noOpenElementDefects").show();
+                        elementDetailViewModel.set('dataSourceNcr', '')
+                    }
+                });
+            },
             openQC1: function () {
                 this.QC_click_flag = true;
+                elementDetailViewModel.QC_click_flag = true; 
+
                 var step0 = elementDetailViewModel.currentItem.Step0,
                     step1 = elementDetailViewModel.currentItem.Step1,
                      step2 = elementDetailViewModel.currentItem.Step2,
@@ -540,8 +716,7 @@ app.localization.registerView('elementDetailView');
 
                         dataSourceGallery.fetch(function() {
                             var view = dataSourceGallery.data();
-                            console.log("view")
-                            console.log(view)
+                            
                             if(view.length > 0 && view[0].R369888918 == "null") {
                                 if(view[0].imageURL != "null") {
                                     document.getElementById("addCapturePhotoS").style.color = "red";
@@ -624,6 +799,13 @@ app.localization.registerView('elementDetailView');
                     template = kendo.template(templateContent);
                     templateContentCore = $("#coreStageTemplate").html();
                     templateCore = kendo.template(templateContentCore);
+
+                    var jsdoOptionsElemForms = elementDetailViewModel.get('_jsdoOptionsElementForms'),
+                        jsdoElemForms = new progress.data.JSDO(jsdoOptionsElemForms);
+
+                    dataSourceOptions.transport.jsdo = jsdoElemForms;
+                    var dataSourceEleForms = new kendo.data.DataSource(dataSourceOptions);
+                    elementDetailViewModel.set('dataSourceElementForms', dataSourceEleForms);
                     
                     var dataSource = elementDetailViewModel.get('dataSourceElementForms')
                     dataSource.filter({
@@ -664,6 +846,7 @@ app.localization.registerView('elementDetailView');
                 if(id != 7) {
                     element_step.innerHTML = elementDetailViewModel.stepsNames[id].name;
                 }
+                document.getElementById("step_name").innerHTML = (elementDetailViewModel.stepsNames[id].name).toLowerCase();
             },
             setCurrentItemByUid: function(uid) {
                 var item = uid,
@@ -715,9 +898,10 @@ app.localization.registerView('elementDetailView');
                         jsdoElemForms.unsubscribe('afterUpdate', afterUpdateFn);
                         if (success === true) {
                             elementDetailViewModel.coreCheckListIds = jsrow.data.R369426825;
-                            app.mobileApp.navigate('#components/formDetailView/view.html?formid='+itemData.id+'&formname='+itemData.name+'&coreFlag=true');
+                            // app.mobileApp.navigate('#components/formDetailView/view.html?formid='+itemData.id+'&formname='+itemData.name+'&stagenum='+itemData.stageNum+'&coreFlag=false');
+                            app.mobileApp.navigate('#components/formDetailView/view.html?formid='+itemData.id+'&formname='+itemData.name+'&stagenum='+itemData.stageNum+'&coreFlag=true');
                         } else {
-                            alert("error")
+                            // alert("error")
                         }
                     };
                     jsdoElemForms.subscribe('afterUpdate', afterUpdateFn);
@@ -749,12 +933,13 @@ app.localization.registerView('elementDetailView');
                         jsdoElemForms.unsubscribe('afterUpdate', afterUpdateFn);
                         if (success === true) {
                             elementDetailViewModel.formCheckListIds = jsrow.data.R365599694;
-                            console.log("jsrow##")
-                            console.log(jsrow)    
-                            // console.log(itemData)
-                            app.mobileApp.navigate('#components/formDetailView/view.html?formid='+itemData.id+'&formname='+itemData.name+'&stagenum='+itemData.stageNum+'&coreFlag=false');
+                           console.log("itemData.stageNum")
+                           console.log(itemData.stageNum)
+                           if(itemData.stageNum == 5)
+                            app.mobileApp.navigate('#components/formDetailView/view.html?formid='+itemData.id+'&stagenum='+itemData.stageNum+'&coreFlag=false');
+                            else app.mobileApp.navigate('#components/formDetailView/view.html?formid='+itemData.id+'&formname='+itemData.name+'&stagenum='+itemData.stageNum+'&coreFlag=false');
                         } else {
-                            alert("error")
+                            // alert("error")
                         }
                     };
                     jsdoElemForms.subscribe('afterUpdate', afterUpdateFn);
@@ -785,7 +970,7 @@ app.localization.registerView('elementDetailView');
             isListmenu = false,
             backbutton = e.view.element && e.view.element.find('header [data-role="navbar"] .backButtonWrapper'),
             dataSourceOptions = elementDetailViewModel.get('_dataSourceOptions'),
-            dataSource, dataSourceEleForms;
+            dataSource, dataSourceT, dataSourceEleForms, dataSourceNcr;
             
         elementDetailViewModel.stepId = parseInt(e.view.params.stageId);
 
@@ -803,7 +988,8 @@ app.localization.registerView('elementDetailView');
         elementDetailViewTitle.innerHTML = sessionStorage.getItem("locationName");
         stageName.innerHTML = sessionStorage.getItem("stageName");
         $("#search").val('');
-
+        
+        var elementTypeOCS;
             dataProvider.loadCatalogs().then(function _catalogsLoaded() {
                 var jsdoOptions = elementDetailViewModel.get('_jsdoOptions'),
                     jsdo = new progress.data.JSDO(jsdoOptions);
@@ -811,15 +997,55 @@ app.localization.registerView('elementDetailView');
                 dataSourceOptions.transport.jsdo = jsdo;
                 dataSource = new kendo.data.DataSource(dataSourceOptions);
 
-                dataSource.filter({
-                    logic: "and",
-                    filters: [
-                        {field: "R363890883", operator: "==", value: stepId},
-                        {field: "locationId", operator: "==", value: sessionStorage.getItem("locationId")}
-                        ]
-                });            
-          
-                elementDetailViewModel.set('dataSource', dataSource);
+                var jsdoOptionsT = elementDetailViewModel.get('_jsdoOptionsElementsType'),
+                    jsdoT = new progress.data.JSDO(jsdoOptionsT);
+
+                dataSourceOptionsT.transport.jsdo = jsdoT;
+                dataSourceT = new kendo.data.DataSource(dataSourceOptionsT);
+                dataSourceT.read().then(function(){
+                    console.log("elementTypeOCS")
+                    console.log(dataSourceT.data())
+                    var view = dataSourceT.data();
+                    for(var i=0; i<view.length;i++) {
+                        // console.log("view[i].name")
+                        // console.log(view[i].name)
+                        if(view[i].name == "OCS Wire") {
+                            elementTypeOCS = view[i].id;
+                            break;
+                        }
+                    }
+                });
+
+                if(e.view.params.stageNum >=4) {
+                        dataSource.filter({
+                            logic: "and",
+                            filters: [
+                                {field: "R363890883", operator: "==", value: stepId},
+                                {field: "locationId", operator: "==", value: sessionStorage.getItem("locationId")},
+                                {field: "R363889131", operator: "==", value: 371595899}
+                                ]
+                        });            
+                        dataSource.fetch(function(){
+                            console.log("elementTypeOCS")
+                            console.log(elementTypeOCS)
+                            console.log(parseInt(elementTypeOCS))
+                            console.log("dataSource.data")
+                            console.log(dataSource.data())
+                            //console.log(dataSource.data()[0].R363889131)
+                        });
+                        elementDetailViewModel.set('dataSource', dataSource);
+                    }
+                    else {
+                        dataSource.filter({
+                            logic: "and",
+                            filters: [
+                                {field: "R363890883", operator: "==", value: stepId},
+                                {field: "locationId", operator: "==", value: sessionStorage.getItem("locationId")}
+                                ]
+                        });            
+                
+                        elementDetailViewModel.set('dataSource', dataSource);
+                    }
                 
                 var jsdoOptionsElemForms = elementDetailViewModel.get('_jsdoOptionsElementForms'),
                     jsdoElemForms = new progress.data.JSDO(jsdoOptionsElemForms);

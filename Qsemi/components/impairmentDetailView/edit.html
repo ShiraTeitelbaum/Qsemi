@@ -4,12 +4,12 @@
             <table style="width:100%;">
                 <tr>
                     <td style="width:10%;">
-                        <a data-icon="home" data-role="button" onclick="goHome()" data-align="left" style="background-color:transparent; border:none;"></a>
                         <a data-icon="backIcon" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
+                        <a data-icon="home" data-role="button" data-align="left" style="background-color:#4fa81a;color:#4fa81a; border:none;"></a>
                     </td>
                     <td style="width:80%;">
-                         <!--<center><span data-bind="text: currentItem['name']"></span></center>-->
-                         <center><span data-bind="text: strings.impairmentDetailView.title"></span></center>
+                         <!--<center><span data-bind="text: strings.impairmentDetailView.title"></span></center>-->
+                         <center><span id="projectName"></span></center>
                     </td>
                     <td style="width:10%;">
                        <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }, buttonText: strings.buttonsText.save" style="background-color:#4fa81a;color:#4fa81a; border:none;"></a>
@@ -31,10 +31,11 @@
         <br/>
         <div style="height:1em"></div>
         <div style="width:100%;height:25%; background-color:#e9eaeb;">
-            <span style="box-shadow: 0px 2px 3px #A29E9E;background-color:#4fa81a;font-family: Tahoma, Geneva, sans-serif; color:white; text-align:center;padding-left: 6px;padding-top: 2px;padding-right: 12px;padding-bottom: 3px;">Check Name: <span data-bind="text:editFormData.name"></span></span> <!--data-bind="text:currentItem['name']"-->
+            <span style="box-shadow: 0px 2px 3px #A29E9E;background-color:#4fa81a;font-family: Tahoma, Geneva, sans-serif; color:white; text-align:center;padding-left: 6px;padding-top: 2px;padding-right: 12px;padding-bottom: 3px;">Check Details: 
         </div>
         <div id="impairtmentDetails" style="background-color: #FFFFFF; width: 100%;">
             <br/>
+            <span style="padding-left:2%;" data-bind="text: strings.impairmentDetailView.checkName"></span><span data-bind="text: editFormData.name"></span><br/><br/>
             <span style="padding-left:2%;" data-bind="text: strings.impairmentDetailView.elementName"></span><span id="nameElementImpairtment" data-bind="text: currenItem.ElementName"></span> <br/><br/>
             <span style="padding-left:2%;" data-bind="text: strings.impairmentDetailView.impairmentDate"></span><span id="dateImpairtment"></span> <br/><br/>
             <span style="padding-left:2%;margin-top:5%;" data-bind="text: strings.impairmentDetailView.status"></span><span id="statusImpairtment"></span> <br/><br/>
@@ -197,10 +198,11 @@
                     <center>
                         <div style="border:1px solid rgba(128, 128, 128, 0.5); background-color: white; width:90%;">  
                             <label class="km-label-above field field--textarea">  
-                                <div class='signature-wrapper'>
-                                    <div id='signatureOpenNCR'></div>
+                                <!--<div class='signature-wrapper'>
+                                    <div id='signatureOpenNCR' contenteditable="false"></div>
                                     <input type='hidden' id='SignatureAdd-value' name='SignatureAdd-value'/>
-                                </div>
+                                </div>-->
+                                <img id="signatureOpenNCR" src="" />
                             </label>
                         </div>
                     </center>
@@ -208,7 +210,7 @@
                 <footer data-role="footer" style="background-color: transparent;">
                     <div style="width:100%; margin-bottom:3%;">
                         <center>
-                            <a data-role="button" style="margin-bottom:0%;border-radius:0;" data-bind="events:{click: closeSignatureOpenNCRPopUp}"><span data-bind="text: strings.stagesFormImg.close"></span></a>
+                            <a data-role="button" style="margin-bottom:0%;border-radius:0;" data-bind="events:{click: closeSignatureOpenNCRPopUp}"><span data-bind="text: strings.buttonsText.close"></span></a>
                             <!--<a id="Reset" data-role="button" style="margin-bottom:0%;border-radius:0;"><span data-bind="text: strings.stagesFormSignature.clear"></span></a>-->
                         </center>
                     </div>
@@ -236,7 +238,7 @@
                 <footer data-role="footer" style="background-color: transparent;">
                     <div style="width:100%; margin-bottom:3%;">
                         <center>
-                            <a data-role="button" style="margin-bottom:0%;border-radius:0;" data-bind="events:{click: closeSignatureCloseNCRPopUp}"><span data-bind="text: strings.stagesFormImg.close"></span></a>
+                            <a data-role="button" style="margin-bottom:0%;border-radius:0;" data-bind="events:{click: closeSignatureCloseNCRPopUp}"><span data-bind="text: strings.buttonsText.save"></span></a>
                             <a id="ResetCloseNcr" data-role="button" style="margin-bottom:0%;border-radius:0;"><span data-bind="text: strings.stagesFormSignature.clear"></span></a>
                         </center>
                     </div>

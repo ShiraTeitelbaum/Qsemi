@@ -4,8 +4,8 @@
             <table style="width:100%;">
                 <tr>
                     <td style="width:10%;">
-                        <a data-icon="home" data-role="button" onclick="goHome()" data-align="left" style="background-color:transparent; border:none;"></a>
                         <a data-icon="backIcon" data-role="backbutton" data-align="left" style="background-color:transparent; border:none;"></a>
+                        <a data-icon="home" data-role="button" data-align="left" style="background-color:#4fa81a;color:#4fa81a; border:none;"></a>
                     </td>
                     <td style="width:80%;">
                          <center><span id="formNameCheckList"></span></center>
@@ -21,14 +21,21 @@
         </div>
     </header>
 
-
+    <!--<div style="margin-top:2%;margin-left:2%;">
+        <span style="color:gray;" id="element_name1" data-bind="events: {click: formDetailViewModel.goToElementPage2}"></span><span style="color:gray;"> >> </span><span style="color:gray;" id="step_name1" data-bind="events: {click: formDetailViewModel.goToStepPage2}"></span>
+        <span style="color:gray;"> >> </span><span style="font-weight:bold;" id="form_name1"></span>
+    </div>-->
+    <div style="margin-top:2%;margin-left:2%;">
+        <span style="color:gray;" id="element_name1"></span><span style="color:gray;"> >> </span><span style="color:gray;" id="step_name1"></span>
+        <span style="color:gray;"> >> </span><span style="font-weight:bold;" id="form_name1"></span>
+    </div>
     <!-- START_CUSTOM_CODE_formDetailView -->
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
 
     <!-- END_CUSTOM_CODE_formDetailView -->
-    <div class="details-content screen__content screen__content--details" style="overflow-x:hidden; background-color: #e9eaeb; width: 100%; height: 100%;">
-        <br/>
-        <br/>
+    <div class="details-content screen__content screen__content--details" style="margin-top:2%;overflow-x:hidden; background-color: #e9eaeb; width: 100%; height: 100%;">
+        <!--<br/>
+        <br/>-->
         <div id="elementGeneralDetails" data-role="collapsible" data-icon-position="right" style="background-color:white; margin-bottom:0;"> <!-- data-collapse-icon="arrow-up" data-expand-icon="arrow-down" -->
             <h3>General Details</h3>
             <!--<h3 data-bind="text: strings.elementDetailView.elementDetailViewModel.editableListForm3.elementDetails.generalDetails"></h2>    style="font-weight:normal;" -->
@@ -221,15 +228,16 @@
                 </div>
             </div>
 
+        <!--<br/>-->
         <ul id="formCheckList" class="masterDetailView list" data-role="listview" data-auto-bind="false" data-style="inset" data-template="formDetailViewModelTemplate" data-bind="source: formDetailViewModel.dataSource, events: {click: formDetailViewModel.itemClick}"
-        data-pull-to-refresh="false" data-endless-scroll="false" style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0; border-bottom: 1px solid #e9eaeb;">
+        data-pull-to-refresh="false" data-endless-scroll="false" style="margin-top: 3%; padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0; border-bottom: 1px solid #e9eaeb;">
         </ul>
         <!--<ul id="formCheckList" class="masterDetailView list" data-role="listview" data-auto-bind="false" data-style="inset" data-bind="events: {click: formDetailViewModel.itemClick}"
         data-pull-to-refresh="false" data-endless-scroll="false" style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0; border-bottom: 1px solid #e9eaeb;">
         </ul>-->
-
+        <!--<br/>-->
         <ul id="coreCheckList" class="masterDetailView list" data-role="listview" data-auto-bind="false" data-style="inset" data-template="coreDetailViewModelTemplate" data-bind="source: formDetailViewModel.dataSourceCore, events: {click: formDetailViewModel.itemCoreClick}"
-        data-pull-to-refresh="false" data-endless-scroll="false" style="padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0; border-bottom: 1px solid #e9eaeb;">
+        data-pull-to-refresh="false" data-endless-scroll="false" style="margin-top: 3%; padding: 0; margin: 0; width: 100%; height: 100%; margin-left: 0; border-bottom: 1px solid #e9eaeb;">
         </ul>
 
 
@@ -268,7 +276,12 @@
                             <span>#: data['Description'].substring(0, 65) #</span><span>...</span>
                         # } #
                     </td>
-                    <td style="width: 2%;">
+                    <td style="width: 3%;">
+                        <center>
+                            <img id=#:data['id']+'checkNcr'# src="images/checkNcrIcon.png" style="margin-left:5px;"/>
+                        </center>
+                    </td>
+                    <td style="width: 1%;">
                         <a data-role="button" data-icon="arrow-open" style="color:black;background-color:transparent; border:none;"></a>
                     </td>
                 </tr>

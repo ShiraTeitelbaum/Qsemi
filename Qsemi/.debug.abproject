@@ -1,11 +1,9 @@
 {
   "CorePlugins": [
-    "cordova-plugin-battery-status",
     "cordova-plugin-camera",
     "cordova-plugin-console",
     "cordova-plugin-device",
     "cordova-plugin-device-orientation",
-    "cordova-plugin-dialogs",
     "cordova-plugin-file",
     "cordova-plugin-file-transfer",
     "cordova-plugin-geolocation",

@@ -13,7 +13,7 @@ app.localization.registerView('controlPanel');
 (function(parent) {
     var dataProvider = app.data.qcsemidataProvider,
         /// start global model properties
-
+        currentTask, currentTaskTeam, currentTaskWorker, currentTaskTeamLeader,
         /// end global model properties
         fetchFilteredData = function(paramFilter, searchFilter) {
             var model = parent.get('controlPanelModel'),
@@ -56,9 +56,218 @@ app.localization.registerView('controlPanel');
             name: 'QualityDashboard',
             autoFill: false
         },
+        jsdoOptionsDefects = {
+            name: 'QualityImpairment',
+            autoFill: false
+        },
+        jsdoOptionsWork = {
+            name: 'WorkArrangement',
+            autoFill: false
+        },
+        jsdoOptionsTeams = {
+            name: 'WorkTeamsSemi',
+            autoFill: false
+        },
+        jsdoOptionsWorkers = {
+            name: 'WorkerObjectSEMI',
+            autoFill: false
+        },
+        dataSourceOptionsWork = {
+            type: 'jsdo', 
+            transport: {},
+            requestEnd: function(e) {
+                var response = e.response;
+                var type = e.type;
+                //console.log(type); // displays "read"
+                //console.log(response);
+                // if(type == "read") {
+                //     currentTaskTeam = response;
+                //     console.log("response")
+                //     console.log(response.data[0].name)
+                //     // document.getElementById("taskTeamName").innerHTML = currentTaskTeam.data[0].name; 
+                // }
+                 if(type == "update")
+                {
+                    currentTask = response;
+                   
+                }
+            },
+            error: function(e) {
+                app.mobileApp.pane.loader.hide();
+                if (e.xhr) {
+                    var errorText = "";
+                    try {
+                        errorText = JSON.stringify(e.xhr);
+                    } catch (jsonErr) {
+                        errorText = e.xhr.responseText || e.xhr.statusText || 'An error has occurred!';
+                    }
+                    alert(errorText);
+                } else if (e.errorThrown) {
+                    alert(e.errorThrown);
+                }
+            },
+            schema: {
+                model: {
+                    fields: {
+                        'name': {
+                            field: 'name',
+                            defaultValue: ''
+                        },
+                    }
+                }
+            },
+            serverFiltering: true,
+
+        },
+        dataSourceOptionsDefects = {
+            type: 'jsdo',
+            transport: {},
+            requestEnd: function(e) {
+                var response = e.response;
+                var type = e.type;
+                //console.log(type); // displays "read"
+                //console.log(response);
+                // if(type == "read") {
+                //     // console.log("response")
+                //     // console.log(response)
+                //     checklist = response;
+                // }
+                if(type == "create")
+                {
+                    current = response;
+                    //updatedWorker = currentWorker;
+                }
+                 if(type == "update")
+                {
+                    current = response;
+                   
+                }
+            },
+            error: function(e) {
+                app.mobileApp.pane.loader.hide();
+                if (e.xhr) {
+                    var errorText = "";
+                    try {
+                        errorText = JSON.stringify(e.xhr);
+                    } catch (jsonErr) {
+                        errorText = e.xhr.responseText || e.xhr.statusText || 'An error has occurred!';
+                    }
+                    alert(errorText);
+                } else if (e.errorThrown) {
+                    alert(e.errorThrown);
+                }
+            },
+            schema: {
+                model: {
+                    fields: {
+                        'name': {
+                            field: 'name',
+                            defaultValue: ''
+                        },
+                    }
+                }
+            },
+            serverFiltering: true,
+
+        },
         dataSourceOptions = {
             type: 'jsdo',
             transport: {},
+            error: function(e) {
+                app.mobileApp.pane.loader.hide();
+                if (e.xhr) {
+                    var errorText = "";
+                    try {
+                        errorText = JSON.stringify(e.xhr);
+                    } catch (jsonErr) {
+                        errorText = e.xhr.responseText || e.xhr.statusText || 'An error has occurred!';
+                    }
+                    alert(errorText);
+                } else if (e.errorThrown) {
+                    alert(e.errorThrown);
+                }
+            },
+            schema: {
+                model: {
+                    fields: {
+                        'name': {
+                            field: 'name',
+                            defaultValue: ''
+                        },
+                    }
+                }
+            },
+            serverFiltering: true,
+
+        },
+        dataSourceOptionsTeams = {
+            type: 'jsdo',
+            transport: {},
+            requestEnd: function(e) {
+                var response = e.response;
+                var type = e.type;
+                //console.log(type); // displays "read"
+                //console.log(response);
+                if(type == "read") {
+                    currentTaskTeam = response;
+                    console.log("response")
+                    console.log(response.data[0].name)
+                    // document.getElementById("taskTeamName").innerHTML = currentTaskTeam.data[0].name; 
+                }
+                 if(type == "update")
+                {
+                    currentTaskTeam = response;
+                   
+                }
+            },
+            error: function(e) {
+                app.mobileApp.pane.loader.hide();
+                if (e.xhr) {
+                    var errorText = "";
+                    try {
+                        errorText = JSON.stringify(e.xhr);
+                    } catch (jsonErr) {
+                        errorText = e.xhr.responseText || e.xhr.statusText || 'An error has occurred!';
+                    }
+                    alert(errorText);
+                } else if (e.errorThrown) {
+                    alert(e.errorThrown);
+                }
+            },
+            schema: {
+                model: {
+                    fields: {
+                        'name': {
+                            field: 'name',
+                            defaultValue: ''
+                        },
+                    }
+                }
+            },
+            serverFiltering: true,
+
+        },
+        dataSourceOptionsWorkers = {
+            type: 'jsdo',
+            transport: {},
+            requestEnd: function(e) {
+                var response = e.response;
+                var type = e.type;
+                //console.log(type); // displays "read"
+                //console.log(response);
+                if(type == "read") {
+                    currentTaskTeamLeader = response;
+                    console.log("currentTaskTeamLeader response")
+                    // console.log(response)
+                     console.log(response.data[0].name)
+                    // document.getElementById("taskTeamName").innerHTML = currentTaskTeam.data[0].name; 
+                }
+                 if(type == "update")
+                {
+                    currentTaskTeam = response;
+                   
+                }
+            },
             error: function(e) {
                 app.mobileApp.pane.loader.hide();
                 if (e.xhr) {
@@ -90,10 +299,23 @@ app.localization.registerView('controlPanel');
         /// end data sources
         controlPanelModel = kendo.observable({
             _dataSourceOptions: dataSourceOptions,
+            _dataSourceOptionsDefects: dataSourceOptionsDefects,
+            _dataSourceOptionsWork: dataSourceOptionsWork,
+            _dataSourceOptionsTeams: dataSourceOptionsTeams,
+            _dataSourceOptionsWorkers: dataSourceOptionsWorkers,
             _jsdoOptions: jsdoOptions,
             _jsdoOptionsElements: jsdoOptionsElements,
             _jsdoOptionsLocations: jsdoOptionsLocations,
+            _jsdoOptionsDefects: jsdoOptionsDefects,
+            _jsdoOptionsWork: jsdoOptionsWork,
+            _jsdoOptionsTeams: jsdoOptionsTeams,
+            _jsdoOptionsWorkers: jsdoOptionsWorkers,
             stageList: [],
+            step_id: '',
+            page_scroller: '',
+            qcTabFlag: false,
+            taskTabFlag: false,
+            ncrTabFlag: false,
             fixHierarchicalData: function(data) {
                 var result = {},
                     layout = {};
@@ -156,6 +378,24 @@ app.localization.registerView('controlPanel');
                 
                 app.mobileApp.navigate('#components/elementDetailView/view.html?stageId=' + dataItem.id);
             },
+            // itemClickTasks: function(e) {
+            //     var dataItem = e.dataItem || controlPanelModel.originalItem;
+
+            //     app.mobileApp.navigate('#components/taskDetailView/edit.html?uid=' + dataItem.uid);
+            // },
+            itemClickTasks: function(id) {
+                // var dataItem = e.dataItem || taskDetailViewModel.originalItem;
+
+                app.mobileApp.navigate('#components/taskDetailView/edit.html?id=' + id);
+            },
+            itemClickDefects: function(id) {
+                // console.log("e")
+                // console.log(e)
+                // var dataItem = e.dataItem || controlPanelModel.originalItem;
+                console.log("id")
+                console.log(id)
+                app.mobileApp.navigate('#components/impairmentDetailView/edit.html?id=' + id);
+            },
             openStage: function(num) {
                 var stepId,
                     dataSource = controlPanelModel.get('dataSource');
@@ -192,8 +432,8 @@ app.localization.registerView('controlPanel');
                         else if(steps[i].stageNum == 6 && steps[i].stageNum == num) { stepId = steps[i].id; break; }
                         else if(steps[i].stageNum == 7 && steps[i].stageNum == num) { stepId = steps[i].id; break; }
                     }
-                    
-                    app.mobileApp.navigate('#components/elementDetailView/view.html?stageId=' + stepId);
+                    controlPanelModel.step_id = stepId;
+                    app.mobileApp.navigate('#components/elementDetailView/view.html?stageId=' + stepId+'&stageNum='+num);
                 });
 
                 
@@ -255,6 +495,68 @@ app.localization.registerView('controlPanel');
             openImpairment: function() {
                 app.mobileApp.navigate('#components/impairmentDetailView/view.html');
             },
+            openDefectsTab1: function(e) {
+                var jsdoOptions = controlPanelModel.get('_jsdoOptionsDefects'),
+                    jsdo = new progress.data.JSDO(jsdoOptions);
+
+                dataSourceOptions.transport.jsdo = jsdo;
+                var dataSource = new kendo.data.DataSource(dataSourceOptions);
+                // dataSource.filter({ field: "locationId", operator: "==", value: sessionStorage.getItem("locationId") });
+                dataSource.filter({
+                    logic: "and",
+                    filters: [
+                        { field: "locationId", operator: "==", value: sessionStorage.getItem("locationId") },
+                        { field: "Fixed", operator: "!=", value: 1 }
+                    ]
+                });
+             
+                dataSource.sort({ field: "updatedAt", dir: "desc" });
+
+                dataSource.fetch(function() {
+                    console.log("dataSource.data()")
+                    console.log(dataSource.data())
+                    if(dataSource.data().length == 0) {
+                        $("#noOpenImpairments").show();
+                        controlPanelModel.set('dataSourceDefects', '');
+                    }
+                    // else controlPanelModel.set('dataSourceDefects', dataSource);
+                });
+               
+                controlPanelModel.set('dataSourceDefects', dataSource);
+            },
+            openSearch: function(e) {
+                app.mobileApp.navigate('#components/elementSearchView/view.html');
+            },
+            openQcTab1: function(e) {
+            },
+            openTaskTab1: function(e) {
+                var dataSourceOptionsWo = controlPanelModel.get('_dataSourceOptionsWorkers'),
+                    dataSourceOptionsWork = controlPanelModel.get('_dataSourceOptionsWork'),
+                    dataSourceOptionsTe = controlPanelModel.get('_dataSourceOptionsTeams');
+
+                console.log("currentTaskTeamLeader")
+                console.log(currentTaskTeamLeader.data[0].R363991813)
+                var jsdoOptionsW = controlPanelModel.get('_jsdoOptionsWork'),
+                    jsdoW = new progress.data.JSDO(jsdoOptionsW);
+
+                dataSourceOptionsWork.transport.jsdo = jsdoW;
+                var dataSource = new kendo.data.DataSource(dataSourceOptionsWork);
+                dataSource.filter({
+                    logic: "and",
+                        filters: [
+                            { field: "locationId", operator: "==", value: sessionStorage.getItem("locationId") },
+                            { field: "Done", operator: "!=", value: true },
+                            { field: "R371893913", operator: "==", value: currentTaskTeamLeader.data[0].R363991813 }
+                            ] 
+                });
+                controlPanelModel.set('dataSourceWork', dataSource);
+                dataSource.fetch(function() {
+                    console.log("tasks view")
+                    console.log(dataSource.data())
+                    if(dataSource.data().length == 0)
+                        $("#noOpenTasks").show();
+                });
+            },
             /// start masterDetails view model functions
             /// end masterDetails view model functions
             currentItem: {}
@@ -275,12 +577,18 @@ app.localization.registerView('controlPanel');
  
     parent.set('onShow', function(e) {
         app.generalMapView.generalMapViewModel.gmapFlag = false;
+        app.controlPanel.controlPanelModel.page_scroller = e.view.scroller;
+        $("#noOpenImpairments").hide();
+        $("#noOpenTasks").hide();
+        // openQcTab();
 
         var param = e.view.params.filter ? JSON.parse(e.view.params.filter) : null,
             isListmenu = false,
             backbutton = e.view.element && e.view.element.find('header [data-role="navbar"] .backButtonWrapper'),
             dataSourceOptions = controlPanelModel.get('_dataSourceOptions'),
-            dataSource;
+            dataSourceOptionsWork = controlPanelModel.get('_dataSourceOptionsWork'),
+            dataSourceOptionsWorker = controlPanelModel.get('_dataSourceOptionsWorkers'),
+            dataSource, dataSourceWork, dataSourceDefects, dataSourceWorker;
 
         if (param || isListmenu) {
             backbutton.show();
@@ -293,6 +601,14 @@ app.localization.registerView('controlPanel');
             }
         }
 
+        var jsdoOptionsWo = controlPanelModel.get('_jsdoOptionsWorkers'),
+            jsdoWor = new progress.data.JSDO(jsdoOptionsWo);
+
+        dataSourceOptionsWorker.transport.jsdo = jsdoWor;
+        dataSourceWorker = new kendo.data.DataSource(dataSourceOptionsWorker);
+        dataSourceWorker.filter({ field: "WorkerId", operator: "==", value: app.authenticationView.authenticationViewModel.current_User.PersonalID });
+        //currentTaskTeamLeader
+
         $("#controlPanelTitle").innerHTML = sessionStorage.getItem("locationName");
          var stages = [{ "name": "SURVEYOR", "stageNum": 0 }, { "name": "FOUNDATION", "stageNum": 1 }, { "name": "ERECTION", "stageNum": 2 },
                     { "name": "EQUIPMENT & CANTILEVER", "stageNum": 3 }, { "name": "OCS WIRES", "stageNum": 4 }, { "name": "E&B", "stageNum": 5 },
@@ -300,6 +616,7 @@ app.localization.registerView('controlPanel');
         app.elementDetailView.elementDetailViewModel.stageList = stages;
 
         //if (!controlPanelModel.get('dataSource')) {
+     
             dataProvider.loadCatalogs().then(function _catalogsLoaded() {
                 var jsdoOptions = controlPanelModel.get('_jsdoOptions'),
                     jsdo = new progress.data.JSDO(jsdoOptions);
@@ -307,6 +624,13 @@ app.localization.registerView('controlPanel');
                 dataSourceOptions.transport.jsdo = jsdo;
                 dataSource = new kendo.data.DataSource(dataSourceOptions);
                 controlPanelModel.set('dataSource', dataSource);
+
+                var jsdoOptionsW = controlPanelModel.get('_jsdoOptionsWork'),
+                    jsdoW = new progress.data.JSDO(jsdoOptionsW);
+
+                dataSourceOptionsWork.transport.jsdo = jsdoW;
+                dataSourceWork = new kendo.data.DataSource(dataSourceOptionsWork);
+                controlPanelModel.set('dataSourceWork', dataSourceWork);
 
                  var jsdoOptionsLocations = controlPanelModel.get('_jsdoOptionsLocations'),
                     jsdoLocations = new progress.data.JSDO(jsdoOptionsLocations);
@@ -337,6 +661,15 @@ app.localization.registerView('controlPanel');
                 //     ]
                 // });
                 
+                if(app.controlPanel.controlPanelModel.taskTabFlag == true)
+                    openTaskTab();
+                else if(app.controlPanel.controlPanelModel.qcTabFlag == true)
+                    openQcTab();
+                else if(app.controlPanel.controlPanelModel.ncrTabFlag == true)
+                    openDefectsTab();
+                else openQcTab();
+
+
                   var jsdoOptionsLocations = controlPanelModel.get('_jsdoOptionsLocations'),
                     jsdoLocations = new progress.data.JSDO(jsdoOptionsLocations);
 
@@ -347,9 +680,7 @@ app.localization.registerView('controlPanel');
                 app.mobileApp.showLoading();
                    dataSourceLocations.fetch(function() {
                         var location = dataSourceLocations.data();
-                        // console.log("location")
-                        // console.log(location)
-                        // console.log(location[0].stage1)
+
                         document.getElementById("stage0Counter").innerHTML = location[0].stage0;
                         document.getElementById("stage1Counter").innerHTML = location[0].stage1;
                         document.getElementById("stage2Counter").innerHTML = location[0].stage2;
@@ -379,6 +710,7 @@ app.localization.registerView('controlPanel');
                                                   break;
                                 }
                             }
+                        
                         app.mobileApp.hideLoading();
                     }); 
                 // dataSourceElem.fetch(function() {

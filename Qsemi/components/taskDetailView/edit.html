@@ -1,0 +1,166 @@
+<div data-role="view" data-title="Edit" data-model="app.taskDetailView.editItemViewModel" data-bind="events: { show: onShow, init: onInit }" id="taskDetailViewModelEditScreen" class="screen screen--edit edit-item-view">
+    <header data-role="header"> <!--, init: onInit-->
+        <div data-role="navbar" class="header-text"  style="box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);">
+            <a data-role="button" data-bind="buttonText: strings.buttonsText.cancel" data-align="right" data-icon="hbar-button" data-position="end" style="font-family: Tahoma, Geneva, sans-serif;background-color:#4fa81a;color:#4fa81a; border:none;"></a>
+            <center><span id="projectName1"></span></center> 
+            <a data-role="backbutton" data-align="left" data-bind="events: { click: onCancel }, buttonText: strings.buttonsText.cancel" style="font-family: Tahoma, Geneva, sans-serif;background-color:transparent; border:none;"></a> <!--Cancel-->
+        </div>
+    </header>
+    <footer data-role="footer" style="background-color: #e9eaeb;"> <!--background-color:#351e45;-->
+        <center>
+            <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }, buttonText: strings.buttonsText.save" style="font-family: Tahoma, Geneva, sans-serif;border-radius: 0; width: 95%;"></a> <!-- Save -->
+        </center>
+    </footer>
+    <!-- START_CUSTOM_CODE_taskDetailViewModel -->
+    <!-- END_CUSTOM_CODE_taskDetailViewModel -->
+    <div id="editableListForm183" class="form-view screen__content screen__content--form" style="overflow-x:hidden;  background-color: #e9eaeb; height:100%;">
+        <br/>
+        <div style="height:1em"></div>
+        <div style="width:100%;height:25%; background-color:#e9eaeb;">
+            <span style="box-shadow: 0px 2px 3px #A29E9E;background-color:#4fa81a;font-family: Tahoma, Geneva, sans-serif; color:white; text-align:center;padding-left: 6px;padding-top: 2px;padding-right: 12px;padding-bottom: 3px;" data-bind="text: strings.taskDetailView.taskTitle2"></span>
+        </div>
+        <div id="taskDetails" style="background-color: #FFFFFF; width: 100%;">
+            <br/>
+            <span style="padding-left:2%;" data-bind="text: strings.taskDetailView.taskTitle"></span><span data-bind="text: editFormData.name"></span> <br/><br/>
+            <span style="padding-left:2%;" data-bind="text: strings.taskDetailView.tpStartTitle"></span><span data-bind="text: editFormData.TPStart"></span> <br/><br/>
+            <span style="padding-left:2%;" data-bind="text: strings.taskDetailView.tpEndTitle"></span><span data-bind="text: editFormData.TPEnd"></span> <br/><br/>
+            <span style="padding-left:2%;" data-bind="text: strings.taskDetailView.kpStartTitle"></span><span data-bind="text: editFormData.KPstart"></span> <br/><br/>
+            <span style="padding-left:2%;" data-bind="text: strings.taskDetailView.kpEndTitle"></span><span data-bind="text: editFormData.KPend"></span> <br/><br/>
+            <span style="padding-left:2%;" data-bind="text: strings.taskDetailView.teamNameTitle"></span><span id="taskTeamName"></span> <br/><br/>
+            <span style="padding-left:2%;" data-bind="text: strings.taskDetailView.foremanTitle"></span><span data-bind=""></span> <br/><br/>
+            <span style="padding-left:2%;" data-bind="text: strings.taskDetailView.teamLeaderTitle"></span><span id="teamLeaderName"></span> <br/><br/>
+            <span style="padding-left:2%;margin-top:5%;" data-bind="text: strings.taskDetailView.workDescriptioTitle"></span><span data-bind="text: editFormData.WorkDescription"></span> <br/><br/>
+        </div>
+        <br/>
+        <div style="height:1em"></div>
+        <div style="width:100%;height:25%; background-color:#e9eaeb;">
+            <span data-bind="text: strings.taskDetailView.equipmentTitle" style="box-shadow: 0px 2px 3px #A29E9E;background-color:#4fa81a;font-family: Tahoma, Geneva, sans-serif; color:white; text-align:center;padding-left: 6px;padding-top: 2px;padding-right: 12px;padding-bottom: 3px;"></span>
+        </div>
+        <div id="equipmentDetails" style="background-color: #FFFFFF; width: 100%;">
+            <br/>
+            <div id="eqiupmentsListView" data-role="listview" style="font-family: Tahoma, Geneva, sans-serif;background-color: #FFFFFF; padding: 0; margin: 0; width: 100%; height: 100%; padding-left:2%;"></div>
+             <!--<ul id="taskTools" class="masterDetailView list noSeparators " data-role="listview" data-style="inset" data-template="toolsTemplate" data-bind="source: taskDetailViewModel.dataSourceEquipment"
+             style="font-family: Tahoma, Geneva, sans-serif;background-color: #FFFFFF; padding: 0; margin: 0; width: 100%; height: 100%; padding-left:2%;">
+            </ul>-->
+            
+            <script type="text/x-kendo-template" id="toolsTemplate">
+                # data = app.elementDetailView.elementDetailViewModel.fixHierarchicalData(data); #
+                <span style="font-family: Tahoma, Geneva, sans-serif;">#: data['EquipmentName'] #</span>
+            </script>
+            <center>
+                <span id="noEquipments" data-bind="text: strings.taskDetailView.noTools"><span>
+            </center>
+        </div>
+        <br/>
+        <div style="height:1em"></div>
+        <div style="width:100%;height:25%; background-color:#e9eaeb;">
+            <span data-bind="text: strings.taskDetailView.doneTitle" style="box-shadow: 0px 2px 3px #A29E9E;background-color:#4fa81a;font-family: Tahoma, Geneva, sans-serif; color:white; text-align:center;padding-left: 6px;padding-top: 2px;padding-right: 12px;padding-bottom: 3px;"></span>
+        </div>
+        <div id="doneTaskDetails" style="background-color: #FFFFFF; width: 100%;">
+            <br/>
+            <span data-bind="text: strings.taskDetailView.workDetails" style="padding-left:2%;color:rgba(0, 0, 0, 0.82);font-family:Tahoma, Geneva, sans-serif;"></span>
+            <br/>
+            <textarea id="workDetails" data-bind="value: editFormData.WorkDetails" rows="7" style="margin-top:2%;margin-left:2%;resize: none; width: 95%; border:1px solid rgba(128, 128, 128, 0.5);"></textarea> 
+            <br/>
+            <span data-bind="text: strings.taskDetailView.materials" style="padding-left:2%;color:rgba(0, 0, 0, 0.82);font-family:Tahoma, Geneva, sans-serif;"></span>
+            <br/>
+            <textarea id="workmaterials" data-bind="value: editFormData.Material" rows="7" style="margin-top:2%;margin-left:2%;resize: none; width: 95%; border:1px solid rgba(128, 128, 128, 0.5);"></textarea> 
+            <br/>
+            <span data-bind="text: strings.taskDetailView.closerName" style="padding-left:2%;font-family:Tahoma, Geneva, sans-serif;"></span>
+            <br/>
+            <input id="closerName" data-bind="value: editFormData.CloserName" type="text" style="margin-top:2%;margin-left:2%;margin-right:17%;padding: 0.5em;width:95%;border:1px solid rgba(128, 128, 128, 0.5);font-size:small;font-family: Tahoma, Geneva, sans-serif;">
+            <br/>
+            <br/>
+            <table style="width:97%;">
+                <tr style="width:100%">
+                    <td style="width:93%;padding: 1%;">
+                        <span data-bind="text: strings.taskDetailView.doneTitle2" style="padding-left:2%;color:rgba(0, 0, 0, 0.82);font-family:Tahoma, Geneva, sans-serif;"></span>
+                    </td>
+                    <td style="width:10%">
+                        <input id="taskDone" type="checkbox" style="line-height: 1.3em;margin-left: 33%;"">
+                    </td>
+                </tr>
+            </table>
+            <br/> 
+            <table style="width:97%;">
+                <tr style="width:100%">
+                    <td style="width:90%;padding: 1%;">
+                        <span data-bind="text: strings.taskDetailView.signature" style="margin-left:2%;color:rgba(0, 0, 0, 0.82);font-family:Tahoma, Geneva, sans-serif;"></span>
+                    </td>
+                    <td style="width:10%">
+                        <a id="NCRSignatureClose" data-icon="signatureNew" data-role="button" data-align="left" data-bind="events:{click: openSignatureTaskPopUp}" style="color:black;background-color:transparent; border:none; margin-left: 33%;"></a>
+                    </td>
+                </tr>
+            </table>
+            <br/>
+            <br/> 
+
+            <div data-role="modalview" id="signatureTaskPopUp" style="left:1px; width:95%; height:36%; background-color:#F4F4F4;font-family: Tahoma, Geneva, sans-serif;">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                    <center>
+                        <span data-bind="text: strings.stagesFormSignature.title" style="margin-left:3%;font-size:large;"></span>
+                    </center>
+                </div>
+                <div data-role="content" dir="ltr" style="background-color: transparent; margin-top: 3%;">
+                    <center>
+                        <div style="border:1px solid rgba(128, 128, 128, 0.5); background-color: white; width:90%;">  
+                            <label class="km-label-above field field--textarea">  
+                                <div class='signature-wrapper'>
+                                    <div id='signatureTask'></div>
+                                    <input type='hidden' id='SignatureAdd-value' name='SignatureAdd-value'/>
+                                </div>
+                            </label>
+                        </div>
+                    </center>
+                </div>
+                <footer data-role="footer" style="background-color: transparent;">
+                    <div style="width:100%; margin-bottom:3%;">
+                        <center>
+                            <a data-role="button" style="margin-bottom:0%;border-radius:0;" data-bind="events:{click: closeSignatureTaskPopUp}"><span data-bind="text: strings.buttonsText.save"></span></a>
+                            <a id="ResetTask" data-role="button" style="margin-bottom:0%;border-radius:0;"><span data-bind="text: strings.stagesFormSignature.clear"></span></a>
+                        </center>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <div data-role="modalview" id="warningPopUp" style="left:1px; width:95%; height:25%; background-color:#F4F4F4;font-family: Tahoma, Geneva, sans-serif;">
+                <div data-role="header" style="border-style:none; background-color:#F4F4F4; margin-top:3%;">
+                    <center><span style="font-size:x-large; font-weight:bold;">!</span></center>
+                </div>
+                <div data-role="content" dir="ltr" style="background-color: transparent; margin-top: 3%;">
+                    <center>
+                        <br/>
+                        <span id="warningPopUpText" style="font-size:large;"></span>
+                        <br/>
+                    </center>
+                </div>
+                <footer data-role="footer" style="background-color: transparent;">
+                    <div style="width:100%; margin-bottom:3%;">
+                        <center>
+                           <a data-role="button" onclick="app.taskDetailView.taskDetailViewModel.saveWarningPopUp()" style="color:white;margin-bottom:0%;border-radius:0;"> <!--  data-bind="events: {click: saveNCR}" -->
+                                <span data-bind="text: strings.buttonsText.ok"></span> <!-- Ok -->
+                            </a>
+                        </center>
+                    </div>
+                </footer>
+            </div>
+        <!--<form>
+            <ul class="form-content" data-role="listview" data-style="inset">
+                <li class="form-content-item">
+                    <div id="heading1Field" class="field field--heading">
+                        <h1 data-bind="text:editFormData.heading1"></h1>
+                    </div>
+                </li>
+            </ul>
+        </form>-->
+        <!-- START_CUSTOM_CODE_editableListForm183 -->
+        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+        <!-- END_CUSTOM_CODE_editableListForm183 -->
+    </div>
+    <script>
+        $('#ResetTask').click(function(e){
+            $('#signatureTask').jSignature('clear');
+            e.preventDefault();
+        });
+    </script>
+</div>

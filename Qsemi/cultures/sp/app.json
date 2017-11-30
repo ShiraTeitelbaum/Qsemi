@@ -9,9 +9,6 @@
   },
   "authenticationView": {
     "title": "Authentication",
-    "MissingCredentials": "Missing credentials.",
-    "MissingUsernameOrEmail": "Missing username or email.",
-    "MissingPassword": "Missing password.",
     "authenticationViewModel": {
       "logoutLabel": "Sign Out",
       "emailLabel": "Email",
@@ -31,8 +28,7 @@
     "back": "Back",
     "edit": "Edit",
     "settings": "Settings",
-    "ok": "Ok",
-    "close": "Close"
+    "ok": "Ok"
   },
   "stagesFormCheckBox": {
     "title": "Status:",
@@ -43,14 +39,8 @@
   "stagesFormComments": {
     "title": "Comments:"
   },
-  "stagesFormName": {
-    "title": "Name:"
-  },
   "stagesFormData": {
     "title": "Data:"
-  },
-  "stagesFormMCR": {
-    "title": "Action Item"
   },
   "stagesFormSignature": {
     "title": "Signature",
@@ -65,7 +55,7 @@
     "title": "Image",
     "close": "Close",
     "changePhoto": "Change Photo",
-    "addPhoto": "Add Photo",
+    "addPhoto": "Add Image",
     "getElementPhoto": "Get Element Image"
   },
   "stagesFormLocation": {
@@ -73,10 +63,6 @@
     "validLocation": "Valid Element Locatiion"
   },
   "controlPanel": {
-    "elementName": "Element Name: ",
-    "taskManagementTitle": "Tasks",
-    "qualityControlTitle": "QC",
-    "defects": "Action Items",
     "mapTitle": "Map",
     "stage0name": "SURVEYOR",
     "stage1name": "FOUNDATION",
@@ -99,23 +85,17 @@
     "text3": "Please enable GPS, with Wifi or 3G service"
   },
   "warningMessage": {
-    "noteLocaion": "Note: You are change the element's locaion",
-    "needSatus": "Status is missing",
-    "detailsMissing": "Missing Details",
     "needSignature": "Signature is missing",
-    "needName": "Name is missing",
     "needDescription": "Description is missing",
     "needDate": "Date is missing",
-    "noLocations": "The is no loaction for this Action Item",
-    "needImage": "Image is missing",
-    "notSaveStatus": "Please make sure to do a corrective action before completing this task"
+    "noLocations": "The is no loaction for this impairment",
+    "needImage": "Image is missing"
   },
   "toastsMessages": {
-    "tasksSuccess": "The task has been successfully saved",
     "checkSuccess": "The check has been successfully saved",
     "formSuccess": "The form has been successfully saved",
     "uploadImageSuccess": "Image successfully uploaded",
-    "NCRSuccess": "The Action Item has been successfully saved",
+    "NCRSuccess": "The impairment has been successfully saved",
     "locationSuccessAproved": "Location successfully approved"
   },
   "elementDetailView": {
@@ -128,7 +108,7 @@
       },
       "editableListForm3": {
         "elementDetails": {
-          "generalDetails": "Details",
+          "generalDetails": "General Details",
           "qc": "QC"
         },
         "stage0": {
@@ -205,10 +185,10 @@
           "title": "Pole Type:"
         },
         "ancohorage": {
-          "title": "Anchorage:"
+          "title": "Ancohorage:"
         },
         "sectionning": {
-          "title": "Sectioning:"
+          "title": "Sectionning:"
         },
         "soilFound": {
           "title": "Soil Found:"
@@ -244,7 +224,7 @@
           "title": "Span After:"
         },
         "depthAnchor": {
-          "title": "Anchor Depth:"
+          "title": "Depth Anchor:"
         }
       }
     }
@@ -299,9 +279,7 @@
       }
     }
   },
-  "menu": {
-    "title": "Menu"
-  },
+ 
   "projectDetailView": {
     "title": "projects",
     "projectDetailViewModel": {
@@ -342,44 +320,44 @@
       "addScreenHeaderValue": "Create",
       "editableListForm166": {
         "DrillingDate": {
-          "title": "Drilling Date:",
+          "title": "DRILLING DATE:",
           "placeholder": "Type here ..."
         },
         "EstimatedUnit": {
-          "title": "Estimated Unit:"
+          "title": "ESTIMATED UNIT:"
         },
         "TOP_LAYER": {
-          "title": "Top Layer Unit:"
+          "title": "PRIMERA CAPA UNIDAD:"
         },
         "TopLayerTHICKNESS": {
-          "title": "Top Layer Thickness:"
+          "title": "PRIMERA CAPA ESPERSOR m.:"
         },
         "SecondLayerUNIT": {
-          "title": "Second Layer Unit:"
+          "title": "SEGUNDA CAPA UNIDAD:"
         },
         "SecondLayerTHICKNESS": {
-          "title": "Second Layer Thickness:"
+          "title": "SEGUNDA CAPA ESPERSOR m.:"
         },
         "ThirdLayerUNIT": {
-          "title": "Third Layer Unit:"
+          "title": "TERCERA CAPA UNIDAD:"
         },
         "ThirdLayerTHICKNESS": {
-          "title": "Third Layer Thickness:"
+          "title": "TERCERA CAPA ESPERSOR m.:"
         },
         "TotalDepth": {
-          "title": "Total Depth:"
+          "title": "PROFUNIDAD TOTAL m.:"
         },
         "PlainTerraineStimated": {
-          "title": "Plain Terrain Etimated:"
+          "title": "PLAIN TERRAIN OR SLOPED EMBANKMENT ESTIMADO:"
         },
         "PlainTerrainACTUAL": {
-          "title": "Plain Terrain Actual:"
+          "title": "PLAIN TERRAIN OR SLOPED EMBANKMENT ACTUAL:"
         },
         "secondLayerThickness": {
-          "title": "Second Layer Thickness:"
+          "title": "Second Layer ESPERSOR m.:"
         },
         "COMMENTS": {
-          "title": "Comments:"
+          "title": "COMENTARIO:"
         }
       },
       "editableListForm167": {}
@@ -394,19 +372,19 @@
           "title": "Factory Name:"
         },
         "CASTINGDATE": {
-          "title": "Casting Date:"
+          "title": "CASTING DATE:"
         },
         "DESIGNEDDEPTH": {
-          "title": "Designed Depth:"
+          "title": "PROFUNDIDAD DISEÑADA m.:"
         },
         "MeasuredDEPTH": {
-          "title": "Measured Depth:"
+          "title": "PROFUNDIDAD MEDIDA (EN EL DÍA DE FUNDICION) m.:"
         },
         "MIXTURENUMBER": {
-          "title": "Mixture Number:"
+          "title": "MIXTURE NUMBER:"
         },
         "ConcreteType": {
-          "title": "Concrete Type:"
+          "title": "LOTE DE ENTREGA CONCRETO:"
         },
         "DeliveryNote": {
           "title": "Delivery Note:"
@@ -415,7 +393,7 @@
           "title": "Batch:"
         },
         "COMMENTS": {
-          "title": "Comments:"
+          "title": "COMENTARIO:"
         }
       },
       "editableListForm171": {}
@@ -430,33 +408,33 @@
           "title": "Concrete Laborator Test Results"
         },
         "DateOfReport": {
-          "title": "Date Of Report:"
+          "title": "FECHA DEL REPORTE:"
         },
         "RECEIVED_REPORT": {
-          "title": "Recieved Report:"
+          "title": "INFORME RECIBIDO:"
         },
         "AVARAGE_STRENGTH_MPa": {
-          "title": "Avarage Strength MPa:"
+          "title": "PROMEDIO DE RESISTENCIA Mpa:"
         },
         "MINIMALSTRENGTHMPa": {
-          "title": "Minimal Strength MPa:"
+          "title": "MPa de fuerza mínima:"
         },
         "APPLIANCE_WITH_CODEREQUIREMENTS": {
-          "title": "Appliance With Coderquirements:"
+          "title": "APARATO CON REQUERIMIENTOS DE CÓDIGO:"
         },
         "COMMENTS": {
-          "title": "Comments:"
+          "title": "COMENTARIO:"
         }
       },
       "editableListForm177": {}
     }
   },
   "impairmentDetailView": {
-    "title": "Action Items",
+    "title": "Impairments",
     "elementName": "Element Name: ",
     "checkName": "Check: ",
-    "noImpairments": "No Open Quality Action Items",
-    "impairmentDate": "Action Item Date: ",
+    "noImpairments": "No Open Quality Impairments",
+    "impairmentDate": "Impairtment Date: ",
     "status": "Status: ",
     "correctTitle": "Proof Of Corrective Action",
     "fixedTitle": "Mark if already corrected",
@@ -466,49 +444,12 @@
     "correctSignature": "Signature",
     "talkbubbleText1": "By choosing 'Approved' you are confirming",
     "talkbubbleText2": "that the corrective actions were completed!",
-    "impairmentDetailsTitle": "Action Item Details",
-    "impairmentDetailsTitle2": "Action Item Details:",
+    "impairmentDetailsTitle": "Impairment Details",
+    "impairmentDetailsTitle2": "Impairment Details:",
     "dueDate": "Due Date:",
     "location": "Location",
     "image1": "Image 1",
     "image2": "Image 2",
-    "qualityImpairmentTitle": "Quality Action Items"
-  },
-  "taskDetailView": {
-    "title": "tasks",
-    "workDescription": "Work Description: ",
-    "workDetails": "Work Details: ",
-    "materials": "Materials :",
-    "dateTitle": "Date: ",
-    "taskTitle": "Task: ",
-    "taskTitle2": "Task Details ",
-    "tpStartTitle": "TP Start: ",
-    "tpEndTitle": "TP End: ",
-    "kpStartTitle": "Kp Start: ",
-    "kpEndTitle": "Kp End: ",
-    "workDescriptioTitle": "Work Description: ",
-    "teamNameTitle": "Team Name: ",
-    "foremanTitle": "Foremen: ",
-    "teamLeaderTitle": "Team Leader Name: ",
-    "equipmentTitle": "Equipment",
-    "doneTitle": "Completion",
-    "doneTitle2": "Task Done",
-    "noTools": "Not Exist Tools For This Task",
-    "noTasks": "No Open Tasks",
-    "closerName": "Name: ",
-    "signature": "Signature",
-    "taskDetailViewModel": {
-      "editableListForm183": {
-        "heading1": {
-          "title": "Heading"
-        }
-      }
-    }
-  },
-  "elementSearchView": {
-    "title": "Element Search",
-    "elementSearchViewModel": {
-      "detailHeaderFieldValue": "Detail"
-    }
+    "qualityImpairmentTitle": "Quality impairment"
   }
 }
