@@ -99,6 +99,7 @@
     "text3": "Please enable GPS, with Wifi or 3G service"
   },
   "warningMessage": {
+    "gpsError": "The following error occurred: ",
     "noteLocaion": "Note: You are change the element's locaion",
     "needSatus": "Status is missing",
     "detailsMissing": "Missing Details",

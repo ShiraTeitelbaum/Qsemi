@@ -606,7 +606,8 @@ app.localization.registerView('controlPanel');
 
         dataSourceOptionsWorker.transport.jsdo = jsdoWor;
         dataSourceWorker = new kendo.data.DataSource(dataSourceOptionsWorker);
-        dataSourceWorker.filter({ field: "WorkerId", operator: "==", value: app.authenticationView.authenticationViewModel.current_User.PersonalID });
+        if(app.authenticationView.authenticationViewModel.current_User.PersonalID != undefined)
+            dataSourceWorker.filter({ field: "WorkerId", operator: "==", value: app.authenticationView.authenticationViewModel.current_User.PersonalID });
         //currentTaskTeamLeader
 
         $("#controlPanelTitle").innerHTML = sessionStorage.getItem("locationName");
@@ -681,36 +682,47 @@ app.localization.registerView('controlPanel');
                    dataSourceLocations.fetch(function() {
                         var location = dataSourceLocations.data();
 
-                        document.getElementById("stage0Counter").innerHTML = location[0].stage0;
-                        document.getElementById("stage1Counter").innerHTML = location[0].stage1;
-                        document.getElementById("stage2Counter").innerHTML = location[0].stage2;
-                        document.getElementById("stage3Counter").innerHTML = location[0].stage3;
-                        document.getElementById("stage4Counter").innerHTML = location[0].stage4;
-                        document.getElementById("stage5Counter").innerHTML = location[0].stage5;
-                        document.getElementById("stage6Counter").innerHTML = location[0].stage6;
-                        document.getElementById("stage7Counter").innerHTML = location[0].stage7;
-                        
-                            for(var i=0; i < stages.length; i++) {
-                                switch(stages[i].name) {
-                                    case "SURVEYOR": sessionStorage.setItem("stage0Name", stages[i].name);
-                                                break;
-                                    case "FOUNDATION": sessionStorage.setItem("stage1Name", stages[i].name);
-                                                  break;
-                                    case "ERECTION": sessionStorage.setItem("stage2Name", stages[i].name);
-                                                  break;
-                                    case "EQUIPMENT & CANTILEVER": sessionStorage.setItem("stage3Name", stages[i].name);
-                                                 break;
-                                    case "OCS WIRES": sessionStorage.setItem("stage4Name", stages[i].name);
-                                                  break;
-                                    case "E&B": sessionStorage.setItem("stage5Name", stages[i].name);
-                                                  break;
-                                    case "TEST": sessionStorage.setItem("stage6Name", stages[i].name);
-                                                  break;
-                                    case "COMPLETED": sessionStorage.setItem("stage7Name", stages[i].name);
-                                                  break;
+                        if(location != undefined) {
+                            document.getElementById("stage0Counter").innerHTML = location[0].stage0;
+                            document.getElementById("stage1Counter").innerHTML = location[0].stage1;
+                            document.getElementById("stage2Counter").innerHTML = location[0].stage2;
+                            document.getElementById("stage3Counter").innerHTML = location[0].stage3;
+                            document.getElementById("stage4Counter").innerHTML = location[0].stage4;
+                            document.getElementById("stage5Counter").innerHTML = location[0].stage5;
+                            document.getElementById("stage6Counter").innerHTML = location[0].stage6;
+                            document.getElementById("stage7Counter").innerHTML = location[0].stage7;
+                            
+                                for(var i=0; i < stages.length; i++) {
+                                    switch(stages[i].name) {
+                                        case "SURVEYOR": sessionStorage.setItem("stage0Name", stages[i].name);
+                                                    break;
+                                        case "FOUNDATION": sessionStorage.setItem("stage1Name", stages[i].name);
+                                                    break;
+                                        case "ERECTION": sessionStorage.setItem("stage2Name", stages[i].name);
+                                                    break;
+                                        case "EQUIPMENT & CANTILEVER": sessionStorage.setItem("stage3Name", stages[i].name);
+                                                    break;
+                                        case "OCS WIRES": sessionStorage.setItem("stage4Name", stages[i].name);
+                                                    break;
+                                        case "E&B": sessionStorage.setItem("stage5Name", stages[i].name);
+                                                    break;
+                                        case "TEST": sessionStorage.setItem("stage6Name", stages[i].name);
+                                                    break;
+                                        case "COMPLETED": sessionStorage.setItem("stage7Name", stages[i].name);
+                                                    break;
+                                    }
                                 }
-                            }
-                        
+                        }
+                        else {
+                            document.getElementById("stage0Counter").innerHTML = 0;
+                            document.getElementById("stage1Counter").innerHTML = 0;
+                            document.getElementById("stage2Counter").innerHTML = 0;
+                            document.getElementById("stage3Counter").innerHTML = 0;
+                            document.getElementById("stage4Counter").innerHTML = 0;
+                            document.getElementById("stage5Counter").innerHTML = 0;
+                            document.getElementById("stage6Counter").innerHTML = 0;
+                            document.getElementById("stage7Counter").innerHTML = 0;
+                        }
                         app.mobileApp.hideLoading();
                     }); 
                 // dataSourceElem.fetch(function() {

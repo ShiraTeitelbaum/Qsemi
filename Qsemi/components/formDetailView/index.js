@@ -1318,8 +1318,8 @@ app.localization.registerView('formDetailView');
                             dataSourceNCR.fetch(function() {
                                 var ncr = dataSourceNCR.data();
                                if(ncr[0] != undefined && ncr[0].Fixed == 0) {
-                                document.getElementById("warningPopUpText").innerHTML = app.formDetailView.get('strings').warningMessage.notSaveStatus;
-                                $("#warningPopUp").kendoMobileModalView("open");
+                                    document.getElementById("warningPopUpText").innerHTML = app.formDetailView.get('strings').warningMessage.notSaveStatus;
+                                    $("#warningPopUp").kendoMobileModalView("open");
                                     // return;
                                 }
                                 else {

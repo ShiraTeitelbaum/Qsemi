@@ -163,7 +163,7 @@ app.localization.registerView('elementLocationMaps');
                     app.mobileApp.pane.loader.hide();
                 }, function _getLocationError(error) {
                     app.mobileApp.pane.loader.hide();
-                    alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+                    // alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
                 });
         },
 
@@ -597,7 +597,9 @@ app.localization.registerView('elementLocationMaps');
                 elementLocationMapsModel.loadMap();
             // }
         }, function(error){
-            alert("The following error occurred: "+error);
+            document.getElementById("warningPopUpTextL").innerHTML = app.elementLocationMaps.get('strings').warningMessage.gpsError + error;
+            $("#warningPopUpL").kendoMobileModalView("open");
+            // alert("The following error occurred: "+error);
         });
     }
     parent.set('onShow', function(e) {

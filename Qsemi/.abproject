@@ -7,7 +7,7 @@
   "Author": "safeguard",
   "Description": "Qsemi",
   "BundleVersion": "1.0",
-  "AndroidVersionCode": "2",
+  "AndroidVersionCode": "3",
   "iOSDeviceFamily": [
     "1",
     "2"
