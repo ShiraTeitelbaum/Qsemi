@@ -635,9 +635,6 @@ app.localization.registerView('castingForm');
 
     });
 function onFileUploadSuccess3() {
-       // alert("onFileUploadSuccess2")
-        console.log("onFileUploadSuccess2")
-       
         $("#addCapturePhotoCPop").kendoMobileModalView("close");
        
         window.plugins.toast.showWithOptions(
@@ -651,7 +648,6 @@ function onFileUploadSuccess3() {
 
 function onFileTransferFail3(error) {
         console.log("FileTransfer Error:");
-        console.log(error)
         console.log("Code: " + error.code);
         console.log("Body:" + error.body);
         console.log("Source: " + error.source);

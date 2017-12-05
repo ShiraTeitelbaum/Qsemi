@@ -100,7 +100,7 @@
   },
   "warningMessage": {
     "gpsError": "The following error occurred: ",
-    "noteLocaion": "Note: You are change the element's locaion",
+    "noteLocaion": "Note: You have changed the element's locaion",
     "needSatus": "Status is missing",
     "detailsMissing": "Missing Details",
     "needSignature": "Signature is missing",

@@ -525,8 +525,7 @@ app.localization.registerView('elementDetailView');
 
                 dataSourceOptionsN.transport.jsdo = jsdoNcr;
                 var dataSourceNcr = new kendo.data.DataSource(dataSourceOptionsN);
-                console.log("elementDetailViewModel.currentItem")
-                console.log(elementDetailViewModel.currentItem)
+                
                 dataSourceNcr.filter({ field: "R371733782", operator: '==', value: elementDetailViewModel.currentItem.id});
                 elementDetailViewModel.set('dataSourceNcr', dataSourceNcr)
                 // dataSourceNcr
@@ -536,8 +535,6 @@ app.localization.registerView('elementDetailView');
                     template: kendo.template($("#ElementDefectsTemplate").html())
                 });
                 dataSourceNcr.fetch(function() {
-                    console.log("ncr")
-                    console.log(dataSourceNcr.data())
                     if(dataSourceNcr.data().length == 0) {
                         $("#noOpenElementDefects").show();
                         elementDetailViewModel.set('dataSourceNcr', '')
@@ -720,11 +717,7 @@ app.localization.registerView('elementDetailView');
                             if(view.length > 0 && view[0].R369888918 == "null") {
                                 if(view[0].imageURL != "null") {
                                     document.getElementById("addCapturePhotoS").style.color = "red";
-                                    // var imageObj = $.parseJSON(view[0].image);
-                                    // view[0].image = processImage(elementDetailViewModel.get('_dataSourceOptionsGallery').transport.jsdo.url + imageObj.src);
                                     
-                                    //$("#addCapturePhotoSImg").src = view[0].image;
-                                    // console.log( view[1].imageURL)
                                     document.getElementById("addCapturePhotoSImg").src = view[0].imageURL;
                                 }
                                 else document.getElementById("addCapturePhotoS").style.color = "black";
@@ -933,8 +926,7 @@ app.localization.registerView('elementDetailView');
                         jsdoElemForms.unsubscribe('afterUpdate', afterUpdateFn);
                         if (success === true) {
                             elementDetailViewModel.formCheckListIds = jsrow.data.R365599694;
-                           console.log("itemData.stageNum")
-                           console.log(itemData.stageNum)
+                          
                            if(itemData.stageNum == 5)
                             app.mobileApp.navigate('#components/formDetailView/view.html?formid='+itemData.id+'&stagenum='+itemData.stageNum+'&coreFlag=false');
                             else app.mobileApp.navigate('#components/formDetailView/view.html?formid='+itemData.id+'&formname='+itemData.name+'&stagenum='+itemData.stageNum+'&coreFlag=false');
@@ -1003,12 +995,9 @@ app.localization.registerView('elementDetailView');
                 dataSourceOptionsT.transport.jsdo = jsdoT;
                 dataSourceT = new kendo.data.DataSource(dataSourceOptionsT);
                 dataSourceT.read().then(function(){
-                    console.log("elementTypeOCS")
-                    console.log(dataSourceT.data())
+                    
                     var view = dataSourceT.data();
                     for(var i=0; i<view.length;i++) {
-                        // console.log("view[i].name")
-                        // console.log(view[i].name)
                         if(view[i].name == "OCS Wire") {
                             elementTypeOCS = view[i].id;
                             break;
@@ -1025,14 +1014,8 @@ app.localization.registerView('elementDetailView');
                                 {field: "R363889131", operator: "==", value: 371595899}
                                 ]
                         });            
-                        dataSource.fetch(function(){
-                            console.log("elementTypeOCS")
-                            console.log(elementTypeOCS)
-                            console.log(parseInt(elementTypeOCS))
-                            console.log("dataSource.data")
-                            console.log(dataSource.data())
-                            //console.log(dataSource.data()[0].R363889131)
-                        });
+                        // dataSource.fetch(function(){
+                        // });
                         elementDetailViewModel.set('dataSource', dataSource);
                     }
                     else {
@@ -1057,8 +1040,6 @@ app.localization.registerView('elementDetailView');
             });
     });
 function onFileUploadSuccess() {
-        // alert("onFileUploadSuccess")
-        console.log("onFileUploadSuccess")
         $("#addCapturePhotoSPop").kendoMobileModalView("close");
 
         window.plugins.toast.showWithOptions(
@@ -1072,7 +1053,6 @@ function onFileUploadSuccess() {
 
 function onFileTransferFail(error) {
         console.log("FileTransfer Error:");
-        console.log(error)
         console.log("Code: " + error.code);
         console.log("Body:" + error.body);
         console.log("Source: " + error.source);

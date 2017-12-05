@@ -70,8 +70,6 @@ app.localization.registerView('taskDetailView');
                 //console.log(response);
                 // if(type == "read") {
                 //     currentTaskTeam = response;
-                //     console.log("response")
-                //     console.log(response.data[0].name)
                 //     // document.getElementById("taskTeamName").innerHTML = currentTaskTeam.data[0].name; 
                 // }
                  if(type == "read")

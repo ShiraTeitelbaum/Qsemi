@@ -86,8 +86,6 @@ app.localization.registerView('formDetailView');
                 //console.log(type); // displays "read"
                 //console.log(response);
                 if(type == "read") {
-                    // console.log("response")
-                    // console.log(response)
                     checklist = response;
                 }
                 if(type == "create")
@@ -141,8 +139,6 @@ app.localization.registerView('formDetailView');
                 //console.log(type); // displays "read"
                 //console.log(response);
                 if(type == "read") {
-                    // console.log("checks response")
-                    // console.log(checks)
                     checks = response;
                 }
                 if(type == "create")
@@ -241,8 +237,6 @@ app.localization.registerView('formDetailView');
                 //console.log(type); // displays "read"
                 //console.log(response);
                 if(type == "read") {
-                    // console.log("response")
-                    // console.log(response)
                     checklist = response;
                 }
                 if(type == "create")
@@ -529,8 +523,6 @@ app.localization.registerView('formDetailView');
 
             //     dataSourceGallery.fetch(function() {
             //         var images = dataSourceGallery.data();
-            //         console.log("images")
-            //         console.log(images)
             //     });                
             // },
             saveWarningPopUp: function(e) {
@@ -628,19 +620,11 @@ app.localization.registerView('formDetailView');
 
                 dataSourceGallery.fetch(function() {
                     var view = dataSourceGallery.data();
-                    // console.log("view")
-                    // console.log(view)
                     if(view[0] != undefined) {
-                        // var imageObj = $.parseJSON(view[0].image);
-                        // view[0].image = processImage(formDetailViewModel.get('_dataSourceOptionsGallery').transport.jsdo.url + imageObj.src);
-                        
                         if(view[0].imageURL != "null") {
                             $("#addCapturePhoto").css("color", "red");
-                            // var imageObj = $.parseJSON(view[0].image);
-                            // view[0].image = processImage(formDetailViewModel.get('_dataSourceOptionsGallery').transport.jsdo.url + imageObj.src);
                                     
                             document.getElementById("addCapturePhotoImg").src = view[0].imageURL;
-                            // document.getElementById("addCapturePhotoImg").setAttribute("src", view[0].image);
                         }
                         else {
                             $("#addCapturePhoto").css("color", "black");
@@ -799,8 +783,6 @@ app.localization.registerView('formDetailView');
             var $sigdiv = $("#signature");
             // after some doodling...
             // $sigdiv.jSignature("reset") // clears the canvas and rerenders the decor on it.
-            //    console.log("$('#signature').jSignature('getData')")
-            // console.log($("#signature").jSignature("getData"))
             var $sigdivNCR = $("#signatureNCR")
             // after some doodling...
             $sigdivNCR.jSignature("reset") // clears the canvas and rerenders the decor on it.
@@ -810,8 +792,6 @@ app.localization.registerView('formDetailView');
                 dataSource = formDetailViewModel.get('dataSource'),
                 itemData = dataSource.getByUid(itemUid),
                 fixedData = formDetailViewModel.fixHierarchicalData(itemData);
-                console.log("itemData")
-                console.log(itemData)
 
             document.getElementById("form_name2").innerHTML = (formDetailViewModel.formName).toLowerCase();
             document.getElementById("element_name2").innerHTML = app.elementDetailView.elementDetailViewModel.currentItem.name;
@@ -838,8 +818,6 @@ app.localization.registerView('formDetailView');
                 //dataSource.sort({ field: "Index", dir: "asc" });
                 dataSource.fetch(function() {
                     var view = dataSource.data();
-                    console.log("view##########")
-                    console.log(view)
                     
                     if(view[0] != undefined) {
                         document.getElementById("status_ok").checked = false;
@@ -882,9 +860,7 @@ app.localization.registerView('formDetailView');
                         }
                       
                         if(view[0].R371573875 != null && view[0].R371573875 != "null") {
-                            console.log("view[0].R371573875")
-                            console.log(view[0].R371573875)
-                            $("#checkNCR").show();
+                           $("#checkNCR").show();
                         }
 
                         currentCheck = view[0];
@@ -1114,8 +1090,6 @@ app.localization.registerView('formDetailView');
             }
             
             var date = moment($("#ImpairmentDestinationDate").val()).add(8,'h');
-            console.log("date")
-            console.log(date.toString())
             var d = new Date(date);
             
             newNCR = {
@@ -1280,8 +1254,35 @@ app.localization.registerView('formDetailView');
                 addModel.index = itemData.Index;
                 //addModel.name = !!addFormData.checkbox7;
                 /// end add form data save
-         
-                dataSourceChecks.add(addModel);
+                if(status_ok_flag == true && status_not_ok_flag == false) {
+                        var jsdoOptionsNCR = formDetailViewModel.get('_jsdoOptionsNCR'),
+                        jsdoNCR = new progress.data.JSDO(jsdoOptionsNCR),
+                        dataSourceOptionsNCR = formDetailViewModel.get('_dataSourceOptionsNCR');
+                    dataSourceOptionsNCR.transport.jsdo = jsdoNCR;
+                    var dataSourceNCR = new kendo.data.DataSource(dataSourceOptionsNCR);
+
+                    if(currentCheck != undefined) {
+                        dataSourceNCR.filter({ field: "R371573875", operator: "==", value: currentCheck.id });
+                        dataSourceNCR.fetch(function() {
+                            var ncr = dataSourceNCR.data();
+                            if(ncr[0] != undefined && ncr[0].Fixed == 0) {
+                                document.getElementById("warningPopUpText").innerHTML = app.formDetailView.get('strings').warningMessage.notSaveStatus;
+                                $("#warningPopUp").kendoMobileModalView("open");
+                                // return;
+                            }
+                            else {
+                                document.getElementById("status_ok").checked = false;
+                                document.getElementById("status_not_ok").checked = false;
+                                document.getElementById("status_NA").checked = false;
+                                $("#checkComments").val('');
+                                app.mobileApp.navigate('#:back');
+                            }
+                            //Fixed
+                        });
+                    }
+                }
+                else
+                    dataSourceChecks.add(addModel);
                 dataSourceChecks.one('change', function(e) {
                     formDetailViewModel.currentCheckId = currentCheck;
 
@@ -1479,14 +1480,9 @@ app.localization.registerView('formDetailView');
         $("#addCapturePhoto").css("color", "black");
        formDetailViewModel.showElementDetails();
        formDetailViewModel.stageNum = e.view.params.stagenum;
-       console.log("e.view.params")
-       console.log(e.view.params)
        formDetailViewModel.showFormImage(e.view.params.stagenum);
        
        document.getElementById("element_name1").innerHTML = formDetailViewModel.elementDetails.name;
-       console.log("app.elementDetailView.elementDetailViewModel.stepsNames[e.view.params.stagenum]")
-       console.log(e.view.params.stagenum)
-       console.log(app.elementDetailView.elementDetailViewModel.stepsNames[e.view.params.stagenum])
        document.getElementById("step_name1").innerHTML = (app.elementDetailView.elementDetailViewModel.stepsNames[e.view.params.stagenum].name).toLowerCase();
         if(e.view.params.stagenum == 5)
             document.getElementById("form_name1").innerHTML = "E&B";
@@ -1518,9 +1514,7 @@ app.localization.registerView('formDetailView');
                 dataSourceCore = new kendo.data.DataSource(dataSourceOptionsCore);
                
                 if(app.elementDetailView.elementDetailViewModel.coreCheckListIds != null) {
-                    // console.log("app.elementDetailView.elementDetailViewModel.coreCheckListIds")
-                    // console.log(app.elementDetailView.elementDetailViewModel.coreCheckListIds)
-                    var checkListFilters = [];
+                   var checkListFilters = [];
                     for(var i=0; i < app.elementDetailView.elementDetailViewModel.coreCheckListIds.length; i++) {
                         checkListFilters[i] = { field: "id", operator: "==", value: app.elementDetailView.elementDetailViewModel.coreCheckListIds[i] };
                     }
@@ -1662,10 +1656,9 @@ app.localization.registerView('formDetailView');
                     });
 
                     dataSource.sort({ field: "Index", dir: "asc" });
-                    dataSource.fetch(function() {
-                        console.log("view")
-                        console.log(dataSource.data())
-                    });
+                    // dataSource.fetch(function() {
+                       
+                    // });
                     
                     formDetailViewModel.set('dataSource', dataSource);
                     
@@ -1696,12 +1689,8 @@ app.localization.registerView('formDetailView');
                         for(var i=0; i<listStatusChecks.length; i++)
                             if(listStatusChecks[i].name == "Not Ok")
                                 notOkStatus = listStatusChecks[i].id;
-                        console.log("notOkStatus")
-                        console.log(notOkStatus)
-
+                        
                         var greenFlag = false;
-                        console.log("checklist")
-                        console.log(checklist)
                         if(checklist != null) {
                             for(var i=0; i<checklist.data.length; i++) {
                                 greenFlag = false;
@@ -1713,7 +1702,7 @@ app.localization.registerView('formDetailView');
                                     if(checklist.data[i].id == view[j].R365688751) {
                                         checklist.data[i].status = "green";//checklist.data[i].id;
                                         document.getElementById(checklist.data[i].id).style.background = "#449d31";
-                                        console.log(view[j])
+                                        
                                         if(view[j].status == notOkStatus) {
                                             checklist.data[i].status = "red";
                                             $("#"+checklist.data[i].id+'checkNcr').show();
@@ -1762,10 +1751,6 @@ app.localization.registerView('formDetailView');
     });
 
 function onFileUploadSuccess1() {
-        console.log("onFileUploadSuccess")
-        
-        // app.mobileApp.navigate('#:back');
-
         window.plugins.toast.showWithOptions(
         {
             message: app.formDetailView.get('strings').toastsMessages.uploadImageSuccess,
@@ -1777,7 +1762,6 @@ function onFileUploadSuccess1() {
 
 function onFileTransferFail1(error) {
         console.log("FileTransfer Error:");
-        console.log(error)
         console.log("Code: " + error.code);
         console.log("Body:" + error.body);
         console.log("Source: " + error.source);
@@ -1785,10 +1769,7 @@ function onFileTransferFail1(error) {
     }
 
 function onFileUploadSuccess2() {
-       // alert("onFileUploadSuccess2")
-        console.log("onFileUploadSuccess2")
-       
-        $("#addCapturePhotoPop").kendoMobileModalView("close");
+       $("#addCapturePhotoPop").kendoMobileModalView("close");
        
         window.plugins.toast.showWithOptions(
         {
@@ -1801,7 +1782,6 @@ function onFileUploadSuccess2() {
 
 function onFileTransferFail(error) {
         console.log("FileTransfer Error:");
-        console.log(error)
         console.log("Code: " + error.code);
         console.log("Body:" + error.body);
         console.log("Source: " + error.source);

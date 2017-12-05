@@ -82,8 +82,6 @@ app.localization.registerView('controlPanel');
                 //console.log(response);
                 // if(type == "read") {
                 //     currentTaskTeam = response;
-                //     console.log("response")
-                //     console.log(response.data[0].name)
                 //     // document.getElementById("taskTeamName").innerHTML = currentTaskTeam.data[0].name; 
                 // }
                  if(type == "update")
@@ -128,8 +126,6 @@ app.localization.registerView('controlPanel');
                 //console.log(type); // displays "read"
                 //console.log(response);
                 // if(type == "read") {
-                //     // console.log("response")
-                //     // console.log(response)
                 //     checklist = response;
                 // }
                 if(type == "create")
@@ -210,8 +206,6 @@ app.localization.registerView('controlPanel');
                 //console.log(response);
                 if(type == "read") {
                     currentTaskTeam = response;
-                    console.log("response")
-                    console.log(response.data[0].name)
                     // document.getElementById("taskTeamName").innerHTML = currentTaskTeam.data[0].name; 
                 }
                  if(type == "update")
@@ -257,9 +251,6 @@ app.localization.registerView('controlPanel');
                 //console.log(response);
                 if(type == "read") {
                     currentTaskTeamLeader = response;
-                    console.log("currentTaskTeamLeader response")
-                    // console.log(response)
-                     console.log(response.data[0].name)
                     // document.getElementById("taskTeamName").innerHTML = currentTaskTeam.data[0].name; 
                 }
                  if(type == "update")
@@ -389,11 +380,6 @@ app.localization.registerView('controlPanel');
                 app.mobileApp.navigate('#components/taskDetailView/edit.html?id=' + id);
             },
             itemClickDefects: function(id) {
-                // console.log("e")
-                // console.log(e)
-                // var dataItem = e.dataItem || controlPanelModel.originalItem;
-                console.log("id")
-                console.log(id)
                 app.mobileApp.navigate('#components/impairmentDetailView/edit.html?id=' + id);
             },
             openStage: function(num) {
@@ -475,21 +461,6 @@ app.localization.registerView('controlPanel');
                 return linkChunks[0] + this.get('currentItem.' + linkChunks[1]);
             },
             openGeneralMap: function() {
-                // html2canvas(document.getElementById("container"), {
-                //     onrendered: function (canvas) {
-                //         var tempcanvas=document.createElement('canvas');
-                //         tempcanvas.width=800;
-                //         tempcanvas.height=800;
-                //         var context=tempcanvas.getContext('2d');
-                //         context.drawImage(canvas,-10,-120,300,550,0,0,600,600);
-                //         var link=document.createElement("a");
-                //         link.href=tempcanvas.toDataURL('image/jpg');   //function blocks CORS
-                //         link.download = 'screenshot.jpg';
-                //         link.click();
-                //         console.log("link.href")
-                //         console.log(link.href)
-                //     }
-                // });
                 app.mobileApp.navigate('#components/generalMapView/view.html');
             },
             openImpairment: function() {
@@ -513,8 +484,6 @@ app.localization.registerView('controlPanel');
                 dataSource.sort({ field: "updatedAt", dir: "desc" });
 
                 dataSource.fetch(function() {
-                    console.log("dataSource.data()")
-                    console.log(dataSource.data())
                     if(dataSource.data().length == 0) {
                         $("#noOpenImpairments").show();
                         controlPanelModel.set('dataSourceDefects', '');
@@ -534,8 +503,6 @@ app.localization.registerView('controlPanel');
                     dataSourceOptionsWork = controlPanelModel.get('_dataSourceOptionsWork'),
                     dataSourceOptionsTe = controlPanelModel.get('_dataSourceOptionsTeams');
 
-                console.log("currentTaskTeamLeader")
-                console.log(currentTaskTeamLeader.data[0].R363991813)
                 var jsdoOptionsW = controlPanelModel.get('_jsdoOptionsWork'),
                     jsdoW = new progress.data.JSDO(jsdoOptionsW);
 
@@ -551,8 +518,6 @@ app.localization.registerView('controlPanel');
                 });
                 controlPanelModel.set('dataSourceWork', dataSource);
                 dataSource.fetch(function() {
-                    console.log("tasks view")
-                    console.log(dataSource.data())
                     if(dataSource.data().length == 0)
                         $("#noOpenTasks").show();
                 });

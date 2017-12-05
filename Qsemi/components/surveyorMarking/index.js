@@ -333,8 +333,6 @@ app.localization.registerView('surveyorMarking');
                 itemData = this.get('itemData'),
                 dataSource = surveyorMarkingModel.get('dataSource'), 
                 newSurvey = {};
-                console.log("onsave itemData")
-                console.log(itemData)
                 dataProvider.loadCatalogs().then(function _catalogsLoaded() {
                     var jsdoOptions2 = surveyorMarkingModel.get('_jsdoOptions'),
                         jsdo2 = new progress.data.JSDO(jsdoOptions2);

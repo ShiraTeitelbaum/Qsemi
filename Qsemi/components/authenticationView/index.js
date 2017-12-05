@@ -30,8 +30,6 @@ app.localization.registerView('authenticationView');
                 {
                     currentUser = response.data[0];
                     authenticationViewModel.current_User = response.data[0];
-                   console.log("currentUser")
-                   console.log(currentUser)
                 }
             },
              schema: {

@@ -230,8 +230,7 @@ app.localization.registerView('geotechnicalForm');
             dataSource.filter({ field: "R370259577", operator: "==", value: app.elementDetailView.elementDetailViewModel.currentItem.id });
             dataSource.fetch(function() {
                 var view = dataSource.data();
-                console.log("view")
-                console.log(view)
+                
                 if(view.length > 0) {
                     geotechnicalFormModel.geoFlag = true;
                     geotechnicalFormModel.currentGeo = view[0];
@@ -527,8 +526,6 @@ app.localization.registerView('geotechnicalForm');
                 editFormData = this.get('editFormData'),
                 itemData = this.get('itemData'),
                 dataSource = geotechnicalFormModel.get('dataSource');
-       console.log("editFormData.EstimatedUnit")
-       console.log(editFormData.EstimatedUnit)
             if($("#DrillingDate").val() == '' || editFormData.EstimatedUnit == '' || editFormData.TOP_LAYER == '' || editFormData.TopLayerTHICKNESS == '' ||
             editFormData.SecondLayerUNIT == '' || editFormData.ThirdLayerTHICKNESS == '' || editFormData.TotalDepth == '' ||
             editFormData.PlainTerraineStimated == '' || editFormData.PlainTerrainACTUAL == '') {

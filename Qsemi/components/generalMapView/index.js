@@ -333,8 +333,7 @@ app.localization.registerView('generalMapView');
 
                 dataSourceElem.fetch(function() {
                     var elementsWithLocation = dataSourceElem.data();
-                    console.log("elementsWithLocation")
-                    console.log(elementsWithLocation)
+                    
                     app.generalMapView.generalMapViewModel.elements = elementsWithLocation;
                     generalMapViewModel.loadMap();
                 });

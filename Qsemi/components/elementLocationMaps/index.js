@@ -327,11 +327,11 @@ app.localization.registerView('elementLocationMaps');
                     var lat = parseFloat((tmp[0]).substr(1, tmp[0].length)).toFixed(8);
                     var lng = parseFloat((tmp[1]).substr(1, tmp[1].length-2)).toFixed(8);
 
-                    if(element[0].Latitude != lat && element[0].Longtitud != lng && element[0].Latitude != undefined && element[0].Longtitud != undefined) {
-                        document.getElementById("warningPopUpTextL").innerHTML = app.elementLocationMaps.get('strings').warningMessage.noteLocaion;//"Signature is missing";
-                        $("#warningPopUpL").kendoMobileModalView("open");
-                        // return;
-                    }
+                    // if(element[0].Latitude != lat && element[0].Longtitud != lng && element[0].Latitude != undefined && element[0].Longtitud != undefined) {
+                    //     document.getElementById("warningPopUpTextL").innerHTML = app.elementLocationMaps.get('strings').warningMessage.noteLocaion;//"Signature is missing";
+                    //     $("#warningPopUpL").kendoMobileModalView("open");
+                    //     // return;
+                    // }
                     var elementLocation = {
                         Latitude: lat,
                         Longtitud: lng
@@ -508,9 +508,9 @@ app.localization.registerView('elementLocationMaps');
                         handleLocationError(true, elementLocationMapsModel.infoWindow, elementLocationMapsModel.map.getCenter());
                     });
                     
-                    google.maps.event.addListener(elementLocationMapsModel.map, 'click', function(event) {
-                        elementLocationMapsModel.addMarker(event.latLng, elementLocationMapsModel.map);
-                     });
+                    // google.maps.event.addListener(elementLocationMapsModel.map, 'click', function(event) {
+                    //     elementLocationMapsModel.addMarker(event.latLng, elementLocationMapsModel.map);
+                    //  });
                 } else {
                     // Browser doesn't support Geolocation
                     handleLocationError(false, infoWindow, map.getCenter());
@@ -549,7 +549,7 @@ app.localization.registerView('elementLocationMaps');
                                 position: location,
                                 //label: elementLocationMapsModel.labels[elementLocationMapsModel.labelIndex++ % elementLocationMapsModel.labels.length],
                                 map: map,
-                                draggable: true,
+                                draggable: false,
                                 animation: google.maps.Animation.DROP,
                                 icon: 'images/addMapPinRed.png'
                             });
@@ -655,8 +655,6 @@ app.localization.registerView('elementLocationMaps');
     });
 
 function onFileUploadSuccess() {
-        // alert("onFileUploadSuccess")
-        console.log("onFileUploadSuccess")
         /*window.plugins.toast.showWithOptions(
             {
             message: "התמונה עלתה בהצלחה",
@@ -669,7 +667,6 @@ function onFileUploadSuccess() {
 
 function onFileTransferFail(error) {
         console.log("FileTransfer Error:");
-        console.log(error)
         console.log("Code: " + error.code);
         console.log("Body:" + error.body);
         console.log("Source: " + error.source);

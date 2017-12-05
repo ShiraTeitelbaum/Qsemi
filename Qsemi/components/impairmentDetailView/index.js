@@ -66,8 +66,6 @@ app.localization.registerView('impairmentDetailView');
                 //console.log(type); // displays "read"
                 //console.log(response);
                 // if(type == "read") {
-                //     // console.log("response")
-                //     // console.log(response)
                 //     checklist = response;
                 // }
                 if(type == "create")
@@ -286,13 +284,9 @@ app.localization.registerView('impairmentDetailView');
                 // dataSource = impairmentDetailViewModel.get('dataSource'),
                 itemData /*= dataSource.getByUid(itemUid)*/,
                 fixedData /*= impairmentDetailViewModel.fixHierarchicalData(itemData)*/;
-            console.log("itemId")
-            console.log(itemId)
             // dataSource.filter({ field: "id", operator: "==", vlaue: 371891572 });
             dataSource.fetch(function() {
                 var view = dataSource.data();
-                console.log("view")
-                console.log(view)
                 for(var i=0;i<view.length; i++) {
                     if(view[i].id == itemId) {
                         itemData = dataSource.getByUid(view[i].uid);
@@ -303,11 +297,7 @@ app.localization.registerView('impairmentDetailView');
                     
                 fixedData = impairmentDetailViewModel.fixHierarchicalData(itemData);
                 that.set('itemData', itemData);
-                console.log("itemData")
-                    console.log(itemData)
-                    console.log("impairmentDetailViewModel.currentItem")
-                    console.log(impairmentDetailViewModel.currentItem)
-
+                
                 impairmentDetailViewModel.currentImpairment = itemData;
                 document.getElementById("nameElementImpairtment").innerHTML = itemData.ElementName;
 
@@ -657,8 +647,6 @@ app.localization.registerView('impairmentDetailView');
 
     });
 function onFileUploadSuccess3() {
-        console.log("onFileUploadSuccess2")
-       
         // $("#addCapturePhotoPop").kendoMobileModalView("close");
        
         window.plugins.toast.showWithOptions(
@@ -672,7 +660,6 @@ function onFileUploadSuccess3() {
 
 function onFileTransferFail3(error) {
         console.log("FileTransfer Error:");
-        console.log(error)
         console.log("Code: " + error.code);
         console.log("Body:" + error.body);
         console.log("Source: " + error.source);
