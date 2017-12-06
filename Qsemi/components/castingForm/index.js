@@ -393,7 +393,7 @@ app.localization.registerView('castingForm');
                         MeasuredDEPTH: '',
                         DESIGNEDDEPTH: '',
                         ConcreteType: '',
-                        Comments: '',
+                        COMMENTS: '',
                         signature: ''
                         /// start edit form data init
                         /// end edit form data init
@@ -444,8 +444,8 @@ app.localization.registerView('castingForm');
                 editFormData = this.get('editFormData'),
                 itemData = this.get('itemData'),
                 dataSource = castingFormModel.get('dataSource');
-            
-            if($("#castingSignature").val() == '' || editFormData.FactoryName == '' || editFormData.MIXTURENUMBER == '' || editFormData.DeliveryNote == '' ||
+           
+            if(editFormData.FactoryName == '' || editFormData.MIXTURENUMBER == '' || editFormData.DeliveryNote == '' ||
             editFormData.BATCH  == '' || editFormData.MeasuredDEPTH == '' || editFormData.DESIGNEDDEPTH == '' || editFormData.ConcreteType == '') {
                   document.getElementById("warningPopUpCastText").innerHTML = app.castingForm.get('strings').warningMessage.detailsMissing;//"Signature is missing";
                 $("#warningPopUpCast").kendoMobileModalView("open");
@@ -470,7 +470,7 @@ app.localization.registerView('castingForm');
                 itemData.set('MeasuredDEPTH', editFormData.MeasuredDEPTH);
                 itemData.set('DESIGNEDDEPTH', editFormData.DESIGNEDDEPTH);
                 itemData.set('ConcreteType', editFormData.ConcreteType);
-                itemData.set('Comments', editFormData.Comments);
+                itemData.set('Comments', editFormData.COMMENTS);
                 itemData.set('signature', $("#castingSignature").jSignature("getData"));
 
                 function editModel(data) {

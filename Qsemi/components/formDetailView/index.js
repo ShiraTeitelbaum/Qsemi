@@ -1281,71 +1281,72 @@ app.localization.registerView('formDetailView');
                         });
                     }
                 }
-                else
+                else {
                     dataSourceChecks.add(addModel);
-                dataSourceChecks.one('change', function(e) {
-                    formDetailViewModel.currentCheckId = currentCheck;
+                   dataSourceChecks.one('change', function(e) {
+                        formDetailViewModel.currentCheckId = currentCheck;
 
-                    document.getElementById("checkSignature").style.color = "black";
+                        document.getElementById("checkSignature").style.color = "black";
 
-                    app.elementDetailView.elementDetailViewModel.change_Percent = true;
-                    app.elementDetailView.elementDetailViewModel.QC_click_flag = true;
+                        app.elementDetailView.elementDetailViewModel.change_Percent = true;
+                        app.elementDetailView.elementDetailViewModel.QC_click_flag = true;
 
-                    // document.getElementById("status_ok").checked = false;
-                    // document.getElementById("status_not_ok").checked = false;
-                    // document.getElementById("status_NA").checked = false;
-                    // $("#checkComments").val('');
+                        // document.getElementById("status_ok").checked = false;
+                        // document.getElementById("status_not_ok").checked = false;
+                        // document.getElementById("status_NA").checked = false;
+                        // $("#checkComments").val('');
 
-                    window.plugins.toast.showWithOptions(
-                    {
-                        message: app.formDetailView.get('strings').toastsMessages.checkSuccess,
-                        duration: "short", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
-                        position: "bottom",
-                        addPixelsY: -40  // added a negative value to move it up a bit (default 0)
-                    }); 
+                        window.plugins.toast.showWithOptions(
+                        {
+                            message: app.formDetailView.get('strings').toastsMessages.checkSuccess,
+                            duration: "short", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
+                            position: "bottom",
+                            addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+                        }); 
 
-                    if(formDetailViewModel.not_ok_flag == true) {
-                        $("#NCRPopUp").kendoMobileModalView("open");
-                    }
-                    else if(status_ok_flag == true && status_not_ok_flag == false) {
-                            var jsdoOptionsNCR = formDetailViewModel.get('_jsdoOptionsNCR'),
-                            jsdoNCR = new progress.data.JSDO(jsdoOptionsNCR),
-                            dataSourceOptionsNCR = formDetailViewModel.get('_dataSourceOptionsNCR');
-                        dataSourceOptionsNCR.transport.jsdo = jsdoNCR;
-                        var dataSourceNCR = new kendo.data.DataSource(dataSourceOptionsNCR);
+                        if(formDetailViewModel.not_ok_flag == true) {
+                            $("#NCRPopUp").kendoMobileModalView("open");
+                        }
+                        else if(status_ok_flag == true && status_not_ok_flag == false) {
+                                var jsdoOptionsNCR = formDetailViewModel.get('_jsdoOptionsNCR'),
+                                jsdoNCR = new progress.data.JSDO(jsdoOptionsNCR),
+                                dataSourceOptionsNCR = formDetailViewModel.get('_dataSourceOptionsNCR');
+                            dataSourceOptionsNCR.transport.jsdo = jsdoNCR;
+                            var dataSourceNCR = new kendo.data.DataSource(dataSourceOptionsNCR);
 
-                        if(currentCheck != undefined) {
-                           dataSourceNCR.filter({ field: "R371573875", operator: "==", value: currentCheck.id });
-                            dataSourceNCR.fetch(function() {
-                                var ncr = dataSourceNCR.data();
-                               if(ncr[0] != undefined && ncr[0].Fixed == 0) {
-                                    document.getElementById("warningPopUpText").innerHTML = app.formDetailView.get('strings').warningMessage.notSaveStatus;
-                                    $("#warningPopUp").kendoMobileModalView("open");
-                                    // return;
-                                }
-                                else {
-                                    document.getElementById("status_ok").checked = false;
-                                    document.getElementById("status_not_ok").checked = false;
-                                    document.getElementById("status_NA").checked = false;
-                                    $("#checkComments").val('');
-                                    app.mobileApp.navigate('#:back');
-                                }
-                                //Fixed
-                            });
-                         }
-                    }
-                    else {
-                        document.getElementById("status_ok").checked = false;
-                        document.getElementById("status_not_ok").checked = false;
-                        document.getElementById("status_NA").checked = false;
-                        $("#checkComments").val('');
-                        app.mobileApp.navigate('#:back');
-                    }
-                });
+                            if(currentCheck != undefined) {
+                            dataSourceNCR.filter({ field: "R371573875", operator: "==", value: currentCheck.id });
+                                dataSourceNCR.fetch(function() {
+                                    var ncr = dataSourceNCR.data();
+                                if(ncr[0] != undefined && ncr[0].Fixed == 0) {
+                                        document.getElementById("warningPopUpText").innerHTML = app.formDetailView.get('strings').warningMessage.notSaveStatus;
+                                        $("#warningPopUp").kendoMobileModalView("open");
+                                        // return;
+                                    }
+                                    else {
+                                        document.getElementById("status_ok").checked = false;
+                                        document.getElementById("status_not_ok").checked = false;
+                                        document.getElementById("status_NA").checked = false;
+                                        $("#checkComments").val('');
+                                        app.mobileApp.navigate('#:back');
+                                    }
+                                    //Fixed
+                                });
+                            }
+                        }
+                        else {
+                            document.getElementById("status_ok").checked = false;
+                            document.getElementById("status_not_ok").checked = false;
+                            document.getElementById("status_NA").checked = false;
+                            $("#checkComments").val('');
+                            app.mobileApp.navigate('#:back');
+                        }
+                    });
 
-                dataSourceChecks.sync();
+                    dataSourceChecks.sync();
 
-                app.clearFormDomData('add-item-view');
+                    app.clearFormDomData('add-item-view');``
+                }
             };
 
             /// start add form save
@@ -1709,7 +1710,7 @@ app.localization.registerView('formDetailView');
                                             document.getElementById(checklist.data[i].id).style.background = "#d12229";
                                         }
                                         else { 
-                                            $("#"+checklist.data[i].id+'checkNcr').show();
+                                            $("#"+checklist.data[i].id+'checkNcr').hide();
                                             document.getElementById(checklist.data[i].id).style.background = "#449d31";
                                         }
                                         greenFlag = true;
